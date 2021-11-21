@@ -26,10 +26,48 @@ body {
   font-feature-settings: "liga";
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+.page-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.App {
-  text-align: center;
+.menu-wrapper {
+  list-style-type: none;
+  margin: 1em;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.menu-wrapper li {
+  margin: 0 1em;
+}
+.menu-wrapper li:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+table {
+  margin: 0 0 1em;
+  width: 100%;
+}
+
+table,
+tr,
+th,
+td {
+  border: 1px solid white;
+  border-collapse: collapse;
+  padding: 0.8em;
+  font-size: 14px;
+}
+
+th {
+  border-bottom: 1px solid #ccc;
+  margin: 1em 0;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.04);
 }
