@@ -82,13 +82,18 @@ const data = {
     ],
     city: [
         {
-            _id: 3,
-            name: 2,
+            _id: 1,
+            name: "Karlskrona",
             coordinates: [0, 0, 100, 50]
         },
         {
+            _id: 2,
+            name: "Karlstad",
+            coordinates: [0, 50, 100, 50]
+        },
+        {
             _id: 3,
-            name: 2,
+            name: "Stockholm",
             coordinates: [0, 50, 100, 50]
         }
     ],
