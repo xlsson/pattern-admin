@@ -5,6 +5,7 @@ import ChargingStationsTable from './components/ChargingStationsTable';
 import ParkingStationsTable from './components/ParkingStationsTable';
 import UsersTable from './components/UsersTable';
 import WelcomePage from './components/WelcomePage';
+import Map from './components/Map';
 
 function App() {
     const [mainContent, setMainContent] = useState("start");
@@ -18,6 +19,7 @@ function App() {
     function renderBikesTable() { return ( <BikesTable city={city} /> ); }
     function renderChargingStationsTable() { return ( <ChargingStationsTable city={city} /> ); }
     function renderParkingStationsTable() { return ( <ParkingStationsTable city={city} /> ); }
+    function renderMap() { return ( <Map city={city} /> ); }
 
     return (
         <div className="page-wrapper">
@@ -33,6 +35,7 @@ function App() {
                 {(mainContent === "bikes") && renderBikesTable()}
                 {(mainContent === "chargingStations") && renderChargingStationsTable()}
                 {(mainContent === "parkingStations") && renderParkingStationsTable()}
+                {(mainContent === "map") && renderMap()}
             </div>
         </div>
     );

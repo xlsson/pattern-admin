@@ -9,7 +9,7 @@ function ChangeCity(props) {
 
     (async function getCities() {
         const defaultOption = [{ _id: "all", name: "Alla städer" }];
-        const citiesFromServer = await api.getCities();
+        const citiesFromServer = await api.getCities("all");
 
         cities = defaultOption.concat(citiesFromServer);
     })();

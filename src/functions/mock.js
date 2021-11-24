@@ -94,17 +94,17 @@ const data = {
         {
             _id: 1,
             name: "Karlskrona",
-            coordinates: [0, 0, 100, 50]
+            coordinates: [56.193013, 15.559232, 56.152144, 15.634511]
         },
         {
             _id: 2,
             name: "Karlstad",
-            coordinates: [0, 50, 100, 50]
+            coordinates: [59.390921, 13.466531, 59.364795, 13.541185]
         },
         {
             _id: 3,
             name: "Stockholm",
-            coordinates: [0, 50, 100, 50]
+            coordinates: [59.343776, 18.027349, 59.301313, 18.111062]
         }
     ],
     parking: [

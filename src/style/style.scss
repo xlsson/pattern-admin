@@ -66,6 +66,20 @@ body {
 
 }
 
+#map-wrapper-main {
+    position: relative;
+    height: 500px;
+    width: 100%;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
 table {
     margin: 0 0 1em;
     width: 100%;
@@ -84,6 +98,7 @@ td {
 th {
     border-bottom: 1px solid #ccc;
     margin: 1em 0;
+    text-align: left;
 }
 
 tr:nth-child(even) {
