@@ -37,6 +37,15 @@ body {
     margin: 0 auto;
 }
 
+.header-wrapper {
+    margin: 1em;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .menu-wrapper {
     list-style-type: none;
     margin: 1em;
