@@ -2,15 +2,19 @@ import React, { useState, useEffect } from 'react';
 
 import api from '../functions/api.js';
 
-function BikesTable() {
-    const [bikes, setBikes] = useState([]);
+function BikesTable(props) {
+    let [bikes, setBikes] = useState([]);
 
-    useEffect(() => {
-        setBikes(api.getBikes());
-    }, [bikes]);
+    async function getBikes() {
+        bikes = await api.getBikes(props.city);
+        setBikes(bikes);
+    };
+
+    useEffect(() => { getBikes(); }, [props.city]);
 
     return (
         <div>
+            <h1>Cyklar för city_id: {props.city}</h1>
             <table>
                 <>
                 <thead>
@@ -36,7 +40,7 @@ function BikesTable() {
                         <td>{bike.bike_status}</td>
                         <td>{bike.battery_status}</td>
                         <td>{bike.maintenance}</td>
-                        <td>{bike.coordinates}</td>
+                        <td>{bike.coordinates[0]}, {bike.coordinates[1]}</td>
                         </>
                     </tr>
                 ))}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Menu from './components/Menu';
 import BikesTable from './components/BikesTable';
 import ChargingStationsTable from './components/ChargingStationsTable';
@@ -7,36 +7,32 @@ import UsersTable from './components/UsersTable';
 import WelcomePage from './components/WelcomePage';
 
 function App() {
-    const [menuChoice, setmenuChoice] = useState("start");
+    const [mainContent, setMainContent] = useState("start");
+    const [city, setCity] = useState("all");
 
-    function handleMenuChoice(choice) {
-        setmenuChoice(choice);
-    }
-
-    useEffect(() => {
-        console.log(menuChoice);
-    }, [menuChoice]);
-
+    function handleMainContent(choice) { setMainContent(choice); }
+    function handleCityChoice(city) { setCity(city); }
 
     function renderWelcomePage() { return ( <WelcomePage /> ); }
     function renderUsersTable() { return ( <UsersTable /> ); }
-    function renderBikesTable() { return ( <BikesTable /> ); }
-    function renderChargingStationsTable() { return ( <ChargingStationsTable /> ); }
-    function renderParkingStationsTable() { return ( <ParkingStationsTable /> ); }
+    function renderBikesTable() { return ( <BikesTable city={city} /> ); }
+    function renderChargingStationsTable() { return ( <ChargingStationsTable city={city} /> ); }
+    function renderParkingStationsTable() { return ( <ParkingStationsTable city={city} /> ); }
 
     return (
         <div className="page-wrapper">
             <header>
                 <Menu
-                    menuChoice={handleMenuChoice}
+                    mainContent={handleMainContent}
+                    cityChoice={handleCityChoice}
                     />
             </header>
             <div className="content">
-                {(menuChoice === "start") && renderWelcomePage()}
-                {(menuChoice === "users") && renderUsersTable()}
-                {(menuChoice === "bikes") && renderBikesTable()}
-                {(menuChoice === "chargingStations") && renderChargingStationsTable()}
-                {(menuChoice === "parkingStations") && renderParkingStationsTable()}
+                {(mainContent === "start") && renderWelcomePage()}
+                {(mainContent === "users") && renderUsersTable()}
+                {(mainContent === "bikes") && renderBikesTable()}
+                {(mainContent === "chargingStations") && renderChargingStationsTable()}
+                {(mainContent === "parkingStations") && renderParkingStationsTable()}
             </div>
         </div>
     );

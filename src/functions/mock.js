@@ -54,13 +54,23 @@ const data = {
         },
         {
             _id: 6,
-            city_id: 2,
+            city_id: 3,
             charge_id: 1,
             parking_id: 0,
             bike_status: "free",
             battery_status: 100,
             maintenance: "",
             coordinates: [22, 39]
+        },
+        {
+            _id: 7,
+            city_id: 2,
+            charge_id: 1,
+            parking_id: 0,
+            bike_status: "free",
+            battery_status: 100,
+            maintenance: "",
+            coordinates: [21, 56]
         }
     ],
     charge: [
@@ -127,26 +137,38 @@ const data = {
         {
             _id: 1,
             name: "Max",
+            surname: "Mustermann",
+            email: "max@mustermann.com",
+            password: "encrypted",
             balance: 34,
-            deleted: false
+            account_status: "active"
         },
         {
             _id: 2,
             name: "Lena",
+            surname: "Andersson",
+            email: "elan@lena.com",
+            password: "encrypted",
             balance: 3435,
-            deleted: false
+            account_status: "active"
         },
         {
             _id: 3,
-            name: "Godzilla Hårddiskson",
+            name: "Godzilla",
+            surname: "Hårddiskson",
+            email: "var@n.tv",
+            password: "encrypted",
             balance: 20,
-            deleted: false
+            account_status: "active"
         },
         {
             _id: 4,
-            name: "Caspar David Friedrich",
+            name: "Caspar David",
+            surname: "Friedrich",
+            email: "caspar@david.com",
+            password: "encrypted",
             balance: 280,
-            deleted: false
+            account_status: "active"
         }
     ]
 };

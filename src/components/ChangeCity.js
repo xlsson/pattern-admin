@@ -3,11 +3,16 @@ import React, { useState, useEffect } from 'react';
 import api from '../functions/api.js';
 
 function ChangeCity(props) {
-    const [cities, setCities] = useState([]);
+    let [cities, setCities] = useState([]);
 
-    useEffect(() => {
-        setCities(api.getCities());
-    }, [cities]);
+    useEffect(() => { setCities(cities); }, [cities]);
+
+    (async function getCities() {
+        const defaultOption = [{ _id: "all", name: "Alla städer" }];
+        const citiesFromServer = await api.getCities();
+
+        cities = defaultOption.concat(citiesFromServer);
+    })();
 
     function handleChange(event) {
         props.cityChoice(event.target.value);

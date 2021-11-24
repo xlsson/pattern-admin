@@ -1,26 +1,34 @@
 const mockData = require('./mock');
 
 const api = {
-    getBikes: function () {
-        const allBikes = mockData.bike;
-        return allBikes;
+    getBikes: async function (city) {
+        const allBikes = await mockData.bike;
+        if (city === "all") { return allBikes; }
+        const cityBikes = allBikes.filter((bike) => bike.city_id == city);
+        return cityBikes;
     },
-    getChargingStations: function() {
-        const allChargingStations = mockData.charge;
-        return allChargingStations;
+    getChargingStations: async function(city) {
+        const allChargingStations = await mockData.charge;
+        if (city === "all") { return allChargingStations; }
+        const cityChargingStations = allChargingStations.filter((chargingStation) => chargingStation.city_id == city);
+        return cityChargingStations;
     },
-    getCities: function () {
-        return mockData.city;
+    getCities: async function () {
+        return await mockData.city;
     },
-    getParkingStations: function() {
-        const allParkingStations = mockData.parking;
-        return allParkingStations;
+    getParkingStations: async function(city) {
+        const allParkingStations = await mockData.parking;
+        if (city === "all") { return allParkingStations; }
+        const cityParkingStations = allParkingStations.filter((parkingStation) => parkingStation.city_id == city);
+        return cityParkingStations;
+
     },
-    getPrice: function () {
-        return mockData.price;
+    getPrice: async function () {
+        return await mockData.price;
     },
-    getUsers: function () {
-        return mockData.user;
+    getUsers: async function () {
+        const allUsers = await mockData.user;
+        return allUsers;
     }
 };
 

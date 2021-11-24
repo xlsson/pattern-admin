@@ -3,22 +3,28 @@ import React, { useState, useEffect } from 'react';
 import api from '../functions/api.js';
 
 function UsersTable() {
-    const [users, setUsers] = useState([]);
+    let [users, setUsers] = useState([]);
 
-    useEffect(() => {
-        setUsers(api.getUsers());
-    }, [users]);
+    async function getUsers() {
+        users = await api.getUsers();
+        setUsers(users);
+    };
+
+    useEffect(() => { getUsers(); }, []);
 
     return (
         <div>
+            <h1>Alla kunder (stadsoberoende)</h1>
             <table>
                 <>
                 <thead>
                     <tr>
                         <th>_id</th>
                         <th>name</th>
+                        <th>surname</th>
+                        <th>email</th>
                         <th>balance</th>
-                        <th>deleted</th>
+                        <th>account_status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,8 +33,10 @@ function UsersTable() {
                         <>
                         <td>{user._id}</td>
                         <td>{user.name}</td>
+                        <td>{user.surname}</td>
+                        <td>{user.email}</td>
                         <td>{user.balance}</td>
-                        <td>{user.deleted}</td>
+                        <td>{user.account_status}</td>
                         </>
                     </tr>
                 ))}

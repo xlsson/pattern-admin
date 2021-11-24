@@ -2,15 +2,19 @@ import React, { useState, useEffect } from 'react';
 
 import api from '../functions/api.js';
 
-function ChargingStationsTable() {
-    const [chargingStations, setChargingStations] = useState([]);
+function ChargingStationsTable(props) {
+    let [chargingStations, setChargingStations] = useState([]);
 
-    useEffect(() => {
-        setChargingStations(api.getChargingStations());
-    }, [chargingStations]);
+    async function getChargingStations() {
+        chargingStations = await api.getChargingStations(props.city);
+        setChargingStations(chargingStations);
+    };
+
+    useEffect(() => { getChargingStations(); }, [props.city]);
 
     return (
         <div>
+            <h1>Laddningsstationer för city_id: {props.city}</h1>
             <table>
                 <>
                 <thead>
@@ -26,7 +30,7 @@ function ChargingStationsTable() {
                         <>
                         <td>{chargingStation._id}</td>
                         <td>{chargingStation.city_id}</td>
-                        <td>{chargingStation.coordinates}</td>
+                        <td>{chargingStation.coordinates[0]}, {chargingStation.coordinates[1]}</td>
                         </>
                     </tr>
                 ))}
