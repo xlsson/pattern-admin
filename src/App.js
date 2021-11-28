@@ -8,8 +8,14 @@ import WelcomePage from './components/WelcomePage';
 import Map from './components/Map';
 
 function App() {
+    const defaultCity = {
+         _id: "all",
+        name: "alla städer",
+        coordinates: [58.195259, 14.221258, 58.195259, 14.221258]
+    };
+
     const [mainContent, setMainContent] = useState("start");
-    const [city, setCity] = useState({ _id: "all", name: "alla städer" });
+    const [city, setCity] = useState(defaultCity);
 
     function handleMainContent(choice) { setMainContent(choice); }
     function handleCityChoice(city) {
