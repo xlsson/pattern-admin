@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, MapConsumer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, MapConsumer, Marker, Popup, Rectangle } from 'react-leaflet';
 
 import api from '../functions/api.js';
 
@@ -29,18 +29,30 @@ function Map(props) {
         setZoom(13);
     };
 
-    function createBikeMarkers(bikes) {
-        bikes.forEach((bike) => {
-            console.log(bike);
-            return (
-                <Marker position={bike.coordinates}>
-                    <Popup>
-                      {bike._id}
-                    </Popup>
-                </Marker>
-            )
-        });
+    function displayStation(type, station, i) {
+        let color = "green";
+        if (type === "parking") { color = "blue"; }
 
+        let coords = station.coordinates;
+        let northWest = [coords[0], coords[1]];
+        let southEast = [coords[2], coords[3]];
+        let center = [
+            ((northWest[0] + southEast[0])/2),
+            ((northWest[1] + southEast[1])/2)
+        ];
+        let bounds = [northWest, southEast];
+        let options = { color: color };
+
+        return (
+            <>
+            <Rectangle bounds={bounds} pathOptions={options} />
+            <Marker position={center}>
+                <Popup>
+                    <span key={i}>{type}Station id: {station._id}</span>
+                </Popup>
+            </Marker>
+            </>
+        );
     }
 
     useEffect(() => { getMapData(); }, [props.city._id]);
@@ -71,6 +83,12 @@ function Map(props) {
                         </Popup>
                     </Marker>
                 ))}
+                {chargingStations.map(function(station, i) {
+                    return displayStation("charging", station, i);
+                })}
+                {parkingStations.map(function(station, i) {
+                    return displayStation("parking", station, i);
+                })}
             </MapContainer>
         </div>
         </>
