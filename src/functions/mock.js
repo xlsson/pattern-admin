@@ -77,17 +77,17 @@ const data = {
         {
             _id: 1,
             city_id: 1,
-            coordinates: [14, 14, 15, 15]
+            coordinates: [56.181368, 15.590497, 56.181187, 15.590952]
         },
         {
             _id: 2,
             city_id: 1,
-            coordinates: [64, 64, 66, 66]
+            coordinates: [59.380880, 13.502523, 59.380748, 13.502966]
         },
         {
             _id: 3,
             city_id: 2,
-            coordinates: [84, 84, 86, 86]
+            coordinates: [59.318668, 18.062481, 59.318405, 18.063230]
         }
     ],
     city: [
@@ -111,17 +111,17 @@ const data = {
         {
             _id: 1,
             city_id: 1,
-            coordinates: [44, 44, 55, 55]
+            coordinates: [56.166459, 15.593423, 56.166382, 15.593662]
         },
         {
             _id: 2,
             city_id: 1,
-            coordinates: [34, 24, 36, 26]
+            coordinates: [59.375324, 13.491880, 59.375265, 13.492030]
         },
         {
             _id: 3,
             city_id: 2,
-            coordinates: [34, 24, 36, 26]
+            coordinates: [59.321328, 18.059566, 59.321310, 18.059708]
         }
     ],
     price: [
