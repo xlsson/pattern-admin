@@ -28,9 +28,11 @@ const api = {
     getPrice: async function () {
         return await mockData.price;
     },
-    getUsers: async function () {
-        const allUsers = await mockData.user;
-        return allUsers;
+    getUsers: async function (userId) {
+        const all = await mockData.user;
+        if (userId === "all") { return all; }
+        const filtered = all.filter((item) => item._id == userId);
+        return filtered;
     }
 };
 
