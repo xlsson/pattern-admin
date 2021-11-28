@@ -4,31 +4,50 @@ import { MapContainer, TileLayer, MapConsumer, Marker, Popup } from 'react-leafl
 import api from '../functions/api.js';
 
 function Map(props) {
-    const sweden = [58.195259, 14.221258];
-    let [cityCoords, setCityCoords] = useState(sweden);
-    let [cityName, setCityName] = useState("all");
     let [zoom, setZoom] = useState(6);
+    let [bikes, setBikes] = useState([]);
+    let [chargingStations, setChargingStations] = useState([]);
+    let [parkingStations, setParkingStations] = useState([]);
+
+    const lat = (props.city.coordinates[0] + props.city.coordinates[2])/2;
+    const long = (props.city.coordinates[1] + props.city.coordinates[3])/2;
+    const cityCoords = [lat, long];
 
     async function getMapData() {
+        const bikes = await api.getBikes(props.city._id);
+        const chargingStations = await api.getChargingStations(props.city._id);
+        const parkingStations = await api.getParkingStations(props.city._id);
+
+        setChargingStations(chargingStations);
+        setParkingStations(parkingStations);
+        setBikes(bikes);
+
         if (props.city._id === "all") {
-            setCityCoords(sweden);
             setZoom(6);
             return;
         }
-
-        const city = await api.getCities(props.city._id);
-        const lat = (city[0].coordinates[0] + city[0].coordinates[2])/2;
-        const long = (city[0].coordinates[1] + city[0].coordinates[3])/2;
-        const coords = [lat, long];
-        setCityCoords(coords);
         setZoom(13);
     };
+
+    function createBikeMarkers(bikes) {
+        bikes.forEach((bike) => {
+            console.log(bike);
+            return (
+                <Marker position={bike.coordinates}>
+                    <Popup>
+                      {bike._id}
+                    </Popup>
+                </Marker>
+            )
+        });
+
+    }
 
     useEffect(() => { getMapData(); }, [props.city._id]);
 
     return (
         <>
-        <h1>Karta för {props.city.name} ({props.city._id})</h1>
+        <h1>Karta över {props.city.name}</h1>
         <div id="map-wrapper-main">
             <MapContainer
                 id="map"
@@ -45,11 +64,13 @@ function Map(props) {
                         return null;
                     }}
                 </MapConsumer>
-                <Marker position={cityCoords}>
-                    <Popup>
-                      {props.city.name}
-                    </Popup>
-                </Marker>
+                {bikes.map((bike, i) => (
+                    <Marker position={bike.coordinates}>
+                        <Popup>
+                            <span key={i}>Bike id: {bike._id}</span>
+                        </Popup>
+                    </Marker>
+                ))}
             </MapContainer>
         </div>
         </>
