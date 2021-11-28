@@ -14,7 +14,7 @@ function ParkingStationsTable(props) {
 
     return (
         <div>
-            <h1>Parkeringszoner för {props.city.name} (_id: {props.city._id})</h1>
+            <h1>Parkeringszoner för {props.city.name}</h1>
             <table>
                 <>
                 <thead>
