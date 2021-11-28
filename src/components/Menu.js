@@ -11,13 +11,13 @@ function Menu(props) {
 
     return (
         <div className="header-wrapper">
-            <ChangeCity cityChoice={handleCityChange} />
+            <ChangeCity chosenCity={handleCityChange} />
             <ul className="menu-wrapper">
                 <li onClick={() => handleMenuClick("bikes")}>Cyklar</li>
                 <li onClick={() => handleMenuClick("chargingStations")}>Laddningsstationer</li>
                 <li onClick={() => handleMenuClick("parkingStations")}>Parkeringszoner</li>
                 <li onClick={() => handleMenuClick("map")}>Karta</li>
-                <li onClick={() => handleMenuClick("users")}>Kunder (ej stadberoende)</li>
+                <li onClick={() => handleMenuClick("users")}>Kunder</li>
             </ul>
         </div>
     );

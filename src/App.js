@@ -9,10 +9,12 @@ import Map from './components/Map';
 
 function App() {
     const [mainContent, setMainContent] = useState("start");
-    const [city, setCity] = useState("all");
+    const [city, setCity] = useState({ _id: "all", name: "alla städer" });
 
     function handleMainContent(choice) { setMainContent(choice); }
-    function handleCityChoice(city) { setCity(city); }
+    function handleCityChoice(city) {
+        setCity(city);
+    }
 
     function renderWelcomePage() { return ( <WelcomePage /> ); }
     function renderUsersTable() { return ( <UsersTable /> ); }

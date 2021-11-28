@@ -6,15 +6,15 @@ function ChargingStationsTable(props) {
     let [chargingStations, setChargingStations] = useState([]);
 
     async function getChargingStations() {
-        chargingStations = await api.getChargingStations(props.city);
+        chargingStations = await api.getChargingStations(props.city._id);
         setChargingStations(chargingStations);
     };
 
-    useEffect(() => { getChargingStations(); }, [props.city]);
+    useEffect(() => { getChargingStations(); }, [props.city._id]);
 
     return (
         <div>
-            <h1>Laddningsstationer för city_id: {props.city}</h1>
+            <h1>Laddningsstationer för {props.city.name} (_id: {props.city._id})</h1>
             <table>
                 <>
                 <thead>

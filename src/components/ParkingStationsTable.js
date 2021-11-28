@@ -6,15 +6,15 @@ function ParkingStationsTable(props) {
     let [parkingStations, setParkingStations] = useState([]);
 
     async function getParkingStations() {
-        parkingStations = await api.getParkingStations(props.city);
+        parkingStations = await api.getParkingStations(props.city._id);
         setParkingStations(parkingStations);
     };
 
-    useEffect(() => { getParkingStations(); }, [props.city]);
+    useEffect(() => { getParkingStations(); }, [props.city._id]);
 
     return (
         <div>
-            <h1>Parkeringszoner för city_id: {props.city}</h1>
+            <h1>Parkeringszoner för {props.city.name} (_id: {props.city._id})</h1>
             <table>
                 <>
                 <thead>

@@ -6,15 +6,15 @@ function BikesTable(props) {
     let [bikes, setBikes] = useState([]);
 
     async function getBikes() {
-        bikes = await api.getBikes(props.city);
+        bikes = await api.getBikes(props.city._id);
         setBikes(bikes);
     };
 
-    useEffect(() => { getBikes(); }, [props.city]);
+    useEffect(() => { getBikes(); }, [props.city._id]);
 
     return (
         <div>
-            <h1>Cyklar för city_id: {props.city}</h1>
+            <h1>Cyklar för {props.city.name} (_id: {props.city._id})</h1>
             <table>
                 <>
                 <thead>

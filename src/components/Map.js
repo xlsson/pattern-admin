@@ -6,16 +6,17 @@ import api from '../functions/api.js';
 function Map(props) {
     const sweden = [58.195259, 14.221258];
     let [cityCoords, setCityCoords] = useState(sweden);
+    let [cityName, setCityName] = useState("all");
     let [zoom, setZoom] = useState(6);
 
     async function getMapData() {
-        if (props.city === "all") {
+        if (props.city._id === "all") {
             setCityCoords(sweden);
             setZoom(6);
             return;
         }
 
-        const city = await api.getCities(props.city);
+        const city = await api.getCities(props.city._id);
         const lat = (city[0].coordinates[0] + city[0].coordinates[2])/2;
         const long = (city[0].coordinates[1] + city[0].coordinates[3])/2;
         const coords = [lat, long];
@@ -23,11 +24,11 @@ function Map(props) {
         setZoom(13);
     };
 
-    useEffect(() => { getMapData(); }, [props.city]);
+    useEffect(() => { getMapData(); }, [props.city._id]);
 
     return (
         <>
-        <h1>Karta</h1>
+        <h1>Karta för {props.city.name} ({props.city._id})</h1>
         <div id="map-wrapper-main">
             <MapContainer
                 id="map"
@@ -46,7 +47,7 @@ function Map(props) {
                 </MapConsumer>
                 <Marker position={cityCoords}>
                     <Popup>
-                      A pretty CSS3 popup. <br /> Easily customizable.
+                      {props.city.name}
                     </Popup>
                 </Marker>
             </MapContainer>

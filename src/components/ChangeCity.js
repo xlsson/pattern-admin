@@ -8,15 +8,15 @@ function ChangeCity(props) {
     useEffect(() => { setCities(cities); }, [cities]);
 
     (async function getCities() {
-        const defaultOption = [{ _id: "all", name: "Alla städer" }];
+        const defaultOption = [
+            { _id: "all", name: "alla städer", coordinates: [0, 0, 100, 100] }
+        ];
         const citiesFromServer = await api.getCities("all");
 
         cities = defaultOption.concat(citiesFromServer);
     })();
 
-    function handleChange(event) {
-        props.cityChoice(event.target.value);
-    }
+    function handleChange(event) { props.chosenCity(cities[event.target.value]); }
 
     return (
         <select
@@ -24,7 +24,7 @@ function ChangeCity(props) {
             {cities.map((city, i) => (
                 <option
                     key={i}
-                    value={city._id}>
+                    value={i}>
                         {city.name}
                     </option>
             ))}
