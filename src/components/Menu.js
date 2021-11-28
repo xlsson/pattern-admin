@@ -1,8 +1,10 @@
 import ChangeCity from './ChangeCity';
 
 function Menu(props) {
-    function handleMenuClick(choice) {
-        props.mainContent(choice);
+    let active = props.view;
+
+    function handleMenuClick(view) {
+        props.switchView(view);
     }
 
     function handleCityChange(city) {
@@ -13,11 +15,28 @@ function Menu(props) {
         <div className="header-wrapper">
             <ChangeCity chosenCity={handleCityChange} />
             <ul className="menu-wrapper">
-                <li onClick={() => handleMenuClick("bikes")}>Cyklar</li>
-                <li onClick={() => handleMenuClick("chargingStations")}>Laddningsstationer</li>
-                <li onClick={() => handleMenuClick("parkingStations")}>Parkeringszoner</li>
-                <li onClick={() => handleMenuClick("map")}>Karta</li>
-                <li onClick={() => handleMenuClick("users")}>Kunder</li>
+                <li className={ (active === "bikes") ? "active" : "" }
+                    onClick={() => handleMenuClick("bikes")}>
+                    Cyklar
+                </li>
+                <li className={ (active === "chargingStations") ? "active" : "" }
+                    onClick={() => handleMenuClick("chargingStations")}>
+                    Laddningsstationer
+                </li>
+                <li className={ (active === "parkingStations") ? "active" : "" }
+                    onClick={() => handleMenuClick("parkingStations")}>
+                    Parkeringszoner
+                </li>
+                <li className={ (active === "map") ? "active" : "" }
+                    onClick={() => handleMenuClick("map")}>
+                    Karta
+                </li>
+                <li className={
+                        ((active === "users") || (active === "user")) ? "active" : ""
+                    }
+                    onClick={() => handleMenuClick("users")}>
+                    Kunder
+                </li>
             </ul>
         </div>
     );
