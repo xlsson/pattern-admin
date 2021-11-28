@@ -8,9 +8,11 @@ function ChangeCity(props) {
     useEffect(() => { setCities(cities); }, [cities]);
 
     (async function getCities() {
-        const defaultOption = [
-            { _id: "all", name: "alla städer", coordinates: [0, 0, 100, 100] }
-        ];
+        const defaultOption = [{
+             _id: "all",
+            name: "alla städer",
+            coordinates: [58.195259, 14.221258, 58.195259, 14.221258]
+        }];
         const citiesFromServer = await api.getCities("all");
 
         cities = defaultOption.concat(citiesFromServer);
