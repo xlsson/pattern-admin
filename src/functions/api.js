@@ -1,28 +1,28 @@
 const mockData = require('./mock');
 
 const api = {
-    getBikes: async function (city) {
+    getBikes: async function (cityId) {
         const all = await mockData.bike;
-        if (city === "all") { return all; }
-        const filtered = all.filter((item) => item.city_id == city);
+        if (cityId === "all") { return all; }
+        const filtered = all.filter((item) => item.city_id == cityId);
         return filtered;
     },
-    getChargingStations: async function(city) {
+    getChargingStations: async function(cityId) {
         const all = await mockData.charge;
-        if (city === "all") { return all; }
-        const filtered = all.filter((item) => item.city_id == city);
+        if (cityId === "all") { return all; }
+        const filtered = all.filter((item) => item.city_id == cityId);
         return filtered;
     },
-    getCities: async function (city) {
+    getCities: async function (cityId) {
         const all = await mockData.city;
-        if (city === "all") { return all; }
-        const filtered = all.filter((item) => item._id == city);
+        if (cityId === "all") { return all; }
+        const filtered = all.filter((item) => item._id == cityId);
         return filtered;
     },
-    getParkingStations: async function(city) {
+    getParkingStations: async function(cityId) {
         const all = await mockData.parking;
-        if (city === "all") { return all; }
-        const filtered = all.filter((item) => item.city_id == city);
+        if (cityId === "all") { return all; }
+        const filtered = all.filter((item) => item.city_id == cityId);
         return filtered;
     },
     getPrice: async function () {
