@@ -2,23 +2,25 @@ import React, { useState, useEffect } from 'react';
 
 import api from '../functions/api.js';
 
-function UsersTable(props) {
-    let [users, setUsers] = useState([]);
+function User(props) {
+    const emptyUser = { name: "", surname: "", email: "", password: "",
+        balance: 0, account_status: "" };
 
-    async function getUsers() {
-        users = await api.getUsers("all");
-        setUsers(users);
+    const userId = props.params._id;
+
+    let [user, setUser] = useState(emptyUser);
+
+    async function getUser() {
+        user = await api.getUsers(userId);
+        setUser(user[0]);
+        console.log(user);
     };
 
-    function handleClick(i) {
-        props.switchView("user", { _id: users[i]._id });
-    }
-
-    useEffect(() => { getUsers(); }, []);
+    useEffect(() => { getUser(); }, [userId]);
 
     return (
         <div>
-            <h1>Alla kunder (stadsoberoende)</h1>
+            <h1>{user.name} {user.surname}</h1>
             <table>
                 <>
                 <thead>
@@ -32,10 +34,9 @@ function UsersTable(props) {
                     </tr>
                 </thead>
                 <tbody>
-                {users.map((user, i) => (
-                    <tr className="pointer-cursor" key={i} onClick={() => handleClick(i)}>
+                    <tr>
                         <>
-                        <td>{user._id}</td>
+                        <td>{userId}</td>
                         <td>{user.name}</td>
                         <td>{user.surname}</td>
                         <td>{user.email}</td>
@@ -43,7 +44,6 @@ function UsersTable(props) {
                         <td>{user.account_status}</td>
                         </>
                     </tr>
-                ))}
                 </tbody>
                 </>
             </table>
@@ -51,4 +51,4 @@ function UsersTable(props) {
     );
 }
 
-export default UsersTable;
+export default User;
