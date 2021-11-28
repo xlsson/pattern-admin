@@ -239,8 +239,4 @@ const data = {
     ]
 };
 
-function updateUsers(newData) {
-    data.user = newData;
-}
-
-module.exports = { data: data, updateUsers: updateUsers };
+module.exports = data;

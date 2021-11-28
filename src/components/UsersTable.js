@@ -24,9 +24,13 @@ function UsersTable(props) {
                 <thead>
                     <tr>
                         <th>_id</th>
-                        <th>name</th>
-                        <th>surname</th>
+                        <th>firstname</th>
+                        <th>lastname</th>
                         <th>email</th>
+                        <th>password</th>
+                        <th>phone</th>
+                        <th>payment_method</th>
+                        <th>card_information</th>
                         <th>balance</th>
                         <th>account_status</th>
                     </tr>
@@ -36,9 +40,13 @@ function UsersTable(props) {
                     <tr className="pointer-cursor" key={i} onClick={() => handleClick(i)}>
                         <>
                         <td>{user._id}</td>
-                        <td>{user.name}</td>
-                        <td>{user.surname}</td>
+                        <td>{user.firstname}</td>
+                        <td>{user.lastname}</td>
                         <td>{user.email}</td>
+                        <td>{user.password}</td>
+                        <td>{user.phone}</td>
+                        <td>{user.payment_method}</td>
+                        <td>{user.card_information}</td>
                         <td>{user.balance}</td>
                         <td>{user.account_status}</td>
                         </>
