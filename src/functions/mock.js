@@ -10,7 +10,7 @@ const data = {
             bike_status: "free",
             battery_status: 20,
             maintenance: "",
-            coordinates: [12, 34]
+            coordinates: [56.183013, 15.573461]
         },
         {
             _id: 2,
@@ -20,7 +20,7 @@ const data = {
             bike_status: "free",
             battery_status: 30,
             maintenance: "",
-            coordinates: [22, 21]
+            coordinates: [56.185000, 15.603461]
         },
         {
             _id: 3,
@@ -30,7 +30,7 @@ const data = {
             bike_status: "free",
             battery_status: 70,
             maintenance: "",
-            coordinates: [28, 32]
+            coordinates: [56.165000, 15.613461]
         },
         {
             _id: 4,
@@ -40,7 +40,7 @@ const data = {
             bike_status: "free",
             battery_status: 1,
             maintenance: "",
-            coordinates: [22, 34]
+            coordinates: [59.385921, 13.490531]
         },
         {
             _id: 5,
@@ -50,7 +50,7 @@ const data = {
             bike_status: "free",
             battery_status: 0,
             maintenance: "",
-            coordinates: [78, 39]
+            coordinates: [56.180000, 15.567777]
         },
         {
             _id: 6,
@@ -60,7 +60,7 @@ const data = {
             bike_status: "free",
             battery_status: 100,
             maintenance: "",
-            coordinates: [22, 39]
+            coordinates: [59.323776, 18.077349]
         },
         {
             _id: 7,
@@ -70,7 +70,7 @@ const data = {
             bike_status: "free",
             battery_status: 100,
             maintenance: "",
-            coordinates: [21, 56]
+            coordinates: [59.380921, 13.506531]
         }
     ],
     charge: [
