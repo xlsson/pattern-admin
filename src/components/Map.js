@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import L from "leaflet";
 import { MapContainer, TileLayer, MapConsumer, Marker, Popup, Rectangle } from 'react-leaflet';
+
 
 import api from '../functions/api.js';
 
 function Map(props) {
-    let [zoom, setZoom] = useState(6);
+    let zoom = 6;
+
     let [bikes, setBikes] = useState([]);
     let [chargingStations, setChargingStations] = useState([]);
     let [parkingStations, setParkingStations] = useState([]);
@@ -21,15 +24,27 @@ function Map(props) {
         setChargingStations(chargingStations);
         setParkingStations(parkingStations);
         setBikes(bikes);
-
-        if (props.city._id === "all") {
-            setZoom(6);
-            return;
-        }
-        setZoom(13);
     };
 
-    function displayStation(type, station, i) {
+    function getIcon(color) {
+        return L.icon({
+            iconUrl: require(`../img/mapmarkers/marker_${color}.png`).default,
+            iconAnchor: [12, 12],
+            popupAnchor: [12, 12]
+        });
+    }
+
+    function drawBike(bike, i) {
+        return (
+            <Marker position={bike.coordinates} icon={getIcon("pink")}>
+                <Popup>
+                    <span key={i}>Bike id: {bike._id}</span>
+                </Popup>
+            </Marker>
+        )
+    }
+
+    function drawStation(type, station, i) {
         let color = "green";
         if (type === "parking") { color = "blue"; }
 
@@ -46,7 +61,7 @@ function Map(props) {
         return (
             <>
             <Rectangle bounds={bounds} pathOptions={options} />
-            <Marker position={center}>
+            <Marker position={center} icon={getIcon(color)}>
                 <Popup>
                     <span key={i}>{type}Station id: {station._id}</span>
                 </Popup>
@@ -60,6 +75,11 @@ function Map(props) {
     return (
         <>
         <h1>Karta över {props.city.name}</h1>
+        <div className="map-legend">
+            <p className="bike">Cyklar</p>
+            <p className="chargingStation">Laddningsstationer</p>
+            <p className="parkingStation">Parkeringsstationer</p>
+        </div>
         <div id="map-wrapper-main">
             <MapContainer
                 id="map"
@@ -72,23 +92,14 @@ function Map(props) {
                 />
                 <MapConsumer>
                     {(map) => {
+                        zoom = (props.city._id != "all") ? 13 : 6;
                         map.setView(cityCoords, zoom);
                         return null;
                     }}
                 </MapConsumer>
-                {bikes.map((bike, i) => (
-                    <Marker position={bike.coordinates}>
-                        <Popup>
-                            <span key={i}>Bike id: {bike._id}</span>
-                        </Popup>
-                    </Marker>
-                ))}
-                {chargingStations.map(function(station, i) {
-                    return displayStation("charging", station, i);
-                })}
-                {parkingStations.map(function(station, i) {
-                    return displayStation("parking", station, i);
-                })}
+                {bikes.map((bike, i) => { return drawBike(bike, i); })}
+                {chargingStations.map((station, i) => { return drawStation("charging", station, i); })}
+                {parkingStations.map((station, i) => { return drawStation("parking", station, i); })}
             </MapContainer>
         </div>
         </>
