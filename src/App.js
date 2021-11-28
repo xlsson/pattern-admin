@@ -5,7 +5,6 @@ import ChargingStationsTable from './components/ChargingStationsTable';
 import ParkingStationsTable from './components/ParkingStationsTable';
 import UsersTable from './components/UsersTable';
 import User from './components/User';
-import WelcomePage from './components/WelcomePage';
 import Map from './components/Map';
 
 function App() {
@@ -15,7 +14,7 @@ function App() {
         coordinates: [58.195259, 14.221258, 58.195259, 14.221258]
     };
 
-    const [view, setView] = useState("start");
+    const [view, setView] = useState("map");
     const [params, setParams] = useState({});
     const [city, setCity] = useState(defaultCity);
 
@@ -27,7 +26,6 @@ function App() {
         setCity(city);
     }
 
-    function renderWelcomePage() { return ( <WelcomePage /> ); }
     function renderUsersTable() { return ( <UsersTable switchView={switchView} /> ); }
     function renderUser() { return ( <User params={params} /> ); }
     function renderBikesTable() { return ( <BikesTable city={city} /> ); }
@@ -45,7 +43,6 @@ function App() {
                     />
             </header>
             <div className="content">
-                {(view === "start") && renderWelcomePage()}
                 {(view === "users") && renderUsersTable()}
                 {(view === "user") && renderUser()}
                 {(view === "bikes") && renderBikesTable()}

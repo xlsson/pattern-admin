@@ -15,6 +15,10 @@ function Menu(props) {
         <div className="header-wrapper">
             <ChangeCity chosenCity={handleCityChange} />
             <ul className="menu-wrapper">
+                <li className={ (active === "map") ? "active" : "" }
+                    onClick={() => handleMenuClick("map")}>
+                    Karta
+                </li>
                 <li className={ (active === "bikes") ? "active" : "" }
                     onClick={() => handleMenuClick("bikes")}>
                     Cyklar
@@ -26,10 +30,6 @@ function Menu(props) {
                 <li className={ (active === "parkingStations") ? "active" : "" }
                     onClick={() => handleMenuClick("parkingStations")}>
                     Parkeringszoner
-                </li>
-                <li className={ (active === "map") ? "active" : "" }
-                    onClick={() => handleMenuClick("map")}>
-                    Karta
                 </li>
                 <li className={
                         ((active === "users") || (active === "user")) ? "active" : ""
