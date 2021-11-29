@@ -2,29 +2,20 @@ import React, { useState, useEffect } from 'react';
 import L from "leaflet";
 import { MapContainer, TileLayer, MapConsumer, Marker, Popup, Rectangle } from 'react-leaflet';
 
-
-import api from '../functions/api.js';
-
 function Map(props) {
-    let zoom = 6;
-
+    let [zoom, setZoom] = useState(6);
+    let [focusCoords, setFocusCoords] = useState([58.195259, 14.221258]);
     let [bikes, setBikes] = useState([]);
     let [chargingStations, setChargingStations] = useState([]);
     let [parkingStations, setParkingStations] = useState([]);
 
-    const lat = (props.city.coordinates[0] + props.city.coordinates[2])/2;
-    const long = (props.city.coordinates[1] + props.city.coordinates[3])/2;
-    const cityCoords = [lat, long];
-
-    async function getMapData() {
-        const bikes = await api.getBikes(props.city._id);
-        const chargingStations = await api.getChargingStations(props.city._id);
-        const parkingStations = await api.getParkingStations(props.city._id);
-
-        setChargingStations(chargingStations);
-        setParkingStations(parkingStations);
-        setBikes(bikes);
-    };
+    useEffect(() => {
+        setZoom(props.zoom);
+        setFocusCoords(props.focusCoords);
+        setBikes(props.bikes);
+        setChargingStations(props.chargingStations);
+        setParkingStations(props.parkingStations);
+    }, [props]);
 
     function getIcon(color) {
         return L.icon({
@@ -70,20 +61,11 @@ function Map(props) {
         );
     }
 
-    useEffect(() => { getMapData(); }, [props.city._id]);
-
     return (
-        <>
-        <h1>Karta över {props.city.name}</h1>
-        <div className="map-legend">
-            <p className="bike">Cyklar</p>
-            <p className="chargingStation">Laddningsstationer</p>
-            <p className="parkingStation">Parkeringsstationer</p>
-        </div>
         <div id="map-wrapper-main">
             <MapContainer
                 id="map"
-                center={cityCoords}
+                center={focusCoords}
                 zoom={zoom}
                 scrollWheelZoom={false}>
                 <TileLayer
@@ -92,8 +74,7 @@ function Map(props) {
                 />
                 <MapConsumer>
                     {(map) => {
-                        zoom = (props.city._id != "all") ? 13 : 6;
-                        map.setView(cityCoords, zoom);
+                        map.setView(focusCoords, zoom);
                         return null;
                     }}
                 </MapConsumer>
@@ -102,7 +83,6 @@ function Map(props) {
                 {parkingStations.map((station, i) => { return drawStation("parking", station, i); })}
             </MapContainer>
         </div>
-        </>
     );
 }
 
