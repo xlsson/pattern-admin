@@ -10,6 +10,10 @@ function ChargingStationsTable(props) {
         setChargingStations(chargingStations);
     };
 
+    function handleClick(i) {
+        props.switchView("chargingStation", chargingStations[i]);
+    }
+
     useEffect(() => { getChargingStations(); }, [props.city._id]);
 
     return (
@@ -26,7 +30,10 @@ function ChargingStationsTable(props) {
                 </thead>
                 <tbody>
                 {chargingStations.map((chargingStation, i) => (
-                    <tr key={i}>
+                    <tr
+                        className="pointer-cursor"
+                        key={i}
+                        onClick={() => handleClick(i)}>
                         <>
                         <td>{chargingStation._id}</td>
                         <td>{chargingStation.city_id}</td>

@@ -10,11 +10,15 @@ function ParkingStationsTable(props) {
         setParkingStations(parkingStations);
     };
 
+    function handleClick(i) {
+        props.switchView("parkingStation", parkingStations[i]);
+    }
+
     useEffect(() => { getParkingStations(); }, [props.city._id]);
 
     return (
         <div>
-            <h1>Parkeringszoner för {props.city.name}</h1>
+            <h1>Parkeringsstationer för {props.city.name}</h1>
             <table>
                 <>
                 <thead>
@@ -26,7 +30,10 @@ function ParkingStationsTable(props) {
                 </thead>
                 <tbody>
                 {parkingStations.map((parkingStation, i) => (
-                    <tr key={i}>
+                    <tr
+                        className="pointer-cursor"
+                        key={i}
+                        onClick={() => handleClick(i)}>
                         <>
                         <td>{parkingStation._id}</td>
                         <td>{parkingStation.city_id}</td>
