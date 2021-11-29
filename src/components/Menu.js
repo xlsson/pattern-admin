@@ -15,21 +15,21 @@ function Menu(props) {
         <div className="header-wrapper">
             <ChangeCity chosenCity={handleCityChange} />
             <ul className="menu-wrapper">
-                <li className={ (active === "map") ? "active" : "" }
-                    onClick={() => handleMenuClick("map")}>
-                    Karta
+                <li className={ (active === "overviewMap") ? "active" : "" }
+                    onClick={() => handleMenuClick("overviewMap")}>
+                    Översikt
                 </li>
                 <li className={ (active === "bikes") ? "active" : "" }
                     onClick={() => handleMenuClick("bikes")}>
                     Cyklar
                 </li>
-                <li className={ (active === "chargingStations") ? "active" : "" }
+                <li className={ ((active === "chargingStations") || (active === "chargingStation")) ? "active" : "" }
                     onClick={() => handleMenuClick("chargingStations")}>
                     Laddningsstationer
                 </li>
-                <li className={ (active === "parkingStations") ? "active" : "" }
+                <li className={ ((active === "parkingStations") || (active === "parkingStation")) ? "active" : "" }
                     onClick={() => handleMenuClick("parkingStations")}>
-                    Parkeringszoner
+                    Parkeringsstationer
                 </li>
                 <li className={
                         ((active === "users") || (active === "user")) ? "active" : ""
