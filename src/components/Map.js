@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import L from "leaflet";
 import { MapContainer, TileLayer, MapConsumer, Marker, Popup, Rectangle } from 'react-leaflet';
+import BikePopup from './BikePopup';
 
 function Map(props) {
     let [zoom, setZoom] = useState(6);
@@ -17,11 +18,12 @@ function Map(props) {
         setParkingStations(props.parkingStations);
     }, [props]);
 
+
     function getIcon(color) {
         return L.icon({
             iconUrl: require(`../img/mapmarkers/marker_${color}.png`).default,
             iconAnchor: [12, 12],
-            popupAnchor: [12, 12]
+            popupAnchor: [0, 0]
         });
     }
 
@@ -29,7 +31,7 @@ function Map(props) {
         return (
             <Marker position={bike.coordinates} icon={getIcon("pink")}>
                 <Popup>
-                    <span key={i}>Bike id: {bike._id}</span>
+                    <BikePopup key={i} bike={bike} />
                 </Popup>
             </Marker>
         )
