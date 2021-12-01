@@ -25,6 +25,11 @@ function OverviewMap(props) {
         setBikes(bikes);
     };
 
+
+    async function getNewMapData() {
+        console.log("hej nu ska ny data hämtas");
+    }
+
     useEffect(() => { getMapData(); }, [props.city._id]);
 
     return (
@@ -40,7 +45,8 @@ function OverviewMap(props) {
             focusCoords={focusCoords}
             bikes={bikes}
             chargingStations={chargingStations}
-            parkingStations={parkingStations}/>
+            parkingStations={parkingStations}
+            getNewMapData={getNewMapData} />
         </>
     );
 }

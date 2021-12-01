@@ -7,23 +7,24 @@ function BikePopup(props) {
     const [chargingStations, setChargingStations] = useState([]);
     const [selectedStation, setSelectedStation] = useState("");
 
+    useEffect(() => { getData(); }, [props]);
+
     async function getData() {
         const stations = await api.getChargingStations(bike.city_id);
         setChargingStations(stations);
-        setSelectedStation(stations[0]);
+        setSelectedStation(stations[0]._id);
     };
 
-    useEffect(() => { getData(); }, [props]);
-
-    function moveBike(bikeId) {
-        console.log("move", bikeId, selectedStation);
+    async function moveBike() {
+        await api.moveBike(bike._id, selectedStation);
+        props.getNewMapData();
     }
 
     function stationSelection(event) {
         setSelectedStation(event.target.value);
     }
 
-    function drawMoveBikeButton(bikeId) {
+    function drawMoveBikeForm(bikeId) {
         return (
             <>
             <strong>Boka hämtning till:</strong>
@@ -35,7 +36,7 @@ function BikePopup(props) {
                         </option>
                     ))}
                 </select>
-                <button type="button" onClick={() => moveBike(bikeId)}>Boka hämtning</button>
+                <button type="button" onClick={moveBike}>Boka hämtning</button>
             </div>
             </>
         )
@@ -44,7 +45,7 @@ function BikePopup(props) {
     return (
         <div className="bike-popup">
             <div>_id: {bike._id}, bike_status: {bike.bike_status}</div>
-            {(bike.bike_status === "free") && drawMoveBikeButton(bike._id)}
+            {(bike.bike_status === "free") && drawMoveBikeForm(bike._id)}
         </div>
     );
 }

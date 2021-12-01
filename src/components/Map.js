@@ -18,7 +18,6 @@ function Map(props) {
         setParkingStations(props.parkingStations);
     }, [props]);
 
-
     function getIcon(color) {
         return L.icon({
             iconUrl: require(`../img/mapmarkers/marker_${color}.png`).default,
@@ -31,7 +30,7 @@ function Map(props) {
         return (
             <Marker position={bike.coordinates} icon={getIcon("pink")}>
                 <Popup>
-                    <BikePopup key={i} bike={bike} />
+                    <BikePopup key={i} bike={bike} getNewMapData={props.getNewMapData} />
                 </Popup>
             </Marker>
         )
