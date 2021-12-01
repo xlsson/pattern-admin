@@ -8,48 +8,35 @@ function User(props) {
     let [user, setUser] = useState({});
     let [trips, setTrips] = useState([]);
 
-    let [firstname, setFirstname] = useState("");
-    let [lastname, setLastname] = useState("");
-    let [phone, setPhone] = useState("");
-    let [paymentMethod, setPaymentMethod] = useState("");
-    let [cardInformation, setCardInformation] = useState("");
-    let [balance, setBalance] = useState("");
-    let [accountStatus, setAccountStatus] = useState("");
+    function handleInput(value, prop) {
+        let updatedUser = { ...user };
+        updatedUser[prop] = value;
+
+        if (prop === "balance") {
+            updatedUser.balance = (value.length > 0) ? parseInt(value) : 0;
+        }
+
+        setUser(updatedUser);
+    }
 
     function toggleAccount() {
-        let newStatus = (accountStatus === "active") ? "inactive" : "active";
-        setAccountStatus(newStatus);
+        let newStatus = (user.account_status === "active") ? "inactive" : "active";
+        let updatedUser = { ...user };
+        updatedUser.account_status = newStatus;
+        setUser(updatedUser);
     }
 
     function saveChanges() {
-        let updatedUser = {
-            _id: userId,
-            firstname: firstname,
-            lastname: lastname,
-            email: user.email,
-            password: user.password,
-            phone: phone,
-            payment_method: paymentMethod,
-            card_information: cardInformation,
-            balance: balance,
-            account_status: accountStatus
-        };
-        setUser(updatedUser);
-        api.updateUser(updatedUser);
+        setUser(user);
+        api.updateUser(user);
     }
 
     async function getData() {
-        user = await api.getUsers(userId);
-        trips = await api.getTrips(userId);
-        setUser(user[0]);
-        setFirstname(user[0].firstname);
-        setLastname(user[0].lastname);
-        setPhone(user[0].phone);
-        setPaymentMethod(user[0].payment_method);
-        setCardInformation(user[0].card_information);
-        setBalance(user[0].balance);
-        setAccountStatus(user[0].account_status);
-        setTrips(trips);
+        let userResult = await api.getUsers(userId);
+        let tripsResult = await api.getTrips(userId);
+        userResult = userResult[0];
+        setUser(userResult);
+        setTrips(tripsResult);
     };
 
     useEffect(() => { getData(); }, [userId]);
@@ -68,8 +55,8 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={firstname}
-                                onChange={e => setFirstname(e.target.value)}>
+                                value={user.firstname}
+                                onChange={e => handleInput(e.target.value, "firstname")}>
                             </input>
                         </td>
                     </tr>
@@ -78,8 +65,8 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={lastname}
-                                onChange={e => setLastname(e.target.value)}>
+                                value={user.lastname}
+                                onChange={e => handleInput(e.target.value, "lastname")}>
                             </input>
                         </td>
                     </tr>
@@ -96,8 +83,8 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={phone}
-                                onChange={e => setPhone(e.target.value)}>
+                                value={user.phone}
+                                onChange={e => handleInput(e.target.value, "phone")}>
                             </input>
                         </td>
                     </tr>
@@ -106,8 +93,8 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={paymentMethod}
-                                onChange={e => setPaymentMethod(e.target.value)}>
+                                value={user.payment_method}
+                                onChange={e => handleInput(e.target.value, "payment_method")}>
                             </input>
                         </td>
                     </tr>
@@ -116,8 +103,8 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={cardInformation}
-                                onChange={e => setCardInformation(e.target.value)}>
+                                value={user.card_information}
+                                onChange={e => handleInput(e.target.value, "card_information")}>
                             </input>
                         </td>
                     </tr>
@@ -125,18 +112,18 @@ function User(props) {
                         <td>balance</td>
                         <td>
                             <input
-                                type="text"
-                                value={balance}
-                                onChange={e => setBalance(e.target.value)}>
+                                type="number"
+                                value={user.balance}
+                                onChange={e => handleInput(e.target.value, "balance")}>
                             </input>
                         </td>
                     </tr>
                     <tr>
                         <td>account_status</td>
-                        <td>{accountStatus}
+                        <td>{user.account_status}
                             <input
                                 type="checkbox"
-                                defaultChecked={(accountStatus === "active") ? true : false}
+                                defaultChecked={(user.account_status === "active") ? true : false}
                                 onClick={toggleAccount}>
                             </input>
                         </td>
