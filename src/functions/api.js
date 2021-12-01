@@ -7,6 +7,9 @@ const api = {
         const filtered = all.filter((item) => item.city_id == cityId);
         return filtered;
     },
+    moveBike: async function (bikeId, chargeId) {
+        console.log("flyttar: ", bikeId, " till ", chargeId);
+    },
     getChargingStations: async function(cityId) {
         const all = await data.charge;
         if (cityId === "all") { return all; }
