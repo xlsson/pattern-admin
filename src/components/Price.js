@@ -28,7 +28,7 @@ function Price(props) {
 
     return (
         <div>
-            <h1>Administrera pristariff för city_id: {cityId}</h1>
+            <h1>Administrera pristariff för city_id: {cityId} (samma tariff för alla städer)</h1>
             <table>
                 <tbody>
                     <tr>
