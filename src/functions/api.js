@@ -47,14 +47,7 @@ const api = {
         return filtered;
     },
     updateUser: async function (updated) {
-        const allUsers = await data.user;
-        let index;
-        allUsers.forEach((user, i) => {
-            if (user._id === updated._id) { index = i; }
-        });
-        allUsers.splice(index, 1, updated);
-        updateUsers(allUsers);
-        return allUsers;
+        console.log("uppdatera user: ", updated);
     }
 };
 
