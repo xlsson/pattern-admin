@@ -27,8 +27,9 @@ function Map(props) {
     }
 
     function drawBike(bike, i) {
+        let position = [bike.coordinates.lat, bike.coordinates.long];
         return (
-            <Marker position={bike.coordinates} icon={getIcon("pink")}>
+            <Marker position={position} icon={getIcon("pink")}>
                 <Popup>
                     <BikePopup key={i} bike={bike} getNewMapData={props.getNewMapData} />
                 </Popup>
@@ -37,18 +38,19 @@ function Map(props) {
     }
 
     function drawStation(type, station, i) {
-        let color = "green";
-        if (type === "parking") { color = "blue"; }
-
-        let coords = station.coordinates;
-        let northWest = [coords[0], coords[1]];
-        let southEast = [coords[2], coords[3]];
-        let center = [
-            ((northWest[0] + southEast[0])/2),
-            ((northWest[1] + southEast[1])/2)
-        ];
-        let bounds = [northWest, southEast];
+        let color = (type === "parking") ? "blue" : "green";
         let options = { color: color };
+        let coords = station.coordinates;
+
+        let center = [
+            ((coords.northwest.lat + coords.southeast.lat)/2),
+            ((coords.northwest.long + coords.southeast.long)/2)
+        ];
+
+        let bounds = [
+            [coords.northwest.lat, coords.northwest.long],
+            [coords.southeast.lat, coords.southeast.long]
+        ];
 
         return (
             <>
@@ -80,7 +82,7 @@ function Map(props) {
                     }}
                 </MapConsumer>
                 {bikes.map((bike, i) => { return drawBike(bike, i); })}
-                {chargingStations.map((station, i) => { return drawStation("charging", station, i); })}
+                {chargingStations.map((station, i) => { return drawStation("charge", station, i); })}
                 {parkingStations.map((station, i) => { return drawStation("parking", station, i); })}
             </MapContainer>
         </div>

@@ -12,7 +12,10 @@ function App() {
     const defaultCity = {
          _id: "all",
         name: "alla städer",
-        coordinates: [58.195259, 14.221258, 58.195259, 14.221258]
+        coordinates: {
+            northwest: { lat: 58.195259, long: 14.221258 },
+            southeast: { lat: 58.195259, long: 14.221258 }
+        }
     };
 
     const [view, setView] = useState("overviewMap");
@@ -55,6 +58,7 @@ function App() {
                 <Menu
                     switchView={switchView}
                     view={view}
+                    defaultCity={defaultCity}
                     cityChoice={handleCityChoice}
                     />
             </header>
@@ -63,7 +67,7 @@ function App() {
                 {(view === "user") && renderUser()}
                 {(view === "bikes") && renderBikesTable()}
                 {(view === "chargingStations") && renderChargingStationsTable()}
-                {(view === "chargingStation") && renderStation("charging")}
+                {(view === "chargingStation") && renderStation("charge")}
                 {(view === "parkingStations") && renderParkingStationsTable()}
                 {(view === "parkingStation") && renderStation("parking")}
                 {(view === "overviewMap") && renderOverviewMap()}

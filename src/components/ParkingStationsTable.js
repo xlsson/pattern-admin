@@ -37,7 +37,10 @@ function ParkingStationsTable(props) {
                         <>
                         <td>{parkingStation._id}</td>
                         <td>{parkingStation.city_id}</td>
-                        <td>{parkingStation.coordinates[0]}, {parkingStation.coordinates[1]}</td>
+                        <td>
+                            {parkingStation.coordinates.northwest.lat}, {parkingStation.coordinates.northwest.long},
+                            {parkingStation.coordinates.southeast.lat}, {parkingStation.coordinates.southeast.long}
+                        </td>
                         </>
                     </tr>
                 ))}

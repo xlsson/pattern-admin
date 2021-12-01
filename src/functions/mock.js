@@ -10,7 +10,7 @@ const data = {
             bike_status: "free",
             battery_status: 20,
             maintenance: "",
-            coordinates: [56.183013, 15.573461]
+            coordinates: { lat: 56.183013, long: 15.573461 }
         },
         {
             _id: 2,
@@ -20,7 +20,7 @@ const data = {
             bike_status: "free",
             battery_status: 30,
             maintenance: "",
-            coordinates: [56.185000, 15.603461]
+            coordinates: { lat: 56.185000, long: 15.603461 }
         },
         {
             _id: 3,
@@ -30,7 +30,7 @@ const data = {
             bike_status: "free",
             battery_status: 70,
             maintenance: "",
-            coordinates: [56.165000, 15.613461]
+            coordinates: { lat: 56.165000, long: 15.613461 }
         },
         {
             _id: 4,
@@ -40,7 +40,7 @@ const data = {
             bike_status: "free",
             battery_status: 1,
             maintenance: "",
-            coordinates: [59.385921, 13.490531]
+            coordinates: { lat: 59.385921, long: 13.490531 }
         },
         {
             _id: 5,
@@ -50,7 +50,7 @@ const data = {
             bike_status: "free",
             battery_status: 0,
             maintenance: "",
-            coordinates: [56.180000, 15.567777]
+            coordinates: { lat: 56.180000, long: 15.567777 }
         },
         {
             _id: 6,
@@ -60,7 +60,7 @@ const data = {
             bike_status: "free",
             battery_status: 100,
             maintenance: "",
-            coordinates: [59.323776, 18.077349]
+            coordinates: { lat: 59.323776, long: 18.077349 }
         },
         {
             _id: 7,
@@ -70,63 +70,93 @@ const data = {
             bike_status: "free",
             battery_status: 100,
             maintenance: "",
-            coordinates: [59.380921, 13.506531]
+            coordinates: { lat: 59.380921, long: 13.506531 }
         }
     ],
     charge: [
         {
             _id: 1,
             city_id: 1,
-            coordinates: [56.181368, 15.590497, 56.181187, 15.590952]
+            coordinates: {
+                northwest: { lat: 56.181368, long: 15.590497 },
+                southeast: { lat: 56.181187, long: 15.590952 }
+            }
         },
         {
             _id: 2,
             city_id: 2,
-            coordinates: [59.380880, 13.502523, 59.380748, 13.502966]
+            coordinates: {
+                northwest: { lat: 59.380880, long: 13.502523 },
+                southeast: { lat: 59.380748, long: 13.502966 }
+            }
         },
         {
             _id: 3,
             city_id: 3,
-            coordinates: [59.318668, 18.062481, 59.318405, 18.063230]
+            coordinates: {
+                northwest: { lat: 59.318668, long: 18.062481 },
+                southeast: { lat: 59.318405, long: 18.063230 }
+            }
         },
         {
             _id: 4,
             city_id: 2,
-            coordinates: [59.382503, 13.495277, 59.382399, 13.495710]
+            coordinates: {
+                northwest: { lat: 59.382503, long: 13.495277 },
+                southeast: { lat: 59.382399, long: 13.495710 }
+            }
         }
     ],
     city: [
         {
             _id: 1,
             name: "Karlskrona",
-            coordinates: [56.193013, 15.559232, 56.152144, 15.634511]
+            coordinates: {
+                northwest: { lat: 56.193013, long: 15.559232 },
+                southeast: { lat: 56.152144, long: 15.634511 }
+            }
         },
         {
             _id: 2,
             name: "Karlstad",
-            coordinates: [59.390921, 13.466531, 59.364795, 13.541185]
+            coordinates: {
+                northwest: { lat: 59.390921, long: 13.466531 },
+                southeast: { lat: 59.364795, long: 13.541185 }
+            }
         },
         {
             _id: 3,
             name: "Stockholm",
-            coordinates: [59.343776, 18.027349, 59.301313, 18.111062]
+            coordinates: {
+                northwest: { lat: 59.343776, long: 18.027349 },
+                southeast: { lat: 59.301313, long: 18.111062 }
+            }
         }
     ],
     parking: [
         {
             _id: 1,
             city_id: 1,
-            coordinates: [56.166459, 15.593423, 56.166382, 15.593662]
+            coordinates: {
+                northwest: { lat: 56.166459, long: 15.593423 },
+                southeast: { lat: 56.166382, long: 15.593662 }
+            }
         },
         {
             _id: 2,
             city_id: 2,
-            coordinates: [59.375324, 13.491880, 59.375265, 13.492030]
+            coordinates: {
+                northwest: { lat: 59.375324, long: 13.491880 },
+                southeast: { lat: 59.375265, long: 13.492030 }
+            }
         },
         {
             _id: 3,
             city_id: 3,
-            coordinates: [59.321328, 18.059566, 59.321310, 18.059708]
+            coordinates: {
+                northwest: { lat: 59.321328, long: 18.059566 },
+                southeast: { lat: 59.321310, long: 18.059708 }
+            }
         }
     ],
     price: [
@@ -146,8 +176,8 @@ const data = {
             city: "Karlstad",
             start_time: "213409082021",
             stop_time: "213409082021",
-            start_coordinates: [59.385921, 13.504531],
-            stop_coordinates: [59.380921, 13.506531],
+            start_coordinates: { lat: 59.385921, long: 13.504531 },
+            stop_coordinates: { lat: 59.380921, long: 13.506531 },
             average_speed: 18,
             distance: 2300,
             price: 80,
@@ -159,8 +189,8 @@ const data = {
             city: "Karlstad",
             start_time: "083409082021",
             stop_time: "093409082021",
-            start_coordinates: [59.382921, 13.514531],
-            stop_coordinates: [59.381921, 13.516531],
+            start_coordinates: { lat: 59.382921, long: 13.514531 },
+            stop_coordinates: { lat: 59.381921, long: 13.516531 },
             average_speed: 16,
             distance: 2100,
             price: 70,
@@ -172,8 +202,8 @@ const data = {
             city: "Karlskrona",
             start_time: "083102112021",
             stop_time: "083902112021",
-            start_coordinates: [59.385971, 13.490541],
-            stop_coordinates: [59.385121, 13.490501],
+            start_coordinates: { lat: 59.385971, long: 13.490541 },
+            stop_coordinates: { lat: 59.385121, long: 13.490501 },
             average_speed: 22,
             distance: 3100,
             price: 110,
@@ -185,8 +215,8 @@ const data = {
             city: "Karlskrona",
             start_time: "083102112021",
             stop_time: "083902112021",
-            start_coordinates: [59.385971, 13.490541],
-            stop_coordinates: [59.385121, 13.490501],
+            start_coordinates: { lat: 59.385971, long: 13.490541 },
+            stop_coordinates: { lat: 59.385121, long: 13.490501 },
             average_speed: 22,
             distance: 3100,
             price: 110,

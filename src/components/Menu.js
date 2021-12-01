@@ -3,17 +3,15 @@ import ChangeCity from './ChangeCity';
 function Menu(props) {
     let active = props.view;
 
-    function handleMenuClick(view) {
-        props.switchView(view);
-    }
+    function handleMenuClick(view) { props.switchView(view); }
 
-    function handleCityChange(city) {
-        props.cityChoice(city);
-    }
+    function handleCityChange(city) { props.cityChoice(city); }
 
     return (
         <div className="header-wrapper">
-            <ChangeCity chosenCity={handleCityChange} />
+            <ChangeCity
+                defaultCity={props.defaultCity}
+                chosenCity={handleCityChange} />
             <ul className="menu-wrapper">
                 <li className={ (active === "overviewMap") ? "active" : "" }
                     onClick={() => handleMenuClick("overviewMap")}>

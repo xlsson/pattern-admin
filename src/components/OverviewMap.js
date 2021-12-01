@@ -9,8 +9,10 @@ function OverviewMap(props) {
     let [chargingStations, setChargingStations] = useState([]);
     let [parkingStations, setParkingStations] = useState([]);
 
-    const lat = (props.city.coordinates[0] + props.city.coordinates[2])/2;
-    const long = (props.city.coordinates[1] + props.city.coordinates[3])/2;
+    let coords = props.city.coordinates;
+
+    const lat = (coords.northwest.lat + coords.southeast.lat)/2;
+    const long = (coords.northwest.long + coords.southeast.long)/2;
     const focusCoords = [lat, long];
 
     async function getMapData() {

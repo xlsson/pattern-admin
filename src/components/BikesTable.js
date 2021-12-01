@@ -72,7 +72,9 @@ function BikesTable(props) {
                         <td>{bike.bike_status}</td>
                         <td>{bike.battery_status}</td>
                         <td>{bike.maintenance}</td>
-                        <td>{bike.coordinates[0]}, {bike.coordinates[1]}</td>
+                        <td>
+                            {bike.coordinates.lat}, {bike.coordinates.long}
+                        </td>
                         <td>{(bike.bike_status === "free") && renderMoveForm(bike)}</td>
                         </>
                     </tr>

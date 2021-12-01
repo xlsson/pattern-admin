@@ -175,8 +175,8 @@ function User(props) {
                         <td>{trip.city}</td>
                         <td>{trip.start_time}</td>
                         <td>{trip.stop_time}</td>
-                        <td>{trip.start_coordinates}</td>
-                        <td>{trip.stop_coordinates}</td>
+                        <td>{trip.start_coordinates.lat}, {trip.start_coordinates.long}</td>
+                        <td>{trip.stop_coordinates.lat}, {trip.stop_coordinates.long}</td>
                         <td>{trip.average_speed}</td>
                         <td>{trip.distance}</td>
                         <td>{trip.price}</td>

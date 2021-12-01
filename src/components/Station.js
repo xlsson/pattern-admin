@@ -4,9 +4,12 @@ import Map from './Map';
 import api from '../functions/api.js';
 
 function Station(props) {
-    let chargingStation, parkingStation = [];
+    let [bikes, setBikes] = useState([]);
+
+    let chargingStation = [];
+    let parkingStation = [];
     let title = "";
-    if (props.type === "charging") {
+    if (props.type === "charge") {
         chargingStation = [props.station];
         title = "Laddningsstation";
     }
@@ -16,20 +19,17 @@ function Station(props) {
     }
 
     let station = props.station;
+    let coords = station.coordinates;
 
-    let [bikes, setBikes] = useState([]);
-
-    const lat = (station.coordinates[0] + station.coordinates[2])/2;
-    const long = (station.coordinates[1] + station.coordinates[3])/2;
+    const lat = (coords.northwest.lat + coords.southeast.lat)/2;
+    const long = (coords.northwest.long + coords.southeast.long)/2;
     const focusCoords = [lat, long];
 
     async function getData() {
         let allBikes = await api.getBikes(station.city_id);
-
         bikes = allBikes.filter(function(bike) {
           return bike[`${props.type}_id`] === station._id;
         });
-
         setBikes(bikes);
     };
 
@@ -49,8 +49,8 @@ function Station(props) {
                 <tr>
                     <td>coordinates:</td>
                     <td>
-                    Nordväst: {station.coordinates[0]}, {station.coordinates[1]},
-                    Sydost: {station.coordinates[2]}, {station.coordinates[3]}
+                    Nordväst: {coords.northwest.lat}, {coords.northwest.long},
+                    Sydost: {coords.southeast.lat}, {coords.southeast.long}
                     </td>
                 </tr>
                 <tr>
