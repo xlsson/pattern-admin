@@ -39,7 +39,7 @@ function Price(props) {
                         <td>starting_fee</td>
                         <td>
                             <input
-                                type="text"
+                                type="number"
                                 value={price.starting_fee}
                                 onChange={e => handleInput(e.target.value, "starting_fee")}>
                             </input>
@@ -49,7 +49,7 @@ function Price(props) {
                         <td>price_per_minute</td>
                         <td>
                             <input
-                                type="text"
+                                type="number"
                                 value={price.price_per_minute}
                                 onChange={e => handleInput(e.target.value, "price_per_minute")}>
                             </input>
@@ -59,7 +59,7 @@ function Price(props) {
                         <td>penalty_fee</td>
                         <td>
                             <input
-                                type="text"
+                                type="number"
                                 value={price.penalty_fee}
                                 onChange={e => handleInput(e.target.value, "penalty_fee")}>
                             </input>
@@ -69,7 +69,7 @@ function Price(props) {
                         <td>discount</td>
                         <td>
                             <input
-                                type="text"
+                                type="number"
                                 value={price.discount}
                                 onChange={e => handleInput(e.target.value, "discount")}>
                             </input>
