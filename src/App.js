@@ -7,6 +7,7 @@ import Station from './components/Station';
 import UsersTable from './components/UsersTable';
 import User from './components/User';
 import OverviewMap from './components/OverviewMap';
+import Price from './components/Price';
 
 function App() {
     const defaultCity = {
@@ -52,6 +53,9 @@ function App() {
     function renderOverviewMap() {
         return ( <OverviewMap city={city} /> ); }
 
+    function renderPrice() {
+        return ( <Price city={city} /> ); }
+
     return (
         <div className="page-wrapper">
             <header>
@@ -71,6 +75,7 @@ function App() {
                 {(view === "parkingStations") && renderParkingStationsTable()}
                 {(view === "parkingStation") && renderStation("parking")}
                 {(view === "overviewMap") && renderOverviewMap()}
+                {(view === "price") && renderPrice()}
             </div>
         </div>
     );

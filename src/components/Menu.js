@@ -29,11 +29,13 @@ function Menu(props) {
                     onClick={() => handleMenuClick("parkingStations")}>
                     Parkeringsstationer
                 </li>
-                <li className={
-                        ((active === "users") || (active === "user")) ? "active" : ""
-                    }
+                <li className={ ((active === "users") || (active === "user")) ? "active" : "" }
                     onClick={() => handleMenuClick("users")}>
                     Kunder
+                </li>
+                <li className={ (active === "price") ? "active" : "" }
+                    onClick={() => handleMenuClick("price")}>
+                    Pristariff
                 </li>
             </ul>
         </div>

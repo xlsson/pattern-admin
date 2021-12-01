@@ -22,7 +22,7 @@ const api = {
         const filtered = all.filter((item) => item._id == cityId);
         return filtered;
     },
-    getParkingStations: async function(cityId) {
+    getParkingStations: async function (cityId) {
         const all = await data.parking;
         if (cityId === "all") { return all; }
         const filtered = all.filter((item) => item.city_id == cityId);
@@ -30,6 +30,9 @@ const api = {
     },
     getPrice: async function () {
         return await data.price;
+    },
+    updatePrice: async function (updatedPrice) {
+        console.log("sparar pris i db", updatedPrice);
     },
     getTrips: async function (userId) {
         const all = await data.trip;
