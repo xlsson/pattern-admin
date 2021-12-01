@@ -58,93 +58,95 @@ function User(props) {
         <div>
             <h1>Administrera kund: {user.firstname} {user.lastname}</h1>
             <table>
-                <tr>
-                    <td>_id</td>
-                    <td>{userId}</td>
-                </tr>
-                <tr>
-                    <td>firstname</td>
-                    <td>
-                        <input
-                            type="text"
-                            value={firstname}
-                            onChange={e => setFirstname(e.target.value)}>
-                        </input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>lastname</td>
-                    <td>
-                        <input
-                            type="text"
-                            value={lastname}
-                            onChange={e => setLastname(e.target.value)}>
-                        </input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>email</td>
-                    <td>{user.email}</td>
-                </tr>
-                <tr>
-                    <td>password</td>
-                    <td>{user.password}</td>
-                </tr>
-                <tr>
-                    <td>phone</td>
-                    <td>
-                        <input
-                            type="text"
-                            value={phone}
-                            onChange={e => setPhone(e.target.value)}>
-                        </input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>payment_method</td>
-                    <td>
-                        <input
-                            type="text"
-                            value={paymentMethod}
-                            onChange={e => setPaymentMethod(e.target.value)}>
-                        </input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>card_information</td>
-                    <td>
-                        <input
-                            type="text"
-                            value={cardInformation}
-                            onChange={e => setCardInformation(e.target.value)}>
-                        </input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>balance</td>
-                    <td>
-                        <input
-                            type="text"
-                            value={balance}
-                            onChange={e => setBalance(e.target.value)}>
-                        </input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>account_status</td>
-                    <td>{accountStatus}
-                        <input
-                            type="checkbox"
-                            checked={(accountStatus === "active") ? true : false}
-                            onClick={toggleAccount}>
-                        </input>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <button type="button" onClick={saveChanges}>Spara ändringar</button>
-                    </td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td>_id</td>
+                        <td>{userId}</td>
+                    </tr>
+                    <tr>
+                        <td>firstname</td>
+                        <td>
+                            <input
+                                type="text"
+                                value={firstname}
+                                onChange={e => setFirstname(e.target.value)}>
+                            </input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>lastname</td>
+                        <td>
+                            <input
+                                type="text"
+                                value={lastname}
+                                onChange={e => setLastname(e.target.value)}>
+                            </input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>email</td>
+                        <td>{user.email}</td>
+                    </tr>
+                    <tr>
+                        <td>password</td>
+                        <td>{user.password}</td>
+                    </tr>
+                    <tr>
+                        <td>phone</td>
+                        <td>
+                            <input
+                                type="text"
+                                value={phone}
+                                onChange={e => setPhone(e.target.value)}>
+                            </input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>payment_method</td>
+                        <td>
+                            <input
+                                type="text"
+                                value={paymentMethod}
+                                onChange={e => setPaymentMethod(e.target.value)}>
+                            </input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>card_information</td>
+                        <td>
+                            <input
+                                type="text"
+                                value={cardInformation}
+                                onChange={e => setCardInformation(e.target.value)}>
+                            </input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>balance</td>
+                        <td>
+                            <input
+                                type="text"
+                                value={balance}
+                                onChange={e => setBalance(e.target.value)}>
+                            </input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>account_status</td>
+                        <td>{accountStatus}
+                            <input
+                                type="checkbox"
+                                defaultChecked={(accountStatus === "active") ? true : false}
+                                onClick={toggleAccount}>
+                            </input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colSpan="2">
+                            <button type="button" onClick={saveChanges}>Spara ändringar</button>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
 
             <h2>{user.firstname} {user.lastname}s resor</h2>
