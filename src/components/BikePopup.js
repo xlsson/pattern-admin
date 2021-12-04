@@ -1,31 +1,36 @@
 import React, { useState, useEffect } from 'react';
+
 import api from '../functions/api.js';
 
 function BikePopup(props) {
     const bike = props.bike;
-    const cities = props.cities;
+    const chargingStations = props.cities[bike.city_id].charge_stations;
 
-    const [selectedStation, setSelectedStation] = useState("");
+    const [selectedId, setSelectedId] = useState("");
 
-    async function moveBike() {
-        await api.moveBike(bike._id, selectedStation);
-        props.redrawBikes();
+    useEffect(() => { setSelectedId(0); }, [props]);
+
+    function moveBike() {
+        const selectedStation = chargingStations[selectedId];
+        api.moveBike(bike._id, selectedStation, afterMoveBike);
+    }
+
+    function afterMoveBike(data) {
+        console.log(data);
     }
 
     function stationSelection(event) {
-        setSelectedStation(event.target.value);
+        setSelectedId(event.target.value);
     }
 
     function drawMoveBikeForm(bike) {
-        let chargingStations = cities[bike.city_id].charge_stations;
-
         return (
             <>
             <strong>Boka hämtning till:</strong>
             <div>
                 <select onBlur={stationSelection}>
                     {chargingStations.map((station, i) => (
-                        <option key={i} value={station._id}>
+                        <option key={i} value={i}>
                             {station._id}
                         </option>
                     ))}

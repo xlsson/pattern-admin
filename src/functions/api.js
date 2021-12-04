@@ -42,8 +42,30 @@ const api = {
 
         api.sendRequest(url, requestOptions, callback);
     },
-    moveBike: async function (bikeId, chargeId) {
-        console.log("flyttar: ", bikeId, " till ", chargeId);
+    moveBike: function (bikeId, station, callback) {
+        console.log("flyttar: ", bikeId, " till ", station);
+        const coords = station.coordinates;
+        const long = (coords.northwest.long + coords.southeast.long)/2;
+        const lat = (coords.northwest.lat + coords.southeast.lat)/2;
+
+        const changes = [
+            { propName: "charge_id", value: station._id },
+            { propName: "battery_status", value: 100 },
+            { propName: "coordinates", value: { lat: lat , long: long } }
+        ];
+
+        let url = `${api.baseUrl}/bikes/${bikeId}`;
+
+        let requestOptions = {
+            method: "PATCH",
+            headers: {
+                'x-access-token': api.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(changes)
+        };
+
+        api.sendRequest(url, requestOptions, callback);
     },
     getCities: function (callback) {
         let url = `${api.baseUrl}/cities`;
@@ -68,7 +90,6 @@ const api = {
         api.sendRequest(url, requestOptions, callback);
     },
     updatePrice: function (priceId, newValues, callback) {
-        console.log("sparar pris i db", newValues);
         let url = `${api.baseUrl}/prices/${priceId}`;
         let keys = Object.keys(newValues);
 

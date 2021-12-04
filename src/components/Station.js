@@ -74,7 +74,8 @@ function Station(props) {
             city={props.currentCity}
             cities={props.cities}
             chargingStations={chargingStation}
-            parkingStations={parkingStation}/>
+            parkingStations={parkingStation}
+            redrawBikes={getBikes} />
         </>
     );
 }
