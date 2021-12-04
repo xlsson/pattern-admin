@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import BikeMoveForm from './BikeMoveForm';
 
 import api from '../functions/api.js';
 
 function BikesTable(props) {
     let [bikes, setBikes] = useState([]);
-    let [selectedStation, setSelectedStation] = useState("");
 
     let currentCity = props.currentCity;
     let cities = props.cities;
@@ -15,28 +15,13 @@ function BikesTable(props) {
 
     function afterGetBikes(data) { setBikes(data.bikes); }
 
-    async function moveBike(bikeId) {
-        await api.moveBike(bikeId, selectedStation);
-    }
-
-    function stationSelection(event) {
-        setSelectedStation(event.target.value);
-    }
-
     function renderMoveForm(bike) {
         let chargingStations = cities[bike.city_id].charge_stations;
 
         return (
-            <div>
-                <select onChange={stationSelection}>
-                    {chargingStations.map((station, i) => (
-                        <option key={i} value={station._id}>
-                            stationsid {station._id}
-                        </option>
-                    ))}
-                </select>
-                <button type="button" onClick={() => moveBike(bike._id)}>Boka hämtning</button>
-            </div>
+            <BikeMoveForm
+                bike={bike}
+                chargingStations={chargingStations} />
         )
     }
 

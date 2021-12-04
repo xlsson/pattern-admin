@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Menu from './components/Menu';
 import BikesTable from './components/BikesTable';
 import StationsTable from './components/StationsTable';
-import ParkingStationsTable from './components/ParkingStationsTable';
 import Station from './components/Station';
 import UsersTable from './components/UsersTable';
 import User from './components/User';
@@ -37,13 +36,10 @@ function App() {
 
     function afterGetCities(data) {
         addStationsToDefault(data.cities);
-
         let citiesObject = {};
         data.cities.forEach((city) => {
             citiesObject[city._id] = city;
         });
-        console.log(citiesObject);
-
         setCities(citiesObject);
     }
 
