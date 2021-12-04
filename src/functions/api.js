@@ -1,5 +1,3 @@
-import { data, updateUsers } from "./mock";
-
 const devconfig = require("./devconfig.json");
 
 const api = {
@@ -35,7 +33,7 @@ const api = {
     getBikes: function (cityId, callback) {
         let url = `${api.baseUrl}/bikes`;
 
-        if (cityId != "all") { url += `/city/${cityId}`; }
+        if (cityId !== "all") { url += `/city/${cityId}`; }
 
         let requestOptions = {
             method: "GET",
@@ -75,7 +73,7 @@ const api = {
     getTrips: function (userId, callback) {
         let url = `${api.baseUrl}/trips`;
 
-        if (userId != "all") { url += `/user/${userId}`; }
+        if (userId !== "all") { url += `/user/${userId}`; }
 
         let requestOptions = {
             method: "GET",
@@ -87,7 +85,7 @@ const api = {
     getUsers: function (userId, callback) {
         let url = `${api.baseUrl}/users`;
 
-        if (userId != "all") { url += `/${userId}`; }
+        if (userId !== "all") { url += `/${userId}`; }
 
         let requestOptions = {
             method: "GET",
@@ -96,8 +94,31 @@ const api = {
 
         api.sendRequest(url, requestOptions, callback);
     },
-    updateUser: async function (updated) {
-        console.log("uppdatera user: ", updated);
+    updateUser: function (userId, newValues, callback) {
+        let url = `${api.baseUrl}/users/${userId}`;
+        let keys = Object.keys(newValues);
+
+        if (keys.length === 0) {
+            callback({ message: "no changes, empty request"});
+            return;
+        }
+
+        let changes = [];
+        keys.forEach((key) => {
+            let change = { propName: key, value: newValues[key] };
+            changes.push(change);
+        });
+
+        let requestOptions = {
+            method: "PATCH",
+            headers: {
+                'x-access-token': api.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(changes)
+        };
+
+        api.sendRequest(url, requestOptions, callback);
     }
 };
 

@@ -7,6 +7,8 @@ function User(props) {
     const userId = props.params._id;
 
     let [user, setUser] = useState({});
+    let [name, setName] = useState("")
+    let [changes, setChanges] = useState({});
     let [trips, setTrips] = useState([]);
 
     useEffect(() => {
@@ -14,16 +16,31 @@ function User(props) {
         api.getTrips(userId, afterGetTrips);
     }, [userId]);
 
-    function afterGetUsers(data) { setUser(data.user); }
+    function updateName(userData) {
+        let fullname = userData.firstname + " " + userData.lastname;
+        setName(fullname);
+    }
+
+    function afterGetUsers(data) {
+        setUser(data.user);
+        updateName(data.user);
+    }
+
     function afterGetTrips(data) { setTrips(data.trips); }
 
     function handleInput(value, prop) {
         let updatedUser = { ...user };
         updatedUser[prop] = value;
 
+        let updatedChanges = { ...changes };
+        updatedChanges[prop] = value;
+
         if (prop === "balance") {
             updatedUser.balance = (value.length > 0) ? parseInt(value) : 0;
+            updatedChanges.balance = (value.length > 0) ? parseInt(value) : 0;
         }
+
+        setChanges(updatedChanges);
         setUser(updatedUser);
     }
 
@@ -35,15 +52,17 @@ function User(props) {
     }
 
     function saveChanges() {
-        setUser(user);
-        api.updateUser(user);
+        api.updateUser(userId, changes, afterSaveChanges);
     }
 
-
+    function afterSaveChanges(data) {
+        updateName(user);
+        console.log(data);
+    }
 
     return (
         <div>
-            <h1>Administrera kund: {user.firstname} {user.lastname}</h1>
+            <h1>Administrera kund: {name}</h1>
             <table>
                 <tbody>
                     <tr>
