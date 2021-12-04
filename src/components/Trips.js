@@ -27,7 +27,7 @@ function Trips(props) {
                     <tr key={i}>
                         <>
                         <td>{trip._id}</td>
-                        <td>{trip.bike_id}</td>
+                        <td>{trip.bike_id}</td> 
                         <td>{trip.start_time}</td>
                         <td>{trip.stop_time}</td>
                         <td>{trip.start_coordinates.lat}, {trip.start_coordinates.long}</td>
