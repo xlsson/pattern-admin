@@ -50,6 +50,7 @@ const api = {
 
         const changes = [
             { propName: "charge_id", value: station._id },
+            { propName: "parking_id", value: null },
             { propName: "battery_status", value: 100 },
             { propName: "coordinates", value: { lat: lat , long: long } }
         ];
