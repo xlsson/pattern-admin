@@ -17,6 +17,7 @@ function BikePopup(props) {
 
     function afterMoveBike(data) {
         console.log(data);
+        props.redrawBikes();
     }
 
     function stationSelection(event) {
