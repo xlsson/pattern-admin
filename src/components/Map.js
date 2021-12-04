@@ -9,6 +9,7 @@ function Map(props) {
     let [bikes, setBikes] = useState([]);
     let [chargingStations, setChargingStations] = useState([]);
     let [parkingStations, setParkingStations] = useState([]);
+    let [cityLimits, setCityLimits] = useState([]);
 
     useEffect(() => {
         setZoom(props.zoom);
@@ -16,6 +17,7 @@ function Map(props) {
         setBikes(props.bikes);
         setChargingStations(props.chargingStations);
         setParkingStations(props.parkingStations);
+        createCityLimits();
     }, [props]);
 
     function getIcon(color) {
@@ -58,12 +60,44 @@ function Map(props) {
 
         return (
             <>
-            <Rectangle bounds={bounds} pathOptions={options} />
+            <Rectangle key={i} bounds={bounds} pathOptions={options} />
             <Marker position={center} icon={getIcon(color)}>
                 <Popup>
-                    <span key={i}>{type}Station id: {station._id}</span>
+                    <span>{type}Station id: {station._id}</span>
                 </Popup>
             </Marker>
+            </>
+        );
+    }
+
+    function createCityLimits() {
+        let limitsArray = [];
+
+        if (props.city._id !== "all") {
+            limitsArray.push(props.city.coordinates);
+            setCityLimits(limitsArray);
+            return;
+        };
+
+        Object.keys(props.cities).forEach((c) => {
+            if (c !== "all") { limitsArray.push(props.cities[c].coordinates); }
+        });
+
+        setCityLimits(limitsArray);
+        return;
+    }
+
+    function drawCityLimits(coords, i) {
+        let options = { color: "red", fillOpacity: 0, weight: 1 };
+
+        let bounds = [
+            [coords.northwest.lat, coords.northwest.long],
+            [coords.southeast.lat, coords.southeast.long]
+        ];
+
+        return (
+            <>
+            <Rectangle key={i} bounds={bounds} pathOptions={options} />
             </>
         );
     }
@@ -85,6 +119,7 @@ function Map(props) {
                         return null;
                     }}
                 </MapConsumer>
+                {cityLimits.map((coords, i) => { return drawCityLimits(coords, i); })}
                 {bikes.map((bike, i) => { return drawBike(bike, i); })}
                 {chargingStations.map((station, i) => { return drawStation("charge", station, i); })}
                 {parkingStations.map((station, i) => { return drawStation("parking", station, i); })}
