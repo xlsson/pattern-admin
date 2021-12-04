@@ -6,6 +6,8 @@ import api from '../functions/api.js';
 function Station(props) {
     let [bikes, setBikes] = useState([]);
 
+    useEffect(() => { getBikes(); }, [props]);
+
     let chargingStation = [];
     let parkingStation = [];
     let title = "";
@@ -25,26 +27,28 @@ function Station(props) {
     const long = (coords.northwest.long + coords.southeast.long)/2;
     const focusCoords = [lat, long];
 
-    async function getData() {
-        let allBikes = await api.getBikes(station.city_id);
-        bikes = allBikes.filter(function(bike) {
+    function getBikes() { api.getBikes(station.city_id, afterGetBikes); }
+
+    function afterGetBikes(data) {
+        let allBikes = data.bikes;
+
+        let filteredBikes = allBikes.filter(function(bike) {
           return bike[`${props.type}_id`] === station._id;
         });
-        setBikes(bikes);
-    };
 
-    useEffect(() => { getData(); }, [props]);
+        setBikes(filteredBikes);
+    }
 
     return (
         <>
-        <h1>{title} {station._id} (city_id: {station.city_id})</h1>
+        <h1>{title} {station._id} ({props.cities[station.city_id].name})</h1>
         <table>
             <tbody>
                 <tr>
                     <td>_id:</td><td>{station._id}</td>
                 </tr>
                 <tr>
-                    <td>city_id:</td><td>{station.city_id}</td>
+                    <td>Stad:</td><td>{props.cities[station.city_id].name}</td>
                 </tr>
                 <tr>
                     <td>coordinates:</td>
@@ -67,6 +71,7 @@ function Station(props) {
             zoom={20}
             focusCoords={focusCoords}
             bikes={bikes}
+            cities={props.cities}
             chargingStations={chargingStation}
             parkingStations={parkingStation}/>
         </>

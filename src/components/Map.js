@@ -31,7 +31,11 @@ function Map(props) {
         return (
             <Marker position={position} icon={getIcon("pink")}>
                 <Popup>
-                    <BikePopup key={i} bike={bike} getNewMapData={props.getNewMapData} />
+                    <BikePopup
+                        key={i}
+                        bike={bike}
+                        cities={props.cities}
+                        redrawBikes={props.redrawBikes} />
                 </Popup>
             </Marker>
         )

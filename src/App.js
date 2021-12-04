@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Menu from './components/Menu';
 import BikesTable from './components/BikesTable';
-import ChargingStationsTable from './components/ChargingStationsTable';
+import StationsTable from './components/StationsTable';
 import ParkingStationsTable from './components/ParkingStationsTable';
 import Station from './components/Station';
 import UsersTable from './components/UsersTable';
@@ -9,27 +9,73 @@ import User from './components/User';
 import OverviewMap from './components/OverviewMap';
 import Price from './components/Price';
 
+import api from './functions/api.js';
+
 function App() {
-    const defaultCity = {
+    const [view, setView] = useState("overviewMap");
+    const [params, setParams] = useState({});
+
+    const swedenData = {
          _id: "all",
-        name: "alla städer",
+        name: "Sverige",
         coordinates: {
             northwest: { lat: 58.195259, long: 14.221258 },
             southeast: { lat: 58.195259, long: 14.221258 }
-        }
+        },
+        parking_stations: [],
+        charge_stations: []
     };
+    const [allCities, setAllCities] = useState(swedenData);
 
-    const [view, setView] = useState("overviewMap");
-    const [params, setParams] = useState({});
-    const [city, setCity] = useState(defaultCity);
+    const [cityId, setCityId] = useState("all");
+    const [cities, setCities] = useState({});
+    const [currentCity, setCurrentCity] = useState(allCities);
+
+    useEffect(() => { api.getCities(afterGetCities); }, []);
+    useEffect(() => { setCurrentCity(allCities); }, [allCities]);
+
+
+    function afterGetCities(data) {
+        addStationsToDefault(data.cities);
+
+        let citiesObject = {};
+        data.cities.forEach((city) => {
+            citiesObject[city._id] = city;
+        });
+        console.log(citiesObject);
+
+        setCities(citiesObject);
+    }
+
+    function addStationsToDefault(allCities) {
+        let park = [];
+        let charge = [];
+        let swedenData_ = { ...swedenData };
+
+        allCities.forEach((city) => {
+            park = park.concat(city.parking_stations);
+            charge = charge.concat(city.charge_stations);
+        });
+
+        swedenData_.parking_stations = park;
+        swedenData_.charge_stations = charge;
+
+        setAllCities(swedenData_);
+    }
+
+    function chooseCity(selectedId) {
+        setCityId(selectedId);
+        if (selectedId === "all") {
+            setCurrentCity(allCities);
+            return;
+        }
+
+        setCurrentCity(cities[selectedId]);
+    }
 
     function switchView(view, params={}) {
         setParams(params);
         setView(view);
-    }
-
-    function handleCityChoice(city) {
-        setCity(city);
     }
 
     function renderUsersTable() {
@@ -39,22 +85,19 @@ function App() {
         return ( <User params={params} /> ); }
 
     function renderBikesTable() {
-        return ( <BikesTable city={city} /> ); }
+        return ( <BikesTable currentCity={currentCity} cities={cities} /> ); }
 
-    function renderChargingStationsTable() {
-        return ( <ChargingStationsTable switchView={switchView} city={city} /> ); }
-
-    function renderParkingStationsTable() {
-        return ( <ParkingStationsTable switchView={switchView} city={city} /> ); }
+    function renderStationsTable(type) {
+        return ( <StationsTable switchView={switchView} type={type} currentCity={currentCity} cities={cities} /> ); }
 
     function renderStation(type) {
-        return ( <Station station={params} type={type} /> ); }
+        return ( <Station station={params} type={type} cities={cities} /> ); }
 
     function renderOverviewMap() {
-        return ( <OverviewMap city={city} /> ); }
+        return ( <OverviewMap currentCity={currentCity} cities={cities} /> ); }
 
     function renderPrice() {
-        return ( <Price city={city} /> ); }
+        return ( <Price city={currentCity} /> ); }
 
     return (
         <div className="page-wrapper">
@@ -62,17 +105,18 @@ function App() {
                 <Menu
                     switchView={switchView}
                     view={view}
-                    defaultCity={defaultCity}
-                    cityChoice={handleCityChoice}
+                    cities={cities}
+                    allCities={allCities}
+                    chooseCity={chooseCity}
                     />
             </header>
             <div className="content">
                 {(view === "users") && renderUsersTable()}
                 {(view === "user") && renderUser()}
                 {(view === "bikes") && renderBikesTable()}
-                {(view === "chargingStations") && renderChargingStationsTable()}
-                {(view === "chargingStation") && renderStation("charge")}
-                {(view === "parkingStations") && renderParkingStationsTable()}
+                {(view === "chargeStations") && renderStationsTable("charge")}
+                {(view === "chargeStation") && renderStation("charge")}
+                {(view === "parkingStations") && renderStationsTable("parking")}
                 {(view === "parkingStation") && renderStation("parking")}
                 {(view === "overviewMap") && renderOverviewMap()}
                 {(view === "price") && renderPrice()}

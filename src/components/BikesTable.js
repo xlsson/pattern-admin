@@ -4,18 +4,16 @@ import api from '../functions/api.js';
 
 function BikesTable(props) {
     let [bikes, setBikes] = useState([]);
-    let [chargingStations, setChargingStations] = useState([]);
     let [selectedStation, setSelectedStation] = useState("");
 
-    async function getData() {
-        bikes = await api.getBikes(props.city._id);
-        chargingStations = await api.getChargingStations("all");
-        setBikes(bikes);
-        setChargingStations(chargingStations);
-        setSelectedStation(chargingStations[0]._id);
-    };
+    let currentCity = props.currentCity;
+    let cities = props.cities;
 
-    useEffect(() => { getData(); }, [props.city._id]);
+    useEffect(() => { getBikes(); }, [props]);
+
+    function getBikes() { api.getBikes(currentCity._id, afterGetBikes); }
+
+    function afterGetBikes(data) { setBikes(data.bikes); }
 
     async function moveBike(bikeId) {
         await api.moveBike(bikeId, selectedStation);
@@ -26,13 +24,12 @@ function BikesTable(props) {
     }
 
     function renderMoveForm(bike) {
-        const cityStations = chargingStations.filter(
-            (chargingStation) => chargingStation.city_id == bike.city_id);
+        let chargingStations = cities[bike.city_id].charge_stations;
 
         return (
             <div>
                 <select onChange={stationSelection}>
-                    {cityStations.map((station, i) => (
+                    {chargingStations.map((station, i) => (
                         <option key={i} value={station._id}>
                             stationsid {station._id}
                         </option>
@@ -45,13 +42,13 @@ function BikesTable(props) {
 
     return (
         <div>
-            <h1>Cyklar för {props.city.name}</h1>
+            <h1>Cyklar ({currentCity.name})</h1>
             <table>
                 <>
                 <thead>
                     <tr>
                         <th>_id</th>
-                        <th>city_id</th>
+                        <th>Stad</th>
                         <th>charge_id</th>
                         <th>parking_id</th>
                         <th>bike_status</th>
@@ -66,7 +63,7 @@ function BikesTable(props) {
                     <tr key={i}>
                         <>
                         <td>{bike._id}</td>
-                        <td>{bike.city_id}</td>
+                        <td>{cities[bike.city_id].name}</td>
                         <td>{bike.charge_id}</td>
                         <td>{bike.parking_id}</td>
                         <td>{bike.bike_status}</td>
