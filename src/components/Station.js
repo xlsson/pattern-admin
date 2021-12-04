@@ -71,6 +71,7 @@ function Station(props) {
             zoom={20}
             focusCoords={focusCoords}
             bikes={bikes}
+            city={props.currentCity}
             cities={props.cities}
             chargingStations={chargingStation}
             parkingStations={parkingStation}/>

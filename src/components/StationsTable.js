@@ -34,7 +34,6 @@ function StationsTable(props) {
     }
 
     function handleClick(i) {
-        console.log(stations[i]);
         props.switchView(`${props.type}Station`, stations[i]);
     }
 

@@ -92,7 +92,7 @@ function App() {
         return ( <StationsTable switchView={switchView} type={type} currentCity={currentCity} cities={cities} /> ); }
 
     function renderStation(type) {
-        return ( <Station station={params} type={type} cities={cities} /> ); }
+        return ( <Station station={params} type={type} currentCity={currentCity} cities={cities} /> ); }
 
     function renderOverviewMap() {
         return ( <OverviewMap currentCity={currentCity} cities={cities} /> ); }
