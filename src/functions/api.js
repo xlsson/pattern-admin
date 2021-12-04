@@ -31,9 +31,7 @@ const api = {
     getBikes: function (cityId, callback) {
         let url = `${api.baseUrl}/bikes`;
 
-        if (cityId != "all") {
-            url += `/city/${cityId}`;
-        }
+        if (cityId != "all") { url += `/city/${cityId}`; }
 
         let requestOptions = {
             method: "GET",
@@ -45,12 +43,6 @@ const api = {
     moveBike: async function (bikeId, chargeId) {
         console.log("flyttar: ", bikeId, " till ", chargeId);
     },
-    getChargingStations: async function(cityId) {
-        const all = await data.charge;
-        if (cityId === "all") { return all; }
-        const filtered = all.filter((item) => item.city_id == cityId);
-        return filtered;
-    },
     getCities: function (callback) {
         let url = `${api.baseUrl}/cities`;
 
@@ -61,14 +53,17 @@ const api = {
 
         api.sendRequest(url, requestOptions, callback);
     },
-    getParkingStations: async function (cityId) {
-        const all = await data.parking;
-        if (cityId === "all") { return all; }
-        const filtered = all.filter((item) => item.city_id == cityId);
-        return filtered;
-    },
-    getPrice: async function () {
-        return await data.price;
+    getPrices: function (cityId, callback) {
+        let url = `${api.baseUrl}/prices`;
+
+        console.log("price not dependent on cityId: ", cityId);
+
+        let requestOptions = {
+            method: "GET",
+            headers: { 'x-access-token': api.token }
+        };
+
+        api.sendRequest(url, requestOptions, callback);
     },
     updatePrice: async function (updatedPrice) {
         console.log("sparar pris i db", updatedPrice);

@@ -24,7 +24,6 @@ function User(props) {
         if (prop === "balance") {
             updatedUser.balance = (value.length > 0) ? parseInt(value) : 0;
         }
-
         setUser(updatedUser);
     }
 

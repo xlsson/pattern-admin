@@ -4,8 +4,13 @@ import api from '../functions/api.js';
 
 function Price(props) {
     const cityId = props.city._id;
-
     const [price, setPrice] = useState({});
+
+    useEffect(() => { api.getPrices(cityId, afterGetPrices); }, [props]);
+
+    function afterGetPrices(data) {
+        setPrice(data.prices[0]);
+    }
 
     function handleInput(value, prop) {
         let updatedPrice = { ...price };
@@ -18,17 +23,9 @@ function Price(props) {
         api.updatePrice(price);
     }
 
-    async function getPrice() {
-        let result = await api.getPrice();
-        result = result[0];
-        setPrice(result);
-    };
-
-    useEffect(() => { getPrice(); }, [cityId]);
-
     return (
         <div>
-            <h1>Administrera pristariff för city_id: {cityId} (samma tariff för alla städer)</h1>
+            <h1>Administrera pristariff</h1>
             <table>
                 <tbody>
                     <tr>
