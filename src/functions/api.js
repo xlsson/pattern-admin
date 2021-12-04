@@ -73,23 +73,29 @@ const api = {
     updatePrice: async function (updatedPrice) {
         console.log("sparar pris i db", updatedPrice);
     },
-    getTrips: async function (userId) {
-        const all = await data.trip;
-        if (userId === "all") { return all; }
-        const filtered = all.filter((item) => item.user_id == userId);
-        return filtered;
+    getTrips: function (userId, callback) {
+        let url = `${api.baseUrl}/trips`;
+
+        if (userId != "all") { url += `/user/${userId}`; }
+
+        let requestOptions = {
+            method: "GET",
+            headers: { 'x-access-token': api.token }
+        };
+
+        api.sendRequest(url, requestOptions, callback);
     },
-    // getUsers: async function (userId) {
-    //     const all = await data.user;
-    //     if (userId === "all") { return all; }
-    //     const filtered = all.filter((item) => item._id == userId);
-    //     return filtered;
-    // },
-    getUsers: async function (userId) {
-        const all = await data.user;
-        if (userId === "all") { return all; }
-        const filtered = all.filter((item) => item._id == userId);
-        return filtered;
+    getUsers: function (userId, callback) {
+        let url = `${api.baseUrl}/users`;
+
+        if (userId != "all") { url += `/${userId}`; }
+
+        let requestOptions = {
+            method: "GET",
+            headers: { 'x-access-token': api.token }
+        };
+
+        api.sendRequest(url, requestOptions, callback);
     },
     updateUser: async function (updated) {
         console.log("uppdatera user: ", updated);

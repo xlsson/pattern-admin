@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Trips from './Trips.js';
 
 import api from '../functions/api.js';
 
@@ -7,6 +8,14 @@ function User(props) {
 
     let [user, setUser] = useState({});
     let [trips, setTrips] = useState([]);
+
+    useEffect(() => {
+        api.getUsers(userId, afterGetUsers);
+        api.getTrips(userId, afterGetTrips);
+    }, [userId]);
+
+    function afterGetUsers(data) { setUser(data.user); }
+    function afterGetTrips(data) { setTrips(data.trips); }
 
     function handleInput(value, prop) {
         let updatedUser = { ...user };
@@ -20,7 +29,7 @@ function User(props) {
     }
 
     function toggleAccount() {
-        let newStatus = (user.account_status === "active") ? "inactive" : "active";
+        let newStatus = (user.account_status === "active") ? "deleted" : "active";
         let updatedUser = { ...user };
         updatedUser.account_status = newStatus;
         setUser(updatedUser);
@@ -31,15 +40,7 @@ function User(props) {
         api.updateUser(user);
     }
 
-    async function getData() {
-        let userResult = await api.getUsers(userId);
-        let tripsResult = await api.getTrips(userId);
-        userResult = userResult[0];
-        setUser(userResult);
-        setTrips(tripsResult);
-    };
 
-    useEffect(() => { getData(); }, [userId]);
 
     return (
         <div>
@@ -136,45 +137,9 @@ function User(props) {
                 </tbody>
             </table>
 
-            <h2>{user.firstname} {user.lastname}s resor</h2>
-            <table>
-                <>
-                <thead>
-                    <tr>
-                        <th>_id</th>
-                        <th>user_id</th>
-                        <th>bike_id</th>
-                        <th>city</th>
-                        <th>start_time</th>
-                        <th>stop_time</th>
-                        <th>start_coordinates</th>
-                        <th>stop_coordinates</th>
-                        <th>average_speed</th>
-                        <th>distance</th>
-                        <th>price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {trips.map((trip, i) => (
-                    <tr key={i}>
-                        <>
-                        <td>{trip._id}</td>
-                        <td>{trip.user_id}</td>
-                        <td>{trip.bike_id}</td>
-                        <td>{trip.city}</td>
-                        <td>{trip.start_time}</td>
-                        <td>{trip.stop_time}</td>
-                        <td>{trip.start_coordinates.lat}, {trip.start_coordinates.long}</td>
-                        <td>{trip.stop_coordinates.lat}, {trip.stop_coordinates.long}</td>
-                        <td>{trip.average_speed}</td>
-                        <td>{trip.distance}</td>
-                        <td>{trip.price}</td>
-                        </>
-                    </tr>
-                ))}
-                </tbody>
-                </>
-            </table>
+            <Trips
+                user={user}
+                trips={trips} />
         </div>
     );
 }

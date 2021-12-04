@@ -5,16 +5,13 @@ import api from '../functions/api.js';
 function UsersTable(props) {
     let [users, setUsers] = useState([]);
 
-    async function getUsers() {
-        users = await api.getUsers("all");
-        setUsers(users);
-    };
+    useEffect(() => { api.getUsers("all", afterGetUsers); }, []);
+
+    function afterGetUsers(data) { setUsers(data.users); }
 
     function handleClick(i) {
         props.switchView("user", { _id: users[i]._id });
     }
-
-    useEffect(() => { getUsers(); }, []);
 
     return (
         <div>
@@ -27,7 +24,6 @@ function UsersTable(props) {
                         <th>firstname</th>
                         <th>lastname</th>
                         <th>email</th>
-                        <th>password</th>
                         <th>phone</th>
                         <th>payment_method</th>
                         <th>card_information</th>
@@ -43,7 +39,6 @@ function UsersTable(props) {
                         <td>{user.firstname}</td>
                         <td>{user.lastname}</td>
                         <td>{user.email}</td>
-                        <td>{user.password}</td>
                         <td>{user.phone}</td>
                         <td>{user.payment_method}</td>
                         <td>{user.card_information}</td>
