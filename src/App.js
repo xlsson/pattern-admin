@@ -30,9 +30,14 @@ function App() {
     const [cities, setCities] = useState({});
     const [currentCity, setCurrentCity] = useState(allCities);
 
-    useEffect(() => { api.getCities(afterGetCities); }, []);
+    useEffect(() => { api.login(afterLogin); }, []);
+
     useEffect(() => { setCurrentCity(allCities); }, [allCities]);
 
+    function afterLogin() {
+        console.log("after login");
+        api.getCities(afterGetCities);
+    }
 
     function afterGetCities(data) {
         addStationsToDefault(data.cities);

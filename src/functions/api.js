@@ -4,7 +4,7 @@ const devconfig = require("./devconfig.json");
 
 const api = {
     baseUrl: devconfig.baseUrl,
-    token: devconfig.token,
+    token: "",
     sendRequest: function (url, requestOptions, callback) {
         fetch(url, requestOptions)
             .then(response => response.json())
@@ -12,21 +12,25 @@ const api = {
                 return callback(data);
             });
     },
-    mockLogin: function () {
-        let url = `${api.baseUrl}/admins/login`;
-
+    login: function (callback, username=devconfig.username, password=devconfig.password) {
         let requestOptions = {
             method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
-                username: devconfig.username,
-                password: devconfig.password
+                username: username,
+                password: password
             })
         };
 
-        api.sendRequest(url, requestOptions, api.afterMockLogin);
-    },
-    afterMockLogin: function (data) {
-        api.token = data.token;
+        fetch(`${api.baseUrl}/admins/login`, requestOptions)
+            .then(response => response.json())
+            .then(function(data) {
+                api.token = data.token;
+                return data;
+            })
+            .then(function(data) { return callback(); });
     },
     getBikes: function (cityId, callback) {
         let url = `${api.baseUrl}/bikes`;
