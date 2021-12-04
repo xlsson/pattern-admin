@@ -26,7 +26,7 @@ function BikePopup(props) {
                 <select onBlur={stationSelection}>
                     {chargingStations.map((station, i) => (
                         <option key={i} value={station._id}>
-                            stationsid {station._id}
+                            {station._id}
                         </option>
                     ))}
                 </select>
