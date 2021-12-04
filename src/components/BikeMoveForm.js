@@ -22,8 +22,7 @@ function BikeMoveForm(props) {
         <div>
             <select
                 onBlur={stationSelection}
-                defaultValue={selectedId}
-                value={selectedId}>
+                defaultValue={selectedId}>
                 {props.chargingStations.map((station, i) => (
                     <option key={i} value={station._id}>
                         {station._id}
