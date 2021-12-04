@@ -5,6 +5,7 @@ import api from '../functions/api.js';
 function Price(props) {
     const cityId = props.city._id;
     const [price, setPrice] = useState({});
+    const [changes, setChanges] = useState({});
 
     useEffect(() => { api.getPrices(cityId, afterGetPrices); }, [props]);
 
@@ -14,13 +15,22 @@ function Price(props) {
 
     function handleInput(value, prop) {
         let updatedPrice = { ...price };
+        let updatedChanges = { ...changes };
+
         updatedPrice[prop] = (value.length > 0) ? parseInt(value) : 0;
+        updatedChanges[prop] = (value.length > 0) ? parseInt(value) : 0;
+
         setPrice(updatedPrice);
+        setChanges(updatedChanges);
     }
 
     function saveChanges() {
         setPrice(price);
-        api.updatePrice(price);
+        api.updatePrice(price._id, changes, afterSaveChanges);
+    }
+
+    function afterSaveChanges(data) {
+        console.log(data);
     }
 
     return (

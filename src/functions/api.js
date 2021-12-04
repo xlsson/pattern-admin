@@ -67,8 +67,32 @@ const api = {
 
         api.sendRequest(url, requestOptions, callback);
     },
-    updatePrice: async function (updatedPrice) {
-        console.log("sparar pris i db", updatedPrice);
+    updatePrice: function (priceId, newValues, callback) {
+        console.log("sparar pris i db", newValues);
+        let url = `${api.baseUrl}/prices/${priceId}`;
+        let keys = Object.keys(newValues);
+
+        if (keys.length === 0) {
+            callback({ message: "no changes, empty request"});
+            return;
+        }
+
+        let changes = [];
+        keys.forEach((key) => {
+            let change = { propName: key, value: newValues[key] };
+            changes.push(change);
+        });
+
+        let requestOptions = {
+            method: "PATCH",
+            headers: {
+                'x-access-token': api.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(changes)
+        };
+
+        api.sendRequest(url, requestOptions, callback);
     },
     getTrips: function (userId, callback) {
         let url = `${api.baseUrl}/trips`;
