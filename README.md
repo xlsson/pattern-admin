@@ -13,8 +13,8 @@ Your system needs git, npm, node.js.
 
 To install:
 
-1. Clone the repo with git clone https://github.com/xlsson/pattern-admin
-2. Run npm install to install the app and its dependencies.
+1. Clone the repo with `git clone https://github.com/xlsson/pattern-admin`
+2. Run `npm install` to install the app and its dependencies.
 3. Create a `devconfig.json` file in the `./src/functions/` folder, with the following content:
 ```
 {
