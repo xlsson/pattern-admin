@@ -16,12 +16,12 @@ function BikesTable(props) {
     function afterGetBikes(data) { setBikes(data.bikes); }
 
     function renderMoveForm(bike) {
-        let chargingStations = cities[bike.city_id].charge_stations;
+        let chargeStations = cities[bike.city_id].charge_stations;
 
         return (
             <BikeMoveForm
                 bike={bike}
-                chargingStations={chargingStations} />
+                chargeStations={chargeStations} />
         )
     }
 

@@ -7,7 +7,7 @@ function Map(props) {
     let [zoom, setZoom] = useState(6);
     let [focusCoords, setFocusCoords] = useState([58.195259, 14.221258]);
     let [bikes, setBikes] = useState([]);
-    let [chargingStations, setChargingStations] = useState([]);
+    let [chargeStations, setChargeStations] = useState([]);
     let [parkingStations, setParkingStations] = useState([]);
     let [cityLimits, setCityLimits] = useState([]);
 
@@ -15,7 +15,7 @@ function Map(props) {
         setZoom(props.zoom);
         setFocusCoords(props.focusCoords);
         setBikes(props.bikes);
-        setChargingStations(props.chargingStations);
+        setChargeStations(props.chargeStations);
         setParkingStations(props.parkingStations);
         createCityLimits();
     }, [props]);
@@ -121,7 +121,7 @@ function Map(props) {
                 </MapConsumer>
                 {cityLimits.map((coords, i) => { return drawCityLimits(coords, i); })}
                 {bikes.map((bike, i) => { return drawBike(bike, i); })}
-                {chargingStations.map((station, i) => { return drawStation("charge", station, i); })}
+                {chargeStations.map((station, i) => { return drawStation("charge", station, i); })}
                 {parkingStations.map((station, i) => { return drawStation("parking", station, i); })}
             </MapContainer>
         </div>

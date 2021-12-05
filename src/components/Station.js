@@ -8,11 +8,11 @@ function Station(props) {
 
     useEffect(() => { getBikes(); }, [props]);
 
-    let chargingStation = [];
+    let chargeStation = [];
     let parkingStation = [];
     let title = "";
     if (props.type === "charge") {
-        chargingStation = [props.station];
+        chargeStation = [props.station];
         title = "Laddningsstation";
     }
     if (props.type === "parking") {
@@ -73,7 +73,7 @@ function Station(props) {
             bikes={bikes}
             city={props.currentCity}
             cities={props.cities}
-            chargingStations={chargingStation}
+            chargeStations={chargeStation}
             parkingStations={parkingStation}
             redrawBikes={getBikes} />
         </>

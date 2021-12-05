@@ -4,14 +4,14 @@ import api from '../functions/api.js';
 
 function BikeMoveForm(props) {
     const bike = props.bike;
-    const chargingStations = props.chargingStations;
+    const chargeStations = props.chargeStations;
 
     const [selectedId, setSelectedId] = useState("");
 
     useEffect(() => { setSelectedId(0); }, [props]);
 
     function moveBike() {
-        const selectedStation = chargingStations[selectedId];
+        const selectedStation = chargeStations[selectedId];
         api.moveBike(bike._id, selectedStation, afterMoveBike);
     }
 
@@ -28,7 +28,7 @@ function BikeMoveForm(props) {
             <select
                 onBlur={stationSelection}
                 defaultValue={selectedId}>
-                {chargingStations.map((station, i) => (
+                {chargeStations.map((station, i) => (
                     <option key={i} value={i}>
                         {station._id}
                     </option>

@@ -8,7 +8,7 @@ function OverviewMap(props) {
 
     const city = props.currentCity;
 
-    const chargingStations = city.charge_stations;
+    const chargeStations = city.charge_stations;
     const parkingStations = city.parking_stations;
 
     const coords = city.coordinates;
@@ -29,7 +29,7 @@ function OverviewMap(props) {
         <h1>Översiktskarta ({city.name})</h1>
         <div className="map-legend">
             <p className="bike">Cyklar</p>
-            <p className="chargingStation">Laddningsstationer</p>
+            <p className="chargeStation">Laddningsstationer</p>
             <p className="parkingStation">Parkeringsstationer</p>
         </div>
         <Map
@@ -38,7 +38,7 @@ function OverviewMap(props) {
             bikes={bikes}
             city={city}
             cities={props.cities}
-            chargingStations={chargingStations}
+            chargeStations={chargeStations}
             parkingStations={parkingStations}
             redrawBikes={getBikes} />
         </>

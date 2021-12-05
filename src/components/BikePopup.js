@@ -4,14 +4,14 @@ import api from '../functions/api.js';
 
 function BikePopup(props) {
     const bike = props.bike;
-    const chargingStations = props.cities[bike.city_id].charge_stations;
+    const chargeStations = props.cities[bike.city_id].charge_stations;
 
     const [selectedId, setSelectedId] = useState("");
 
     useEffect(() => { setSelectedId(0); }, [props]);
 
     function moveBike() {
-        const selectedStation = chargingStations[selectedId];
+        const selectedStation = chargeStations[selectedId];
         api.moveBike(bike._id, selectedStation, afterMoveBike);
     }
 
@@ -30,7 +30,7 @@ function BikePopup(props) {
             <strong>Boka hämtning till:</strong>
             <div>
                 <select onBlur={stationSelection}>
-                    {chargingStations.map((station, i) => (
+                    {chargeStations.map((station, i) => (
                         <option key={i} value={i}>
                             {station._id}
                         </option>
