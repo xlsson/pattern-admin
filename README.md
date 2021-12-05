@@ -1,7 +1,7 @@
 # E-scooter admin interface
 (Part of a student project for the course Pattern at Blekinge Institute of Technology, BTH)
 
-The admin interface is a tool for administrators to do administrative tasks and get an overview of the status quo. Administrators can switch between showing data and perform tasks for all cities in the system, or for a specific city. Data is fetched from, and sent to, the [server](https://github.com/wadholm/pattern-backend) using a REST API.
+The admin interface is a tool for administrators to do administrative tasks and get an overview of the active system. Administrators can switch between showing data and perform tasks for the system as a whole, or for a specific city. Data is fetched from, and sent to, the [server](https://github.com/wadholm/pattern-backend) using a REST API.
 
 ## Installation
 
