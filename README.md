@@ -48,4 +48,4 @@ Available tasks:
 
 - Edit the price tariff.
 
-- Request an e-scooter to be moved to a charging station in the city.
+- Request an e-scooter to be moved to a charging station in the city (effectively immediately moves the e-scooter to the station coordinates and sets battery level to 100, charge_id to the stations id and parking_id to null).
