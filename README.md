@@ -28,7 +28,7 @@ To install:
 5. Point your browser to `http://localhost:3000`
 
 
-## Available views:
+## Available views
 
 - A map with an overview of all e-scooters, charging stations and parking stations in the system/city.
 
@@ -42,7 +42,7 @@ To install:
 
 - An overview of the price tariff currently in place for the system/city.
 
-Available tasks:
+## Available tasks
 
 - Edit customer data.
 
