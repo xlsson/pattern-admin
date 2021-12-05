@@ -3,9 +3,32 @@
 
 The admin interface is a tool for administrators to do administrative tasks and get an overview of the status quo. Administrators can switch between showing data and perform tasks for all cities in the system, or for a specific city. Data is fetched from, and sent to, the [server](https://github.com/wadholm/pattern-backend) using a REST API.
 
+## Installation
+
+To run the app on your local system, you need the following:
+
+This [server](https://github.com/wadholm/pattern-backend) running on `http://localhost:1337`.
+
+Your system needs git, npm, node.js.
+
+To install:
+
+1. Clone the repo with git clone https://github.com/xlsson/pattern-admin
+2. Run npm install to install the app and its dependencies.
+3. Create a `devconfig.json` file in the `./src/functions/` folder, with the following content:
+```
+{
+    "baseUrl": "http://localhost:1337",
+    "username": <admin username>,
+    "password": <admin password>
+}
+```
+
+4. Start the app in your browser by running `npm start`.
+5. Point your browser to `http://localhost:3000`
 
 
-Available views:
+## Available views:
 
 - A map with an overview of all e-scooters, charging stations and parking stations in the system/city.
 
