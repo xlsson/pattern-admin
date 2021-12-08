@@ -118,11 +118,16 @@ body {
         font-weight: bold;
     }
 
-    .bike-popup {
-        display: flex;
-        flex-direction: column;
-    }
+}
 
+.bike-popup {
+    display: flex;
+    flex-direction: column;
+}
+
+.bike-popup-form {
+    display: flex;
+    flex-direction: column;
 }
 
 table {

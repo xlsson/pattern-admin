@@ -7,15 +7,18 @@ function BikeMoveForm(props) {
     const chargeStations = props.chargeStations;
 
     const [selectedId, setSelectedId] = useState("");
+    const [maintenance, setMaintenance] = useState(false);
 
     useEffect(() => { setSelectedId(0); }, [props]);
 
     function moveBike() {
         const selectedStation = chargeStations[selectedId];
-        api.moveBike(bike._id, selectedStation, afterMoveBike);
+        api.moveBike(bike._id, selectedStation, maintenance, afterMoveBike);
     }
 
     function afterMoveBike(data) {
+        setMaintenance(false);
+        props.redrawBikes();
         console.log(data);
     }
 
@@ -34,7 +37,15 @@ function BikeMoveForm(props) {
                     </option>
                 ))}
             </select>
-            <button type="button" onClick={moveBike}>Boka hämtning</button>
+            <div>
+                <label htmlFor="maintenance">Boka underhåll</label>
+                <input
+                    name="maintenance"
+                    type="checkbox"
+                    onClick={() => setMaintenance(!maintenance)}>
+                </input>
+            </div>
+            <button type="button" onClick={moveBike}>Boka</button>
         </div>
     )
 }

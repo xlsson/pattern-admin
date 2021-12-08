@@ -65,7 +65,7 @@ function Map(props) {
             <Rectangle key={i} bounds={bounds} pathOptions={options} />
             <Marker position={markerPosition} icon={getIcon(markerImg, [15, 35], [1, -10])}>
                 <Popup>
-                    <span>{type}Station id: {station._id}</span>
+                    <span>Station: {station.name}</span>
                 </Popup>
             </Marker>
             </>

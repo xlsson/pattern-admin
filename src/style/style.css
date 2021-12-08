@@ -105,7 +105,13 @@ body {
   color: #0074d9;
   font-weight: bold;
 }
-.map-legend .bike-popup {
+
+.bike-popup {
+  display: flex;
+  flex-direction: column;
+}
+
+.bike-popup-form {
   display: flex;
   flex-direction: column;
 }

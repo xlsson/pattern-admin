@@ -42,7 +42,7 @@ const api = {
 
         api.sendRequest(url, requestOptions, callback);
     },
-    moveBike: function (bikeId, station, callback) {
+    moveBike: function (bikeId, station, maintenance, callback) {
         console.log("flyttar: ", bikeId, " till ", station);
         const coords = station.coordinates;
         const long = (coords.northwest.long + coords.southeast.long)/2;
@@ -51,8 +51,37 @@ const api = {
         const changes = [
             { propName: "charge_id", value: station._id },
             { propName: "parking_id", value: null },
-            { propName: "battery_status", value: 100 },
             { propName: "coordinates", value: { lat: lat , long: long } }
+        ];
+
+        if (maintenance) {
+            console.log("sätter maintenance till true");
+            changes.concat([
+                { propName: "maintenance", value: true },
+                { propName: "bike_status", value: "unavailable" }
+            ]);
+        }
+
+        let url = `${api.baseUrl}/bikes/${bikeId}`;
+
+        let requestOptions = {
+            method: "PATCH",
+            headers: {
+                'x-access-token': api.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(changes)
+        };
+
+        api.sendRequest(url, requestOptions, callback);
+    },
+    endMaintenance: function (bikeId, callback) {
+        console.log("avslutar maintenance");
+
+        const changes = [
+            { propName: "maintenance", value: false },
+            { propName: "bike_status", value: "available" },
+            { propName: "battery_status", value: 100 }
         ];
 
         let url = `${api.baseUrl}/bikes/${bikeId}`;

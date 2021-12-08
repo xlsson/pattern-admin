@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BikeMoveForm from './BikeMoveForm';
+import BikeEndMaintenance from './BikeEndMaintenance';
 
 import api from '../functions/api.js';
 
@@ -16,8 +17,11 @@ function BikesTable(props) {
     function afterGetBikes(data) { setBikes(data.bikes); }
 
     function handleClick(bike) {
-        // console.log(bike);
         props.switchView(`bike`, bike);
+    }
+
+    function renderEndMaintenance(bike) {
+        return ( <BikeEndMaintenance bike={bike} /> )
     }
 
     function renderMoveForm(bike) {
@@ -26,6 +30,7 @@ function BikesTable(props) {
         return (
             <BikeMoveForm
                 bike={bike}
+                redrawBikes={getBikes}
                 chargeStations={chargeStations} />
         )
     }
@@ -53,7 +58,6 @@ function BikesTable(props) {
                             onClick={() => handleClick(bike)}>{cities[bike.city_id].name}</td>
                         <td className="pointer-cursor"
                             onClick={() => handleClick(bike)}>
-                            {console.log(bike._id)}
                             {(bike.charge_id) ? `Laddningsstation` : ""}
                             {(bike.parking_id) ? `Parkeringsstation` : ""}
                         </td>
@@ -65,12 +69,15 @@ function BikesTable(props) {
                             {bike.battery_status}</td>
                         <td className="pointer-cursor"
                             onClick={() => handleClick(bike)}>
-                            {bike.maintenance}</td>
+                            {(bike.maintenance) && "Genomgår underhåll"}</td>
                         <td className="pointer-cursor"
                             onClick={() => handleClick(bike)}>
                             {bike.coordinates.lat}, {bike.coordinates.long}
                         </td>
-                        <td>{(bike.bike_status === "available") && renderMoveForm(bike)}</td>
+                        <td>
+                            {(bike.bike_status === "available") && renderMoveForm(bike)}
+                            {((bike.bike_status === "unavailable") && (bike.maintenance)) && renderEndMaintenance(bike)}
+                        </td>
                     </tr>
                 ))}
                 </tbody>
