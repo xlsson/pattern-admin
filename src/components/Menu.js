@@ -18,7 +18,7 @@ function Menu(props) {
                     onClick={() => handleMenuClick("overviewMap")}>
                     Översikt
                 </li>
-                <li className={ (active === "bikes") ? "active" : "" }
+                <li className={ ((active === "bikes") || (active === "bike")) ? "active" : "" }
                     onClick={() => handleMenuClick("bikes")}>
                     Cyklar
                 </li>

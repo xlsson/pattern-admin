@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Menu from './components/Menu';
 import BikesTable from './components/BikesTable';
+import Bike from './components/Bike';
 import StationsTable from './components/StationsTable';
 import Station from './components/Station';
 import UsersTable from './components/UsersTable';
@@ -86,7 +87,10 @@ function App() {
         return ( <User params={params} /> ); }
 
     function renderBikesTable() {
-        return ( <BikesTable currentCity={currentCity} cities={cities} /> ); }
+        return ( <BikesTable switchView={switchView} currentCity={currentCity} cities={cities} /> ); }
+
+    function renderBike() {
+        return ( <Bike bike={params} currentCity={currentCity} cities={cities} /> ); }
 
     function renderStationsTable(type) {
         return ( <StationsTable switchView={switchView} type={type} currentCity={currentCity} cities={cities} /> ); }
@@ -115,6 +119,7 @@ function App() {
                 {(view === "users") && renderUsersTable()}
                 {(view === "user") && renderUser()}
                 {(view === "bikes") && renderBikesTable()}
+                {(view === "bike") && renderBike()}
                 {(view === "chargeStations") && renderStationsTable("charge")}
                 {(view === "chargeStation") && renderStation("charge")}
                 {(view === "parkingStations") && renderStationsTable("parking")}
