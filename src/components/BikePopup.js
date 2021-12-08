@@ -32,7 +32,7 @@ function BikePopup(props) {
                 <select onBlur={stationSelection}>
                     {chargeStations.map((station, i) => (
                         <option key={i} value={i}>
-                            {station._id}
+                            {station.name}
                         </option>
                     ))}
                 </select>
@@ -45,7 +45,7 @@ function BikePopup(props) {
     return (
         <div className="bike-popup">
             <div>_id: {bike._id}, bike_status: {bike.bike_status}</div>
-            {(bike.bike_status === "free") && drawMoveBikeForm(bike)}
+            {(bike.bike_status === "available") && drawMoveBikeForm(bike)}
         </div>
     );
 }

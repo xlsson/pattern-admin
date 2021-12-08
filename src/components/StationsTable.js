@@ -44,9 +44,9 @@ function StationsTable(props) {
                 <>
                 <thead>
                     <tr>
-                        <th>_id</th>
+                        <th>Namn</th>
                         <th>Stad</th>
-                        <th>coordinates</th>
+                        <th>Koordinater</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,7 +56,7 @@ function StationsTable(props) {
                         key={i}
                         onClick={() => handleClick(i)}>
                         <>
-                        <td>{station._id}</td>
+                        <td>{station.name}</td>
                         <td>{props.cities[station.city_id].name}</td>
                         <td>
                             {station.coordinates.northwest.lat}, {station.coordinates.northwest.long},

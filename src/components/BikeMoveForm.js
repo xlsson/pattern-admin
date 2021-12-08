@@ -30,7 +30,7 @@ function BikeMoveForm(props) {
                 defaultValue={selectedId}>
                 {chargeStations.map((station, i) => (
                     <option key={i} value={i}>
-                        {station._id}
+                        {station.name}
                     </option>
                 ))}
             </select>

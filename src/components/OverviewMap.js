@@ -28,9 +28,9 @@ function OverviewMap(props) {
         <>
         <h1>Översiktskarta ({city.name})</h1>
         <div className="map-legend">
-            <p className="bike">Cyklar</p>
-            <p className="chargeStation">Laddningsstationer</p>
-            <p className="parkingStation">Parkeringsstationer</p>
+            <p><span className="material-icons">electric_scooter</span> = elsparkcykel</p>
+            <p><span className="material-icons">bolt</span> = laddningsstation</p>
+            <p><span className="material-icons">local_parking</span> = parkeringsstation</p>
         </div>
         <Map
             zoom={zoom}

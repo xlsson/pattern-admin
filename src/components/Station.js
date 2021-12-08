@@ -41,11 +41,11 @@ function Station(props) {
 
     return (
         <>
-        <h1>{title} {station._id} ({props.cities[station.city_id].name})</h1>
+        <h1>{title} {station.name} ({props.cities[station.city_id].name})</h1>
         <table>
             <tbody>
                 <tr>
-                    <td>_id:</td><td>{station._id}</td>
+                    <td>name:</td><td>{station.name}</td>
                 </tr>
                 <tr>
                     <td>Stad:</td><td>{props.cities[station.city_id].name}</td>

@@ -44,7 +44,6 @@ function Map(props) {
     }
 
     function drawStation(type, station, i) {
-        console.log(type);
         let color = (type === "parking") ? "blue" : "green";
         let options = { color: color };
         let coords = station.coordinates;
