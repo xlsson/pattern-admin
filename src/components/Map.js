@@ -20,18 +20,18 @@ function Map(props) {
         createCityLimits();
     }, [props]);
 
-    function getIcon(color) {
+    function getIcon(markerImg, iconAnchor, popupAnchor) {
         return L.icon({
-            iconUrl: require(`../img/mapmarkers/marker_${color}.png`).default,
-            iconAnchor: [12, 12],
-            popupAnchor: [0, 0]
+            iconUrl: require(`../img/mapmarkers/${markerImg}.png`).default,
+            iconAnchor: iconAnchor,
+            popupAnchor: popupAnchor
         });
     }
 
     function drawBike(bike, i) {
         let position = [bike.coordinates.lat, bike.coordinates.long];
         return (
-            <Marker position={position} icon={getIcon("pink")}>
+            <Marker position={position} icon={getIcon("marker_scooter", [15, 15], [0, 0])}>
                 <Popup>
                     <BikePopup
                         key={i}
@@ -44,12 +44,15 @@ function Map(props) {
     }
 
     function drawStation(type, station, i) {
+        console.log(type);
         let color = (type === "parking") ? "blue" : "green";
         let options = { color: color };
         let coords = station.coordinates;
 
-        let center = [
-            ((coords.northwest.lat + coords.southeast.lat)/2),
+        let markerImg = `bubble_${type}`;
+
+        let markerPosition = [
+            coords.northwest.lat,
             ((coords.northwest.long + coords.southeast.long)/2)
         ];
 
@@ -61,7 +64,7 @@ function Map(props) {
         return (
             <>
             <Rectangle key={i} bounds={bounds} pathOptions={options} />
-            <Marker position={center} icon={getIcon(color)}>
+            <Marker position={markerPosition} icon={getIcon(markerImg, [15, 35], [1, -10])}>
                 <Popup>
                     <span>{type}Station id: {station._id}</span>
                 </Popup>
