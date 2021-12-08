@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Material Icons Outlined';
-  src: url('./MaterialIconsOutlined-Regular.otf') format('opentype');
+  src: url('./MaterialIconsOutlined-Regular_OLD.otf') format('opentype');
 }
 
 body {
@@ -14,6 +14,11 @@ body {
 
 .material-icons {
     font-family: 'Material Icons Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
     text-transform: none;
     letter-spacing: normal;
     word-wrap: normal;
