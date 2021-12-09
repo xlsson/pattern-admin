@@ -44,8 +44,8 @@ function User(props) {
         setUser(updatedUser);
     }
 
-    function toggleAccount() {
-        let newStatus = (user.account_status === "active") ? "deleted" : "active";
+    function toggleAccount(event) {
+        let newStatus = event.target.value;
         let updatedUser = { ...user };
         updatedUser.account_status = newStatus;
         setUser(updatedUser);
@@ -94,10 +94,6 @@ function User(props) {
                         <td>{user.email}</td>
                     </tr>
                     <tr>
-                        <td>password</td>
-                        <td>{user.password}</td>
-                    </tr>
-                    <tr>
                         <td>phone</td>
                         <td>
                             <input
@@ -139,12 +135,13 @@ function User(props) {
                     </tr>
                     <tr>
                         <td>account_status</td>
-                        <td>{user.account_status}
-                            <input
-                                type="checkbox"
-                                defaultChecked={(user.account_status === "active") ? true : false}
-                                onClick={toggleAccount}>
-                            </input>
+                        <td>
+                            <select
+                                onBlur={(e) => toggleAccount(e)}
+                                defaultValue={user.account_status}>
+                                <option value={"active"}>Active</option>
+                                <option value={"deleted"}>Deleted</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
