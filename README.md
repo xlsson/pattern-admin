@@ -1,3 +1,5 @@
+![Github Actions](https://github.com/xlsson/pattern-admin/actions/workflows/node.js.yml/badge.svg)
+
 # E-scooter admin interface
 (Part of a student project for the course Pattern at Blekinge Institute of Technology, BTH)
 
