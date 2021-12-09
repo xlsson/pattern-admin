@@ -4,6 +4,7 @@ import BikeEndMaintenance from './BikeEndMaintenance';
 import api from '../functions/api.js';
 
 function BikePopup(props) {
+
     const bike = props.bike;
     const chargeStations = props.cities[bike.city_id].charge_stations;
 
@@ -15,6 +16,7 @@ function BikePopup(props) {
     function moveBike() {
         const selectedStation = chargeStations[selectedId];
         api.moveBike(bike._id, selectedStation, maintenance, afterMoveBike);
+        props.mapInstance.closePopup();
     }
 
     function afterMoveBike(data) {

@@ -10,6 +10,7 @@ function Map(props) {
     let [chargeStations, setChargeStations] = useState([]);
     let [parkingStations, setParkingStations] = useState([]);
     let [cityLimits, setCityLimits] = useState([]);
+    let [mapInstance, setMapInstance] = useState();
 
     useEffect(() => {
         setZoom(props.zoom);
@@ -19,6 +20,10 @@ function Map(props) {
         setParkingStations(props.parkingStations);
         createCityLimits();
     }, [props]);
+
+    function closeAnyOpenPopup() {
+        mapInstance.closePopup();
+    }
 
     function getIcon(markerImg, iconAnchor, popupAnchor) {
         return L.icon({
@@ -36,6 +41,7 @@ function Map(props) {
                     <BikePopup
                         key={i}
                         bike={bike}
+                        mapInstance={mapInstance}
                         cities={props.cities}
                         redrawBikes={props.redrawBikes} />
                 </Popup>
@@ -105,7 +111,7 @@ function Map(props) {
     }
 
     return (
-        <div id="map-wrapper-main">
+        <div id="map-wrapper-main" onBlur={closeAnyOpenPopup}>
             <MapContainer
                 id="map"
                 center={focusCoords}
@@ -117,6 +123,7 @@ function Map(props) {
                 />
                 <MapConsumer>
                     {(map) => {
+                        setMapInstance(map);
                         map.setView(focusCoords, zoom);
                         return null;
                     }}

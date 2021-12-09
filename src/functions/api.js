@@ -39,7 +39,6 @@ const api = {
             method: "GET",
             headers: { 'x-access-token': api.token }
         };
-
         api.sendRequest(url, requestOptions, callback);
     },
     moveBike: function (bikeId, station, maintenance, callback) {
@@ -70,7 +69,6 @@ const api = {
             },
             body: JSON.stringify(changes)
         };
-
         api.sendRequest(url, requestOptions, callback);
     },
     endMaintenance: function (bikeId, callback) {
