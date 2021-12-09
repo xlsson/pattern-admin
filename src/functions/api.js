@@ -43,12 +43,11 @@ const api = {
         api.sendRequest(url, requestOptions, callback);
     },
     moveBike: function (bikeId, station, maintenance, callback) {
-        console.log("flyttar: ", bikeId, " till ", station);
         const coords = station.coordinates;
         const long = (coords.northwest.long + coords.southeast.long)/2;
         const lat = (coords.northwest.lat + coords.southeast.lat)/2;
 
-        const changes = [
+        let changes = [
             { propName: "charge_id", value: station._id },
             { propName: "parking_id", value: null },
             { propName: "coordinates", value: { lat: lat , long: long } }
@@ -56,11 +55,13 @@ const api = {
 
         if (maintenance) {
             console.log("sätter maintenance till true");
-            changes.concat([
+            changes = changes.concat([
                 { propName: "maintenance", value: true },
                 { propName: "bike_status", value: "unavailable" }
             ]);
         }
+
+        console.log(changes);
 
         let url = `${api.baseUrl}/bikes/${bikeId}`;
 
