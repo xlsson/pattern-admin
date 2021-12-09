@@ -11,6 +11,7 @@ function BikeEndMaintenance(props) {
 
     function afterEndMaintenance(data) {
         console.log(data);
+        props.redrawBikes();
     }
     return (
             <button type="button" onClick={endMaintenance}>Avsluta underhåll</button>

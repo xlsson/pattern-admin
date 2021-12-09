@@ -34,7 +34,7 @@ function BikePopup(props) {
     function drawMoveBikeForm(bike) {
         return (
             <div className="bike-popup-form">
-                <strong>Boka hämtning</strong>
+                <strong>Boka hämtning till:</strong>
                 <select onBlur={stationSelection}>
                     {chargeStations.map((station, i) => (
                         <option key={i} value={i}>
@@ -43,7 +43,7 @@ function BikePopup(props) {
                     ))}
                 </select>
                 <div>
-                    <label htmlFor="maintenance">Boka underhåll</label>
+                    <label htmlFor="maintenance">Med underhåll</label>
                     <input
                         name="maintenance"
                         type="checkbox"
@@ -57,13 +57,16 @@ function BikePopup(props) {
 
     return (
         <div className="bike-popup">
-            <span className="material-icons">electric_scooter</span>
-            <div>_id: {bike._id}</div>
+            <div>
+                <span className="material-icons">electric_scooter</span>
+                {(bike.bike_status === "available") ? "Ledig" : "Upptagen" }
+            </div>
+            <div>{(bike.charge_id) && "På laddningsstation"}</div>
             <div>Status: {bike.bike_status}</div>
             <div>Batterinivå: {bike.battery_status}</div>
-            <div>Underhåll: {bike.mainenance}</div>
+            <div>{(bike.mainenance) && "Genomgår underhåll"}</div>
             {(bike.bike_status === "available") && drawMoveBikeForm(bike)}
-            {((bike.bike_status === "unavailable") && (bike.maintenance)) && renderEndMaintenance(bike)}
+            {(bike.maintenance && (bike.battery_status === 100)) && renderEndMaintenance(bike)}
         </div>
     );
 }

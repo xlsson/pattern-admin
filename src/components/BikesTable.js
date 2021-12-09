@@ -14,14 +14,20 @@ function BikesTable(props) {
 
     function getBikes() { api.getBikes(currentCity._id, afterGetBikes); }
 
-    function afterGetBikes(data) { setBikes(data.bikes); }
+    function afterGetBikes(data) {
+        console.log("i afterGetBikes");
+        setBikes(data.bikes);
+    }
 
     function handleClick(bike) {
         props.switchView(`bike`, bike);
     }
 
     function renderEndMaintenance(bike) {
-        return ( <BikeEndMaintenance bike={bike} /> )
+        return ( <BikeEndMaintenance
+                    redrawBikes={getBikes}
+                    bike={bike} />
+        )
     }
 
     function renderMoveForm(bike) {
@@ -46,9 +52,8 @@ function BikesTable(props) {
                         <th>Placering</th>
                         <th>Status</th>
                         <th>Batterinivå</th>
-                        <th>maintenance</th>
                         <th>Koordinater</th>
-                        <th>Boka hämtning</th>
+                        <th>Boka hämtning till:</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,25 +63,24 @@ function BikesTable(props) {
                             onClick={() => handleClick(bike)}>{cities[bike.city_id].name}</td>
                         <td className="pointer-cursor"
                             onClick={() => handleClick(bike)}>
-                            {(bike.charge_id) ? `Laddningsstation` : ""}
-                            {(bike.parking_id) ? `Parkeringsstation` : ""}
+                            {(bike.charge_id) && "Laddningsstation"}
+                            {(bike.parking_id) && "Parkeringsstation"}
+                            {(!bike.parking_id && !bike.charge_id) && "Utanför station"}
                         </td>
                         <td className="pointer-cursor"
                             onClick={() => handleClick(bike)}>
-                            {bike.bike_status}</td>
+                            {bike.bike_status}
+                            {(bike.maintenance) && ", Genomgår underhåll"}</td>
                         <td className="pointer-cursor"
                             onClick={() => handleClick(bike)}>
                             {bike.battery_status}</td>
-                        <td className="pointer-cursor"
-                            onClick={() => handleClick(bike)}>
-                            {(bike.maintenance) && "Genomgår underhåll"}</td>
                         <td className="pointer-cursor"
                             onClick={() => handleClick(bike)}>
                             {bike.coordinates.lat}, {bike.coordinates.long}
                         </td>
                         <td>
                             {(bike.bike_status === "available") && renderMoveForm(bike)}
-                            {((bike.bike_status === "unavailable") && (bike.maintenance)) && renderEndMaintenance(bike)}
+                            {(bike.maintenance && (bike.battery_status === 100)) && renderEndMaintenance(bike)}
                         </td>
                     </tr>
                 ))}

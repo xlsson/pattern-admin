@@ -38,7 +38,7 @@ function BikeMoveForm(props) {
                 ))}
             </select>
             <div>
-                <label htmlFor="maintenance">Boka underhåll</label>
+                <label htmlFor="maintenance">Med underhåll</label>
                 <input
                     name="maintenance"
                     type="checkbox"
