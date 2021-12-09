@@ -54,14 +54,11 @@ const api = {
         ];
 
         if (maintenance) {
-            console.log("sätter maintenance till true");
             changes = changes.concat([
                 { propName: "maintenance", value: true },
                 { propName: "bike_status", value: "unavailable" }
             ]);
         }
-
-        console.log(changes);
 
         let url = `${api.baseUrl}/bikes/${bikeId}`;
 
