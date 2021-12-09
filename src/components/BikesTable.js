@@ -15,7 +15,6 @@ function BikesTable(props) {
     function getBikes() { api.getBikes(currentCity._id, afterGetBikes); }
 
     function afterGetBikes(data) {
-        console.log("i afterGetBikes");
         setBikes(data.bikes);
     }
 
