@@ -21,8 +21,8 @@ function Map(props) {
         createCityLimits();
     }, [props]);
 
-    function closeAnyOpenPopup() {
-        mapInstance.closePopup();
+    function closeAnyOpenPopup(e) {
+        if (!e.currentTarget.contains(e.relatedTarget)) { mapInstance.closePopup(); }
     }
 
     function getIcon(markerImg, iconAnchor, popupAnchor) {
