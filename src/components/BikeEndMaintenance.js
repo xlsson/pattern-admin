@@ -6,7 +6,7 @@ function BikeEndMaintenance(props) {
     const bike = props.bike;
 
     function endMaintenance() {
-        api.endMaintenance(bike._id, afterEndMaintenance);
+        api.orderMaintenance(bike._id, false, afterEndMaintenance);
     }
 
     function afterEndMaintenance(data) {

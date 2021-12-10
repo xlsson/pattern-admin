@@ -13,18 +13,25 @@ function BikeMoveForm(props) {
 
     function moveBike() {
         const selectedStation = chargeStations[selectedId];
-        api.moveBike(bike._id, selectedStation, maintenance, afterMoveBike);
+        api.moveBike(bike._id, selectedStation, afterMoveBike);
     }
 
     function afterMoveBike(data) {
-        setMaintenance(false);
-        props.redrawBikes();
         console.log(data);
+        if (maintenance) {
+            api.orderMaintenance(bike._id, true, afterOrderMaintenance);
+            return;
+        }
+        props.redrawBikes();
     }
 
-    function stationSelection(event) {
-        setSelectedId(event.target.value);
+    function afterOrderMaintenance(data) {
+        console.log(data);
+        setMaintenance(false);
+        props.redrawBikes();
     }
+
+    function stationSelection(event) { setSelectedId(event.target.value); }
 
     return (
         <div>

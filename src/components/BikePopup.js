@@ -15,11 +15,20 @@ function BikePopup(props) {
 
     function moveBike() {
         const selectedStation = chargeStations[selectedId];
-        api.moveBike(bike._id, selectedStation, maintenance, afterMoveBike);
+        api.moveBike(bike._id, selectedStation, afterMoveBike);
         props.mapInstance.closePopup();
     }
 
     function afterMoveBike(data) {
+        console.log(data);
+        if (maintenance) {
+            api.orderMaintenance(bike._id, true, afterOrderMaintenance);
+            return;
+        }
+        props.redrawBikes();
+    }
+
+    function afterOrderMaintenance(data) {
         console.log(data);
         setMaintenance(false);
         props.redrawBikes();
@@ -30,7 +39,9 @@ function BikePopup(props) {
     }
 
     function renderEndMaintenance(bike) {
-        return ( <BikeEndMaintenance bike={bike} /> )
+        return ( <BikeEndMaintenance
+                    redrawBikes={props.redrawBikes}
+                    bike={bike} /> )
     }
 
     function drawMoveBikeForm(bike) {

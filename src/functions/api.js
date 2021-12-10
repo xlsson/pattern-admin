@@ -41,7 +41,7 @@ const api = {
         };
         api.sendRequest(url, requestOptions, callback);
     },
-    moveBike: function (bikeId, station, maintenance, callback) {
+    moveBike: function (bikeId, station, callback) {
         const coords = station.coordinates;
         const long = (coords.northwest.long + coords.southeast.long)/2;
         const lat = (coords.northwest.lat + coords.southeast.lat)/2;
@@ -51,13 +51,6 @@ const api = {
             { propName: "parking_id", value: null },
             { propName: "coordinates", value: { lat: lat , long: long } }
         ];
-
-        if (maintenance) {
-            changes = changes.concat([
-                { propName: "maintenance", value: true },
-                { propName: "bike_status", value: "unavailable" }
-            ]);
-        }
 
         let url = `${api.baseUrl}/bikes/${bikeId}`;
 
@@ -71,24 +64,18 @@ const api = {
         };
         api.sendRequest(url, requestOptions, callback);
     },
-    endMaintenance: function (bikeId, callback) {
-        console.log("avslutar maintenance");
+    orderMaintenance: function (bikeId, maintenance, callback) {
+        console.log("sätter maintenance till", maintenance);
 
-        const changes = [
-            { propName: "maintenance", value: false },
-            { propName: "bike_status", value: "available" },
-            { propName: "battery_status", value: 100 }
-        ];
-
-        let url = `${api.baseUrl}/bikes/${bikeId}`;
+        let url = `${api.baseUrl}/bikes/maintenance/${bikeId}`;
 
         let requestOptions = {
-            method: "PATCH",
+            method: "PUT",
             headers: {
                 'x-access-token': api.token,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(changes)
+            body: JSON.stringify({ maintenance: maintenance })
         };
 
         api.sendRequest(url, requestOptions, callback);
