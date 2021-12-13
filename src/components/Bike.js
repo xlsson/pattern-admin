@@ -1,7 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import PropTypes from "prop-types";
 import Map from './Map';
 
 import api from '../functions/api.js';
+
+Bike.propTypes = {
+    bike: PropTypes.object,
+    currentCity: PropTypes.object,
+    cities: PropTypes.array
+};
 
 function Bike(props) {
     const [bikes, setBikes] = useState([props.bike]);

@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
 import L from "leaflet";
 import { MapContainer, TileLayer, MapConsumer, Marker, Popup, Rectangle } from 'react-leaflet';
 import BikePopup from './BikePopup';
+
+Map.propTypes = {
+    zoom: PropTypes.number,
+    focusCoords: PropTypes.array,
+    bikes: PropTypes.array,
+    city: PropTypes.object,
+    cities: PropTypes.array,
+    chargeStations: PropTypes.array,
+    parkingStations: PropTypes.array,
+    redrawBikes: PropTypes.func
+};
 
 function Map(props) {
     let [zoom, setZoom] = useState(6);
@@ -85,7 +97,7 @@ function Map(props) {
             limitsArray.push(props.city.coordinates);
             setCityLimits(limitsArray);
             return;
-        };
+        }
 
         Object.keys(props.cities).forEach((c) => {
             if (c !== "all") { limitsArray.push(props.cities[c].coordinates); }

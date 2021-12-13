@@ -1,4 +1,14 @@
+import React from 'react';
 import ChangeCity from './ChangeCity';
+import PropTypes from "prop-types";
+
+Menu.propTypes = {
+    switchView: PropTypes.func,
+    view: PropTypes.string,
+    cities: PropTypes.cities,
+    allCities: PropTypes.object,
+    chooseCity: PropTypes.func
+};
 
 function Menu(props) {
     let active = props.view;

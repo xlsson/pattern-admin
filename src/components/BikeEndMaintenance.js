@@ -1,6 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import PropTypes from "prop-types";
 
 import api from '../functions/api.js';
+
+BikeEndMaintenance.propTypes = {
+    redrawBikes: PropTypes.redrawBikes,
+    bike: PropTypes.object
+};
 
 function BikeEndMaintenance(props) {
     const bike = props.bike;

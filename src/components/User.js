@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
 import Trips from './Trips.js';
 
 import api from '../functions/api.js';
 
+User.propTypes = {
+  user: PropTypes.object
+};
+
 function User(props) {
-    const userId = props.params._id;
+    const userId = props.user._id;
 
     let [user, setUser] = useState({});
     let [name, setName] = useState("")
@@ -90,6 +95,10 @@ function User(props) {
                         </td>
                     </tr>
                     <tr>
+                        <td>defaultstad</td>
+                        <td>{user.city}</td>
+                    </tr>
+                    <tr>
                         <td>email</td>
                         <td>{user.email}</td>
                     </tr>
@@ -152,9 +161,7 @@ function User(props) {
                 </tbody>
             </table>
 
-            <Trips
-                user={user}
-                trips={trips} />
+            <Trips trips={trips} />
         </div>
     );
 }

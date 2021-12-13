@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
 
 import api from '../functions/api.js';
+
+BikeMoveForm.propTypes = {
+    bike: PropTypes.object,
+    redrawBikes: PropTypes.redrawBikes,
+    chargeStations: PropTypes.chargeStations
+};
 
 function BikeMoveForm(props) {
     const bike = props.bike;

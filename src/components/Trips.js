@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import PropTypes from "prop-types";
+
+Trips.propTypes = {
+  trips: PropTypes.array
+};
 
 function Trips(props) {
-    const user = props.user;
     const trips = props.trips;
 
     return (
@@ -27,7 +31,7 @@ function Trips(props) {
                     <tr key={i}>
                         <>
                         <td>{trip._id}</td>
-                        <td>{trip.bike_id}</td> 
+                        <td>{trip.bike_id}</td>
                         <td>{trip.start_time}</td>
                         <td>{trip.stop_time}</td>
                         <td>{trip.start_coordinates.lat}, {trip.start_coordinates.long}</td>

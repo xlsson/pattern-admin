@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
 
 import api from '../functions/api.js';
 
+Price.propTypes = {
+  currentCity: PropTypes.string
+};
+
 function Price(props) {
-    const cityId = props.city._id;
+    const cityId = props.currentCity._id;
     const [price, setPrice] = useState({});
     const [changes, setChanges] = useState({});
 

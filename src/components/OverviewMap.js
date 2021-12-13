@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
 import Map from './Map';
 
 import api from '../functions/api.js';
+
+OverviewMap.propTypes = {
+  currentCity: PropTypes.string,
+  cities: PropTypes.cities
+};
 
 function OverviewMap(props) {
     let [bikes, setBikes] = useState([]);

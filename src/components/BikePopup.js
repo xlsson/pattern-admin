@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
 import BikeEndMaintenance from './BikeEndMaintenance';
 
 import api from '../functions/api.js';
+
+BikePopup.propTypes = {
+    key: PropTypes.number,
+    bike: PropTypes.object,
+    mapInstance: PropTypes.object,
+    cities: PropTypes.array,
+    redrawBikes: PropTypes.redrawBikes
+};
 
 function BikePopup(props) {
 
@@ -44,7 +53,7 @@ function BikePopup(props) {
                     bike={bike} /> )
     }
 
-    function drawMoveBikeForm(bike) {
+    function drawMoveBikeForm() {
         return (
             <div className="bike-popup-form">
                 <strong>Boka hämtning till:</strong>

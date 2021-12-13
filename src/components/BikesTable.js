@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
 import BikeMoveForm from './BikeMoveForm';
 import BikeEndMaintenance from './BikeEndMaintenance';
 
 import api from '../functions/api.js';
+
+BikesTable.propTypes = {
+    switchView: PropTypes.func,
+    currentCity: PropTypes.string,
+    cities: PropTypes.array
+};
 
 function BikesTable(props) {
     let [bikes, setBikes] = useState([]);

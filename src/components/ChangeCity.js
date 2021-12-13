@@ -1,6 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import PropTypes from "prop-types";
 
-import api from '../functions/api.js';
+ChangeCity.propTypes = {
+    allCities: PropTypes.object,
+    cities: PropTypes.array,
+    chooseCity: PropTypes.func
+};
 
 function ChangeCity(props) {
     const [selectedId, setSelectedId] = useState("all");

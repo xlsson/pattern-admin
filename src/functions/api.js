@@ -28,7 +28,7 @@ const api = {
                 api.token = data.token;
                 return data;
             })
-            .then(function(data) { return callback(); });
+            .then(function(data) { return callback(data); });
     },
     getBikes: function (cityId, callback) {
         let url = `${api.baseUrl}/bikes`;

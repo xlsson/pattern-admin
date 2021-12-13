@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
 import Map from './Map';
 
 import api from '../functions/api.js';
+
+Station.propTypes = {
+  station: PropTypes.object,
+  type: PropTypes.string,
+  currentCity: PropTypes.string,
+  cities: PropTypes.array
+};
 
 function Station(props) {
     let [bikes, setBikes] = useState([]);
@@ -61,7 +69,7 @@ function Station(props) {
                     <td>Just nu {bikes.length} cyklar här:</td>
                     <td>
                         {bikes.map((bike, i) => (
-                            <span>bike._id: {bike._id} </span>
+                            <span key={i}>bike._id: {bike._id} </span>
                         ))}
                     </td>
                 </tr>

@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
 
-import api from '../functions/api.js';
+StationsTable.propTypes = {
+  switchView: PropTypes.func,
+  type: PropTypes.string,
+  currentCity: PropTypes.string,
+  cities: PropTypes.array
+};
 
 function StationsTable(props) {
     const [stations, setStations] = useState([]);
