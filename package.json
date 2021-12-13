@@ -19,7 +19,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "style": "sass ./src/style/style.scss ./src/style/style.css --no-source-map",
-    "style-min": "sass ./src/style/style.scss ./src/style/style.min.css  --no-source-map --style compressed"
+    "style-min": "sass ./src/style/style.scss ./src/style/style.min.css  --no-source-map --style compressed",
+    "lint": "eslint ./src"
   },
   "eslintConfig": {
     "extends": [
