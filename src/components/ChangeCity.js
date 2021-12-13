@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 ChangeCity.propTypes = {
     allCities: PropTypes.object,
-    cities: PropTypes.array,
+    cities: PropTypes.object,
     chooseCity: PropTypes.func
 };
 

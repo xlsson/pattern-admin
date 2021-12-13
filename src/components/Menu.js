@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 Menu.propTypes = {
     switchView: PropTypes.func,
     view: PropTypes.string,
-    cities: PropTypes.cities,
+    cities: PropTypes.object,
     allCities: PropTypes.object,
     chooseCity: PropTypes.func
 };

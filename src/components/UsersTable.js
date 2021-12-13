@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import api from '../functions/api.js';
 
 UsersTable.propTypes = {
-  switchView: PropTypes.func
+    switchView: PropTypes.func
 };
 
 function UsersTable(props) {

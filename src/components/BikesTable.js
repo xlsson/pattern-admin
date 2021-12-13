@@ -7,8 +7,8 @@ import api from '../functions/api.js';
 
 BikesTable.propTypes = {
     switchView: PropTypes.func,
-    currentCity: PropTypes.string,
-    cities: PropTypes.array
+    currentCity: PropTypes.object,
+    cities: PropTypes.object
 };
 
 function BikesTable(props) {

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import api from '../functions/api.js';
 
 Price.propTypes = {
-  currentCity: PropTypes.string
+    currentCity: PropTypes.object
 };
 
 function Price(props) {

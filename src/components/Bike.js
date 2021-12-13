@@ -7,7 +7,7 @@ import api from '../functions/api.js';
 Bike.propTypes = {
     bike: PropTypes.object,
     currentCity: PropTypes.object,
-    cities: PropTypes.array
+    cities: PropTypes.object
 };
 
 function Bike(props) {

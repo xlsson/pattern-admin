@@ -5,8 +5,8 @@ import Map from './Map';
 import api from '../functions/api.js';
 
 OverviewMap.propTypes = {
-  currentCity: PropTypes.string,
-  cities: PropTypes.cities
+    currentCity: PropTypes.object,
+    cities: PropTypes.object
 };
 
 function OverviewMap(props) {

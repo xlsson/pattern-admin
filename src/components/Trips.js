@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 Trips.propTypes = {
-  trips: PropTypes.array
+    trips: PropTypes.array
 };
 
 function Trips(props) {

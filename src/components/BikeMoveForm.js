@@ -5,8 +5,8 @@ import api from '../functions/api.js';
 
 BikeMoveForm.propTypes = {
     bike: PropTypes.object,
-    redrawBikes: PropTypes.redrawBikes,
-    chargeStations: PropTypes.chargeStations
+    redrawBikes: PropTypes.func,
+    chargeStations: PropTypes.array
 };
 
 function BikeMoveForm(props) {

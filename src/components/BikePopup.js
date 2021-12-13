@@ -5,11 +5,10 @@ import BikeEndMaintenance from './BikeEndMaintenance';
 import api from '../functions/api.js';
 
 BikePopup.propTypes = {
-    key: PropTypes.number,
     bike: PropTypes.object,
     mapInstance: PropTypes.object,
-    cities: PropTypes.array,
-    redrawBikes: PropTypes.redrawBikes
+    cities: PropTypes.object,
+    redrawBikes: PropTypes.func
 };
 
 function BikePopup(props) {

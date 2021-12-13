@@ -9,7 +9,7 @@ Map.propTypes = {
     focusCoords: PropTypes.array,
     bikes: PropTypes.array,
     city: PropTypes.object,
-    cities: PropTypes.array,
+    cities: PropTypes.object,
     chargeStations: PropTypes.array,
     parkingStations: PropTypes.array,
     redrawBikes: PropTypes.func
@@ -45,23 +45,24 @@ function Map(props) {
         });
     }
 
-    function drawBike(bike, i) {
+    function drawBike(bike) {
         let position = [bike.coordinates.lat, bike.coordinates.long];
         return (
-            <Marker position={position} icon={getIcon("marker_scooter", [15, 15], [0, 0])}>
-                <Popup>
-                    <BikePopup
-                        key={i}
-                        bike={bike}
-                        mapInstance={mapInstance}
-                        cities={props.cities}
-                        redrawBikes={props.redrawBikes} />
-                </Popup>
-            </Marker>
+            <div>
+                <Marker position={position} icon={getIcon("marker_scooter", [15, 15], [0, 0])}>
+                    <Popup>
+                        <BikePopup
+                            bike={bike}
+                            mapInstance={mapInstance}
+                            cities={props.cities}
+                            redrawBikes={props.redrawBikes} />
+                    </Popup>
+                </Marker>
+            </div>
         )
     }
 
-    function drawStation(type, station, i) {
+    function drawStation(type, station) {
         let color = (type === "parking") ? "blue" : "green";
         let options = { color: color };
         let coords = station.coordinates;
@@ -80,7 +81,7 @@ function Map(props) {
 
         return (
             <>
-            <Rectangle key={i} bounds={bounds} pathOptions={options} />
+            <Rectangle bounds={bounds} pathOptions={options} />
             <Marker position={markerPosition} icon={getIcon(markerImg, [15, 35], [1, -10])}>
                 <Popup>
                     <span>Station: {station.name}</span>
@@ -107,7 +108,7 @@ function Map(props) {
         return;
     }
 
-    function drawCityLimits(coords, i) {
+    function drawCityLimits(coords) {
         let options = { color: "red", fillOpacity: 0, weight: 1 };
 
         let bounds = [
@@ -117,7 +118,7 @@ function Map(props) {
 
         return (
             <>
-            <Rectangle key={i} bounds={bounds} pathOptions={options} />
+            <Rectangle bounds={bounds} pathOptions={options} />
             </>
         );
     }
@@ -140,10 +141,18 @@ function Map(props) {
                         return null;
                     }}
                 </MapConsumer>
-                {cityLimits.map((coords, i) => { return drawCityLimits(coords, i); })}
-                {bikes.map((bike, i) => { return drawBike(bike, i); })}
-                {chargeStations.map((station, i) => { return drawStation("charge", station, i); })}
-                {parkingStations.map((station, i) => { return drawStation("parking", station, i); })}
+                {cityLimits.map((coords, i) => {
+                    return (<div key={i}>{drawCityLimits(coords)}</div>);
+                })}
+                {bikes.map((bike, i) => {
+                    return (<div key={i}>{drawBike(bike)}</div>);
+                })}
+                {chargeStations.map((station, i) => {
+                    return (<div key={i}>{drawStation("charge", station)}</div>);
+                })}
+                {parkingStations.map((station, i) => {
+                    return (<div key={i}>{drawStation("parking", station)}</div>);
+                })}
             </MapContainer>
         </div>
     );

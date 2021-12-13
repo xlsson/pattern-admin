@@ -5,10 +5,10 @@ import Map from './Map';
 import api from '../functions/api.js';
 
 Station.propTypes = {
-  station: PropTypes.object,
-  type: PropTypes.string,
-  currentCity: PropTypes.string,
-  cities: PropTypes.array
+    station: PropTypes.object,
+    type: PropTypes.string,
+    currentCity: PropTypes.object,
+    cities: PropTypes.object
 };
 
 function Station(props) {

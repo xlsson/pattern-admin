@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 
 StationsTable.propTypes = {
-  switchView: PropTypes.func,
-  type: PropTypes.string,
-  currentCity: PropTypes.string,
-  cities: PropTypes.array
+    switchView: PropTypes.func,
+    type: PropTypes.string,
+    currentCity: PropTypes.object,
+    cities: PropTypes.object
 };
 
 function StationsTable(props) {

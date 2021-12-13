@@ -5,7 +5,7 @@ import Trips from './Trips.js';
 import api from '../functions/api.js';
 
 User.propTypes = {
-  user: PropTypes.object
+    user: PropTypes.object
 };
 
 function User(props) {
