@@ -126,7 +126,7 @@ function App() {
 
     function renderPrice() {
         return ( <Price
-            city={currentCity} /> );
+                    currentCity={currentCity} /> );
     }
 
     return (
