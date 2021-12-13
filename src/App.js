@@ -27,7 +27,6 @@ function App() {
     };
     const [allCities, setAllCities] = useState(swedenData);
 
-    const [cityId, setCityId] = useState("all");
     const [cities, setCities] = useState({});
     const [currentCity, setCurrentCity] = useState(allCities);
 
@@ -66,7 +65,6 @@ function App() {
     }
 
     function chooseCity(selectedId) {
-        setCityId(selectedId);
         if (selectedId === "all") {
             setCurrentCity(allCities);
             return;
@@ -81,28 +79,55 @@ function App() {
     }
 
     function renderUsersTable() {
-        return ( <UsersTable switchView={switchView} /> ); }
+        return ( <UsersTable
+                    switchView={switchView} /> );
+    }
 
     function renderUser() {
-        return ( <User params={params} /> ); }
+        return ( <User
+                    user={params} /> );
+    }
 
     function renderBikesTable() {
-        return ( <BikesTable switchView={switchView} currentCity={currentCity} cities={cities} /> ); }
+        return ( <BikesTable
+                    switchView={switchView}
+                    currentCity={currentCity}
+                    cities={cities} /> );
+    }
 
     function renderBike() {
-        return ( <Bike bike={params} currentCity={currentCity} cities={cities} /> ); }
+        return ( <Bike
+                    bike={params}
+                    currentCity={currentCity}
+                    cities={cities} /> );
+    }
 
     function renderStationsTable(type) {
-        return ( <StationsTable switchView={switchView} type={type} currentCity={currentCity} cities={cities} /> ); }
+        return ( <StationsTable
+                    switchView={switchView}
+                    type={type}
+                    currentCity={currentCity}
+                    cities={cities} /> );
+    }
 
     function renderStation(type) {
-        return ( <Station station={params} type={type} currentCity={currentCity} cities={cities} /> ); }
+        return ( <Station
+                    station={params}
+                    type={type}
+                    currentCity={currentCity}
+                    cities={cities} /> );
+    }
 
     function renderOverviewMap() {
-        return ( <OverviewMap currentCity={currentCity} cities={cities} /> ); }
+        return ( <OverviewMap
+                    currentCity={currentCity}
+                    cities={cities} /> );
+    }
 
     function renderPrice() {
-        return ( <Price city={currentCity} /> ); }
+        return ( <Price
+            city={currentCity} /> );
+    }
 
     return (
         <div className="page-wrapper">
