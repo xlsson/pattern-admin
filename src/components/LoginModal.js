@@ -4,63 +4,69 @@ import PropTypes from "prop-types";
 import api from '../functions/api.js';
 
 LoginModal.propTypes = {
-    switchView: PropTypes.func
+    switchView: PropTypes.func,
+    setLoggedInUser: PropTypes.func
 };
 
 function LoginModal(props) {
-    console.log("token length: ", api.token.length);
+    const msg = {
+        welcome: "Ange användarnamn och lösenord för att logga in",
+        fail: "Fel användarnamn eller lösen. Försök igen."
+    };
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [message, setMessage] = useState(msg.welcome);
 
     function handleInput(value, property) {
-        if (property === "username") {
-            setUsername(value);
-            return;
-        }
+        if (property === "username") { return setUsername(value); }
+
         setPassword(value);
     }
 
-    function confirm() {
-        api.login(doAfterConfirm, username, password);
+    function attemptLogin() {
+        api.login(handleLoginResult, username, password);
     }
 
-    function doAfterConfirm(data) {
-        console.log("after login");
-        console.log(data);
-        // Add conditional for succesful/unsuccesful login
+    function handleLoginResult(data) {
+        if (!data.token) { return setMessage(msg.fail); }
+
         props.switchView("overviewMap");
+        props.setLoggedInUser(username);
     }
 
     return (
-        <div>
-            <h1>Logga in</h1>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>Användarnamn</td>
-                        <td>
-                            <input
-                                type="text"
-                                onChange={e => handleInput(e.target.value, "username")}>
-                            </input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Lösenord</td>
-                        <td>
-                            <input
-                                type="text"
-                                onChange={e => handleInput(e.target.value, "password")}>
-                            </input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan="2">
-                            <button type="button" onClick={confirm}>Logga in</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div className="modal-background">
+            <div className="modal-box">
+                <h1>Administrativt gränssnitt</h1>
+                <p>{message}</p>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Användarnamn</td>
+                            <td>
+                                <input
+                                    type="text"
+                                    onChange={e => handleInput(e.target.value, "username")}>
+                                </input>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Lösenord</td>
+                            <td>
+                                <input
+                                    type="text"
+                                    onChange={e => handleInput(e.target.value, "password")}>
+                                </input>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan="2">
+                                <button type="button" onClick={attemptLogin}>Logga in</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }

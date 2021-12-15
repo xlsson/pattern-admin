@@ -11,8 +11,9 @@ const api = {
             });
     },
     login: function (callback, username, password) {
-        console.log("username: ", username, "password: ", password);
-        console.log("(overridden with devconfig login details)"); 
+
+        console.log(username, password, "replaced by deconfig");
+
         let requestOptions = {
             method: "POST",
             headers: {
@@ -27,7 +28,7 @@ const api = {
         fetch(`${api.baseUrl}/admins/login`, requestOptions)
             .then(response => response.json())
             .then(function(data) {
-                api.token = data.token;
+                if (data.token) { api.token = data.token; }
                 return data;
             })
             .then(function(data) { return callback(data); });

@@ -1,5 +1,6 @@
 import React from 'react';
 import ChangeCity from './ChangeCity';
+import LoggedInBox from './LoggedInBox';
 import PropTypes from "prop-types";
 
 Menu.propTypes = {
@@ -7,7 +8,9 @@ Menu.propTypes = {
     view: PropTypes.string,
     cities: PropTypes.object,
     allCities: PropTypes.object,
-    chooseCity: PropTypes.func
+    chooseCity: PropTypes.func,
+    loggedInUser: PropTypes.string,
+    setLoggedInUser: PropTypes.func
 };
 
 function Menu(props) {
@@ -26,7 +29,7 @@ function Menu(props) {
             <ul className="menu-wrapper">
                 <li className={ (active === "overviewMap") ? "active" : "" }
                     onClick={() => handleMenuClick("overviewMap")}>
-                    Översikt
+                    Översiktskarta
                 </li>
                 <li className={ ((active === "bikes") || (active === "bike")) ? "active" : "" }
                     onClick={() => handleMenuClick("bikes")}>
@@ -49,6 +52,12 @@ function Menu(props) {
                     Pristariff
                 </li>
             </ul>
+
+            <LoggedInBox
+                loggedInUser={props.loggedInUser}
+                setLoggedInUser={props.setLoggedInUser}
+                switchView={props.switchView} />
+
         </div>
     );
 }

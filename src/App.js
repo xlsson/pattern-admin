@@ -13,10 +13,6 @@ import Price from './components/Price';
 import api from './functions/api.js';
 
 function App() {
-    const defaultView = (api.token.length === 0) ? "loginModal" : "overviewMap";
-    const [view, setView] = useState(defaultView);
-    const [params, setParams] = useState({});
-
     const swedenData = {
          _id: "all",
         name: "Sverige",
@@ -27,13 +23,17 @@ function App() {
         parking_stations: [],
         charge_stations: []
     };
-    const [allCities, setAllCities] = useState(swedenData);
 
+    const defaultView = (api.token.length === 0) ? "loginModal" : "overviewMap";
+
+    const [view, setView] = useState(defaultView);
+    const [params, setParams] = useState({});
+    const [loggedInUser, setLoggedInUser] = useState("");
     const [cities, setCities] = useState({});
+    const [allCities, setAllCities] = useState(swedenData);
     const [currentCity, setCurrentCity] = useState(allCities);
 
     useEffect(() => { api.getCities(afterGetCities); }, []);
-
     useEffect(() => { setCurrentCity(allCities); }, [allCities]);
 
     function afterGetCities(data) {
@@ -62,17 +62,12 @@ function App() {
     }
 
     function chooseCity(selectedId) {
-        if (selectedId === "all") {
-            setCurrentCity(allCities);
-            return;
-        }
+        if (selectedId === "all") { return setCurrentCity(allCities); }
 
         setCurrentCity(cities[selectedId]);
     }
 
     function switchView(view, params={}) {
-        console.log("view: ", view);
-        console.log("token length: ", api.token.length);
         if (api.token.length > 0) {
             setParams(params);
             setView(view);
@@ -83,7 +78,8 @@ function App() {
 
     function renderLoginModal() {
         return ( <LoginModal
-                    switchView={switchView} /> );
+                    switchView={switchView}
+                    setLoggedInUser={setLoggedInUser} /> );
     }
 
     function renderUsersTable() {
@@ -146,7 +142,8 @@ function App() {
                     cities={cities}
                     allCities={allCities}
                     chooseCity={chooseCity}
-                    />
+                    loggedInUser={loggedInUser}
+                    setLoggedInUser={setLoggedInUser} />
             </header>
             <div className="content">
                 {(view === "loginModal") && renderLoginModal()}
