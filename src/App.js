@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import LoginModal from './components/LoginModal';
 import Menu from './components/Menu';
 import BikesTable from './components/BikesTable';
 import Bike from './components/Bike';
@@ -12,7 +13,8 @@ import Price from './components/Price';
 import api from './functions/api.js';
 
 function App() {
-    const [view, setView] = useState("overviewMap");
+    const defaultView = (api.token.length === 0) ? "loginModal" : "overviewMap";
+    const [view, setView] = useState(defaultView);
     const [params, setParams] = useState({});
 
     const swedenData = {
@@ -30,14 +32,9 @@ function App() {
     const [cities, setCities] = useState({});
     const [currentCity, setCurrentCity] = useState(allCities);
 
-    useEffect(() => { api.login(afterLogin); }, []);
+    useEffect(() => { api.getCities(afterGetCities); }, []);
 
     useEffect(() => { setCurrentCity(allCities); }, [allCities]);
-
-    function afterLogin() {
-        console.log("after login");
-        api.getCities(afterGetCities);
-    }
 
     function afterGetCities(data) {
         addStationsToDefault(data.cities);
@@ -74,8 +71,19 @@ function App() {
     }
 
     function switchView(view, params={}) {
-        setParams(params);
-        setView(view);
+        console.log("view: ", view);
+        console.log("token length: ", api.token.length);
+        if (api.token.length > 0) {
+            setParams(params);
+            setView(view);
+            return;
+        }
+        setView("loginModal");
+    }
+
+    function renderLoginModal() {
+        return ( <LoginModal
+                    switchView={switchView} /> );
     }
 
     function renderUsersTable() {
@@ -141,6 +149,7 @@ function App() {
                     />
             </header>
             <div className="content">
+                {(view === "loginModal") && renderLoginModal()}
                 {(view === "users") && renderUsersTable()}
                 {(view === "user") && renderUser()}
                 {(view === "bikes") && renderBikesTable()}

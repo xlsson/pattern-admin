@@ -10,15 +10,17 @@ const api = {
                 return callback(data);
             });
     },
-    login: function (callback, username=devconfig.username, password=devconfig.password) {
+    login: function (callback, username, password) {
+        console.log("username: ", username, "password: ", password);
+        console.log("(overridden with devconfig login details)"); 
         let requestOptions = {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: username,
-                password: password
+                username: devconfig.username,
+                password: devconfig.password
             })
         };
 
@@ -92,8 +94,6 @@ const api = {
     },
     getPrices: function (cityId, callback) {
         let url = `${api.baseUrl}/prices`;
-
-        console.log("price not dependent on cityId: ", cityId);
 
         let requestOptions = {
             method: "GET",
