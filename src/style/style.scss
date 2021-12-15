@@ -37,6 +37,26 @@ body {
     font-feature-settings: 'liga';
 }
 
+.modal-background {
+    z-index: 100;
+    background-color: rgba(0,0,0,0.6);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.modal-box {
+    margin: 20vh auto;
+    max-width: 50vh;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3), 0 3px 10px 0 rgba(0,0,0,0.19);
+    padding: 1em;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 .pointer-cursor {
     cursor: pointer;
 }
