@@ -1,0 +1,11 @@
+[{
+	"_id": {
+		"$oid": "61a7c13abc12788d197715e6"
+	},
+	"starting_fee": 10,
+	"price_per_minute": 3,
+	"penalty_fee": 50,
+	"discount": 0.1,
+	"__v": 0
+}]
+

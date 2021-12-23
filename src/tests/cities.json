@@ -1,0 +1,270 @@
+{
+    "61a76026bb53f131584de9b1": {
+        "_id": "61a76026bb53f131584de9b1",
+        "name": "Karlskrona",
+        "coordinates": {
+            "northwest": {
+                "lat": 56.193013,
+                "long": 15.559232
+            },
+            "southeast": {
+                "lat": 56.152144,
+                "long": 15.634511
+            }
+        },
+        "charge_stations": [
+            {
+                "_id": "61a93ba5e146af1a898bdb33",
+                "name": "BTH",
+                "coordinates": {
+                    "northwest": {
+                        "lat": 56.181368,
+                        "long": 15.590497
+                    },
+                    "southeast": {
+                        "lat": 56.181187,
+                        "long": 15.590952
+                    }
+                }
+            }
+        ],
+        "parking_stations": [
+            {
+                "_id": "61a760deeefc1bd24ba91645",
+                "name": "Östra Hamngatan",
+                "coordinates": {
+                    "northwest": {
+                        "lat": 56.166459,
+                        "long": 15.593423
+                    },
+                    "southeast": {
+                        "lat": 56.166382,
+                        "long": 15.593662
+                    }
+                }
+            }
+        ]
+    },
+    "61a7603dbb53f131584de9b3": {
+        "_id": "61a7603dbb53f131584de9b3",
+        "name": "Stockholm",
+        "coordinates": {
+            "northwest": {
+                "lat": 59.343886,
+                "long": 18.026826
+            },
+            "southeast": {
+                "lat": 59.310522,
+                "long": 18.099825
+            }
+        },
+        "charge_stations": [
+            {
+                "_id": "61a93c3ce146af1a898bdb34",
+                "name": "Mariatorget",
+                "coordinates": {
+                    "northwest": {
+                        "lat": 59.318668,
+                        "long": 18.062481
+                    },
+                    "southeast": {
+                        "lat": 59.318405,
+                        "long": 18.06323
+                    }
+                }
+            }
+        ],
+        "parking_stations": [
+            {
+                "coordinates": {
+                    "northwest": {
+                        "lat": 59.321328,
+                        "long": 18.059566
+                    },
+                    "southeast": {
+                        "lat": 59.32131,
+                        "long": 18.059708
+                    }
+                },
+                "_id": "61a93b34e146af1a898bdb31",
+                "name": "Söder Mälarstrand"
+            }
+        ]
+    },
+    "61a8fd85ea20b50150945887": {
+        "_id": "61a8fd85ea20b50150945887",
+        "name": "Karlstad",
+        "coordinates": {
+            "northwest": {
+                "lat": 59.390921,
+                "long": 13.466531
+            },
+            "southeast": {
+                "lat": 59.364795,
+                "long": 13.541185
+            }
+        },
+        "charge_stations": [
+            {
+                "_id": "61a8ff1b108640ebcc7fd228",
+                "name": "Stora Torget",
+                "coordinates": {
+                    "northwest": {
+                        "lat": 59.380714,
+                        "long": 13.503747
+                    },
+                    "southeast": {
+                        "lat": 59.380611,
+                        "long": 13.504056
+                    }
+                }
+            },
+            {
+                "_id": "61b3d032d81d217b892357d6",
+                "name": "Centralstation",
+                "coordinates": {
+                    "northwest": {
+                        "lat": 59.378051,
+                        "long": 13.498123
+                    },
+                    "southeast": {
+                        "lat": 59.377978,
+                        "long": 13.498289
+                    }
+                }
+            }
+        ],
+        "parking_stations": [
+            {
+                "_id": "61a939c1e146af1a898bdb30",
+                "name": "Wennbergsparken",
+                "coordinates": {
+                    "northwest": {
+                        "lat": 59.375324,
+                        "long": 13.49188
+                    },
+                    "southeast": {
+                        "lat": 59.375265,
+                        "long": 13.49203
+                    }
+                }
+            }
+        ]
+    },
+    "all": {
+        "_id": "all",
+        "name": "Sverige",
+        "coordinates": {
+            "northwest": {
+                "lat": 58.195259,
+                "long": 14.221258
+            },
+            "southeast": {
+                "lat": 58.195259,
+                "long": 14.221258
+            }
+        },
+        "parking_stations": [
+            {
+                "_id": "61a760deeefc1bd24ba91645",
+                "name": "Östra Hamngatan",
+                "coordinates": {
+                    "northwest": {
+                        "lat": 56.166459,
+                        "long": 15.593423
+                    },
+                    "southeast": {
+                        "lat": 56.166382,
+                        "long": 15.593662
+                    }
+                }
+            },
+            {
+                "coordinates": {
+                    "northwest": {
+                        "lat": 59.321328,
+                        "long": 18.059566
+                    },
+                    "southeast": {
+                        "lat": 59.32131,
+                        "long": 18.059708
+                    }
+                },
+                "_id": "61a93b34e146af1a898bdb31",
+                "name": "Söder Mälarstrand"
+            },
+            {
+                "_id": "61a939c1e146af1a898bdb30",
+                "name": "Wennbergsparken",
+                "coordinates": {
+                    "northwest": {
+                        "lat": 59.375324,
+                        "long": 13.49188
+                    },
+                    "southeast": {
+                        "lat": 59.375265,
+                        "long": 13.49203
+                    }
+                }
+            }
+        ],
+        "charge_stations": [
+            {
+                "_id": "61a93ba5e146af1a898bdb33",
+                "name": "BTH",
+                "coordinates": {
+                    "northwest": {
+                        "lat": 56.181368,
+                        "long": 15.590497
+                    },
+                    "southeast": {
+                        "lat": 56.181187,
+                        "long": 15.590952
+                    }
+                }
+            },
+            {
+                "_id": "61a93c3ce146af1a898bdb34",
+                "name": "Mariatorget",
+                "coordinates": {
+                    "northwest": {
+                        "lat": 59.318668,
+                        "long": 18.062481
+                    },
+                    "southeast": {
+                        "lat": 59.318405,
+                        "long": 18.06323
+                    }
+                }
+            },
+            {
+                "_id": "61a8ff1b108640ebcc7fd228",
+                "name": "Stora Torget",
+                "coordinates": {
+                    "northwest": {
+                        "lat": 59.380714,
+                        "long": 13.503747
+                    },
+                    "southeast": {
+                        "lat": 59.380611,
+                        "long": 13.504056
+                    }
+                }
+            },
+            {
+                "_id": "61b3d032d81d217b892357d6",
+                "name": "Centralstation",
+                "coordinates": {
+                    "northwest": {
+                        "lat": 59.378051,
+                        "long": 13.498123
+                    },
+                    "southeast": {
+                        "lat": 59.377978,
+                        "long": 13.498289
+                    }
+                }
+            }
+        ]
+    }
+}
