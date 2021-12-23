@@ -25,3 +25,13 @@ test('Expected number of options are displayed', () => {
     const options = screen.getAllByRole('option');
     expect(options.length).toEqual(4);
 });
+
+test('Select option 0', () => {
+    render(<ChangeCity
+                allCities={allCities}
+                cities={cities}
+                chooseCity={chooseCity} />);
+    const options = screen.getAllByRole('option');
+    expect(options[0]).toHaveProperty("value");
+    expect(options[0].value).toEqual("61a76026bb53f131584de9b1");
+});
