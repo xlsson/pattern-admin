@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import Map from './Map';
 
-import api from '../functions/api.js';
-
 OverviewMap.propTypes = {
+    api: PropTypes.object,
     currentCity: PropTypes.object,
     cities: PropTypes.object
 };
@@ -24,7 +23,7 @@ function OverviewMap(props) {
 
     const zoom = (city._id !== "all") ? 13 : 6;
 
-    function getBikes() { api.getBikes(city._id, afterGetBikes); }
+    function getBikes() { props.api.getBikes(city._id, afterGetBikes); }
 
     function afterGetBikes(data) { setBikes(data.bikes); }
 
@@ -39,6 +38,7 @@ function OverviewMap(props) {
             <p><span className="material-icons">local_parking</span> = parkeringsstation</p>
         </div>
         <Map
+            api={props.api}
             zoom={zoom}
             focusCoords={focusCoords}
             bikes={bikes}

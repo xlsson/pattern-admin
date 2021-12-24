@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import Map from './Map';
 
-import api from '../functions/api.js';
-
 Station.propTypes = {
+    api: PropTypes.object,
     station: PropTypes.object,
     type: PropTypes.string,
     currentCity: PropTypes.object,
@@ -35,7 +34,7 @@ function Station(props) {
     const long = (coords.northwest.long + coords.southeast.long)/2;
     const focusCoords = [lat, long];
 
-    function getBikes() { api.getBikes(station.city_id, afterGetBikes); }
+    function getBikes() { props.api.getBikes(station.city_id, afterGetBikes); }
 
     function afterGetBikes(data) {
         let allBikes = data.bikes;
@@ -76,6 +75,7 @@ function Station(props) {
             </tbody>
         </table>
         <Map
+            api={props.api}
             zoom={20}
             focusCoords={focusCoords}
             bikes={bikes}

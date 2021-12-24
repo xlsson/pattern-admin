@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import Trips from './Trips.js';
 
-import api from '../functions/api.js';
-
 User.propTypes = {
+    api: PropTypes.object,
     user: PropTypes.object
 };
 
@@ -17,8 +16,8 @@ function User(props) {
     let [trips, setTrips] = useState([]);
 
     useEffect(() => {
-        api.getUsers(userId, afterGetUsers);
-        api.getTrips(userId, afterGetTrips);
+        props.api.getUsers(userId, afterGetUsers);
+        props.api.getTrips(userId, afterGetTrips);
     }, [userId]);
 
     function updateName(userData) {
@@ -57,7 +56,7 @@ function User(props) {
     }
 
     function saveChanges() {
-        api.updateUser(userId, changes, afterSaveChanges);
+        props.api.updateUser(userId, changes, afterSaveChanges);
     }
 
     function afterSaveChanges(data) {

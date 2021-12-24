@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-import api from '../functions/api.js';
-
 LoggedInBox.propTypes = {
+    api: PropTypes.object,
     loggedInUser: PropTypes.string,
     setLoggedInUser: PropTypes.func,
     switchView: PropTypes.func
@@ -12,15 +11,15 @@ LoggedInBox.propTypes = {
 function LoggedInBox(props) {
 
     function logOut() {
-        api.token = "";
+        props.api.token = "";
         props.setLoggedInUser("");
         props.switchView("loginModal");
     }
 
     return (
         <div>
-        <p>Inloggad som: {props.loggedInUser}</p>
-        <a onClick={logOut} className="pointer-cursor">Logga ut</a>
+            <p data-testid="loggedInUserLabel">Inloggad som: {props.loggedInUser}</p>
+            <a onClick={logOut} className="pointer-cursor" data-testid="logoutLink">Logga ut</a>
         </div>
     );
 }

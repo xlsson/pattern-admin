@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 
-import api from '../functions/api.js';
-
 UsersTable.propTypes = {
+    api: PropTypes.object,
     switchView: PropTypes.func
 };
 
 function UsersTable(props) {
     let [users, setUsers] = useState([]);
 
-    useEffect(() => { api.getUsers("all", afterGetUsers); }, []);
+    useEffect(() => { props.api.getUsers("all", afterGetUsers); }, []);
 
     function afterGetUsers(data) { setUsers(data.users); }
 

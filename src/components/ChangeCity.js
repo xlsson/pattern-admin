@@ -22,6 +22,7 @@ function ChangeCity(props) {
 
     return (
         <select
+            data-testid="changeCityDropdown"
             value={selectedId}
             onChange={handleChange}>
             {cityIds.map((cityId, i) => (

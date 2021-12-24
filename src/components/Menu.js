@@ -4,6 +4,7 @@ import LoggedInBox from './LoggedInBox';
 import PropTypes from "prop-types";
 
 Menu.propTypes = {
+    api: PropTypes.object,
     switchView: PropTypes.func,
     view: PropTypes.string,
     cities: PropTypes.object,
@@ -54,6 +55,7 @@ function Menu(props) {
             </ul>
 
             <LoggedInBox
+                api={props.api}
                 loggedInUser={props.loggedInUser}
                 setLoggedInUser={props.setLoggedInUser}
                 switchView={props.switchView} />

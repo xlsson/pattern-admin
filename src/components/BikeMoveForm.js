@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 
-import api from '../functions/api.js';
-
 BikeMoveForm.propTypes = {
+    api: PropTypes.object,
     bike: PropTypes.object,
     redrawBikes: PropTypes.func,
     chargeStations: PropTypes.array
@@ -20,13 +19,13 @@ function BikeMoveForm(props) {
 
     function moveBike() {
         const selectedStation = chargeStations[selectedId];
-        api.moveBike(bike._id, selectedStation, afterMoveBike);
+        props.api.moveBike(bike._id, selectedStation, afterMoveBike);
     }
 
     function afterMoveBike(data) {
         console.log(data);
         if (maintenance) {
-            api.orderMaintenance(bike._id, true, afterOrderMaintenance);
+            props.api.orderMaintenance(bike._id, true, afterOrderMaintenance);
             return;
         }
         props.redrawBikes();

@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-import api from '../functions/api.js';
-
 BikeEndMaintenance.propTypes = {
+    api: PropTypes.object,
     redrawBikes: PropTypes.redrawBikes,
     bike: PropTypes.object
 };
@@ -12,7 +11,7 @@ function BikeEndMaintenance(props) {
     const bike = props.bike;
 
     function endMaintenance() {
-        api.orderMaintenance(bike._id, false, afterEndMaintenance);
+        props.api.orderMaintenance(bike._id, false, afterEndMaintenance);
     }
 
     function afterEndMaintenance(data) {

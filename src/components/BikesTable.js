@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 import BikeMoveForm from './BikeMoveForm';
 import BikeEndMaintenance from './BikeEndMaintenance';
 
-import api from '../functions/api.js';
-
 BikesTable.propTypes = {
+    api: PropTypes.object,
     switchView: PropTypes.func,
     currentCity: PropTypes.object,
     cities: PropTypes.object
@@ -19,7 +18,7 @@ function BikesTable(props) {
 
     useEffect(() => { getBikes(); }, [props]);
 
-    function getBikes() { api.getBikes(currentCity._id, afterGetBikes); }
+    function getBikes() { props.api.getBikes(currentCity._id, afterGetBikes); }
 
     function afterGetBikes(data) {
         setBikes(data.bikes);
@@ -31,6 +30,7 @@ function BikesTable(props) {
 
     function renderEndMaintenance(bike) {
         return ( <BikeEndMaintenance
+                    api={props.api}
                     redrawBikes={getBikes}
                     bike={bike} />
         )
@@ -41,6 +41,7 @@ function BikesTable(props) {
 
         return (
             <BikeMoveForm
+                api={props.api}
                 bike={bike}
                 redrawBikes={getBikes}
                 chargeStations={chargeStations} />

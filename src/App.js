@@ -78,22 +78,26 @@ function App() {
 
     function renderLoginModal() {
         return ( <LoginModal
+                    api={api}
                     switchView={switchView}
                     setLoggedInUser={setLoggedInUser} /> );
     }
 
     function renderUsersTable() {
         return ( <UsersTable
+                    api={api}
                     switchView={switchView} /> );
     }
 
     function renderUser() {
         return ( <User
+                    api={api}
                     user={params} /> );
     }
 
     function renderBikesTable() {
         return ( <BikesTable
+                    api={api}
                     switchView={switchView}
                     currentCity={currentCity}
                     cities={cities} /> );
@@ -101,6 +105,7 @@ function App() {
 
     function renderBike() {
         return ( <Bike
+                    api={api}
                     bike={params}
                     currentCity={currentCity}
                     cities={cities} /> );
@@ -116,6 +121,7 @@ function App() {
 
     function renderStation(type) {
         return ( <Station
+                    api={api}
                     station={params}
                     type={type}
                     currentCity={currentCity}
@@ -124,12 +130,14 @@ function App() {
 
     function renderOverviewMap() {
         return ( <OverviewMap
+                    api={api}
                     currentCity={currentCity}
                     cities={cities} /> );
     }
 
     function renderPrice() {
         return ( <Price
+                    api={api}
                     currentCity={currentCity} /> );
     }
 
@@ -137,6 +145,7 @@ function App() {
         <div className="page-wrapper">
             <header>
                 <Menu
+                    api={api}
                     switchView={switchView}
                     view={view}
                     cities={cities}

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from "prop-types";
 
-import api from '../functions/api.js';
-
 LoginModal.propTypes = {
+    api: PropTypes.object,
     switchView: PropTypes.func,
     setLoggedInUser: PropTypes.func
 };
@@ -24,7 +23,7 @@ function LoginModal(props) {
     }
 
     function attemptLogin() {
-        api.login(handleLoginResult, username, password);
+        props.api.login(handleLoginResult, username, password);
     }
 
     function handleLoginResult(data) {

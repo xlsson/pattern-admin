@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, MapConsumer, Marker, Popup, Rectangle } from '
 import BikePopup from './BikePopup';
 
 Map.propTypes = {
+    api: PropTypes.object,
     zoom: PropTypes.number,
     focusCoords: PropTypes.array,
     bikes: PropTypes.array,
@@ -52,6 +53,7 @@ function Map(props) {
                 <Marker position={position} icon={getIcon("marker_scooter", [15, 15], [0, 0])}>
                     <Popup>
                         <BikePopup
+                            api={props.api}
                             bike={bike}
                             mapInstance={mapInstance}
                             cities={props.cities}

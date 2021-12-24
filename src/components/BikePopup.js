@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import BikeEndMaintenance from './BikeEndMaintenance';
 
-import api from '../functions/api.js';
-
 BikePopup.propTypes = {
+    api: PropTypes.object,
     bike: PropTypes.object,
     mapInstance: PropTypes.object,
     cities: PropTypes.object,
@@ -23,14 +22,14 @@ function BikePopup(props) {
 
     function moveBike() {
         const selectedStation = chargeStations[selectedId];
-        api.moveBike(bike._id, selectedStation, afterMoveBike);
+        props.api.moveBike(bike._id, selectedStation, afterMoveBike);
         props.mapInstance.closePopup();
     }
 
     function afterMoveBike(data) {
         console.log(data);
         if (maintenance) {
-            api.orderMaintenance(bike._id, true, afterOrderMaintenance);
+            props.api.orderMaintenance(bike._id, true, afterOrderMaintenance);
             return;
         }
         props.redrawBikes();
@@ -48,6 +47,7 @@ function BikePopup(props) {
 
     function renderEndMaintenance(bike) {
         return ( <BikeEndMaintenance
+                    api={props.api}
                     redrawBikes={props.redrawBikes}
                     bike={bike} /> )
     }

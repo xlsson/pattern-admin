@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 
-import api from '../functions/api.js';
-
 Price.propTypes = {
+    api: PropTypes.object,
     currentCity: PropTypes.object
 };
 
@@ -12,7 +11,7 @@ function Price(props) {
     const [price, setPrice] = useState({});
     const [changes, setChanges] = useState({});
 
-    useEffect(() => { api.getPrices(cityId, afterGetPrices); }, [props]);
+    useEffect(() => { props.api.getPrices(cityId, afterGetPrices); }, [props]);
 
     function afterGetPrices(data) {
         setPrice(data.prices[0]);
@@ -31,7 +30,7 @@ function Price(props) {
 
     function saveChanges() {
         setPrice(price);
-        api.updatePrice(price._id, changes, afterSaveChanges);
+        props.api.updatePrice(price._id, changes, afterSaveChanges);
     }
 
     function afterSaveChanges(data) {
