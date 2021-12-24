@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 BikeEndMaintenance.propTypes = {
     api: PropTypes.object,
-    redrawBikes: PropTypes.redrawBikes,
+    redrawBikes: PropTypes.func,
     bike: PropTypes.object
 };
 

@@ -42,6 +42,7 @@ function BikeMoveForm(props) {
     return (
         <div>
             <select
+                data-testid="stationsDropdown"
                 onBlur={stationSelection}
                 defaultValue={selectedId}>
                 {chargeStations.map((station, i) => (
