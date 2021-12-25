@@ -20,7 +20,7 @@ function BikePopup(props) {
         return ( <BikeEndMaintenance
                     api={props.api}
                     redrawBikes={props.redrawBikes}
-                    bike={bike} /> )
+                    bike={bike} /> );
     }
 
     function renderBikePopupMoveForm() {
@@ -30,7 +30,7 @@ function BikePopup(props) {
                     redrawBikes={props.redrawBikes}
                     mapInstance={props.mapInstance}
                     bike={bike}
-                    chargeStations={chargeStations} /> )
+                    chargeStations={chargeStations} /> );
     }
 
     return (
@@ -42,7 +42,7 @@ function BikePopup(props) {
             <div>{(bike.charge_id) && "På laddningsstation"}</div>
             <div>Status: {bike.bike_status}</div>
             <div>Batterinivå: {bike.battery_status}</div>
-            <div>{(bike.mainenance) && "Genomgår underhåll"}</div>
+            <div>{(bike.maintenance) && "Genomgår underhåll"}</div>
             {(bike.bike_status === "available") && renderBikePopupMoveForm()}
             {(bike.maintenance && (bike.battery_status === 100)) && renderEndMaintenance()}
         </div>
