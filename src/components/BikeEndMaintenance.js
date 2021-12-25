@@ -10,14 +10,12 @@ BikeEndMaintenance.propTypes = {
 function BikeEndMaintenance(props) {
     const bike = props.bike;
 
-    function endMaintenance() {
-        props.api.orderMaintenance(bike._id, false, afterEndMaintenance);
-    }
-
-    function afterEndMaintenance(data) {
+    async function endMaintenance() {
+        const data = await props.api.orderMaintenance(bike._id, false);
         console.log(data);
         props.redrawBikes();
     }
+
     return (
             <button type="button" onClick={endMaintenance}>Avsluta underhåll</button>
     )

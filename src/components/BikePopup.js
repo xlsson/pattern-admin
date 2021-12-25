@@ -20,25 +20,16 @@ function BikePopup(props) {
 
     useEffect(() => { setSelectedId(0); }, [props]);
 
-    function moveBike() {
+    async function moveBike() {
         const selectedStation = chargeStations[selectedId];
-        props.api.moveBike(bike._id, selectedStation, afterMoveBike);
-        props.mapInstance.closePopup();
-    }
-
-    function afterMoveBike(data) {
+        const data = await props.api.moveBike(bike._id, selectedStation);
         console.log(data);
         if (maintenance) {
-            props.api.orderMaintenance(bike._id, true, afterOrderMaintenance);
-            return;
+            await props.api.orderMaintenance(bike._id, true);
+            setMaintenance(false);
         }
         props.redrawBikes();
-    }
-
-    function afterOrderMaintenance(data) {
-        console.log(data);
-        setMaintenance(false);
-        props.redrawBikes();
+        props.mapInstance.closePopup();
     }
 
     function stationSelection(event) {

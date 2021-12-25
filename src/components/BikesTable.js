@@ -18,9 +18,8 @@ function BikesTable(props) {
 
     useEffect(() => { getBikes(); }, [props]);
 
-    function getBikes() { props.api.getBikes(currentCity._id, afterGetBikes); }
-
-    function afterGetBikes(data) {
+    async function getBikes() {
+        const data = await props.api.getBikes(currentCity._id);
         setBikes(data.bikes);
     }
 

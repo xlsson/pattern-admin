@@ -19,9 +19,8 @@ function Bike(props) {
         props.bike.coordinates.long
     ];
 
-    function getBikes() { props.api.getBikes(props.bike.city_id, afterGetBikes); }
-
-    function afterGetBikes(data) {
+    async function getBikes() {
+        const data = await props.api.getBikes(props.bike.city_id);
         let allBikes = data.bikes;
 
         let filteredBikes = allBikes.filter(function(bike) {

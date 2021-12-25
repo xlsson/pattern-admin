@@ -33,10 +33,11 @@ function App() {
     const [allCities, setAllCities] = useState(swedenData);
     const [currentCity, setCurrentCity] = useState(allCities);
 
-    useEffect(() => { api.getCities(afterGetCities); }, []);
+    useEffect(() => { getCities(); }, []);
     useEffect(() => { setCurrentCity(allCities); }, [allCities]);
 
-    function afterGetCities(data) {
+    async function getCities() {
+        const data = await api.getCities();
         addStationsToDefault(data.cities);
         let citiesObject = {};
         data.cities.forEach((city) => {

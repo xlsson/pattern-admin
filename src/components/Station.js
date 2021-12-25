@@ -34,9 +34,8 @@ function Station(props) {
     const long = (coords.northwest.long + coords.southeast.long)/2;
     const focusCoords = [lat, long];
 
-    function getBikes() { props.api.getBikes(station.city_id, afterGetBikes); }
-
-    function afterGetBikes(data) {
+    async function getBikes() {
+        const data = await props.api.getBikes(station.city_id);
         let allBikes = data.bikes;
 
         let filteredBikes = allBikes.filter(function(bike) {

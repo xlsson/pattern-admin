@@ -22,11 +22,8 @@ function LoginModal(props) {
         setPassword(value);
     }
 
-    function attemptLogin() {
-        props.api.login(handleLoginResult, username, password);
-    }
-
-    function handleLoginResult(data) {
+    async function attemptLogin() {
+        const data = await props.api.login(username, password);
         if (!data.token) { return setMessage(msg.fail); }
 
         props.switchView("overviewMap");

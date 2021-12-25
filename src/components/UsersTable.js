@@ -9,9 +9,14 @@ UsersTable.propTypes = {
 function UsersTable(props) {
     let [users, setUsers] = useState([]);
 
-    useEffect(() => { props.api.getUsers("all", afterGetUsers); }, []);
+    useEffect(() => {
+        getUsers();
+    }, []);
 
-    function afterGetUsers(data) { setUsers(data.users); }
+    async function getUsers() {
+        const data = await props.api.getUsers("all");
+        setUsers(data.users);
+    }
 
     function handleClick(i) {
         props.switchView("user", { _id: users[i]._id });

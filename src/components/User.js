@@ -16,8 +16,8 @@ function User(props) {
     let [trips, setTrips] = useState([]);
 
     useEffect(() => {
-        props.api.getUsers(userId, afterGetUsers);
-        props.api.getTrips(userId, afterGetTrips);
+        getUsers(userId);
+        getTrips(userId);
     }, [userId]);
 
     function updateName(userData) {
@@ -25,12 +25,16 @@ function User(props) {
         setName(fullname);
     }
 
-    function afterGetUsers(data) {
+    async function getUsers(userId) {
+        const data = await props.api.getUsers(userId);
         setUser(data.user);
         updateName(data.user);
     }
 
-    function afterGetTrips(data) { setTrips(data.trips); }
+    async function getTrips(userId) {
+        const data = await props.api.getTrips(userId);
+        setTrips(data.trips);
+    }
 
     function handleInput(value, prop) {
         let updatedUser = { ...user };
@@ -55,11 +59,8 @@ function User(props) {
         setUser(updatedUser);
     }
 
-    function saveChanges() {
-        props.api.updateUser(userId, changes, afterSaveChanges);
-    }
-
-    function afterSaveChanges(data) {
+    async function saveChanges() {
+        const data = await props.api.updateUser(userId, changes);
         updateName(user);
         console.log(data);
     }

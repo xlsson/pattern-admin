@@ -23,9 +23,10 @@ function OverviewMap(props) {
 
     const zoom = (city._id !== "all") ? 13 : 6;
 
-    function getBikes() { props.api.getBikes(city._id, afterGetBikes); }
-
-    function afterGetBikes(data) { setBikes(data.bikes); }
+    async function getBikes() {
+        const data = await props.api.getBikes(city._id);
+        setBikes(data.bikes);
+    }
 
     useEffect(() => { getBikes(); }, [props]);
 

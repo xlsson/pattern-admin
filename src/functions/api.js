@@ -3,16 +3,15 @@ const devconfig = require("./devconfig.json");
 const api = {
     baseUrl: devconfig.baseUrl,
     token: "",
-    sendRequest: function (url, requestOptions, callback) {
-        fetch(url, requestOptions)
-            .then(response => response.json())
-            .then(function(data) {
-                return callback(data);
-            });
+    sendRequest: async function (url, requestOptions) {
+        const response = await fetch(url, requestOptions);
+        const data = await response.json();
+        return data;
     },
-    login: function (callback, username, password) {
+    login: async function (username, password) {
+        const url = `${api.baseUrl}/admins/login`;
 
-        console.log(username, password, "replaced by deconfig");
+        console.log(username, password, "replaced by default userinfo from devconfig");
 
         let requestOptions = {
             method: "POST",
@@ -25,15 +24,11 @@ const api = {
             })
         };
 
-        fetch(`${api.baseUrl}/admins/login`, requestOptions)
-            .then(response => response.json())
-            .then(function(data) {
-                if (data.token) { api.token = data.token; }
-                return data;
-            })
-            .then(function(data) { return callback(data); });
+        const data = await api.sendRequest(url, requestOptions);
+        if (data.token) { api.token = data.token; }
+        return data;
     },
-    getBikes: function (cityId, callback) {
+    getBikes: async function (cityId) {
         let url = `${api.baseUrl}/bikes`;
 
         if (cityId !== "all") { url += `/city/${cityId}`; }
@@ -42,9 +37,9 @@ const api = {
             method: "GET",
             headers: { 'x-access-token': api.token }
         };
-        api.sendRequest(url, requestOptions, callback);
+        return api.sendRequest(url, requestOptions);
     },
-    moveBike: function (bikeId, station, callback) {
+    moveBike: function (bikeId, station) {
         const coords = station.coordinates;
         const long = (coords.northwest.long + coords.southeast.long)/2;
         const lat = (coords.northwest.lat + coords.southeast.lat)/2;
@@ -65,9 +60,9 @@ const api = {
             },
             body: JSON.stringify(changes)
         };
-        api.sendRequest(url, requestOptions, callback);
+        return api.sendRequest(url, requestOptions);
     },
-    orderMaintenance: function (bikeId, maintenance, callback) {
+    orderMaintenance: function (bikeId, maintenance) {
         console.log("sätter maintenance till", maintenance);
 
         let url = `${api.baseUrl}/bikes/maintenance/${bikeId}`;
@@ -81,9 +76,9 @@ const api = {
             body: JSON.stringify({ maintenance: maintenance })
         };
 
-        api.sendRequest(url, requestOptions, callback);
+        return api.sendRequest(url, requestOptions);
     },
-    getCities: function (callback) {
+    getCities: function () {
         let url = `${api.baseUrl}/cities`;
 
         let requestOptions = {
@@ -91,9 +86,10 @@ const api = {
             headers: { 'x-access-token': api.token }
         };
 
-        api.sendRequest(url, requestOptions, callback);
+        return api.sendRequest(url, requestOptions);
     },
-    getPrices: function (cityId, callback) {
+    getPrices: function (cityId) {
+        console.log("priser för city", cityId);
         let url = `${api.baseUrl}/prices`;
 
         let requestOptions = {
@@ -101,15 +97,14 @@ const api = {
             headers: { 'x-access-token': api.token }
         };
 
-        api.sendRequest(url, requestOptions, callback);
+        return api.sendRequest(url, requestOptions);
     },
-    updatePrice: function (priceId, newValues, callback) {
+    updatePrice: function (priceId, newValues) {
         let url = `${api.baseUrl}/prices/${priceId}`;
         let keys = Object.keys(newValues);
 
         if (keys.length === 0) {
-            callback({ message: "no changes, empty request"});
-            return;
+            return { message: "no changes, empty request"};
         }
 
         let changes = [];
@@ -127,9 +122,9 @@ const api = {
             body: JSON.stringify(changes)
         };
 
-        api.sendRequest(url, requestOptions, callback);
+        return api.sendRequest(url, requestOptions);
     },
-    getTrips: function (userId, callback) {
+    getTrips: function (userId) {
         let url = `${api.baseUrl}/trips`;
 
         if (userId !== "all") { url += `/user/${userId}`; }
@@ -139,9 +134,9 @@ const api = {
             headers: { 'x-access-token': api.token }
         };
 
-        api.sendRequest(url, requestOptions, callback);
+        return api.sendRequest(url, requestOptions);
     },
-    getUsers: function (userId, callback) {
+    getUsers: function (userId) {
         let url = `${api.baseUrl}/users`;
 
         if (userId !== "all") { url += `/${userId}`; }
@@ -151,15 +146,14 @@ const api = {
             headers: { 'x-access-token': api.token }
         };
 
-        api.sendRequest(url, requestOptions, callback);
+        return api.sendRequest(url, requestOptions);
     },
-    updateUser: function (userId, newValues, callback) {
+    updateUser: function (userId, newValues) {
         let url = `${api.baseUrl}/users/${userId}`;
         let keys = Object.keys(newValues);
 
         if (keys.length === 0) {
-            callback({ message: "no changes, empty request"});
-            return;
+            return { message: "no changes, empty request"};
         }
 
         let changes = [];
@@ -177,7 +171,7 @@ const api = {
             body: JSON.stringify(changes)
         };
 
-        api.sendRequest(url, requestOptions, callback);
+        return api.sendRequest(url, requestOptions);
     }
 };
 

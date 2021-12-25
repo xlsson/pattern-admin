@@ -11,9 +11,10 @@ function Price(props) {
     const [price, setPrice] = useState({});
     const [changes, setChanges] = useState({});
 
-    useEffect(() => { props.api.getPrices(cityId, afterGetPrices); }, [props]);
+    useEffect(() => { getPrices(cityId); }, [props]);
 
-    function afterGetPrices(data) {
+    async function getPrices(cityId) {
+        const data = await props.api.getPrices(cityId);
         setPrice(data.prices[0]);
     }
 
@@ -28,12 +29,9 @@ function Price(props) {
         setChanges(updatedChanges);
     }
 
-    function saveChanges() {
+    async function saveChanges() {
         setPrice(price);
-        props.api.updatePrice(price._id, changes, afterSaveChanges);
-    }
-
-    function afterSaveChanges(data) {
+        const data = await props.api.updatePrice(price._id, changes);
         console.log(data);
     }
 
