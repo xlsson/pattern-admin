@@ -6,7 +6,8 @@ BikePopupMoveForm.propTypes = {
     cities: PropTypes.object,
     redrawBikes: PropTypes.func,
     mapInstance: PropTypes.object,
-    bike: PropTypes.object
+    bike: PropTypes.object,
+    chargeStations: PropTypes.array
 };
 
 function BikePopupMoveForm(props) {
