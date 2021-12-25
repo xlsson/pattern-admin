@@ -22,6 +22,7 @@ function BikeMoveForm(props) {
         const data = await props.api.moveBike(bike._id, selectedStation);
         console.log(data);
         if (maintenance) {
+            console.log("nu körs orderMaintenance");
             await props.api.orderMaintenance(bike._id, true);
             setMaintenance(false);
         }
