@@ -6,7 +6,7 @@ describe("Tests for BikeEndMaintenance component", () => {
     const bikes = require("./mockdata/bikes.json");
     const bike = bikes[0];
     const redrawBikes = jest.fn();
-    let api = { orderMaintenance: jest.fn() };
+    const api = { orderMaintenance: jest.fn() };
 
     it("Button gets rendered", () => {
         render(<BikeEndMaintenance
@@ -28,8 +28,6 @@ describe("Tests for BikeEndMaintenance component", () => {
         const maintenanceButton = screen.getByRole("button");
         userEvent.click(maintenanceButton);
         expect(api.orderMaintenance).toHaveBeenCalled();
-        expect(api.orderMaintenance).toHaveBeenCalledWith(
-            bike._id, false, expect.anything()
-        );
+        expect(api.orderMaintenance).toHaveBeenCalledWith(bike._id, false);
     });
 });

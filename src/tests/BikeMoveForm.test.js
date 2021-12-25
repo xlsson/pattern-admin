@@ -1,4 +1,4 @@
-import { render, waitFor, fireEvent, screen } from "@testing-library/react";
+import { render, waitFor, fireEvent, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import BikeMoveForm from "../components/BikeMoveForm";
 
@@ -7,7 +7,7 @@ describe("Tests for BikeMoveForm component", () => {
     const bike = bikes[0];
     const chargeStations = require("./mockdata/chargeStations.json");
     const redrawBikes = jest.fn();
-    let api = {
+    const api = {
         orderMaintenance: jest.fn(),
         moveBike: jest.fn()
     };
@@ -29,9 +29,10 @@ describe("Tests for BikeMoveForm component", () => {
 
         const checkBox = screen.getByRole("checkbox");
         expect(checkBox).toBeInTheDocument();
+        expect(checkBox.checked).toEqual(false);
     });
 
-    it("Selecting a station calls api with expected values", () => {
+    it("Ordering a bike to move calls api with expected values", () => {
         render(<BikeMoveForm
                     api={api}
                     redrawBikes={redrawBikes}
@@ -45,9 +46,25 @@ describe("Tests for BikeMoveForm component", () => {
         userEvent.click(confirmButton);
 
         expect(api.moveBike).toHaveBeenCalled();
-        expect(api.moveBike).toHaveBeenCalledWith(
-            bike._id, chargeStations[0], expect.anything()
-        );
+        expect(api.moveBike).toHaveBeenCalledWith(bike._id, chargeStations[0]);
     });
 
+    it("Ordering maintenance calls api with expected values", () => {
+        render(<BikeMoveForm
+                api={api}
+                redrawBikes={redrawBikes}
+                bike={bike}
+                chargeStations={chargeStations} />);
+
+        const checkBox = screen.getByRole("checkbox");
+        const confirmButton = screen.getByRole("button");
+
+        userEvent.click(checkBox);
+        userEvent.click(confirmButton);
+
+        expect(checkBox.checked).toEqual(true);
+        expect(api.moveBike).toHaveBeenCalled();
+        expect(api.orderMaintenance).toHaveBeenCalled();
+        expect(api.orderMaintenance).toHaveBeenCalledWith(bike._id, true);
+    });
 });
