@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import L from "leaflet";
 import { MapContainer, TileLayer, MapConsumer, Marker, Popup, Rectangle } from 'react-leaflet';
 import BikePopup from './BikePopup';
+import MapCityLimits from './MapCityLimits';
 
 Map.propTypes = {
     api: PropTypes.object,
@@ -98,8 +99,7 @@ function Map(props) {
 
         if (props.city._id !== "all") {
             limitsArray.push(props.city.coordinates);
-            setCityLimits(limitsArray);
-            return;
+            return setCityLimits(limitsArray);
         }
 
         Object.keys(props.cities).forEach((c) => {
@@ -111,18 +111,7 @@ function Map(props) {
     }
 
     function drawCityLimits(coords) {
-        let options = { color: "red", fillOpacity: 0, weight: 1 };
-
-        let bounds = [
-            [coords.northwest.lat, coords.northwest.long],
-            [coords.southeast.lat, coords.southeast.long]
-        ];
-
-        return (
-            <>
-            <Rectangle bounds={bounds} pathOptions={options} />
-            </>
-        );
+        return ( <MapCityLimits coords={coords} /> );
     }
 
     return (
