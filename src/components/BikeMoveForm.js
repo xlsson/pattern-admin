@@ -32,7 +32,7 @@ function BikeMoveForm(props) {
     function stationSelection(event) { setSelectedId(event.target.value); }
 
     return (
-        <div>
+        <div data-testid="bikeMoveForm">
             <select
                 data-testid="stationsDropdown"
                 onBlur={stationSelection}

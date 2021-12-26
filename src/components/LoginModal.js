@@ -41,6 +41,7 @@ function LoginModal(props) {
                             <td>Användarnamn</td>
                             <td>
                                 <input
+                                    data-testid="fieldUsername"
                                     type="text"
                                     onChange={e => handleInput(e.target.value, "username")}>
                                 </input>
@@ -50,6 +51,7 @@ function LoginModal(props) {
                             <td>Lösenord</td>
                             <td>
                                 <input
+                                    data-testid="fieldPassword"
                                     type="text"
                                     onChange={e => handleInput(e.target.value, "password")}>
                                 </input>

@@ -37,7 +37,9 @@ function BikePopupMoveForm(props) {
     return (
         <div className="bike-popup-form">
             <strong>Boka hämtning till:</strong>
-            <select onBlur={stationSelection}>
+            <select
+                data-testid="moveBikeDropdown"
+                onBlur={stationSelection}>
                 {props.chargeStations.map((station, i) => (
                     <option key={i} value={i}>
                         {station.name}
