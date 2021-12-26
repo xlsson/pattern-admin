@@ -35,16 +35,16 @@ function Bike(props) {
         <h1>Cykel (id: {props.bike._id})</h1>
         <table>
             <tbody>
-                <tr>
+                <tr data-testid="city">
                     <td>Stad:</td><td>{props.cities[props.bike.city_id].name}</td>
                 </tr>
-                <tr>
+                <tr data-testid="batteryStatus">
                     <td>Batterinivå:</td>
                     <td>
                         {props.bike.battery_status}
                     </td>
                 </tr>
-                <tr>
+                <tr data-testid="status">
                     <td>Status:</td>
                     <td>
                         {props.bike.bike_status}
