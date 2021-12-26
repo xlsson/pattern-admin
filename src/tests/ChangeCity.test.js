@@ -12,6 +12,7 @@ describe("Tests for ChangeCity component", () => {
                     allCities={allCities}
                     cities={cities}
                     chooseCity={chooseCity} />);
+
         const defaultDropdownValue = screen.getByDisplayValue("Sverige");
         expect(defaultDropdownValue).toBeInTheDocument();
     });
@@ -21,6 +22,7 @@ describe("Tests for ChangeCity component", () => {
                     allCities={allCities}
                     cities={cities}
                     chooseCity={chooseCity} />);
+
         const options = screen.getAllByRole("option");
         expect(options.length).toEqual(4);
     });
@@ -30,6 +32,7 @@ describe("Tests for ChangeCity component", () => {
                     allCities={allCities}
                     cities={cities}
                     chooseCity={chooseCity} />);
+
         const options = screen.getAllByRole("option");
         expect(options[0]).toHaveProperty("value");
         expect(options[0].value).toEqual("61a76026bb53f131584de9b1");
@@ -40,6 +43,7 @@ describe("Tests for ChangeCity component", () => {
                     allCities={allCities}
                     cities={cities}
                     chooseCity={chooseCity} />);
+
         const dropdown = screen.getByTestId("changeCityDropdown");
         userEvent.selectOptions(dropdown, ["61a76026bb53f131584de9b1"]);
         expect(chooseCity).toHaveBeenCalledWith("61a76026bb53f131584de9b1");

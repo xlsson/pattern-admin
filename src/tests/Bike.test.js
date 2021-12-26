@@ -10,7 +10,7 @@ describe("Tests for Bike component", () => {
     const bikes = require("./mockdata/bikes.json");
     const bike = bikes[0];
     const cities = require("./mockdata/cities.json");
-    const currentCity = cities[0];
+    const currentCity = cities[bike.city_id];
     const api = {
         getBikes: function(cityId) {
             return bike;
@@ -25,18 +25,25 @@ describe("Tests for Bike component", () => {
             cities={cities} />
     );
 
-    it('Bike page gets rendered and displays expected data', () => {
+    it('Bike page gets rendered with expected elements', () => {
         const title = wrapper.find("h1");
-        const cityname = wrapper.find("table tbody tr td").at(1);
-        const batteryTableRow = wrapper.find("table tbody tr").at(1);
-        const battery = batteryTableRow.find("td").at(1);
-
-        const actualCityname = cities[bike.city_id].name;
-        const actualBatteryStatus = bike.battery_status;
 
         expect(title.text().includes("Cykel")).toBe(true);
-        expect(cityname.text().includes(actualCityname)).toBe(true);
         expect(wrapper.exists("Map")).toBe(true);
+    });
+
+    it('Bike page contains expected data', () => {
+        const correctBatteryStatus = bike.battery_status;
+        const correctCity = currentCity.name;
+        const correctStatus = bike.bike_status;
+
+        const battery = wrapper.find({ "data-testid": "batteryStatus" });
+        const city = wrapper.find({ "data-testid": "city" });
+        const status = wrapper.find({ "data-testid": "status" });
+
+        expect(city.text().includes(correctCity)).toBe(true);
+        expect(battery.text().includes(correctBatteryStatus)).toBe(true);
+        expect(status.text().includes(correctStatus)).toBe(true);
     });
 
 });

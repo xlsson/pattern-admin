@@ -4,7 +4,7 @@
 	"charge_id": "61a93c3ce146af1a898bdb34",
 	"parking_id": null,
 	"bike_status": "available",
-	"battery_status": 100,
+	"battery_status": 78,
 	"coordinates": {
 		"lat": 59.3185365,
 		"long": 18.062855499999998

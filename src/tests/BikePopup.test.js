@@ -23,13 +23,23 @@ describe("Tests for BikePopup component", () => {
             redrawBikes={redrawBikes} />
     );
 
-    it('BikePopup gets rendered and displays expected data', () => {
-        const scooterIcon = wrapper.find("span");
-        const battery = wrapper.find("div div").at(3);
-
-        const actualBatteryStatus = bike.battery_status;
+    it('BikePopup gets rendered with expected elements', () => {
+        const scooterIcon = wrapper.find({ "data-testid": "scooter-icon" });
+        const chargeStation = wrapper.find({ "data-testid": "chargeStation" });
+        const status = wrapper.find({ "data-testid": "status" });
+        const batteryStatus = wrapper.find({ "data-testid": "batteryStatus" });
 
         expect(scooterIcon.text().includes("electric_scooter")).toBe(true);
+        expect(chargeStation.text().includes("På laddningsstation")).toBe(true);
+        expect(status.text().includes("Status")).toBe(true);
+        expect(batteryStatus.text().includes("Batterinivå")).toBe(true);
+    });
+
+
+    it('BikePopup displays expected data', () => {
+        const battery = wrapper.find("div div").at(3);
+        const actualBatteryStatus = bike.battery_status;
+
         expect(battery.text().includes(actualBatteryStatus)).toBe(true);
         expect(wrapper.exists("BikePopupMoveForm")).toBe(true);
         expect(wrapper.exists("BikeEndMaintenance")).toBe(false);

@@ -32,39 +32,42 @@ describe("Tests for BikeMoveForm component", () => {
         expect(checkBox.checked).toEqual(false);
     });
 
-    it("Ordering a bike to move calls api with expected values", () => {
+    it("Ordering a bike to move calls api with expected values", async () => {
         render(<BikeMoveForm
                     api={api}
                     redrawBikes={redrawBikes}
                     bike={bike}
                     chargeStations={chargeStations} />);
+        await waitFor(() => {
+            const dropdown = screen.getByTestId("stationsDropdown");
+            const confirmButton = screen.getByRole("button");
 
-        const dropdown = screen.getByTestId("stationsDropdown");
-        const confirmButton = screen.getByRole("button");
+            userEvent.selectOptions(dropdown, ["0"]);
+            userEvent.click(confirmButton);
 
-        userEvent.selectOptions(dropdown, ["0"]);
-        userEvent.click(confirmButton);
-
-        expect(api.moveBike).toHaveBeenCalled();
-        expect(api.moveBike).toHaveBeenCalledWith(bike._id, chargeStations[0]);
+            expect(api.moveBike).toHaveBeenCalled();
+            expect(api.moveBike).toHaveBeenCalledWith(bike._id, chargeStations[0]);
+        });
     });
 
-    it("Ordering maintenance calls api with expected values", () => {
+    it("Ordering maintenance calls api with expected values", async () => {
         render(<BikeMoveForm
                 api={api}
                 redrawBikes={redrawBikes}
                 bike={bike}
                 chargeStations={chargeStations} />);
 
-        const checkBox = screen.getByRole("checkbox");
-        const confirmButton = screen.getByRole("button");
+        await waitFor(() => {
+            const checkBox = screen.getByRole("checkbox");
+            const confirmButton = screen.getByRole("button");
 
-        userEvent.click(checkBox);
-        userEvent.click(confirmButton);
+            userEvent.click(checkBox);
+            userEvent.click(confirmButton);
 
-        expect(checkBox.checked).toEqual(true);
-        expect(api.moveBike).toHaveBeenCalled();
-        expect(api.orderMaintenance).toHaveBeenCalled();
-        expect(api.orderMaintenance).toHaveBeenCalledWith(bike._id, true);
+            expect(checkBox.checked).toEqual(true);
+            expect(api.moveBike).toHaveBeenCalled();
+            expect(api.orderMaintenance).toHaveBeenCalled();
+            expect(api.orderMaintenance).toHaveBeenCalledWith(bike._id, true);
+        });
     });
 });
