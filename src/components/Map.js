@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import L from "leaflet";
-import { MapContainer, TileLayer, MapConsumer, Marker, Popup, Rectangle } from 'react-leaflet';
-import BikePopup from './BikePopup';
+import { MapContainer, TileLayer, MapConsumer } from 'react-leaflet';
 import MapCityLimits from './MapCityLimits';
+import MapStation from './MapStation';
+import MapBike from './MapBike';
 
 Map.propTypes = {
     api: PropTypes.object,
@@ -48,49 +49,23 @@ function Map(props) {
     }
 
     function drawBike(bike) {
-        let position = [bike.coordinates.lat, bike.coordinates.long];
         return (
-            <div>
-                <Marker position={position} icon={getIcon("marker_scooter", [15, 15], [0, 0])}>
-                    <Popup>
-                        <BikePopup
-                            api={props.api}
-                            bike={bike}
-                            mapInstance={mapInstance}
-                            cities={props.cities}
-                            redrawBikes={props.redrawBikes} />
-                    </Popup>
-                </Marker>
-            </div>
+            <MapBike
+                api={props.api}
+                bike={bike}
+                mapInstance={mapInstance}
+                cities={props.cities}
+                redrawBikes={props.redrawBikes}
+                getIcon={getIcon} />
         )
     }
 
     function drawStation(type, station) {
-        let color = (type === "parking") ? "blue" : "green";
-        let options = { color: color };
-        let coords = station.coordinates;
-
-        let markerImg = `bubble_${type}`;
-
-        let markerPosition = [
-            coords.northwest.lat,
-            ((coords.northwest.long + coords.southeast.long)/2)
-        ];
-
-        let bounds = [
-            [coords.northwest.lat, coords.northwest.long],
-            [coords.southeast.lat, coords.southeast.long]
-        ];
-
         return (
-            <>
-            <Rectangle bounds={bounds} pathOptions={options} />
-            <Marker position={markerPosition} icon={getIcon(markerImg, [15, 35], [1, -10])}>
-                <Popup>
-                    <span>Station: {station.name}</span>
-                </Popup>
-            </Marker>
-            </>
+            <MapStation
+                type={type}
+                station={station}
+                getIcon={getIcon} />
         );
     }
 
@@ -127,7 +102,7 @@ function Map(props) {
                 />
                 <MapConsumer>
                     {(map) => {
-                        setMapInstance(map);
+                        useEffect(() => { setMapInstance(map); }, []);
                         map.setView(focusCoords, zoom);
                         return null;
                     }}
