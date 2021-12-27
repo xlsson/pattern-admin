@@ -31,8 +31,7 @@ function Price(props) {
 
     async function saveChanges() {
         setPrice(price);
-        const data = await props.api.updatePrice(price._id, changes);
-        console.log(data);
+        await props.api.updatePrice(price._id, changes);
     }
 
     return (
@@ -42,14 +41,15 @@ function Price(props) {
                 <tbody>
                     <tr>
                         <td>_id</td>
-                        <td>{price._id}</td>
+                        <td>{price._id || "price._id"}</td>
                     </tr>
                     <tr>
                         <td>starting_fee</td>
                         <td>
                             <input
+                                data-testid="startingFee"
                                 type="number"
-                                value={price.starting_fee}
+                                value={price.starting_fee || 0}
                                 onChange={e => handleInput(e.target.value, "starting_fee")}>
                             </input>
                         </td>
@@ -58,8 +58,9 @@ function Price(props) {
                         <td>price_per_minute</td>
                         <td>
                             <input
+                                data-testid="minutePrice"
                                 type="number"
-                                value={price.price_per_minute}
+                                value={price.price_per_minute || 0}
                                 onChange={e => handleInput(e.target.value, "price_per_minute")}>
                             </input>
                         </td>
@@ -68,8 +69,9 @@ function Price(props) {
                         <td>penalty_fee</td>
                         <td>
                             <input
+                                data-testid="penaltyFee"
                                 type="number"
-                                value={price.penalty_fee}
+                                value={price.penalty_fee || 0}
                                 onChange={e => handleInput(e.target.value, "penalty_fee")}>
                             </input>
                         </td>
@@ -78,8 +80,9 @@ function Price(props) {
                         <td>discount</td>
                         <td>
                             <input
+                                data-testid="discount"
                                 type="number"
-                                value={price.discount}
+                                value={price.discount || 0}
                                 onChange={e => handleInput(e.target.value, "discount")}>
                             </input>
                         </td>
