@@ -1,5 +1,4 @@
 import { render, waitFor, fireEvent, screen, act } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import BikesTable from "../components/BikesTable";
 
 describe("Tests for BikesTable component", () => {

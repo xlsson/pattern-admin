@@ -8,6 +8,8 @@ configure({ adapter: new Adapter() });
 
 describe("Tests for Map component", () => {
     const api = {};
+    const zoom = 6;
+    const focusCoords = [58.195259, 14.221258];
     const bikes = require("./mockdata/bikes.json");
     const cities = require("./mockdata/cities.json");
     const city = cities["61a76026bb53f131584de9b1"];
@@ -18,6 +20,8 @@ describe("Tests for Map component", () => {
     const wrapper = shallow(
         <Map
             api={api}
+            zoom={zoom}
+            focusCoords={focusCoords}
             bikes={bikes}
             cities={cities}
             city={city}
@@ -25,26 +29,10 @@ describe("Tests for Map component", () => {
             parkingStations={parkingStations}
             redrawBikes={redrawBikes} />
     );
-    //
-    // it('Bike page gets rendered with expected elements', () => {
-    //     const title = wrapper.find("h1");
-    //
-    //     expect(title.text().includes("Cykel")).toBe(true);
-    //     expect(wrapper.exists("Map")).toBe(true);
-    // });
-    //
-    // it('Bike page contains expected data', () => {
-    //     const correctBatteryStatus = bike.battery_status;
-    //     const correctCity = currentCity.name;
-    //     const correctStatus = bike.bike_status;
-    //
-    //     const battery = wrapper.find({ "data-testid": "batteryStatus" });
-    //     const city = wrapper.find({ "data-testid": "city" });
-    //     const status = wrapper.find({ "data-testid": "status" });
-    //
-    //     expect(city.text().includes(correctCity)).toBe(true);
-    //     expect(battery.text().includes(correctBatteryStatus)).toBe(true);
-    //     expect(status.text().includes(correctStatus)).toBe(true);
-    // });
+
+    it('MapContainer gets rendered', () => {
+        expect(wrapper.exists("MapContainer")).toBe(true);
+        expect(wrapper.exists("MapConsumer")).toBe(true);
+    });
 
 });
