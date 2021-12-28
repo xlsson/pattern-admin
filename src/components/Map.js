@@ -92,6 +92,7 @@ function Map(props) {
     return (
         <div id="map-wrapper-main" onBlur={closeAnyOpenPopup}>
             <MapContainer
+                data-testid="map"
                 id="map"
                 center={focusCoords}
                 zoom={zoom}
@@ -107,9 +108,6 @@ function Map(props) {
                         return null;
                     }}
                 </MapConsumer>
-                {cityLimits.map((coords, i) => {
-                    return (<div key={i}>{drawCityLimits(coords)}</div>);
-                })}
                 {bikes.map((bike, i) => {
                     return (<div key={i}>{drawBike(bike)}</div>);
                 })}
@@ -118,6 +116,9 @@ function Map(props) {
                 })}
                 {parkingStations.map((station, i) => {
                     return (<div key={i}>{drawStation("parking", station)}</div>);
+                })}
+                {cityLimits.map((coords, i) => {
+                    return (<div key={i}>{drawCityLimits(coords)}</div>);
                 })}
             </MapContainer>
         </div>
