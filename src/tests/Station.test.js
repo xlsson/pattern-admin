@@ -61,12 +61,6 @@ describe("Tests for Station component", () => {
             expect(name.text().includes(station.name)).toBe(true);
             expect(city.text().includes(currentCity.name)).toBe(true);
             expect(coordinates.text().includes(station.coordinates.northwest.lat)).toBe(true);
-            // expect(bikes.text().includes("2")).toBe(true);
         });
     });
-
-    // it('Station page contains expected data', () => {
-    //     expect(getBikesHasBeenCalled).toEqual(true);
-    // });
-
 });
