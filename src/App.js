@@ -11,6 +11,7 @@ import OverviewMap from './components/OverviewMap';
 import Price from './components/Price';
 
 import api from './functions/api.js';
+import utils from './functions/utils.js';
 
 function App() {
     const swedenData = {
@@ -69,6 +70,10 @@ function App() {
     }
 
     function switchView(view, params={}) {
+        // Clears current interval, if active
+        utils.stopInterval();
+
+        // Displays chosen view, if token exists
         if (api.token.length > 0) {
             setParams(params);
             setView(view);
@@ -132,6 +137,7 @@ function App() {
     function renderOverviewMap() {
         return ( <OverviewMap
                     api={api}
+                    utils={utils}
                     currentCity={currentCity}
                     cities={cities} /> );
     }
@@ -148,6 +154,7 @@ function App() {
                 <Menu
                     api={api}
                     switchView={switchView}
+                    utils={utils}
                     view={view}
                     cities={cities}
                     allCities={allCities}

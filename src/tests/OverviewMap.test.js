@@ -6,6 +6,7 @@ import OverviewMap from "../components/OverviewMap";
 configure({ adapter: new Adapter() });
 
 describe("Tests for OverviewMap component", () => {
+    const utils = { currentInterval: "" };
     const cities = require("./mockdata/cities.json");
     const bikes = require("./mockdata/bikes.json");
     const currentCity = cities["61a8fd85ea20b50150945887"];

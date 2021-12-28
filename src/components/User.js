@@ -79,7 +79,7 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={user.firstname}
+                                value={user.firstname || ""}
                                 onChange={e => handleInput(e.target.value, "firstname")}>
                             </input>
                         </td>
@@ -89,25 +89,25 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={user.lastname}
+                                value={user.lastname || ""}
                                 onChange={e => handleInput(e.target.value, "lastname")}>
                             </input>
                         </td>
                     </tr>
                     <tr>
                         <td>defaultstad</td>
-                        <td>{user.city}</td>
+                        <td>{user.city || ""}</td>
                     </tr>
                     <tr>
                         <td>email</td>
-                        <td>{user.email}</td>
+                        <td>{user.email || ""}</td>
                     </tr>
                     <tr>
                         <td>phone</td>
                         <td>
                             <input
                                 type="text"
-                                value={user.phone}
+                                value={user.phone || ""}
                                 onChange={e => handleInput(e.target.value, "phone")}>
                             </input>
                         </td>
@@ -117,7 +117,7 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={user.payment_method}
+                                value={user.payment_method || ""}
                                 onChange={e => handleInput(e.target.value, "payment_method")}>
                             </input>
                         </td>
@@ -127,7 +127,7 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={user.card_information}
+                                value={user.card_information || ""}
                                 onChange={e => handleInput(e.target.value, "card_information")}>
                             </input>
                         </td>
@@ -137,7 +137,7 @@ function User(props) {
                         <td>
                             <input
                                 type="number"
-                                value={user.balance}
+                                value={user.balance || 0}
                                 onChange={e => handleInput(e.target.value, "balance")}>
                             </input>
                         </td>
@@ -147,7 +147,7 @@ function User(props) {
                         <td>
                             <select
                                 onBlur={(e) => toggleAccount(e)}
-                                defaultValue={user.account_status}>
+                                defaultValue={user.account_status || ""}>
                                 <option value={"active"}>Active</option>
                                 <option value={"deleted"}>Deleted</option>
                             </select>
