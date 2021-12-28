@@ -27,8 +27,9 @@ function Station(props) {
         title = "Parkeringsstation";
     }
 
-    let station = props.station;
-    let coords = station.coordinates;
+    const station = props.station;
+    const coords = station.coordinates;
+    const cityName = props.cities[station.city_id].name;
 
     const lat = (coords.northwest.lat + coords.southeast.lat)/2;
     const long = (coords.northwest.long + coords.southeast.long)/2;
@@ -37,7 +38,6 @@ function Station(props) {
     async function getBikes() {
         const data = await props.api.getBikes(station.city_id);
         let allBikes = data.bikes;
-
         let filteredBikes = allBikes.filter(function(bike) {
           return bike[`${props.type}_id`] === station._id;
         });
@@ -47,27 +47,27 @@ function Station(props) {
 
     return (
         <>
-        <h1>{title} {station.name} ({props.cities[station.city_id].name})</h1>
+        <h1>{title} {station.name} ({cityName})</h1>
         <table>
             <tbody>
-                <tr>
+                <tr data-testid="name">
                     <td>name:</td><td>{station.name}</td>
                 </tr>
-                <tr>
-                    <td>Stad:</td><td>{props.cities[station.city_id].name}</td>
+                <tr data-testid="city">
+                    <td>Stad:</td><td>{cityName}</td>
                 </tr>
-                <tr>
+                <tr data-testid="coordinates">
                     <td>coordinates:</td>
                     <td>
                     Nordväst: {coords.northwest.lat}, {coords.northwest.long},
                     Sydost: {coords.southeast.lat}, {coords.southeast.long}
                     </td>
                 </tr>
-                <tr>
+                <tr data-testid="bikes">
                     <td>Just nu {bikes.length} cyklar här:</td>
                     <td>
                         {bikes.map((bike, i) => (
-                            <span key={i}>bike._id: {bike._id} </span>
+                            <span data-testid="bike" key={i}>bike._id: {bike._id} </span>
                         ))}
                     </td>
                 </tr>
