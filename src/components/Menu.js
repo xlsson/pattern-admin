@@ -22,10 +22,16 @@ function Menu(props) {
     return (
         <div className="header-wrapper">
 
+            <div className="change-city-wrapper">
+
+            <div className="label">Visar data för:</div>
+
             <ChangeCity
                 allCities={props.allCities}
                 cities={props.cities}
                 chooseCity={props.chooseCity} />
+
+            </div>
 
             <ul className="menu-wrapper">
                 <li className={ (active === "overviewMap") ? "active" : "" }
