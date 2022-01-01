@@ -206,3 +206,13 @@ tr:nth-child(even) {
   align-items: center;
   justify-content: flex-end;
 }
+
+.bikes-table-position-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.bikes-table-position-wrapper div {
+  margin-left: 1em;
+}

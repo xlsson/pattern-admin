@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import BikeMoveForm from './BikeMoveForm';
 import BikeEndMaintenance from './BikeEndMaintenance';
+import BikesTablePosition from './BikesTablePosition';
 
 BikesTable.propTypes = {
     api: PropTypes.object,
@@ -47,6 +48,14 @@ function BikesTable(props) {
         )
     }
 
+    function renderPosition(bike) {
+        return (
+            <BikesTablePosition
+                bike={bike}
+                cities={props.cities} />
+        )
+    }
+
     return (
         <div>
             <h1>Cyklar</h1>
@@ -69,11 +78,7 @@ function BikesTable(props) {
                             onClick={() => handleClick(bike)}>{cities[bike.city_id].name}</td>
                         <td className="pointer-cursor text-align-center"
                             onClick={() => handleClick(bike)}>
-                            <span className="material-icons">
-                                {(bike.charge_id) && "battery_charging_full"}
-                                {(bike.parking_id) && "local_parking"}
-                                {(!bike.parking_id && !bike.charge_id) && "wrong_location"}
-                            </span>
+                            {renderPosition(bike)}
                         </td>
                         <td className="pointer-cursor"
                             onClick={() => handleClick(bike)}>
