@@ -16,8 +16,7 @@ Map.propTypes = {
     cities: PropTypes.object,
     chargeStations: PropTypes.array,
     parkingStations: PropTypes.array,
-    getBikes: PropTypes.func,
-    updateBikes: PropTypes.func
+    getBikes: PropTypes.func
 };
 
 function Map(props) {
@@ -56,7 +55,7 @@ function Map(props) {
                 utils={props.utils}
                 bike={bike}
                 cities={props.cities}
-                updateBikes={props.updateBikes}
+                getBikes={props.getBikes}
                 getIcon={getIcon} />
         )
     }

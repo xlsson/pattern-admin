@@ -5,7 +5,7 @@ BikePopupMoveForm.propTypes = {
     api: PropTypes.object,
     utils: PropTypes.object,
     cities: PropTypes.object,
-    updateBikes: PropTypes.func,
+    getBikes: PropTypes.func,
     bike: PropTypes.object,
     chargeStations: PropTypes.array
 };
@@ -26,7 +26,7 @@ function BikePopupMoveForm(props) {
             await props.api.orderMaintenance(bike._id, true);
             setMaintenance(false);
         }
-        props.updateBikes();
+        props.getBikes();
         props.utils.mapInstance.closePopup();
     }
 

@@ -13,7 +13,7 @@ Station.propTypes = {
 function Station(props) {
     let [bikes, setBikes] = useState([]);
 
-    useEffect(() => { getBikes(); }, [props]);
+    useEffect(() => { getBikesAtStation(); }, [props]);
 
     let chargeStation = [];
     let parkingStation = [];
@@ -35,7 +35,7 @@ function Station(props) {
     const long = (coords.northwest.long + coords.southeast.long)/2;
     const focusCoords = [lat, long];
 
-    async function getBikes() {
+    async function getBikesAtStation() {
         const data = await props.api.getBikes(station.city_id);
         let allBikes = data.bikes;
         let filteredBikes = allBikes.filter(function(bike) {
@@ -82,7 +82,7 @@ function Station(props) {
             cities={props.cities}
             chargeStations={chargeStation}
             parkingStations={parkingStation}
-            getBikes={getBikes} />
+            getBikes={getBikesAtStation} />
         </>
     );
 }

@@ -8,7 +8,7 @@ BikePopup.propTypes = {
     utils: PropTypes.object,
     bike: PropTypes.object,
     cities: PropTypes.object,
-    updateBikes: PropTypes.func
+    getBikes: PropTypes.func
 };
 
 function BikePopup(props) {
@@ -19,7 +19,7 @@ function BikePopup(props) {
     function renderEndMaintenance() {
         return ( <BikeEndMaintenance
                     api={props.api}
-                    updateBikes={props.updateBikes}
+                    getBikes={props.getBikes}
                     bike={bike} /> );
     }
 
@@ -28,7 +28,7 @@ function BikePopup(props) {
                     api={props.api}
                     utils={props.utils}
                     cities={props.cities}
-                    updateBikes={props.updateBikes}
+                    getBikes={props.getBikes}
                     bike={bike}
                     chargeStations={chargeStations} /> );
     }

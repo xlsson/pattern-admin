@@ -26,7 +26,7 @@ function OverviewMap(props) {
     let [zoom, setZoom] = useState(initialZoom);
     let [autoFetchIsOn, setAutoFetchIsOn] = useState(props.utils.autoFetch);
 
-    function updateBikes() {
+    function setZoomGetBikes() {
         console.log("hämtar cyklar och sätter rätt zoom och center");
         let center = props.utils.mapInstance.getCenter();
         setZoom(props.utils.mapInstance.getZoom());
@@ -47,7 +47,7 @@ function OverviewMap(props) {
         }
         setAutoFetchIsOn(true);
         props.utils.autoFetch = true;
-        props.utils.currentInterval = setInterval(updateBikes, 1000);
+        props.utils.currentInterval = setInterval(setZoomGetBikes, 1000);
     }
 
     useEffect(() => {
@@ -74,8 +74,7 @@ function OverviewMap(props) {
             cities={props.cities}
             chargeStations={chargeStations}
             parkingStations={parkingStations}
-            getBikes={getBikes}
-            updateBikes={updateBikes} />
+            getBikes={setZoomGetBikes} />
         <div className="map-legend">
             <p><span className="material-icons">electric_scooter</span> = elsparkcykel</p>
             <p><span className="material-icons">bolt</span> = laddningsstation</p>

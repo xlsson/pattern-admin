@@ -19,7 +19,7 @@ function Bike(props) {
         props.bike.coordinates.long
     ];
 
-    async function getBikes() {
+    async function getThisBike() {
         const data = await props.api.getBikes(props.bike.city_id);
         let allBikes = data.bikes;
 
@@ -61,7 +61,7 @@ function Bike(props) {
             cities={props.cities}
             chargeStations={chargeStations}
             parkingStations={parkingStations}
-            getBikes={getBikes} />
+            getBikes={getThisBike} />
         </>
     );
 }

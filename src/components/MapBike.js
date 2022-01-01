@@ -8,7 +8,7 @@ MapBike.propTypes = {
     utils: PropTypes.object,
     bike: PropTypes.object,
     cities: PropTypes.object,
-    updateBikes: PropTypes.func,
+    getBikes: PropTypes.func,
     getIcon: PropTypes.func
 };
 
@@ -25,7 +25,7 @@ function MapBike(props) {
                         utils={props.utils}
                         bike={bike}
                         cities={props.cities}
-                        updateBikes={props.updateBikes} />
+                        getBikes={props.getBikes} />
                 </Popup>
             </Marker>
         </div>
