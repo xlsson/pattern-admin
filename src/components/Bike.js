@@ -33,16 +33,22 @@ function Bike(props) {
 
     return (
         <>
-        <h1>Cykel (id: {props.bike._id})</h1>
+        <h1>Cykel</h1>
         <table>
             <tbody>
+                <tr data-testid="bikeId">
+                    <td>Id:</td>
+                    <td>
+                        {props.bike._id}
+                    </td>
+                </tr>
                 <tr data-testid="city">
                     <td>Stad:</td><td>{props.cities[props.bike.city_id].name}</td>
                 </tr>
                 <tr data-testid="batteryStatus">
                     <td>Batterinivå:</td>
                     <td>
-                        {props.bike.battery_status}
+                        {parseInt(props.bike.battery_status)}
                     </td>
                 </tr>
                 <tr data-testid="status">

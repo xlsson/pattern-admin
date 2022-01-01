@@ -43,6 +43,7 @@ function LoginModal(props) {
                                 <input
                                     data-testid="fieldUsername"
                                     type="text"
+                                    defaultValue="xlsson"
                                     onChange={e => handleInput(e.target.value, "username")}>
                                 </input>
                             </td>

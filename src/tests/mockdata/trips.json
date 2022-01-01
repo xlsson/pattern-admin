@@ -1,16 +1,8 @@
 [{
-	"_id": {
-		"$oid": "61a8ce5cd84acdc3bb04d155"
-	},
-	"user_id": {
-		"$oid": "619f6ee3d0b6c914a2b58514"
-	},
-	"bike_id": {
-		"$oid": "61a8aec803d845a108c53774"
-	},
-	"start_time": {
-		"$date": "2021-12-02T13:47:08.007Z"
-	},
+	"_id": "61a8ce5cd84acdc3bb04d155",
+	"user_id": "619f6ee3d0b6c914a2b58514",
+	"bike_id": "61a8aec803d845a108c53774",
+	"start_time": "2021-12-02T13:47:08.007Z",
 	"start_coordinates": {
 		"lat": 56.166382,
 		"long": 15.593662
@@ -23,8 +15,5 @@
 		"lat": 56.162077,
 		"long": 15.58989
 	},
-	"stop_time": {
-		"$date": "2021-12-02T14:14:06.149Z"
-	}
+	"stop_time": "2021-12-02T14:14:06.149Z"
 }]
-

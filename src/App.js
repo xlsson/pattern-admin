@@ -83,6 +83,22 @@ function App() {
         setView("loginModal");
     }
 
+    function renderView() {
+        switch (view) {
+            case "loginModal": return renderLoginModal();
+            case "users": return renderUsersTable();
+            case "user": return renderUser();
+            case "bikes": return renderBikesTable();
+            case "bike": return renderBike();
+            case "chargeStations": return renderStationsTable("charge");
+            case "chargeStation": return renderStation("charge");
+            case "parkingStations": return renderStationsTable("parking");
+            case "parkingStation": return renderStation("parking");
+            case "overviewMap": return renderOverviewMap();
+            case "price": return renderPrice();
+        }
+    }
+
     function renderLoginModal() {
         return ( <LoginModal
                     api={api}
@@ -166,17 +182,7 @@ function App() {
                     setLoggedInUser={setLoggedInUser} />
             </header>
             <div className="content">
-                {(view === "loginModal") && renderLoginModal()}
-                {(view === "users") && renderUsersTable()}
-                {(view === "user") && renderUser()}
-                {(view === "bikes") && renderBikesTable()}
-                {(view === "bike") && renderBike()}
-                {(view === "chargeStations") && renderStationsTable("charge")}
-                {(view === "chargeStation") && renderStation("charge")}
-                {(view === "parkingStations") && renderStationsTable("parking")}
-                {(view === "parkingStation") && renderStation("parking")}
-                {(view === "overviewMap") && renderOverviewMap()}
-                {(view === "price") && renderPrice()}
+                {renderView()}
             </div>
         </div>
     );

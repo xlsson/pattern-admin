@@ -21,18 +21,21 @@ function ChangeCity(props) {
     }
 
     return (
-        <select
-            data-testid="changeCityDropdown"
-            value={selectedId}
-            onChange={handleChange}>
-            {cityIds.map((cityId, i) => (
-                <option
-                    key={i}
-                    value={cityId}>
-                        {allOptions[cityId].name}
-                    </option>
-            ))}
-        </select>
+        <div className="change-city-wrapper">
+            <div className="label">Visar data för:</div>
+            <select
+                data-testid="changeCityDropdown"
+                value={selectedId}
+                onChange={handleChange}>
+                {cityIds.map((cityId, i) => (
+                    <option
+                        key={i}
+                        value={cityId}>
+                            {allOptions[cityId].name}
+                        </option>
+                ))}
+            </select>
+        </div>
     );
 }
 

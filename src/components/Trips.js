@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-Trips.propTypes = {
-    trips: PropTypes.array
-};
+// Trips.propTypes = {
+//     trips: PropTypes.array
+// };
 
 function Trips(props) {
-    const trips = props.trips;
+    const trips = require("../tests/mockdata/trips.json");
+    // const trips = props.trips;
+    console.log("HÄMTAR MOCKDATA!!");
 
     return (
         <div>
