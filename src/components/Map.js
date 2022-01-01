@@ -8,6 +8,7 @@ import MapBike from './MapBike';
 
 Map.propTypes = {
     api: PropTypes.object,
+    utils: PropTypes.object,
     zoom: PropTypes.number,
     focusCoords: PropTypes.array,
     bikes: PropTypes.array,
@@ -15,7 +16,7 @@ Map.propTypes = {
     cities: PropTypes.object,
     chargeStations: PropTypes.array,
     parkingStations: PropTypes.array,
-    redrawBikes: PropTypes.func
+    getBikes: PropTypes.func
 };
 
 function Map(props) {
@@ -25,7 +26,6 @@ function Map(props) {
     let [chargeStations, setChargeStations] = useState([]);
     let [parkingStations, setParkingStations] = useState([]);
     let [cityLimits, setCityLimits] = useState([]);
-    let [mapInstance, setMapInstance] = useState();
 
     useEffect(() => {
         setZoom(props.zoom);
@@ -37,7 +37,7 @@ function Map(props) {
     }, [props]);
 
     function closeAnyOpenPopup(e) {
-        if (!e.currentTarget.contains(e.relatedTarget)) { mapInstance.closePopup(); }
+        if (!e.currentTarget.contains(e.relatedTarget)) { props.utils.mapInstance.closePopup(); }
     }
 
     function getIcon(markerImg, iconAnchor, popupAnchor) {
@@ -52,10 +52,10 @@ function Map(props) {
         return (
             <MapBike
                 api={props.api}
+                utils={props.utils}
                 bike={bike}
-                mapInstance={mapInstance}
                 cities={props.cities}
-                redrawBikes={props.redrawBikes}
+                getBikes={props.getBikes}
                 getIcon={getIcon} />
         )
     }
@@ -103,8 +103,12 @@ function Map(props) {
                 />
                 <MapConsumer>
                     {(map) => {
-                        useEffect(() => { setMapInstance(map); }, []);
+                        useEffect(() => {
+                            props.utils.mapInstance = map;
+                            console.log("inne i useEffect");
+                        }, []);
                         map.setView(focusCoords, zoom);
+                        console.log("MapConsumer utanför");
                         return null;
                     }}
                 </MapConsumer>

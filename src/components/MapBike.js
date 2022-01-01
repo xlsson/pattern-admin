@@ -5,10 +5,10 @@ import BikePopup from './BikePopup';
 
 MapBike.propTypes = {
     api: PropTypes.object,
+    utils: PropTypes.object,
     bike: PropTypes.object,
-    mapInstance: PropTypes.object,
     cities: PropTypes.object,
-    redrawBikes: PropTypes.func,
+    getBikes: PropTypes.func,
     getIcon: PropTypes.func
 };
 
@@ -22,10 +22,10 @@ function MapBike(props) {
                 <Popup>
                     <BikePopup
                         api={props.api}
+                        utils={props.utils}
                         bike={bike}
-                        mapInstance={props.mapInstance}
                         cities={props.cities}
-                        redrawBikes={props.redrawBikes} />
+                        getBikes={props.getBikes} />
                 </Popup>
             </Marker>
         </div>

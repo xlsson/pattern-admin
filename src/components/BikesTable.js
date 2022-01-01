@@ -30,7 +30,7 @@ function BikesTable(props) {
     function renderEndMaintenance(bike) {
         return ( <BikeEndMaintenance
                     api={props.api}
-                    redrawBikes={getBikes}
+                    getBikes={getBikes}
                     bike={bike} />
         )
     }
@@ -42,7 +42,7 @@ function BikesTable(props) {
             <BikeMoveForm
                 api={props.api}
                 bike={bike}
-                redrawBikes={getBikes}
+                getBikes={getBikes}
                 chargeStations={chargeStations} />
         )
     }

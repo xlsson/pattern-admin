@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 BikeMoveForm.propTypes = {
     api: PropTypes.object,
     bike: PropTypes.object,
-    redrawBikes: PropTypes.func,
+    getBikes: PropTypes.func,
     chargeStations: PropTypes.array
 };
 
@@ -26,7 +26,7 @@ function BikeMoveForm(props) {
             await props.api.orderMaintenance(bike._id, true);
             setMaintenance(false);
         }
-        props.redrawBikes();
+        props.getBikes();
     }
 
     function stationSelection(event) { setSelectedId(event.target.value); }

@@ -82,7 +82,7 @@ function Station(props) {
             cities={props.cities}
             chargeStations={chargeStation}
             parkingStations={parkingStation}
-            redrawBikes={getBikes} />
+            getBikes={getBikes} />
         </>
     );
 }

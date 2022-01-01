@@ -79,6 +79,7 @@ function App() {
             setView(view);
             return;
         }
+        // Otherwise, show login modal
         setView("loginModal");
     }
 

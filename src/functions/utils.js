@@ -5,7 +5,8 @@ const utils = {
         clearInterval(utils.currentInterval);
         utils.autoFetch = false;
         console.log(utils.autoFetch, utils.currentInterval);
-    }
+    },
+    mapInstance: null
 };
 
 export default utils;

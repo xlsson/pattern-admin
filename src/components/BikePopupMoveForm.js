@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 BikePopupMoveForm.propTypes = {
     api: PropTypes.object,
+    utils: PropTypes.object,
     cities: PropTypes.object,
-    redrawBikes: PropTypes.func,
-    mapInstance: PropTypes.object,
+    getBikes: PropTypes.func,
     bike: PropTypes.object,
     chargeStations: PropTypes.array
 };
@@ -26,8 +26,8 @@ function BikePopupMoveForm(props) {
             await props.api.orderMaintenance(bike._id, true);
             setMaintenance(false);
         }
-        props.redrawBikes();
-        props.mapInstance.closePopup();
+        props.getBikes();
+        props.utils.mapInstance.closePopup();
     }
 
     function stationSelection(event) {

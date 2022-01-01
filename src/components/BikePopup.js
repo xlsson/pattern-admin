@@ -5,10 +5,10 @@ import BikePopupMoveForm from './BikePopupMoveForm';
 
 BikePopup.propTypes = {
     api: PropTypes.object,
+    utils: PropTypes.object,
     bike: PropTypes.object,
-    mapInstance: PropTypes.object,
     cities: PropTypes.object,
-    redrawBikes: PropTypes.func
+    getBikes: PropTypes.func
 };
 
 function BikePopup(props) {
@@ -19,16 +19,16 @@ function BikePopup(props) {
     function renderEndMaintenance() {
         return ( <BikeEndMaintenance
                     api={props.api}
-                    redrawBikes={props.redrawBikes}
+                    getBikes={props.getBikes}
                     bike={bike} /> );
     }
 
     function renderBikePopupMoveForm() {
         return ( <BikePopupMoveForm
                     api={props.api}
+                    utils={props.utils}
                     cities={props.cities}
-                    redrawBikes={props.redrawBikes}
-                    mapInstance={props.mapInstance}
+                    getBikes={props.getBikes}
                     bike={bike}
                     chargeStations={chargeStations} /> );
     }
