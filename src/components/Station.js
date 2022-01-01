@@ -4,6 +4,7 @@ import Map from './Map';
 
 Station.propTypes = {
     api: PropTypes.object,
+    utils: PropTypes.object,
     station: PropTypes.object,
     type: PropTypes.string,
     currentCity: PropTypes.object,
@@ -75,6 +76,7 @@ function Station(props) {
         </table>
         <Map
             api={props.api}
+            utils={props.utils}
             zoom={20}
             focusCoords={focusCoords}
             bikes={bikes}

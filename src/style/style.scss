@@ -37,6 +37,35 @@ body {
     font-feature-settings: 'liga';
 }
 
+table {
+    margin: 0 0 1em;
+    width: 100%;
+}
+
+table,
+tr,
+th,
+td {
+    border: 1px solid white;
+    border-collapse: collapse;
+    padding: 0.8em;
+    font-size: 14px;
+}
+
+th {
+    border-bottom: 1px solid #ccc;
+    margin: 1em 0;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.text-align-center {
+    text-align: center;
+}
+
 .modal-background {
     z-index: 100;
     background-color: rgba(0,0,0,0.6);
@@ -122,7 +151,7 @@ body {
 
 #map-wrapper-main {
     position: relative;
-    height: 500px;
+    height: 600px;
     width: 100%;
 }
 
@@ -170,27 +199,9 @@ body {
     flex-direction: column;
 }
 
-table {
-    margin: 0 0 1em;
-    width: 100%;
-}
-
-table,
-tr,
-th,
-td {
-    border: 1px solid white;
-    border-collapse: collapse;
-    padding: 0.8em;
-    font-size: 14px;
-}
-
-th {
-    border-bottom: 1px solid #ccc;
-    margin: 1em 0;
-    text-align: left;
-}
-
-tr:nth-child(even) {
-    background-color: rgba(0, 0, 0, 0.04);
+.bike-move-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
 }

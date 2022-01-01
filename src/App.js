@@ -113,6 +113,7 @@ function App() {
     function renderBike() {
         return ( <Bike
                     api={api}
+                    utils={utils}
                     bike={params}
                     currentCity={currentCity}
                     cities={cities} /> );
@@ -129,6 +130,7 @@ function App() {
     function renderStation(type) {
         return ( <Station
                     api={api}
+                    utils={utils}
                     station={params}
                     type={type}
                     currentCity={currentCity}

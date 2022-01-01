@@ -49,17 +49,17 @@ function BikesTable(props) {
 
     return (
         <div>
-            <h1>Cyklar ({currentCity.name})</h1>
+            <h1>Cyklar</h1>
             <table>
                 <>
                 <thead>
                     <tr>
                         <th>Stad</th>
-                        <th>Placering</th>
-                        <th>Status</th>
-                        <th>Batterinivå</th>
-                        <th>Koordinater</th>
-                        <th>Boka hämtning till:</th>
+                        <th className="text-align-center">Position</th>
+                        <th>Ledig</th>
+                        <th className="text-align-center">Batterinivå</th>
+                        <th>Underhåll</th>
+                        <th>Boka hämtning</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,26 +67,30 @@ function BikesTable(props) {
                     <tr key={i}>
                         <td className="pointer-cursor"
                             onClick={() => handleClick(bike)}>{cities[bike.city_id].name}</td>
-                        <td className="pointer-cursor"
+                        <td className="pointer-cursor text-align-center"
                             onClick={() => handleClick(bike)}>
-                            {(bike.charge_id) && "Laddningsstation"}
-                            {(bike.parking_id) && "Parkeringsstation"}
-                            {(!bike.parking_id && !bike.charge_id) && "Utanför station"}
+                            <span className="material-icons">
+                                {(bike.charge_id) && "battery_charging_full"}
+                                {(bike.parking_id) && "local_parking"}
+                                {(!bike.parking_id && !bike.charge_id) && "wrong_location"}
+                            </span>
                         </td>
                         <td className="pointer-cursor"
                             onClick={() => handleClick(bike)}>
                             {bike.bike_status}
-                            {(bike.maintenance) && ", Genomgår underhåll"}</td>
-                        <td className="pointer-cursor"
+                        </td>
+                        <td className="pointer-cursor text-align-center"
                             onClick={() => handleClick(bike)}>
-                            {bike.battery_status}</td>
-                        <td className="pointer-cursor"
-                            onClick={() => handleClick(bike)}>
-                            {bike.coordinates.lat}, {bike.coordinates.long}
+                            {parseInt(bike.battery_status)}
+                        </td>
+                        <td>
+                            <span className="material-icons">
+                            {(bike.maintenance) && "build"}
+                            </span>
+                            {(bike.maintenance && (bike.battery_status === 100)) && renderEndMaintenance(bike)}
                         </td>
                         <td>
                             {(bike.bike_status === "available") && renderMoveForm(bike)}
-                            {(bike.maintenance && (bike.battery_status === 100)) && renderEndMaintenance(bike)}
                         </td>
                     </tr>
                 ))}
