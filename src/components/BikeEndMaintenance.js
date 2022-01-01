@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 BikeEndMaintenance.propTypes = {
     api: PropTypes.object,
-    getBikes: PropTypes.func,
+    updateBikes: PropTypes.func,
     bike: PropTypes.object
 };
 
@@ -13,7 +13,7 @@ function BikeEndMaintenance(props) {
     async function endMaintenance() {
         const data = await props.api.orderMaintenance(bike._id, false);
         console.log(data);
-        props.getBikes();
+        props.updateBikes();
     }
 
     return (

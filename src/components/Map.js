@@ -16,7 +16,8 @@ Map.propTypes = {
     cities: PropTypes.object,
     chargeStations: PropTypes.array,
     parkingStations: PropTypes.array,
-    getBikes: PropTypes.func
+    getBikes: PropTypes.func,
+    updateBikes: PropTypes.func
 };
 
 function Map(props) {
@@ -55,7 +56,7 @@ function Map(props) {
                 utils={props.utils}
                 bike={bike}
                 cities={props.cities}
-                getBikes={props.getBikes}
+                updateBikes={props.updateBikes}
                 getIcon={getIcon} />
         )
     }
@@ -105,10 +106,8 @@ function Map(props) {
                     {(map) => {
                         useEffect(() => {
                             props.utils.mapInstance = map;
-                            console.log("inne i useEffect");
                         }, []);
                         map.setView(focusCoords, zoom);
-                        console.log("MapConsumer utanför");
                         return null;
                     }}
                 </MapConsumer>

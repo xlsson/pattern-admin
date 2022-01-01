@@ -50,10 +50,6 @@ function OverviewMap(props) {
         props.utils.currentInterval = setInterval(updateBikes, 1000);
     }
 
-    function getcurrentzoom() {
-        console.log("current zoom:", props.utils.mapInstance.getZoom());
-    }
-
     useEffect(() => {
         setZoom(initialZoom);
         setFocusCoords([lat, long]);
@@ -78,7 +74,8 @@ function OverviewMap(props) {
             cities={props.cities}
             chargeStations={chargeStations}
             parkingStations={parkingStations}
-            getBikes={getBikes} />
+            getBikes={getBikes}
+            updateBikes={updateBikes} />
         <div className="map-legend">
             <p><span className="material-icons">electric_scooter</span> = elsparkcykel</p>
             <p><span className="material-icons">bolt</span> = laddningsstation</p>
