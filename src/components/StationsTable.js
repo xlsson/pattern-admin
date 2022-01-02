@@ -11,16 +11,20 @@ StationsTable.propTypes = {
 
 function StationsTable(props) {
     const [stations, setStations] = useState([]);
+    const [bikesPerStation, setBikesPerStation] = useState({});
 
     let title = (props.type === "charge") ? "Laddningsstationer" : "Parkeringsstationer";
 
-    useEffect(() => { createData(); }, [props]);
+    useEffect(() => {
+        const _stations = createStationsArray();
+        setStations(_stations);
+        createBikesPerStation();
+    }, [props]);
 
-    async function createData() {
+    async function createBikesPerStation() {
         const _bikes = await getBikes();
         const _bikesPerStation = countBikes(_bikes);
-        const _stations = createStationsArray(_bikesPerStation);
-        setStations(_stations);
+        setBikesPerStation(_bikesPerStation);
     }
 
     async function getBikes() {
@@ -49,14 +53,13 @@ function StationsTable(props) {
 
     // Adds city_id to each station and, if "all" is selected, creates one
     // array for all stations
-    function createStationsArray(_bikesPerStation) {
+    function createStationsArray() {
         let _stations = [];
 
         if (props.currentCity._id !== "all") {
             _stations = props.currentCity[`${props.type}_stations`];
             _stations.forEach((station) => {
                 station.city_id = props.currentCity._id;
-                station.nrOfBikes = _bikesPerStation[station._id];
             });
             return _stations;
         }
@@ -65,7 +68,6 @@ function StationsTable(props) {
             if (key !== "all") {
                 props.cities[key][`${props.type}_stations`].forEach((station) => {
                     station.city_id = key;
-                    station.nrOfBikes = _bikesPerStation[station._id];
                 });
                 _stations = _stations.concat(props.cities[key][`${props.type}_stations`]);
             }
@@ -106,7 +108,7 @@ function StationsTable(props) {
                             <div>{station.name}</div>
                         </div>
                         </td>
-                        <td className="text-align-center">{station.nrOfBikes}</td>
+                        <td className="text-align-center">{bikesPerStation[station._id] || 0}</td>
                         </>
                     </tr>
                 ))}
