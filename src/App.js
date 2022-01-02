@@ -14,9 +14,9 @@ import api from './functions/api.js';
 import utils from './functions/utils.js';
 
 function App() {
-    const swedenData = {
+    const _allCities = {
          _id: "all",
-        name: "Sverige",
+        name: "-- Alla städer --",
         coordinates: {
             northwest: { lat: 58.195259, long: 14.221258 },
             southeast: { lat: 58.195259, long: 14.221258 }
@@ -31,7 +31,8 @@ function App() {
     const [params, setParams] = useState({});
     const [loggedInUser, setLoggedInUser] = useState("");
     const [cities, setCities] = useState({});
-    const [allCities, setAllCities] = useState(swedenData);
+    const [citiesArray, setCitiesArray] = useState([]);
+    const [allCities, setAllCities] = useState(_allCities);
     const [currentCity, setCurrentCity] = useState(allCities);
 
     useEffect(() => { getCities(); }, []);
@@ -39,6 +40,7 @@ function App() {
 
     async function getCities() {
         const data = await api.getCities();
+        setCitiesArray(data.cities);
         addStationsToDefault(data.cities);
         let citiesObject = {};
         data.cities.forEach((city) => {
@@ -50,17 +52,17 @@ function App() {
     function addStationsToDefault(allCities) {
         let park = [];
         let charge = [];
-        let swedenData_ = { ...swedenData };
+        let allCitiesUpdated = { ..._allCities };
 
         allCities.forEach((city) => {
             park = park.concat(city.parking_stations);
             charge = charge.concat(city.charge_stations);
         });
 
-        swedenData_.parking_stations = park;
-        swedenData_.charge_stations = charge;
+        allCitiesUpdated.parking_stations = park;
+        allCitiesUpdated.charge_stations = charge;
 
-        setAllCities(swedenData_);
+        setAllCities(allCitiesUpdated);
     }
 
     function chooseCity(selectedId) {
@@ -109,12 +111,15 @@ function App() {
     function renderUsersTable() {
         return ( <UsersTable
                     api={api}
+                    cities={cities}
                     switchView={switchView} /> );
     }
 
     function renderUser() {
         return ( <User
                     api={api}
+                    cities={cities}
+                    citiesArray={citiesArray}
                     user={params} /> );
     }
 

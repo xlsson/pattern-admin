@@ -11,7 +11,7 @@ function ChangeCity(props) {
     const [selectedId, setSelectedId] = useState("all");
 
     let allOptions = props.cities;
-    allOptions[props.allCities._id] = props.allCities;
+    allOptions["all"] = props.allCities;
 
     let cityIds = Object.keys(allOptions);
 

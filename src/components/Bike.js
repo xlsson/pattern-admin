@@ -64,7 +64,16 @@ function Bike(props) {
                         {renderPosition(bike)}
                     </td>
                     <td>
-                        {(bike.bike_status === "available") ? "Ja" : "Nej"}
+                        <div className="icon-and-label-wrapper">
+                            <span className="material-icons">
+                                {(bike.bike_status === "available") ? "check" : "close"}
+                            </span>
+                            <div>{(bike.bike_status === "available") ? "Ja" : "Nej"}</div>
+                            <span className="material-icons">
+                                {(bike.maintenance) && "build"}
+                            </span>
+                            <div>{(bike.maintenance) && "Underhåll pågår"}</div>
+                        </div>
                     </td>
                     <td className="text-align-center">
                         {parseInt(bike.battery_status)}

@@ -35,10 +35,11 @@ function BikePopup(props) {
 
     return (
         <div className="bike-popup">
-            <div>
+            <div className="icon-and-label-wrapper">
                 <span className="material-icons" data-testid="scooter-icon">electric_scooter</span>
-                {(bike.bike_status === "available") ? "Ledig" : "Upptagen" }
+                <div>{(bike.bike_status === "available") ? "Ledig" : "Upptagen" }</div>
             </div>
+            <div>{bike._id}</div>
             <div data-testid="chargeStation">{(bike.charge_id) && "På laddningsstation"}</div>
             <div data-testid="status">Status: {bike.bike_status}</div>
             <div data-testid="batteryStatus">Batterinivå: {bike.battery_status}</div>

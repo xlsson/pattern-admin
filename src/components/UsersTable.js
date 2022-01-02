@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 UsersTable.propTypes = {
     api: PropTypes.object,
+    cities: PropTypes.object,
     switchView: PropTypes.func
 };
 
@@ -25,20 +26,18 @@ function UsersTable(props) {
     return (
         <div>
             <h1>Kunder</h1>
-            <p>(Kunder är ej knutna till en specifik stad)</p>
+            <p>(Ej stadsspecifikt)</p>
             <table>
                 <>
                 <thead>
                     <tr>
-                        <th>_id</th>
-                        <th>firstname</th>
-                        <th>lastname</th>
-                        <th>email</th>
-                        <th>phone</th>
-                        <th>payment_method</th>
-                        <th>card_information</th>
-                        <th>balance</th>
-                        <th>account_status</th>
+                        <th>Id</th>
+                        <th>Namn</th>
+                        <th>Status</th>
+                        <th>E-mail</th>
+                        <th>Saldo</th>
+                        <th>Betalmetod</th>
+                        <th>Favoritstad</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,14 +45,26 @@ function UsersTable(props) {
                     <tr className="pointer-cursor" key={i} onClick={() => handleClick(i)}>
                         <>
                         <td>{user._id}</td>
-                        <td>{user.firstname}</td>
-                        <td>{user.lastname}</td>
+                        <td>{user.firstname} {user.lastname}</td>
+                        <td>
+                            <div className="icon-and-label-wrapper">
+                                <span className="material-icons">
+                                    {(user.account_status === "active") ? "check" : "close"}
+                                </span>
+                                <div>{(user.account_status === "active") ? "Aktiv" : "Inaktiv"}</div>
+                            </div>
+                        </td>
                         <td>{user.email}</td>
-                        <td>{user.phone}</td>
-                        <td>{user.payment_method}</td>
-                        <td>{user.card_information}</td>
-                        <td>{user.balance}</td>
-                        <td>{user.account_status}</td>
+                        <td>{user.balance} kr</td>
+                        <td>
+                            <div className="icon-and-label-wrapper">
+                                <span className="material-icons">
+                                    {(user.payment_method === "monthly") ? "event" : "payments"}
+                                </span>
+                                <div>{(user.payment_method === "monthly") ? "Abonnemang" : "Refill"}</div>
+                            </div>
+                        </td>
+                        <td>{props.cities[user.city].name}</td>
                         </>
                     </tr>
                 ))}

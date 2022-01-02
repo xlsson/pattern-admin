@@ -1,14 +1,34 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-Trips.propTypes = {
-    trips: PropTypes.array
-};
+// Trips.propTypes = {
+//     trips: PropTypes.array
+// };
 
 function Trips(props) {
-    // const trips = require("../tests/mockdata/trips.json");
-    const trips = props.trips;
-    // console.log("HÄMTAR MOCKDATA!!");
+    const trips = require("../tests/mockdata/trips.json");
+    // const trips = props.trips;
+    console.log("MOCKDATA");
+
+
+    function returnDateAndTime(mongoDate) {
+        const startTime = new Date(mongoDate);
+
+        const year = startTime.getFullYear();
+        const month = leadingZero(startTime.getMonth());
+        const date = leadingZero(startTime.getDate());
+        const hours = leadingZero(startTime.getHours());
+        const minutes = leadingZero(startTime.getMinutes());
+
+        const time = `${year}-${month}-${date}, ${hours}:${minutes}`;
+        return time;
+    }
+
+    function leadingZero(number) {
+        number = number.toString();
+        if (number.length === 1) { number = `0${number}`; }
+        return number;
+    }
 
     return (
         <div>
@@ -17,15 +37,13 @@ function Trips(props) {
                 <>
                 <thead>
                     <tr>
-                        <th>_id</th>
-                        <th>bike_id</th>
-                        <th>start_time</th>
-                        <th>stop_time</th>
-                        <th>start_coordinates</th>
-                        <th>stop_coordinates</th>
-                        <th>average_speed</th>
-                        <th>distance</th>
-                        <th>price</th>
+                        <th>Res-Id</th>
+                        <th>Starttid</th>
+                        <th>Sluttid</th>
+                        <th>Cykel-Id</th>
+                        <th>Medelhastighet</th>
+                        <th>Sträcka</th>
+                        <th>Pris</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,14 +51,12 @@ function Trips(props) {
                     <tr key={i}>
                         <>
                         <td>{trip._id}</td>
+                        <td>{returnDateAndTime(trip.start_time)}</td>
+                        <td>{returnDateAndTime(trip.stop_time)}</td>
                         <td>{trip.bike_id}</td>
-                        <td>{trip.start_time}</td>
-                        <td>{trip.stop_time}</td>
-                        <td>{trip.start_coordinates.lat}, {trip.start_coordinates.long}</td>
-                        <td>{trip.stop_coordinates.lat}, {trip.stop_coordinates.long}</td>
-                        <td>{trip.average_speed}</td>
-                        <td>{trip.distance}</td>
-                        <td>{trip.price}</td>
+                        <td>{trip.average_speed} km/h</td>
+                        <td>{trip.distance} m</td>
+                        <td>{trip.price} kr</td>
                         </>
                     </tr>
                 ))}

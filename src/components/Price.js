@@ -40,11 +40,15 @@ function Price(props) {
             <table>
                 <tbody>
                     <tr>
-                        <td>_id</td>
+                        <td className="text-align-right">
+                            <strong>Pristariff-Id</strong>
+                        </td>
                         <td>{price._id || "price._id"}</td>
                     </tr>
                     <tr>
-                        <td>starting_fee</td>
+                        <td className="text-align-right">
+                            <strong>Startavgift</strong>
+                        </td>
                         <td>
                             <input
                                 data-testid="startingFee"
@@ -55,7 +59,9 @@ function Price(props) {
                         </td>
                     </tr>
                     <tr>
-                        <td>price_per_minute</td>
+                        <td className="text-align-right">
+                            <strong>Pris per minut</strong>
+                        </td>
                         <td>
                             <input
                                 data-testid="minutePrice"
@@ -66,7 +72,9 @@ function Price(props) {
                         </td>
                     </tr>
                     <tr>
-                        <td>penalty_fee</td>
+                        <td className="text-align-right">
+                            <strong>Avgift (parkering utanför station)</strong>
+                        </td>
                         <td>
                             <input
                                 data-testid="penaltyFee"
@@ -77,7 +85,9 @@ function Price(props) {
                         </td>
                     </tr>
                     <tr>
-                        <td>discount</td>
+                        <td className="text-align-right">
+                            <strong>Rabatt (flytt från gata till station)</strong>
+                        </td>
                         <td>
                             <input
                                 data-testid="discount"
@@ -88,7 +98,7 @@ function Price(props) {
                         </td>
                     </tr>
                     <tr>
-                        <td colSpan="2">
+                        <td colSpan="2" className="text-align-right">
                             <button type="button" onClick={saveChanges}>Spara ändringar</button>
                         </td>
                     </tr>

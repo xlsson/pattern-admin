@@ -50,7 +50,7 @@ function BikesTable(props) {
             <div className="title-wrapper">
                 <h1>Cyklar</h1>
                 <button type="button" onClick={getBikes}>
-                    Hämta senaste cykeldata
+                    Hämta senaste data
                 </button>
             </div>
             <table>
@@ -78,7 +78,12 @@ function BikesTable(props) {
                         </td>
                         <td className="pointer-cursor"
                             onClick={() => handleClick(bike)}>
-                            {(bike.bike_status === "available") ? "Ja" : "Nej"}
+                            <div className="icon-and-label-wrapper">
+                                <span className="material-icons">
+                                    {(bike.bike_status === "available") ? "check" : "close"}
+                                </span>
+                                <div>{(bike.bike_status === "available") ? "Ja" : "Nej"}</div>
+                            </div>
                         </td>
                         <td className="pointer-cursor text-align-center"
                             onClick={() => handleClick(bike)}>
