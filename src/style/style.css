@@ -134,10 +134,15 @@ button {
   justify-content: space-around;
   margin: 1em;
   padding: 0.5em;
-  background-color: #ccc;
+  border: 2px solid #7dbb92;
+  border-radius: 3px;
 }
 .change-city-wrapper .label {
-  margin-right: 1em;
+  margin: 0 1em;
+  color: #000;
+}
+.change-city-wrapper select {
+  font-weight: bold;
 }
 
 .menu-wrapper {
@@ -216,6 +221,7 @@ button {
 }
 
 .icon-and-label-wrapper {
+  margin: 0.2em 0;
   display: flex;
   flex-direction: row;
   align-items: center;

@@ -5,6 +5,7 @@ import Map from './Map';
 Station.propTypes = {
     api: PropTypes.object,
     utils: PropTypes.object,
+    switchView: PropTypes.func,
     station: PropTypes.object,
     type: PropTypes.string,
     currentCity: PropTypes.object,
@@ -46,33 +47,49 @@ function Station(props) {
         setBikes(filteredBikes);
     }
 
+    function handleClick(bike) {
+        props.switchView(`bike`, bike);
+    }
+
     return (
         <>
         <h1>{title} {station.name}</h1>
         <table>
+            <>
+            <thead>
+                <tr>
+                    <th>Stad</th>
+                    <th>Namn</th>
+                    <th>Cyklar på stationen ({bikes.length} st)</th>
+                </tr>
+            </thead>
             <tbody>
-                <tr data-testid="name">
-                    <td>name:</td><td>{station.name}</td>
-                </tr>
-                <tr data-testid="city">
-                    <td>Stad:</td><td>{cityName}</td>
-                </tr>
-                <tr data-testid="coordinates">
-                    <td>coordinates:</td>
-                    <td>
-                    Nordväst: {coords.northwest.lat}, {coords.northwest.long},
-                    Sydost: {coords.southeast.lat}, {coords.southeast.long}
+                <tr>
+                    <td data-testid="city">{cityName}</td>
+
+                    <td data-testid="name">
+                        <div className="icon-and-label-wrapper">
+                            <span className="material-icons">
+                            {(props.type === "charge") ? "battery_charging_full" : "local_parking"}
+                            </span>
+                            <div>{station.name}</div>
+                        </div>
                     </td>
-                </tr>
-                <tr data-testid="bikes">
-                    <td>Just nu {bikes.length} cyklar här:</td>
-                    <td>
+                    <td data-testid="bikes">
                         {bikes.map((bike, i) => (
-                            <span data-testid="bike" key={i}>bike._id: {bike._id} </span>
+                            <div
+                                onClick={() => handleClick(bike)}
+                                className="icon-and-label-wrapper pointer-cursor"
+                                data-testid="bike"
+                                key={i}>
+                                <span className="material-icons">electric_scooter</span>
+                                <div>{bike._id}</div>
+                            </div>
                         ))}
                     </td>
                 </tr>
             </tbody>
+            </>
         </table>
         <Map
             api={props.api}

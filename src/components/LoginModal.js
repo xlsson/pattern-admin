@@ -43,7 +43,6 @@ function LoginModal(props) {
                                 <input
                                     data-testid="fieldUsername"
                                     type="text"
-                                    defaultValue="xlsson"
                                     onChange={e => handleInput(e.target.value, "username")}>
                                 </input>
                             </td>
@@ -59,7 +58,7 @@ function LoginModal(props) {
                             </td>
                         </tr>
                         <tr>
-                            <td colSpan="2">
+                            <td colSpan="2" className="text-align-right">
                                 <button type="button" onClick={attemptLogin}>Logga in</button>
                             </td>
                         </tr>
