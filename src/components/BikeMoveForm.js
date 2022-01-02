@@ -33,6 +33,7 @@ function BikeMoveForm(props) {
 
     return (
         <div data-testid="bikeMoveForm" className="bike-move-form">
+            <div>Till</div>
             <select
                 data-testid="stationsDropdown"
                 onBlur={stationSelection}
@@ -44,7 +45,7 @@ function BikeMoveForm(props) {
                 ))}
             </select>
             <div>
-                <label htmlFor="maintenance">Med underhåll</label>
+                <label htmlFor="maintenance">med underhåll</label>
                 <input
                     name="maintenance"
                     type="checkbox"

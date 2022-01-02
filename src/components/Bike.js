@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from "prop-types";
 import Map from './Map';
+import BikePosition from './BikePosition';
 
 Bike.propTypes = {
     api: PropTypes.object,
@@ -12,9 +13,11 @@ Bike.propTypes = {
 
 function Bike(props) {
     const [bikes, setBikes] = useState([props.bike]);
+    const cities = props.cities;
+    const bike = props.bike;
 
-    let chargeStations = props.cities[props.bike.city_id].charge_stations;
-    let parkingStations = props.cities[props.bike.city_id].parking_stations;
+    let chargeStations = cities[props.bike.city_id].charge_stations;
+    let parkingStations = cities[props.bike.city_id].parking_stations;
     let focusCoords = [
         props.bike.coordinates.lat,
         props.bike.coordinates.long
@@ -31,33 +34,44 @@ function Bike(props) {
         setBikes(filteredBikes);
     }
 
+    function renderPosition(bike) {
+        return (
+            <BikePosition
+                bike={bike}
+                cities={cities} />
+        )
+    }
+
     return (
         <>
         <h1>Cykel</h1>
         <table>
+            <>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Stad</th>
+                    <th>Position</th>
+                    <th>Ledig</th>
+                    <th className="text-align-center">Batterinivå</th>
+                </tr>
+            </thead>
             <tbody>
-                <tr data-testid="bikeId">
-                    <td>Id:</td>
-                    <td>
-                        {props.bike._id}
+                <tr>
+                    <td>{bike._id}</td>
+                    <td>{cities[bike.city_id].name}</td>
+                    <td className="text-align-center">
+                        {renderPosition(bike)}
                     </td>
-                </tr>
-                <tr data-testid="city">
-                    <td>Stad:</td><td>{props.cities[props.bike.city_id].name}</td>
-                </tr>
-                <tr data-testid="batteryStatus">
-                    <td>Batterinivå:</td>
                     <td>
-                        {parseInt(props.bike.battery_status)}
+                        {(bike.bike_status === "available") ? "Ja" : "Nej"}
                     </td>
-                </tr>
-                <tr data-testid="status">
-                    <td>Status:</td>
-                    <td>
-                        {props.bike.bike_status}
+                    <td className="text-align-center">
+                        {parseInt(bike.battery_status)}
                     </td>
                 </tr>
             </tbody>
+            </>
         </table>
         <Map
             api={props.api}
@@ -66,7 +80,7 @@ function Bike(props) {
             focusCoords={focusCoords}
             bikes={bikes}
             city={props.currentCity}
-            cities={props.cities}
+            cities={cities}
             chargeStations={chargeStations}
             parkingStations={parkingStations}
             getBikes={getThisBike} />

@@ -3,7 +3,7 @@
   src: url("./MaterialIconsOutlined-Regular_OLD.otf") format("opentype");
 }
 body {
-  margin: 0 1em;
+  margin: 0 1em 6em 1em;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -57,8 +57,18 @@ tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.04);
 }
 
+input,
+select,
+button {
+  padding: 0.5em 0.7em;
+}
+
 .text-align-center {
   text-align: center;
+}
+
+.text-align-right {
+  text-align: right;
 }
 
 .modal-background {
@@ -170,24 +180,13 @@ tr:nth-child(even) {
 }
 
 .map-legend {
+  margin: 1em;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
 }
-.map-legend p {
-  margin-right: 2em;
-}
-.map-legend .bike {
-  color: #a600d9;
-  font-weight: bold;
-}
-.map-legend .chargeStation {
-  color: #00d991;
-  font-weight: bold;
-}
-.map-legend .parkingStation {
-  color: #0074d9;
-  font-weight: bold;
+.map-legend div {
+  margin-right: 1em;
 }
 
 .bike-popup {
@@ -204,15 +203,23 @@ tr:nth-child(even) {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
+}
+.bike-move-form select,
+.bike-move-form div,
+.bike-move-form button {
+  margin-left: 1em;
+}
+.bike-move-form select {
+  min-width: 200px;
 }
 
-.bikes-table-position-wrapper {
+.icon-and-label-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
 }
-.bikes-table-position-wrapper div {
+.icon-and-label-wrapper div {
   margin-left: 1em;
 }

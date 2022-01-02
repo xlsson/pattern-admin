@@ -61,7 +61,7 @@ function OverviewMap(props) {
         <div className="title-wrapper">
             <h1>Översiktskarta ({city.name})</h1>
             <button type="button" onClick={() => toggleInterval(!props.utils.autoFetch)}>
-                {!autoFetchIsOn ? "Sätt på " : "Stäng av "} autohämtning av cykeldata
+                {!autoFetchIsOn ? "Starta " : "Avbryt "} autohämtning av cykeldata
             </button>
         </div>
         <Map
@@ -76,9 +76,18 @@ function OverviewMap(props) {
             parkingStations={parkingStations}
             getBikes={setZoomGetBikes} />
         <div className="map-legend">
-            <p><span className="material-icons">electric_scooter</span> = elsparkcykel</p>
-            <p><span className="material-icons">battery_charging_full</span> = laddningsstation</p>
-            <p><span className="material-icons">local_parking</span> = parkeringsstation</p>
+            <div className="icon-and-label-wrapper">
+                <span className="material-icons">electric_scooter</span>
+                <div>Elsparkcykel</div>
+            </div>
+            <div className="icon-and-label-wrapper">
+                <span className="material-icons">battery_charging_full</span>
+                <div>Laddningsstation</div>
+            </div>
+            <div className="icon-and-label-wrapper">
+                <span className="material-icons">local_parking</span>
+                <div>Parkeringsstation</div>
+            </div>
         </div>
         </>
     );

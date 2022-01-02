@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from "prop-types";
 
-BikesTablePosition.propTypes = {
+BikePosition.propTypes = {
     bike: PropTypes.object,
     cities: PropTypes.object
 };
 
-function BikesTablePosition(props) {
+function BikePosition(props) {
     const bike = props.bike;
     let icon;
     let text;
@@ -27,20 +27,17 @@ function BikesTablePosition(props) {
         const stations = props.cities[bike.city_id][stationType];
         let stationName;
         stations.forEach((station) => {
-            if (station._id === id) {
-                console.log("match", station.name);
-                stationName = station.name;
-            }
+            if (station._id === id) { stationName = station.name; }
         });
         return stationName;
     }
 
     return (
-        <div className="bikes-table-position-wrapper">
+        <div className="icon-and-label-wrapper">
             <span className="material-icons">{icon}</span>
             <div>{text}</div>
         </div>
     );
 }
 
-export default BikesTablePosition;
+export default BikePosition;
