@@ -52,7 +52,7 @@ function BikeMoveForm(props) {
                     onClick={() => setMaintenance(!maintenance)}>
                 </input>
             </div>
-            <button type="button" onClick={moveBike}>Boka</button>
+            <button type="button" onClick={moveBike}>Hämta</button>
         </div>
     )
 }

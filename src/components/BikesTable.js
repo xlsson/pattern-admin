@@ -47,7 +47,12 @@ function BikesTable(props) {
 
     return (
         <div>
-            <h1>Cyklar</h1>
+            <div className="title-wrapper">
+                <h1>Cyklar</h1>
+                <button type="button" onClick={getBikes}>
+                    Hämta senaste cykeldata
+                </button>
+            </div>
             <table>
                 <>
                 <thead>
