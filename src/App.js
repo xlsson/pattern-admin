@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import LoginModal from './components/LoginModal';
 import Menu from './components/Menu';
 import BikesTable from './components/BikesTable';
@@ -9,6 +10,7 @@ import UsersTable from './components/UsersTable';
 import User from './components/User';
 import OverviewMap from './components/OverviewMap';
 import Price from './components/Price';
+import FlashMessage from './components/FlashMessage';
 
 import api from './functions/api.js';
 import utils from './functions/utils.js';
@@ -34,6 +36,8 @@ function App() {
     const [citiesArray, setCitiesArray] = useState([]);
     const [allCities, setAllCities] = useState(_allCities);
     const [currentCity, setCurrentCity] = useState(allCities);
+
+    const [message, setMessage] = useState(null);
 
     useEffect(() => { getCities(); }, []);
     useEffect(() => { setCurrentCity(allCities); }, [allCities]);
@@ -85,6 +89,13 @@ function App() {
         setView("loginModal");
     }
 
+    function renderFlashMessage() {
+        console.log("flash");
+        return ( <FlashMessage
+                    setMessage={setMessage}
+                    message={message} /> );
+    }
+
     function renderView() {
         switch (view) {
             case "loginModal": return renderLoginModal();
@@ -127,6 +138,7 @@ function App() {
         return ( <BikesTable
                     api={api}
                     switchView={switchView}
+                    setMessage={setMessage}
                     currentCity={currentCity}
                     cities={cities} /> );
     }
@@ -190,6 +202,7 @@ function App() {
             </header>
             <div className="content">
                 {renderView()}
+                {message && renderFlashMessage(message)}
             </div>
         </div>
     );

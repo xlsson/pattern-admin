@@ -31,7 +31,7 @@ function LoginModal(props) {
     }
 
     return (
-        <div className="modal-background">
+        <div className="login-modal-background">
             <div className="modal-box">
                 <h1>Administrativt gränssnitt</h1>
                 <p>{message}</p>

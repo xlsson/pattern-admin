@@ -6,6 +6,7 @@ import BikesTableMaintenance from './BikesTableMaintenance';
 BikesTable.propTypes = {
     api: PropTypes.object,
     switchView: PropTypes.func,
+    renderFlashMessage: PropTypes.func,
     currentCity: PropTypes.object,
     cities: PropTypes.object
 };
@@ -49,6 +50,9 @@ function BikesTable(props) {
         <div>
             <div className="title-wrapper">
                 <h1>Cyklar</h1>
+                <button type="button" onClick={() => props.setMessage("hej")}>
+                    flash me
+                </button>
                 <button type="button" onClick={getBikes}>
                     Hämta senaste data
                 </button>
