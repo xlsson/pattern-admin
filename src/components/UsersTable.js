@@ -24,7 +24,8 @@ function UsersTable(props) {
 
     return (
         <div>
-            <h1>Alla kunder (stadsoberoende)</h1>
+            <h1>Kunder</h1>
+            <p>(Kunder är ej knutna till en specifik stad)</p>
             <table>
                 <>
                 <thead>

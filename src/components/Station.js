@@ -48,7 +48,7 @@ function Station(props) {
 
     return (
         <>
-        <h1>{title} {station.name} ({cityName})</h1>
+        <h1>{title} {station.name}</h1>
         <table>
             <tbody>
                 <tr data-testid="name">

@@ -27,7 +27,6 @@ function OverviewMap(props) {
     let [autoFetchIsOn, setAutoFetchIsOn] = useState(props.utils.autoFetch);
 
     function setZoomGetBikes() {
-        console.log("hämtar cyklar och sätter rätt zoom och center");
         let center = props.utils.mapInstance.getCenter();
         setZoom(props.utils.mapInstance.getZoom());
         setFocusCoords([center.lat, center.lng]);
@@ -59,7 +58,7 @@ function OverviewMap(props) {
     return (
         <>
         <div className="title-wrapper">
-            <h1>Översiktskarta ({city.name})</h1>
+            <h1>Översiktskarta</h1>
             <button type="button" onClick={() => toggleInterval(!props.utils.autoFetch)}>
                 {!autoFetchIsOn ? "Starta " : "Avbryt "} autohämtning av cykeldata
             </button>

@@ -18,6 +18,8 @@ function StationsTable(props) {
         setStations(_stations);
     }, [props]);
 
+    // Adds city_id to each station and, if "all" is selected, creates one
+    // array for all stations
     function createStationsArray() {
         let _stations = [];
 
@@ -45,7 +47,7 @@ function StationsTable(props) {
 
     return (
         <div>
-            <h1>{title} ({props.currentCity.name})</h1>
+            <h1>{title}</h1>
             <table>
                 <>
                 <thead>
