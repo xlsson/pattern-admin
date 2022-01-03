@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 
 Price.propTypes = {
     api: PropTypes.object,
-    currentCity: PropTypes.object
+    utils: PropTypes.object,
+    currentCity: PropTypes.object,
+    setMessage: PropTypes.func
 };
 
 function Price(props) {
@@ -30,8 +32,12 @@ function Price(props) {
     }
 
     async function saveChanges() {
+        const data = await props.api.updatePrice(price._id, changes);
+        const message = props.utils.createFlashMessage(data, "updatePrice");
+
         setPrice(price);
-        await props.api.updatePrice(price._id, changes);
+        setChanges({});
+        props.setMessage(message);
     }
 
     return (

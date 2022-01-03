@@ -103,7 +103,7 @@ const api = {
         let keys = Object.keys(newValues);
 
         if (keys.length === 0) {
-            return { message: "no changes, empty request"};
+            return { error: "no changes, empty request"};
         }
 
         let changes = [];
@@ -152,7 +152,7 @@ const api = {
         let keys = Object.keys(newValues);
 
         if (keys.length === 0) {
-            return { message: "no changes, empty request"};
+            return { error: "no changes, empty request"};
         }
 
         let changes = [];

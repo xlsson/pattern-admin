@@ -4,9 +4,11 @@ import Trips from './Trips.js';
 
 User.propTypes = {
     api: PropTypes.object,
+    utils: PropTypes.object,
     cities: PropTypes.object,
     citiesArray: PropTypes.array,
-    user: PropTypes.object
+    user: PropTypes.object,
+    setMessage: PropTypes.func
 };
 
 function User(props) {
@@ -58,8 +60,11 @@ function User(props) {
 
     async function saveChanges() {
         const data = await props.api.updateUser(userId, changes);
+        const message = props.utils.createFlashMessage(data, "updateUser");
+
         updateName(user);
-        console.log(data);
+        setChanges({});
+        props.setMessage(message);
     }
 
     return (

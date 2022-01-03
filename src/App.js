@@ -127,9 +127,11 @@ function App() {
     function renderUser() {
         return ( <User
                     api={api}
+                    utils={utils}
                     cities={cities}
                     citiesArray={citiesArray}
-                    user={params} /> );
+                    user={params}
+                    setMessage={setMessage} /> );
     }
 
     function renderBikesTable() {
@@ -182,7 +184,9 @@ function App() {
     function renderPrice() {
         return ( <Price
                     api={api}
-                    currentCity={currentCity} /> );
+                    utils={utils}
+                    currentCity={currentCity}
+                    setMessage={setMessage} /> );
     }
 
     return (

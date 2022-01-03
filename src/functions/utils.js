@@ -23,7 +23,15 @@ const utils = {
             getDataButton: {
                 success: "Senaste data hämtad",
                 error: "Något gick snett",
-            }
+            },
+            updateUser: {
+                success: "Kundinformation uppdaterad",
+                error: "Kundinformation ej uppdaterad",
+            },
+            updatePrice: {
+                success: "Pristariff uppdaterad",
+                error: "Pristariff ej uppdaterad",
+            },
         };
 
         const isError = Object.prototype.hasOwnProperty.call(data, "error");
