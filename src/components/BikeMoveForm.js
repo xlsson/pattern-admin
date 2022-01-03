@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 
 BikeMoveForm.propTypes = {
     api: PropTypes.object,
+    utils: PropTypes.object,
     bike: PropTypes.object,
     getBikes: PropTypes.func,
-    chargeStations: PropTypes.array
+    chargeStations: PropTypes.array,
+    setMessage: PropTypes.func
 };
 
 function BikeMoveForm(props) {
@@ -20,12 +22,15 @@ function BikeMoveForm(props) {
     async function moveBike() {
         const selectedStation = chargeStations[selectedId];
         const data = await props.api.moveBike(bike._id, selectedStation);
-        console.log(data);
+        let message = props.utils.createFlashMessage(data, "move");
+
         if (maintenance) {
-            console.log("nu körs orderMaintenance");
-            await props.api.orderMaintenance(bike._id, true);
+            const maintenanceData = await props.api.orderMaintenance(bike._id, true);
+            message = props.utils.createFlashMessage(maintenanceData, "moveMaintenance");
+
             setMaintenance(false);
         }
+        props.setMessage(message);
         props.getBikes();
     }
 

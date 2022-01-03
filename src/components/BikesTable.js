@@ -5,8 +5,9 @@ import BikesTableMaintenance from './BikesTableMaintenance';
 
 BikesTable.propTypes = {
     api: PropTypes.object,
+    utils: PropTypes.object,
     switchView: PropTypes.func,
-    renderFlashMessage: PropTypes.func,
+    setMessage: PropTypes.func,
     currentCity: PropTypes.object,
     cities: PropTypes.object
 };
@@ -19,9 +20,13 @@ function BikesTable(props) {
 
     useEffect(() => { getBikes(); }, [props]);
 
-    async function getBikes() {
+    async function getBikes(button=false) {
         const data = await props.api.getBikes(currentCity._id);
         setBikes(data.bikes);
+        if (button) {
+            const message = props.utils.createFlashMessage(data, "getDataButton");
+            props.setMessage(message);
+        }
     }
 
     function handleClick(bike) {
@@ -40,9 +45,11 @@ function BikesTable(props) {
         return (
             <BikesTableMaintenance
                 api={props.api}
+                utils={props.utils}
                 bike={bike}
                 getBikes={getBikes}
-                cities={cities} />
+                cities={cities}
+                setMessage={props.setMessage} />
         )
     }
 
@@ -50,10 +57,7 @@ function BikesTable(props) {
         <div>
             <div className="title-wrapper">
                 <h1>Cyklar</h1>
-                <button type="button" onClick={() => props.setMessage({ text: "hej", warning: true })}>
-                    flash me
-                </button>
-                <button type="button" onClick={getBikes}>
+                <button type="button" onClick={() => getBikes(true)}>
                     Hämta senaste data
                 </button>
             </div>

@@ -131,10 +131,10 @@ button {
 .flash-modal-background .material-icons {
   color: #7dbb92;
 }
-.flash-modal-background .warning-border {
+.flash-modal-background .error-border {
   border: 2px solid #dc3545;
 }
-.flash-modal-background .warning-color {
+.flash-modal-background .error-color {
   color: #dc3545;
 }
 

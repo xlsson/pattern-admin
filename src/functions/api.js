@@ -63,7 +63,6 @@ const api = {
         return api.sendRequest(url, requestOptions);
     },
     orderMaintenance: function (bikeId, maintenance) {
-        console.log("sätter maintenance till", maintenance);
 
         let url = `${api.baseUrl}/bikes/maintenance/${bikeId}`;
 

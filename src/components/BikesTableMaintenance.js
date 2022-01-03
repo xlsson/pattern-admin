@@ -5,9 +5,11 @@ import BikeMoveForm from './BikeMoveForm';
 
 BikesTableMaintenance.propTypes = {
     api: PropTypes.object,
+    utils: PropTypes.object,
     getBikes: PropTypes.func,
     bike: PropTypes.object,
-    cities: PropTypes.object
+    cities: PropTypes.object,
+    setMessage: PropTypes.func
 };
 
 function BikesTableMaintenance(props) {
@@ -18,8 +20,10 @@ function BikesTableMaintenance(props) {
         return (
             <BikeEndMaintenance
                 api={props.api}
+                utils={props.utils}
                 getBikes={props.getBikes}
-                bike={bike} />
+                bike={bike}
+                setMessage={props.setMessage} />
         )
     }
 
@@ -28,9 +32,11 @@ function BikesTableMaintenance(props) {
         return (
             <BikeMoveForm
                 api={props.api}
+                utils={props.utils}
                 bike={bike}
                 getBikes={props.getBikes}
-                chargeStations={chargeStations} />
+                chargeStations={chargeStations}
+                setMessage={props.setMessage} />
         )
     }
 
@@ -39,7 +45,7 @@ function BikesTableMaintenance(props) {
             <div className="icon-and-label-wrapper">
                 <span className="material-icons">build</span>
                 <div>Underhåll{(bike.battery_status < 20) ? " och laddning " : " "}pågår</div>
-                {(bike.battery_status === 100) && renderEndMaintenance(bike)}
+                {(bike.battery_status > 20) && renderEndMaintenance(bike)}
             </div>
         )
     }

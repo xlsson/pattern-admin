@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import LoginModal from './components/LoginModal';
 import Menu from './components/Menu';
 import BikesTable from './components/BikesTable';
@@ -136,6 +135,7 @@ function App() {
     function renderBikesTable() {
         return ( <BikesTable
                     api={api}
+                    utils={utils}
                     switchView={switchView}
                     setMessage={setMessage}
                     currentCity={currentCity}

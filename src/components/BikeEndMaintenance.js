@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 
 BikeEndMaintenance.propTypes = {
     api: PropTypes.object,
+    utils: PropTypes.object,
     getBikes: PropTypes.func,
-    bike: PropTypes.object
+    bike: PropTypes.object,
+    setMessage: PropTypes.func
 };
 
 function BikeEndMaintenance(props) {
@@ -12,7 +14,9 @@ function BikeEndMaintenance(props) {
 
     async function endMaintenance() {
         const data = await props.api.orderMaintenance(bike._id, false);
-        console.log(data);
+        const message = props.utils.createFlashMessage(data, "endMaintenance");
+
+        props.setMessage(message);
         props.getBikes();
     }
 
