@@ -6,8 +6,7 @@ MapStation.propTypes = {
     utils: PropTypes.object,
     type: PropTypes.string,
     station: PropTypes.object,
-    getIcon: PropTypes.func,
-    switchView: PropTypes.func
+    getIcon: PropTypes.func
 };
 
 function MapStation(props) {
@@ -30,12 +29,6 @@ function MapStation(props) {
         [coords.southeast.lat, coords.southeast.long]
     ];
 
-    function showStation() {
-        props.utils.mapInstance.closePopup();
-        console.log("öppnar");
-        // props.switchView("parkingStation", station);
-    }
-
     return (
         <>
             <Rectangle bounds={bounds} pathOptions={options} />
@@ -48,7 +41,6 @@ function MapStation(props) {
                             </span>
                             <div className="station-icon-text">{station.name}</div>
                         </div>
-                        <button type="button" onClick={showStation}>Visa station</button>
                     </div>
                 </Popup>
             </Marker>

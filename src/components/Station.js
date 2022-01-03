@@ -103,8 +103,7 @@ function Station(props) {
             chargeStations={chargeStation}
             parkingStations={parkingStation}
             getBikes={getBikesAtStation}
-            setMessage={props.setMessage}
-            switchView={props.switchView} />
+            setMessage={props.setMessage}/>
         </>
     );
 }

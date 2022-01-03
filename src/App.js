@@ -181,7 +181,6 @@ function App() {
         return ( <OverviewMap
                     api={api}
                     utils={utils}
-                    switchView={switchView}
                     currentCity={currentCity}
                     cities={cities}
                     setMessage={setMessage} /> );

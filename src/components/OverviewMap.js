@@ -7,8 +7,7 @@ OverviewMap.propTypes = {
     utils: PropTypes.object,
     currentCity: PropTypes.object,
     cities: PropTypes.object,
-    setMessage: PropTypes.func,
-    switchView: PropTypes.func
+    setMessage: PropTypes.func
 };
 
 function OverviewMap(props) {
@@ -76,8 +75,7 @@ function OverviewMap(props) {
             chargeStations={chargeStations}
             parkingStations={parkingStations}
             getBikes={setZoomGetBikes}
-            setMessage={props.setMessage}
-            switchView={props.switchView} />
+            setMessage={props.setMessage}/>
         <div className="map-legend">
             <div className="icon-and-label-wrapper">
                 <span className="material-icons">electric_scooter</span>
