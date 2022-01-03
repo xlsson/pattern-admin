@@ -13,6 +13,8 @@ function BikeEndMaintenance(props) {
     const bike = props.bike;
 
     async function endMaintenance() {
+        if (props.utils.mapInstance) { props.utils.mapInstance.closePopup(); }
+
         const data = await props.api.orderMaintenance(bike._id, false);
         const message = props.utils.createFlashMessage(data, "endMaintenance");
 

@@ -8,7 +8,8 @@ BikePopup.propTypes = {
     utils: PropTypes.object,
     bike: PropTypes.object,
     cities: PropTypes.object,
-    getBikes: PropTypes.func
+    getBikes: PropTypes.func,
+    setMessage: PropTypes.func
 };
 
 function BikePopup(props) {
@@ -19,8 +20,10 @@ function BikePopup(props) {
     function renderEndMaintenance() {
         return ( <BikeEndMaintenance
                     api={props.api}
+                    utils={props.utils}
                     getBikes={props.getBikes}
-                    bike={bike} /> );
+                    bike={bike}
+                    setMessage={props.setMessage} /> );
     }
 
     function renderBikePopupMoveForm() {
@@ -30,20 +33,58 @@ function BikePopup(props) {
                     cities={props.cities}
                     getBikes={props.getBikes}
                     bike={bike}
-                    chargeStations={chargeStations} /> );
+                    chargeStations={chargeStations}
+                    setMessage={props.setMessage} /> );
+    }
+
+    function renderStatusInfo() {
+        if (!bike.charge_id) { return "Uthyrd"; }
+
+        let status;
+        if (bike.battery_status < 20) { status = `laddning`; }
+        if (bike.maintenance) { status = `underhåll`; }
+        if (bike.maintenance && (bike.battery_status < 20)) {
+            status = `laddning, underhåll`;
+        }
+
+        return ( <>
+                <span className="bike-info-label">Service pågår:</span>
+                <span>{status}</span>
+            </> );
+    }
+
+    function renderPositionInfo() {
+        let position = "ej på station";
+        if (bike.charge_id) { position = `Laddningsstation`; }
+        if (bike.parking_id) { position = `Parkeringsstation`; }
+        return position;
     }
 
     return (
         <div className="bike-popup">
-            <div className="icon-and-label-wrapper">
-                <span className="material-icons" data-testid="scooter-icon">electric_scooter</span>
-                <div>{(bike.bike_status === "available") ? "Ledig" : "Upptagen" }</div>
+            <div className="bike-icon-wrapper">
+                <span className="material-icons" data-testid="scooter-icon">
+                    electric_scooter
+                </span>
+                <div className="bike-icon-text">
+                    {(bike.bike_status === "available") ? "Ledig" : "Upptagen"}
+                </div>
             </div>
-            <div>{bike._id}</div>
-            <div data-testid="chargeStation">{(bike.charge_id) && "På laddningsstation"}</div>
-            <div data-testid="status">Status: {bike.bike_status}</div>
-            <div data-testid="batteryStatus">Batterinivå: {bike.battery_status}</div>
-            <div data-testid="maintenance">{(bike.maintenance) && "Genomgår underhåll"}</div>
+            <div className="bike-info" data-testid="maintenance">
+                {(bike.bike_status !== "available") && renderStatusInfo()}
+            </div>
+            <div className="bike-info">
+                <span className="bike-info-label">Id:</span>
+                <span>{bike._id}</span>
+            </div>
+            <div className="bike-info" data-testid="chargeStation">
+                <span className="bike-info-label">Position:</span>
+                <span>{renderPositionInfo()}</span>
+            </div>
+            <div className="bike-info" data-testid="batteryStatus">
+                <span className="bike-info-label">Batterinivå:</span>
+                <span>{parseInt(bike.battery_status)}</span>
+            </div>
             {(bike.bike_status === "available") && renderBikePopupMoveForm()}
             {(bike.maintenance && (bike.battery_status === 100)) && renderEndMaintenance()}
         </div>

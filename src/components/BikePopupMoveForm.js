@@ -7,7 +7,8 @@ BikePopupMoveForm.propTypes = {
     cities: PropTypes.object,
     getBikes: PropTypes.func,
     bike: PropTypes.object,
-    chargeStations: PropTypes.array
+    chargeStations: PropTypes.array,
+    setMessage: PropTypes.array
 };
 
 function BikePopupMoveForm(props) {
@@ -21,11 +22,15 @@ function BikePopupMoveForm(props) {
     async function moveBike() {
         const selectedStation = props.chargeStations[selectedId];
         const data = await props.api.moveBike(bike._id, selectedStation);
-        console.log(data);
+        let message = props.utils.createFlashMessage(data, "move");
+
         if (maintenance) {
-            await props.api.orderMaintenance(bike._id, true);
+            const maintenanceData = await props.api.orderMaintenance(bike._id, true);
+            message = props.utils.createFlashMessage(maintenanceData, "moveMaintenance");
+
             setMaintenance(false);
         }
+        props.setMessage(message);
         props.getBikes();
         props.utils.mapInstance.closePopup();
     }
@@ -36,7 +41,7 @@ function BikePopupMoveForm(props) {
 
     return (
         <div className="bike-popup-form">
-            <strong>Boka hämtning till:</strong>
+            <strong>Hämta till:</strong>
             <select
                 data-testid="moveBikeDropdown"
                 onBlur={stationSelection}>
@@ -46,7 +51,7 @@ function BikePopupMoveForm(props) {
                     </option>
                 ))}
             </select>
-            <div>
+            <div className="maintenance-checkbox">
                 <label htmlFor="maintenance">Med underhåll</label>
                 <input
                     name="maintenance"
@@ -54,7 +59,7 @@ function BikePopupMoveForm(props) {
                     onClick={() => setMaintenance(!maintenance)}>
                 </input>
             </div>
-            <button type="button" onClick={moveBike}>Boka</button>
+            <button type="button" onClick={moveBike}>Hämta</button>
         </div>
     );
 }

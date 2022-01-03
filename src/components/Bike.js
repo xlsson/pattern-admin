@@ -8,7 +8,9 @@ Bike.propTypes = {
     utils: PropTypes.object,
     bike: PropTypes.object,
     currentCity: PropTypes.object,
-    cities: PropTypes.object
+    cities: PropTypes.object,
+    setMessage: PropTypes.func,
+    switchView: PropTypes.func
 };
 
 function Bike(props) {
@@ -92,7 +94,9 @@ function Bike(props) {
             cities={cities}
             chargeStations={chargeStations}
             parkingStations={parkingStations}
-            getBikes={getThisBike} />
+            getBikes={getThisBike}
+            setMessage={props.setMessage}
+            switchView={props.switchView} />
         </>
     );
 }

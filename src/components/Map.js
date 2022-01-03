@@ -16,7 +16,9 @@ Map.propTypes = {
     cities: PropTypes.object,
     chargeStations: PropTypes.array,
     parkingStations: PropTypes.array,
-    getBikes: PropTypes.func
+    getBikes: PropTypes.func,
+    setMessage: PropTypes.func,
+    switchView: PropTypes.func
 };
 
 function Map(props) {
@@ -56,16 +58,19 @@ function Map(props) {
                 bike={bike}
                 cities={props.cities}
                 getBikes={props.getBikes}
-                getIcon={getIcon} />
+                getIcon={getIcon}
+                setMessage={props.setMessage} />
         )
     }
 
     function drawStation(type, station) {
         return (
             <MapStation
+                utils={props.utils}
                 type={type}
                 station={station}
-                getIcon={getIcon} />
+                getIcon={getIcon}
+                switchView={props.switchView} />
         );
     }
 

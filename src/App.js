@@ -149,8 +149,10 @@ function App() {
                     api={api}
                     utils={utils}
                     bike={params}
+                    switchView={switchView}
                     currentCity={currentCity}
-                    cities={cities} /> );
+                    cities={cities}
+                    setMessage={setMessage} /> );
     }
 
     function renderStationsTable(type) {
@@ -163,6 +165,7 @@ function App() {
     }
 
     function renderStation(type) {
+        console.log(params);
         return ( <Station
                     api={api}
                     utils={utils}
@@ -170,15 +173,18 @@ function App() {
                     station={params}
                     type={type}
                     currentCity={currentCity}
-                    cities={cities} /> );
+                    cities={cities}
+                    setMessage={setMessage} /> );
     }
 
     function renderOverviewMap() {
         return ( <OverviewMap
                     api={api}
                     utils={utils}
+                    switchView={switchView}
                     currentCity={currentCity}
-                    cities={cities} /> );
+                    cities={cities}
+                    setMessage={setMessage} /> );
     }
 
     function renderPrice() {

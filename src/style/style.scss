@@ -78,7 +78,7 @@ button {
 }
 
 .login-modal-background {
-    z-index: 100;
+    z-index: 1000;
     background-color: rgba(0,0,0,0.6);
     height: 100%;
     width: 100%;
@@ -98,7 +98,7 @@ button {
 }
 
 .flash-modal-background {
-    z-index: 100;
+    z-index: 1000;
     background-color: rgba(255,255,255,0.5);
     height: 100%;
     width: 100%;
@@ -263,13 +263,70 @@ button {
 }
 
 .bike-popup {
+    width: 180px;
     display: flex;
     flex-direction: column;
+
+    .bike-icon-wrapper {
+        margin: 0.5em 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .bike-icon-text {
+        margin-left: 1em;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    .bike-info {
+        margin: 0.2em 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .bike-info-label {
+        font-weight: bold;
+    }
 }
 
 .bike-popup-form {
+    padding: 0.5em;
+    margin: 0.5em 0;
     display: flex;
     flex-direction: column;
+    background-color: #ddd;
+    border: 2px solid #ddd;
+    border-radius: 3px;
+
+    .maintenance-checkbox {
+        margin: 0.3em 0;
+    }
+}
+
+.station-popup {
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+
+    .station-icon-wrapper {
+        margin: 0.5em 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .station-icon-text {
+        margin-left: 1em;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
 }
 
 .bike-move-form {

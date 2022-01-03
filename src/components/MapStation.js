@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import { Marker, Popup, Rectangle } from 'react-leaflet';
 
 MapStation.propTypes = {
+    utils: PropTypes.object,
     type: PropTypes.string,
     station: PropTypes.object,
-    getIcon: PropTypes.func
+    getIcon: PropTypes.func,
+    switchView: PropTypes.func
 };
 
 function MapStation(props) {
@@ -28,12 +30,26 @@ function MapStation(props) {
         [coords.southeast.lat, coords.southeast.long]
     ];
 
+    function showStation() {
+        props.utils.mapInstance.closePopup();
+        console.log("öppnar");
+        // props.switchView("parkingStation", station);
+    }
+
     return (
         <>
             <Rectangle bounds={bounds} pathOptions={options} />
             <Marker position={markerPosition} icon={props.getIcon(markerImg, [15, 35], [1, -10])}>
                 <Popup>
-                    <span>Station: {station.name}</span>
+                    <div className="station-popup">
+                        <div className="station-icon-wrapper">
+                            <span className="material-icons">
+                                {(type === "charge") ? "battery_charging_full" : "local_parking"}
+                            </span>
+                            <div className="station-icon-text">{station.name}</div>
+                        </div>
+                        <button type="button" onClick={showStation}>Visa station</button>
+                    </div>
                 </Popup>
             </Marker>
         </>
