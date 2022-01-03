@@ -87,7 +87,7 @@ button {
     left: 0;
 
     .modal-box {
-        margin: 20vh auto;
+        margin: 30vh auto;
         max-width: 50vh;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3), 0 3px 10px 0 rgba(0,0,0,0.19);
         padding: 1em;
@@ -118,13 +118,36 @@ button {
 
     .flash-wrapper {
         display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
+        flex-direction: column;
+        justify-content: space-between;
         margin: 1em;
         padding: 0.5em;
         border: 2px solid #7dbb92;
         border-radius: 3px;
+    }
+
+    .symbol-text-wrapper {
+        margin: 1em;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .text {
+        margin: 0 1em;
+    }
+
+    .material-icons {
+        color: #7dbb92;
+    }
+
+    .warning-border {
+        border: 2px solid #dc3545;
+    }
+
+    .warning-color {
+        color: #dc3545;
     }
 }
 

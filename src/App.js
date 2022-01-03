@@ -90,7 +90,6 @@ function App() {
     }
 
     function renderFlashMessage() {
-        console.log("flash");
         return ( <FlashMessage
                     setMessage={setMessage}
                     message={message} /> );

@@ -50,7 +50,7 @@ function BikesTable(props) {
         <div>
             <div className="title-wrapper">
                 <h1>Cyklar</h1>
-                <button type="button" onClick={() => props.setMessage("hej")}>
+                <button type="button" onClick={() => props.setMessage({ text: "hej", warning: true })}>
                     flash me
                 </button>
                 <button type="button" onClick={getBikes}>
