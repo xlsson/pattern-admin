@@ -14,41 +14,26 @@ function StationsTable(props) {
     const [stations, setStations] = useState([]);
     const [bikesPerStation, setBikesPerStation] = useState({});
 
-    const title = (props.type === "charge") ? "Laddningsstationer" : "Parkeringsstationer";
+    const type = props.type;
+    const currentCity = props.currentCity;
+    const cities = props.cities;
+
+    const title = (type === "charge") ? "Laddningsstationer" : "Parkeringsstationer";
 
     useEffect(() => {
-        const _stations = props.utils.createStationsArray(props.type, props.currentCity, props.cities);
+        const _stations = props.utils.createStationsArray(type, currentCity, cities);
         setStations(_stations);
-        createBikesPerStation(_stations);
+        countBikes(_stations);
     }, [props]);
 
-    async function createBikesPerStation(_stations) {
-        const _bikes = await getBikes();
-        const _bikesPerStation = countBikes(_bikes, _stations);
-        setBikesPerStation(_bikesPerStation);
+    async function countBikes(_stations) {
+        const result = await props.utils.countBikes(_stations, type, currentCity._id);
+        setBikesPerStation(result);
     }
 
-    async function getBikes() {
-        const data = await props.api.getBikes(props.currentCity._id);
-        return data.bikes;
-    }
-
-    function countBikes(_bikes, _stations) {
-        const _bikesPerStation = {};
-
-        _stations.forEach((station) => { _bikesPerStation[station._id] = 0; });
-
-        let stationId;
-        _bikes.forEach((_bike) => {
-            stationId = _bike[`${props.type}_id`];
-            if (stationId) { _bikesPerStation[stationId] += 1; }
-        });
-
-        return _bikesPerStation;
-    }
 
     function handleClick(i) {
-        props.switchView(`${props.type}Station`, stations[i]);
+        props.switchView(`${type}Station`, stations[i]);
     }
 
     return (
@@ -74,7 +59,7 @@ function StationsTable(props) {
                         <td>
                         <div className="icon-and-label-wrapper">
                             <span className="material-icons">
-                            {(props.type === "charge") ? "battery_charging_full" : "local_parking"}
+                            {(type === "charge") ? "battery_charging_full" : "local_parking"}
                             </span>
                             <div>{station.name}</div>
                         </div>

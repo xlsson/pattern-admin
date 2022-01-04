@@ -1,3 +1,5 @@
+import api from './api.js';
+
 const utils = {
     mapInstance: null,
     currentInterval: "",
@@ -6,9 +8,9 @@ const utils = {
         clearInterval(utils.currentInterval);
         utils.autoFetch = false;
     },
+    // Returns an array of all stations for the selected city id, with a
+    // city_id and city_name attribute added to each station
     createStationsArray: function(type, currentCity, cities) {
-        // Returns an array of all stations for the selected city id, with a
-        // city_id and city_name attribute added to each station
         let stations = [];
 
         if (currentCity._id !== "all") {
@@ -28,6 +30,23 @@ const utils = {
         });
 
         return stations;
+    },
+    // Returns an object with the city's station ids as keys, and
+    // the number of bikes at each station as their value
+    countBikes: async function(stations, type, cityId) {
+        const data = await api.getBikes(cityId);
+        const bikes = data.bikes;
+        const result = {};
+
+        stations.forEach((station) => { result[station._id] = 0; });
+
+        let stationId;
+        bikes.forEach((bike) => {
+            stationId = bike[`${type}_id`];
+            if (stationId) { result[stationId] += 1; }
+        });
+
+        return result;
     },
     createFlashMessage: function(data, context) {
         const texts = {
