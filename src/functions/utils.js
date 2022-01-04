@@ -8,7 +8,7 @@ const utils = {
         clearInterval(utils.currentInterval);
         utils.autoFetch = false;
     },
-    // Returns an array of all stations for the selected city id, with a
+    // Returns an array of all stations for the selected city id, with
     // city_id and city_name attribute added to each station
     createStationsArray: function(type, currentCity, cities) {
         let stations = [];
@@ -47,6 +47,23 @@ const utils = {
         });
 
         return result;
+    },
+    getDateTimeString: function(mongoDate) {
+        const startTime = new Date(mongoDate);
+
+        const year = startTime.getFullYear();
+        const month = utils.addZero(startTime.getMonth());
+        const date = utils.addZero(startTime.getDate());
+        const hours = utils.addZero(startTime.getHours());
+        const minutes = utils.addZero(startTime.getMinutes());
+
+        const time = `${year}-${month}-${date}, ${hours}:${minutes}`;
+        return time;
+    },
+    addZero: function(number) {
+        number = number.toString();
+        if (number.length === 1) { number = `0${number}`; }
+        return number;
     },
     createFlashMessage: function(data, context) {
         const texts = {

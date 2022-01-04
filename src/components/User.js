@@ -199,7 +199,7 @@ function User(props) {
                 </tbody>
             </table>
 
-            <Trips trips={trips} />
+            <Trips utils={props.utils} trips={trips} />
         </div>
     );
 }
