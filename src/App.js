@@ -31,12 +31,12 @@ function App() {
     const [view, setView] = useState(defaultView);
     const [params, setParams] = useState({});
     const [loggedInUser, setLoggedInUser] = useState("");
+    const [message, setMessage] = useState(null);
+
     const [cities, setCities] = useState({});
     const [citiesArray, setCitiesArray] = useState([]);
     const [allCities, setAllCities] = useState(_allCities);
     const [currentCity, setCurrentCity] = useState(allCities);
-
-    const [message, setMessage] = useState(null);
 
     useEffect(() => { getCities(); }, []);
     useEffect(() => { setCurrentCity(allCities); }, [allCities]);
@@ -45,10 +45,9 @@ function App() {
         const data = await api.getCities();
         setCitiesArray(data.cities);
         addStationsToDefault(data.cities);
+
         let citiesObject = {};
-        data.cities.forEach((city) => {
-            citiesObject[city._id] = city;
-        });
+        data.cities.forEach((city) => { citiesObject[city._id] = city; });
         setCities(citiesObject);
     }
 
@@ -88,12 +87,6 @@ function App() {
         setView("loginModal");
     }
 
-    function renderFlashMessage() {
-        return ( <FlashMessage
-                    setMessage={setMessage}
-                    message={message} /> );
-    }
-
     function renderView() {
         switch (view) {
             case "loginModal": return renderLoginModal();
@@ -108,6 +101,12 @@ function App() {
             case "overviewMap": return renderOverviewMap();
             case "price": return renderPrice();
         }
+    }
+
+    function renderFlashMessage() {
+        return ( <FlashMessage
+                    setMessage={setMessage}
+                    message={message} /> );
     }
 
     function renderLoginModal() {
