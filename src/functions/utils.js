@@ -34,6 +34,10 @@ const utils = {
             },
         };
 
+        if (Object.prototype.hasOwnProperty.call(data, "message")) {
+            return { text: data.message, error: false };
+        }
+
         const isError = Object.prototype.hasOwnProperty.call(data, "error");
         const type = (isError ? "error" : "success");
         const text = texts[context][type];

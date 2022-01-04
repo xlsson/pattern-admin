@@ -11,7 +11,7 @@ const api = {
     login: async function (username, password) {
         const url = `${api.baseUrl}/admins/login`;
 
-        console.log(username, password, "replaced by default userinfo from devconfig");
+        // console.log(username, password, "replaced by default userinfo from devconfig");
 
         let requestOptions = {
             method: "POST",
@@ -19,8 +19,8 @@ const api = {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: devconfig.username,
-                password: devconfig.password
+                username: username,
+                password: password
             })
         };
 
@@ -103,7 +103,7 @@ const api = {
         let keys = Object.keys(newValues);
 
         if (keys.length === 0) {
-            return { error: "no changes, empty request"};
+            return { message: "Inget att spara"};
         }
 
         let changes = [];
@@ -152,7 +152,7 @@ const api = {
         let keys = Object.keys(newValues);
 
         if (keys.length === 0) {
-            return { error: "no changes, empty request"};
+            return { message: "Inget att spara"};
         }
 
         let changes = [];

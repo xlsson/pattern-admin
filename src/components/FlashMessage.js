@@ -18,7 +18,7 @@ function FlashMessage(props) {
                 <div className={"flash-wrapper " + borderColor}>
                     <div className="symbol-text-wrapper">
                         <span className={"material-icons " + iconColor}>
-                            {(error) ? "error" : "check"}
+                            {(error) ? "error" : "info"}
                         </span>
                         <div className="text">{text}</div>
                         <button type="button" onClick={() => props.setMessage(null)}>Stäng</button>
