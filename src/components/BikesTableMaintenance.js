@@ -28,7 +28,7 @@ function BikesTableMaintenance(props) {
     }
 
     function renderMoveForm(bike) {
-        let chargeStations = cities[bike.city_id].charge_stations;
+        const chargeStations = cities[bike.city_id].charge_stations;
         return (
             <BikeMoveForm
                 api={props.api}

@@ -17,18 +17,18 @@ function Bike(props) {
     const cities = props.cities;
     const bike = props.bike;
 
-    let chargeStations = cities[props.bike.city_id].charge_stations;
-    let parkingStations = cities[props.bike.city_id].parking_stations;
-    let focusCoords = [
+    const chargeStations = cities[props.bike.city_id].charge_stations;
+    const parkingStations = cities[props.bike.city_id].parking_stations;
+    const focusCoords = [
         props.bike.coordinates.lat,
         props.bike.coordinates.long
     ];
 
     async function getThisBike() {
         const data = await props.api.getBikes(props.bike.city_id);
-        let allBikes = data.bikes;
+        const allBikes = data.bikes;
 
-        let filteredBikes = allBikes.filter(function(bike) {
+        const filteredBikes = allBikes.filter(function(bike) {
           return bike._id === props.bike._id;
         });
 

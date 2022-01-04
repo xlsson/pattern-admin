@@ -15,7 +15,7 @@ Menu.propTypes = {
 };
 
 function Menu(props) {
-    let active = props.view;
+    const active = props.view;
 
     function handleMenuClick(view) { props.switchView(view); }
 

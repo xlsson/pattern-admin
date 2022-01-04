@@ -10,10 +10,10 @@ ChangeCity.propTypes = {
 function ChangeCity(props) {
     const [selectedId, setSelectedId] = useState("all");
 
-    let allOptions = props.cities;
+    const allOptions = props.cities;
     allOptions["all"] = props.allCities;
 
-    let cityIds = Object.keys(allOptions);
+    const cityIds = Object.keys(allOptions);
 
     function handleChange(event) {
         setSelectedId(event.target.value);

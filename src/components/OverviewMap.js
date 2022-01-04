@@ -22,13 +22,13 @@ function OverviewMap(props) {
 
     const initialZoom = (city._id !== "all") ? 13 : 6;
 
-    let [bikes, setBikes] = useState([]);
-    let [focusCoords, setFocusCoords] = useState([lat, long]);
-    let [zoom, setZoom] = useState(initialZoom);
-    let [autoFetchIsOn, setAutoFetchIsOn] = useState(props.utils.autoFetch);
+    const [bikes, setBikes] = useState([]);
+    const [focusCoords, setFocusCoords] = useState([lat, long]);
+    const [zoom, setZoom] = useState(initialZoom);
+    const [autoFetchIsOn, setAutoFetchIsOn] = useState(props.utils.autoFetch);
 
     function setZoomGetBikes() {
-        let center = props.utils.mapInstance.getCenter();
+        const center = props.utils.mapInstance.getCenter();
         setZoom(props.utils.mapInstance.getZoom());
         setFocusCoords([center.lat, center.lng]);
         getBikes();

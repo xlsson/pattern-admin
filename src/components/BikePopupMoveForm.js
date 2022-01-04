@@ -8,7 +8,7 @@ BikePopupMoveForm.propTypes = {
     getBikes: PropTypes.func,
     bike: PropTypes.object,
     chargeStations: PropTypes.array,
-    setMessage: PropTypes.array
+    setMessage: PropTypes.func
 };
 
 function BikePopupMoveForm(props) {

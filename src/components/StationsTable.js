@@ -13,7 +13,7 @@ function StationsTable(props) {
     const [stations, setStations] = useState([]);
     const [bikesPerStation, setBikesPerStation] = useState({});
 
-    let title = (props.type === "charge") ? "Laddningsstationer" : "Parkeringsstationer";
+    const title = (props.type === "charge") ? "Laddningsstationer" : "Parkeringsstationer";
 
     useEffect(() => {
         const _stations = createStationsArray();

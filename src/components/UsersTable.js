@@ -8,7 +8,7 @@ UsersTable.propTypes = {
 };
 
 function UsersTable(props) {
-    let [users, setUsers] = useState([]);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         getUsers();

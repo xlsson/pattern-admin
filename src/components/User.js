@@ -14,11 +14,11 @@ User.propTypes = {
 function User(props) {
     const userId = props.user._id;
 
-    let [user, setUser] = useState(props.user);
-    let [name, setName] = useState("")
-    let [changes, setChanges] = useState({});
-    let [trips, setTrips] = useState([]);
-    let [cityName, setCityName] = useState("");
+    const [user, setUser] = useState(props.user);
+    const [name, setName] = useState("")
+    const [changes, setChanges] = useState({});
+    const [trips, setTrips] = useState([]);
+    const [cityName, setCityName] = useState("");
 
     useEffect(() => {
         getUsers(userId);
@@ -26,7 +26,7 @@ function User(props) {
     }, [userId]);
 
     function updateName(userData) {
-        let fullname = userData.firstname + " " + userData.lastname;
+        const fullname = userData.firstname + " " + userData.lastname;
         setName(fullname);
     }
 

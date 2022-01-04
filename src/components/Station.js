@@ -14,7 +14,7 @@ Station.propTypes = {
 };
 
 function Station(props) {
-    let [bikes, setBikes] = useState([]);
+    const [bikes, setBikes] = useState([]);
 
     useEffect(() => { getBikesAtStation(); }, [props]);
 
@@ -40,8 +40,8 @@ function Station(props) {
 
     async function getBikesAtStation() {
         const data = await props.api.getBikes(station.city_id);
-        let allBikes = data.bikes;
-        let filteredBikes = allBikes.filter(function(bike) {
+        const allBikes = data.bikes;
+        const filteredBikes = allBikes.filter(function(bike) {
           return bike[`${props.type}_id`] === station._id;
         });
 

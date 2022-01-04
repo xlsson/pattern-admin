@@ -21,8 +21,8 @@ function Price(props) {
     }
 
     function handleInput(value, prop) {
-        let updatedPrice = { ...price };
-        let updatedChanges = { ...changes };
+        const updatedPrice = { ...price };
+        const updatedChanges = { ...changes };
 
         updatedPrice[prop] = (value.length > 0) ? parseInt(value) : 0;
         updatedChanges[prop] = (value.length > 0) ? parseInt(value) : 0;

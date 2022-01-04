@@ -21,12 +21,12 @@ Map.propTypes = {
 };
 
 function Map(props) {
-    let [zoom, setZoom] = useState(6);
-    let [focusCoords, setFocusCoords] = useState([58.195259, 14.221258]);
-    let [bikes, setBikes] = useState([]);
-    let [chargeStations, setChargeStations] = useState([]);
-    let [parkingStations, setParkingStations] = useState([]);
-    let [cityLimits, setCityLimits] = useState([]);
+    const [zoom, setZoom] = useState(6);
+    const [focusCoords, setFocusCoords] = useState([58.195259, 14.221258]);
+    const [bikes, setBikes] = useState([]);
+    const [chargeStations, setChargeStations] = useState([]);
+    const [parkingStations, setParkingStations] = useState([]);
+    const [cityLimits, setCityLimits] = useState([]);
 
     useEffect(() => {
         setZoom(props.zoom);
@@ -73,7 +73,7 @@ function Map(props) {
     }
 
     function createCityLimits() {
-        let limitsArray = [];
+        const limitsArray = [];
 
         if (props.city._id !== "all") {
             limitsArray.push(props.city.coordinates);

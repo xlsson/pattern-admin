@@ -13,10 +13,10 @@ BikesTable.propTypes = {
 };
 
 function BikesTable(props) {
-    let [bikes, setBikes] = useState([]);
+    const [bikes, setBikes] = useState([]);
 
-    let currentCity = props.currentCity;
-    let cities = props.cities;
+    const currentCity = props.currentCity;
+    const cities = props.cities;
 
     useEffect(() => { getBikes(); }, [props]);
 
