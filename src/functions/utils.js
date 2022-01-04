@@ -1,11 +1,34 @@
 const utils = {
+    mapInstance: null,
     currentInterval: "",
     autoFetch: false,
     stopInterval: function() {
         clearInterval(utils.currentInterval);
         utils.autoFetch = false;
     },
-    mapInstance: null,
+    createStationsArray: function(type, currentCity, cities) {
+        // Returns an array of all stations for the selected city id, with a
+        // city_id and city_name attribute added to each station
+        let stations = [];
+
+        if (currentCity._id !== "all") {
+            stations = currentCity[`${type}_stations`];
+            stations.forEach((station) => { station.city_id = currentCity._id; });
+            return stations;
+        }
+
+        Object.keys(cities).forEach((key) => {
+            if (key !== "all") {
+                cities[key][`${type}_stations`].forEach((station) => {
+                    station.city_id = key;
+                    station.city_name = cities[key].name;
+                });
+                stations = stations.concat(cities[key][`${type}_stations`]);
+            }
+        });
+
+        return stations;
+    },
     createFlashMessage: function(data, context) {
         const texts = {
             endMaintenance: {

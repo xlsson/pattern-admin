@@ -11,7 +11,7 @@ const api = {
     login: async function (username, password) {
         const url = `${api.baseUrl}/admins/login`;
 
-        // console.log(username, password, "replaced by default userinfo from devconfig");
+        console.log(username, password, "replaced by default userinfo from devconfig");
 
         let requestOptions = {
             method: "POST",
@@ -19,8 +19,8 @@ const api = {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: username,
-                password: password
+                username: devconfig.username,
+                password: devconfig.password
             })
         };
 

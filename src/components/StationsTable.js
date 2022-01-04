@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 StationsTable.propTypes = {
     api: PropTypes.object,
+    utils: PropTypes.object,
     switchView: PropTypes.func,
     type: PropTypes.string,
     currentCity: PropTypes.object,
@@ -16,14 +17,14 @@ function StationsTable(props) {
     const title = (props.type === "charge") ? "Laddningsstationer" : "Parkeringsstationer";
 
     useEffect(() => {
-        const _stations = createStationsArray();
+        const _stations = props.utils.createStationsArray(props.type, props.currentCity, props.cities);
         setStations(_stations);
-        createBikesPerStation();
+        createBikesPerStation(_stations);
     }, [props]);
 
-    async function createBikesPerStation() {
+    async function createBikesPerStation(_stations) {
         const _bikes = await getBikes();
-        const _bikesPerStation = countBikes(_bikes);
+        const _bikesPerStation = countBikes(_bikes, _stations);
         setBikesPerStation(_bikesPerStation);
     }
 
@@ -32,15 +33,10 @@ function StationsTable(props) {
         return data.bikes;
     }
 
-    function countBikes(_bikes) {
+    function countBikes(_bikes, _stations) {
         const _bikesPerStation = {};
-        Object.keys(props.cities).forEach((key) => {
-            if (key !== "all") {
-                props.cities[key][`${props.type}_stations`].forEach((station) => {
-                    _bikesPerStation[station._id] = 0;
-                });
-            }
-        });
+
+        _stations.forEach((station) => { _bikesPerStation[station._id] = 0; });
 
         let stationId;
         _bikes.forEach((_bike) => {
@@ -49,31 +45,6 @@ function StationsTable(props) {
         });
 
         return _bikesPerStation;
-    }
-
-    // Adds city_id to each station and, if "all" is selected, creates one
-    // array for all stations
-    function createStationsArray() {
-        let _stations = [];
-
-        if (props.currentCity._id !== "all") {
-            _stations = props.currentCity[`${props.type}_stations`];
-            _stations.forEach((station) => {
-                station.city_id = props.currentCity._id;
-            });
-            return _stations;
-        }
-
-        Object.keys(props.cities).forEach((key) => {
-            if (key !== "all") {
-                props.cities[key][`${props.type}_stations`].forEach((station) => {
-                    station.city_id = key;
-                });
-                _stations = _stations.concat(props.cities[key][`${props.type}_stations`]);
-            }
-        });
-
-        return _stations;
     }
 
     function handleClick(i) {
@@ -99,7 +70,7 @@ function StationsTable(props) {
                         key={i}
                         onClick={() => handleClick(i)}>
                         <>
-                        <td>{props.cities[station.city_id].name}</td>
+                        <td>{station.city_name}</td>
                         <td>
                         <div className="icon-and-label-wrapper">
                             <span className="material-icons">

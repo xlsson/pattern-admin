@@ -158,6 +158,7 @@ function App() {
     function renderStationsTable(type) {
         return ( <StationsTable
                     api={api}
+                    utils={utils}
                     switchView={switchView}
                     type={type}
                     currentCity={currentCity}
@@ -165,7 +166,6 @@ function App() {
     }
 
     function renderStation(type) {
-        console.log(params);
         return ( <Station
                     api={api}
                     utils={utils}

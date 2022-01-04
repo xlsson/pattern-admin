@@ -10,7 +10,7 @@ Station.propTypes = {
     type: PropTypes.string,
     currentCity: PropTypes.object,
     cities: PropTypes.object,
-    setMessage: PropTypes.array
+    setMessage: PropTypes.func
 };
 
 function Station(props) {
@@ -32,7 +32,6 @@ function Station(props) {
 
     const station = props.station;
     const coords = station.coordinates;
-    const cityName = props.cities[station.city_id].name;
 
     const lat = (coords.northwest.lat + coords.southeast.lat)/2;
     const long = (coords.northwest.long + coords.southeast.long)/2;
@@ -66,7 +65,7 @@ function Station(props) {
             </thead>
             <tbody>
                 <tr>
-                    <td data-testid="city">{cityName}</td>
+                    <td data-testid="city">{station.city_name}</td>
 
                     <td data-testid="name">
                         <div className="icon-and-label-wrapper">
