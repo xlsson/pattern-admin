@@ -23,7 +23,9 @@ function Menu(props) {
         <header className="header">
             <div className="header-content-wrapper">
 
-                <div className="logo">seab.</div>
+                <div
+                    onClick={() => props.switchView("overviewMap")}
+                    className="logo pointer-cursor">seab.</div>
 
                 <ChangeCity
                     allCities={props.allCities}
