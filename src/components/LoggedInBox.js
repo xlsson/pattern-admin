@@ -19,11 +19,12 @@ function LoggedInBox(props) {
     return (
         <div className="logged-in-box">
             <p data-testid="loggedInUserLabel">
-                {(props.api.token.length > 0) && "Inloggad som "} <strong>{props.loggedInUser}</strong>
+                {(props.api.token.length > 0) && "Inloggad: "} <strong>{props.loggedInUser}</strong>
             </p>
-            <a onClick={logOut} className="pointer-cursor" data-testid="logoutLink">
-            <span className="material-icons">exit_to_app</span>
-            </a>
+            <button
+                onClick={logOut}
+                className="pointer-cursor"
+                data-testid="logoutLink">Logga ut</button>
         </div>
     );
 }

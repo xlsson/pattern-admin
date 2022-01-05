@@ -20,15 +20,10 @@ function Menu(props) {
     function handleMenuClick(view) { props.switchView(view); }
 
     return (
-        <div className="header-wrapper">
+        <header className="header">
+            <div className="header-content-wrapper">
 
-            <LoggedInBox
-                api={props.api}
-                loggedInUser={props.loggedInUser}
-                setLoggedInUser={props.setLoggedInUser}
-                switchView={props.switchView} />
-
-            <div className="header-below-wrapper">
+                <div className="logo">seab.</div>
 
                 <ChangeCity
                     allCities={props.allCities}
@@ -38,7 +33,7 @@ function Menu(props) {
                 <ul className="menu-wrapper">
                     <li className={ (active === "overviewMap") ? "active" : "" }
                         onClick={() => handleMenuClick("overviewMap")}>
-                        Översiktskarta
+                        Karta
                     </li>
                     <li className={ ((active === "bikes") || (active === "bike")) ? "active" : "" }
                         onClick={() => handleMenuClick("bikes")}>
@@ -46,11 +41,11 @@ function Menu(props) {
                     </li>
                     <li className={ ((active === "chargeStations") || (active === "chargeStation")) ? "active" : "" }
                         onClick={() => handleMenuClick("chargeStations")}>
-                        Laddningsstationer
+                        Laddning
                     </li>
                     <li className={ ((active === "parkingStations") || (active === "parkingStation")) ? "active" : "" }
                         onClick={() => handleMenuClick("parkingStations")}>
-                        Parkeringsstationer
+                        Parkering
                     </li>
                     <li className={ ((active === "users") || (active === "user")) ? "active" : "" }
                         onClick={() => handleMenuClick("users")}>
@@ -58,11 +53,17 @@ function Menu(props) {
                     </li>
                     <li className={ (active === "price") ? "active" : "" }
                         onClick={() => handleMenuClick("price")}>
-                        Pristariff
+                        Pris
                     </li>
                 </ul>
+
+                <LoggedInBox
+                    api={props.api}
+                    loggedInUser={props.loggedInUser}
+                    setLoggedInUser={props.setLoggedInUser}
+                    switchView={props.switchView} />
             </div>
-        </div>
+        </header>
     );
 }
 

@@ -195,18 +195,16 @@ function App() {
 
     return (
         <div className="page-wrapper">
-            <header>
-                <Menu
-                    api={api}
-                    switchView={switchView}
-                    utils={utils}
-                    view={view}
-                    cities={cities}
-                    allCities={allCities}
-                    chooseCity={chooseCity}
-                    loggedInUser={loggedInUser}
-                    setLoggedInUser={setLoggedInUser} />
-            </header>
+            <Menu
+                api={api}
+                switchView={switchView}
+                utils={utils}
+                view={view}
+                cities={cities}
+                allCities={allCities}
+                chooseCity={chooseCity}
+                loggedInUser={loggedInUser}
+                setLoggedInUser={setLoggedInUser} />
             <div className="content">
                 {renderView()}
                 {message && renderFlashMessage(message)}

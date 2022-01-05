@@ -18,12 +18,9 @@ function User(props) {
         phone: "", payment_method: "unknown", card_information: "", balance: 0, account_status: "deleted" };
 
     const [trips, setTrips] = useState([]);
-
     const [user, setUser] = useState(emptyUser);
-
     const [changes, setChanges] = useState({});
     const [name, setName] = useState("");
-
 
     useEffect(() => {
         getUser(userId);
@@ -74,14 +71,14 @@ function User(props) {
     return (
         <div>
             <h1>{name}</h1>
-            <table>
+            <table className="column-table">
                 <tbody>
                     <tr>
-                        <td className="text-align-right"><strong>Id</strong></td>
+                        <th scope="col">Id</th>
                         <td>{userId}</td>
                     </tr>
                     <tr>
-                        <td className="text-align-right"><strong>Förnamn</strong></td>
+                        <th scope="col">Förnamn</th>
                         <td>
                             <input
                                 type="text"
@@ -91,7 +88,7 @@ function User(props) {
                         </td>
                     </tr>
                     <tr>
-                        <td className="text-align-right"><strong>Efternamn</strong></td>
+                        <th scope="col">Efternamn</th>
                         <td>
                             <input
                                 type="text"
@@ -101,7 +98,7 @@ function User(props) {
                         </td>
                     </tr>
                     <tr>
-                        <td className="text-align-right"><strong>Favoritstad</strong></td>
+                        <th scope="col">Favoritstad</th>
                         <td>
                             <select value={user.city}
                                 onChange={(e) => updateUser(e.target.value, "city")}>
@@ -116,7 +113,7 @@ function User(props) {
                         </td>
                     </tr>
                     <tr>
-                        <td className="text-align-right"><strong>E-mail</strong></td>
+                        <th scope="col">E-mail</th>
                         <td>
                             <input
                                 type="text"
@@ -126,7 +123,7 @@ function User(props) {
                         </td>
                     </tr>
                     <tr>
-                        <td className="text-align-right"><strong>Telefon</strong></td>
+                        <th scope="col">Telefon</th>
                         <td>
                             <input
                                 type="text"
@@ -136,7 +133,7 @@ function User(props) {
                         </td>
                     </tr>
                     <tr>
-                        <td className="text-align-right"><strong>Betalmetod</strong></td>
+                        <th scope="col">Betalmetod</th>
                         <td>
                             <select
                                 onChange={(e) => updateUser(e.target.value, "payment_method")}
@@ -144,13 +141,13 @@ function User(props) {
                                 disabled={isNaN(parseInt(user.card_information))}>
                                 <option value="monthly">Abonnemang</option>
                                 <option value="refill">Refill</option>
-                                <option value="unknown">Ej vald</option>
+                                <option value="unknown">{isNaN(parseInt(user.card_information)) ? "Ange kortnummer" : "Ej vald" }</option>
                             </select>
-                            {isNaN(parseInt(user.card_information)) && "För att ändra, ange först kortnummer"}
+
                         </td>
                     </tr>
                     <tr>
-                        <td className="text-align-right"><strong>Kortnummer</strong></td>
+                        <th scope="col">Kortnummer</th>
                         <td>
                             <input
                                 type="number"
@@ -160,7 +157,7 @@ function User(props) {
                         </td>
                     </tr>
                     <tr>
-                        <td className="text-align-right"><strong>Saldo</strong></td>
+                        <th scope="col">Saldo</th>
                         <td>
                             <input
                                 type="number"
@@ -170,7 +167,7 @@ function User(props) {
                         </td>
                     </tr>
                     <tr>
-                        <td className="text-align-right"><strong>Status</strong></td>
+                        <th scope="col">Status</th>
                         <td>
                             <select
                                 onChange={(e) => updateUser(e.target.value, "account_status")}
@@ -180,13 +177,12 @@ function User(props) {
                             </select>
                         </td>
                     </tr>
-                    <tr>
-                        <td colSpan="2" className="text-align-right">
-                            <button type="button" onClick={saveChanges}>Spara ändringar</button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
+
+            <div className="text-align-right">
+                <button type="button" onClick={saveChanges}>Spara ändringar</button>
+            </div>
 
             <Trips utils={props.utils} trips={trips} />
         </div>

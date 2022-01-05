@@ -32,7 +32,6 @@ function UsersTable(props) {
     return (
         <div>
             <h1>Kunder</h1>
-            <p>(Ej stadsspecifikt)</p>
             <table>
                 <>
                 <thead>
