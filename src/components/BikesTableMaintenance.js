@@ -44,8 +44,8 @@ function BikesTableMaintenance(props) {
         return (
             <div className="icon-and-label-wrapper">
                 <span className="material-icons">build</span>
-                <div>Underhåll{(bike.battery_status < 20) ? " och laddning " : " "}pågår</div>
-                {(bike.battery_status > 20) && renderEndMaintenance(bike)}
+                <div>Underhåll{(bike.battery_status < 50) ? " och laddning " : " "}pågår</div>
+                {(bike.battery_status > 50) && renderEndMaintenance(bike)}
             </div>
         )
     }

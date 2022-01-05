@@ -41,9 +41,9 @@ function BikePopup(props) {
         if (!bike.charge_id) { return "Uthyrd"; }
 
         let status;
-        if (bike.battery_status < 20) { status = `laddning`; }
+        if (bike.battery_status < 50) { status = `laddning`; }
         if (bike.maintenance) { status = `underhåll`; }
-        if (bike.maintenance && (bike.battery_status < 20)) {
+        if (bike.maintenance && (bike.battery_status < 50)) {
             status = `laddning, underhåll`;
         }
 
