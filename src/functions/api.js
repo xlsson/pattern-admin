@@ -88,7 +88,7 @@ const api = {
         return api.sendRequest(url, requestOptions);
     },
     getPrices: function (cityId) {
-        console.log("priser för city", cityId);
+        console.log(cityId);
         let url = `${api.baseUrl}/prices`;
 
         let requestOptions = {
