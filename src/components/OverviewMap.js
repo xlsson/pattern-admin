@@ -35,6 +35,7 @@ function OverviewMap(props) {
     }
 
     async function getBikes() {
+        console.log("hämtar");
         const data = await props.api.getBikes(city._id);
         setBikes(data.bikes);
     }
