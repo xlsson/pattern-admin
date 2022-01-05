@@ -283,7 +283,6 @@ button {
 }
 
 .station-popup {
-  width: 180px;
   display: flex;
   flex-direction: column;
 }
@@ -292,7 +291,7 @@ button {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-around;
 }
 .station-popup .station-icon-text {
   margin-left: 1em;
