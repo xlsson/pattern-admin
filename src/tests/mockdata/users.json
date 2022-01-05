@@ -1,7 +1,5 @@
 [{
-	"_id": {
-		"$oid": "619f6ee3d0b6c914a2b58514"
-	},
+	"_id": "619f6ee3d0b6c914a2b58514",
 	"firstname": "Sherlock",
 	"lastname": "Holmes",
 	"email": "holmes@bakerstreet.com",
@@ -12,14 +10,10 @@
 	"balance": 99.99,
 	"account_status": "active",
 	"__v": 0,
-	"city": {
-		"$oid": "61a7603dbb53f131584de9b3"
-	}
+	"city": "61a7603dbb53f131584de9b3"
 },
 {
-	"_id": {
-		"$oid": "619f767f6736ee4a118b900a"
-	},
+	"_id": "619f767f6736ee4a118b900a",
 	"firstname": "John H.",
 	"lastname": "Watson",
 	"email": "watson@bakerstreet.com",
@@ -29,12 +23,11 @@
 	"card_information": "unknown",
 	"balance": 0,
 	"account_status": "deleted",
-	"__v": 0
+	"__v": 0,
+	"city": "61a8fd85ea20b50150945887"
 },
 {
-	"_id": {
-		"$oid": "619fca59bd11666568250ddd"
-	},
+	"_id": "619fca59bd11666568250ddd",
 	"firstname": "Mycroft",
 	"lastname": "Holm",
 	"email": "holmes@MI6.co.uk",
@@ -44,12 +37,11 @@
 	"card_information": "unknown",
 	"balance": 0,
 	"account_status": "active",
-	"__v": 0
+	"__v": 0,
+	"city": "61a8fd85ea20b50150945887"
 },
 {
-	"_id": {
-		"$oid": "61a4dd7e9359327c0c571055"
-	},
+	"_id": "61a4dd7e9359327c0c571055",
 	"firstname": "James",
 	"lastname": "Moriarty",
 	"email": "hi@moriarty.com",
@@ -59,38 +51,6 @@
 	"card_information": "unknown",
 	"balance": 0,
 	"account_status": "active",
-	"__v": 0
-},
-{
-	"_id": {
-		"$oid": "61b3d83f5bb9e290b5ee0c3b"
-	},
-	"firstname": "Stefan",
-	"lastname": "Holmes",
-	"email": "teamholm@242.se",
-	"password": "$2a$10$AswncJPE./hfJVwDgDoqIe9Pf10qvXUH1VIQ7PnnMMvKUGlTWy.SG",
-	"phone": "054123456",
-	"payment_method": "unknown",
-	"card_information": "unknown",
-	"balance": 242,
-	"account_status": "active",
 	"__v": 0,
-	"city": {
-		"$oid": "61a8fd85ea20b50150945887"
-	}
-},
-{
-	"_id": {
-		"$oid": "61b7563dee05234b222142cb"
-	},
-	"firstname": "Malin",
-	"lastname": "Wadholm",
-	"email": "malin.wadholm@gmail.com",
-	"phone": "unknown",
-	"payment_method": "unknown",
-	"card_information": "unknown",
-	"balance": 0,
-	"account_status": "active",
-	"__v": 0
+	"city": "61a8fd85ea20b50150945887"
 }]
-
