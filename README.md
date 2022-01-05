@@ -1,5 +1,4 @@
-[![Github Actions](https://github.com/xlsson/pattern-admin/actions/workflows/node.js.yml/badge.svg)](https://github.com/xlsson/pattern-admin/)
-
+[![Github Actions](https://github.com/xlsson/pattern-admin/actions/workflows/node.js.yml/badge.svg)](https://github.com/xlsson/pattern-admin/actions)
 [![Scrutinizer Build](https://scrutinizer-ci.com/g/xlsson/pattern-admin/badges/build.png?b=main)](https://scrutinizer-ci.com/g/xlsson/pattern-admin/?branch=main)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/xlsson/pattern-admin/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/xlsson/pattern-admin/?branch=main)
 [![Scrutinizer Code Coverage](https://scrutinizer-ci.com/g/xlsson/pattern-admin/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/xlsson/pattern-admin/?branch=main)
