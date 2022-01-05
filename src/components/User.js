@@ -14,65 +14,16 @@ User.propTypes = {
 function User(props) {
     const userId = props.user._id;
 
+    const emptyUser = { firstname: "", lastname: "", city: "", email: "",
+        phone: "", payment_method: "unknown", card_information: "", balance: 0, account_status: "deleted" };
+
     const [trips, setTrips] = useState([]);
 
-    const [firstname, setFirstname] = useState("");
-    const [lastname, setLastname] = useState("");
-    const [city, setCity] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [payment, setPayment] = useState("");
-    const [card, setCard] = useState("");
-    const [balance, setBalance] = useState(0);
-    const [status, setStatus] = useState("");
+    const [user, setUser] = useState(emptyUser);
 
     const [changes, setChanges] = useState({});
     const [name, setName] = useState("");
 
-    function updateFirstname(value) {
-        setFirstname(value);
-        setChanges(prevState => ({ ...prevState, firstname: value }));
-    }
-
-    function updateLastname(value) {
-        setLastname(value);
-        setChanges(prevState => ({ ...prevState, lastname: value }));
-    }
-
-    function updateCity(value) {
-        setCity(value);
-        setChanges(prevState => ({ ...prevState, city: value }));
-    }
-
-    function updateEmail(value) {
-        setEmail(value);
-        setChanges(prevState => ({ ...prevState, email: value }));
-    }
-
-    function updatePhone(value) {
-        setPhone(value);
-        setChanges(prevState => ({ ...prevState, phone: value }));
-    }
-
-    function updatePayment(value) {
-        setPayment(value);
-        setChanges(prevState => ({ ...prevState, payment_method: value }));
-    }
-
-    function updateCard(value) {
-        setCard(value);
-        setChanges(prevState => ({ ...prevState, card: value }));
-    }
-
-    function updateBalance(value) {
-        setBalance(value);
-        setChanges(prevState => ({ ...prevState, balance: value }));
-    }
-
-    function updateStatus(value) {
-        setStatus(value);
-        setChanges(prevState => ({ ...prevState, status: value }));
-    }
 
     useEffect(() => {
         getUser(userId);
@@ -82,16 +33,7 @@ function User(props) {
     async function getUser(userId) {
         const data = await props.api.getUsers(userId);
 
-        setFirstname(data.user.firstname);
-        setLastname(data.user.lastname);
-        setCity(data.user.city);
-        setEmail(data.user.email);
-        setPhone(data.user.phone);
-        setPayment((data.user.payment_method === "monthly") ? "monthly" : "refill");
-        setCard(data.user.card_information);
-        setBalance(data.user.balance);
-        setStatus((data.user.account_status === "active") ? "active" : "deleted");
-
+        setUser(data.user);
         setName(`${data.user.firstname} ${data.user.lastname}`);
     }
 
@@ -100,12 +42,31 @@ function User(props) {
         setTrips(data.trips);
     }
 
+    function updateUser(value, property) {
+        const tempUser = { ...user };
+        tempUser[property] = value;
+        setUser(tempUser);
+
+        const tempChanges = { ...changes };
+        tempChanges[property] = value;
+        setChanges(tempChanges);
+    }
+
     async function saveChanges() {
+
+        const card = changes.card_information;
+        if (card && (card.length < 13 || card.length > 16)) {
+            return props.setMessage({
+                text: "Ej sparat. Kortnumret måste vara 13-16 siffror långt",
+                error: true
+            });
+        }
+
         console.log("save", changes);
         const data = await props.api.updateUser(userId, changes);
         const message = props.utils.createFlashMessage(data, "updateUser");
 
-        setName(`${firstname} ${lastname}`);
+        setName(`${user.firstname} ${user.lastname}`);
         props.setMessage(message);
         setChanges({});
     }
@@ -124,8 +85,8 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={firstname}
-                                onChange={(e) => updateFirstname(e.target.value)}>
+                                value={user.firstname}
+                                onChange={(e) => updateUser(e.target.value, "firstname")}>
                             </input>
                         </td>
                     </tr>
@@ -134,16 +95,16 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={lastname}
-                                onChange={(e) => updateLastname(e.target.value)}>
+                                value={user.lastname}
+                                onChange={(e) => updateUser(e.target.value, "lastname")}>
                             </input>
                         </td>
                     </tr>
                     <tr>
                         <td className="text-align-right"><strong>Favoritstad</strong></td>
                         <td>
-                            <select value={city}
-                                onChange={(e) => updateCity(e.target.value)}>
+                            <select value={user.city}
+                                onChange={(e) => updateUser(e.target.value, "city")}>
                                     {props.citiesArray.map((city, i) => (
                                         <option
                                             key={i}
@@ -159,8 +120,8 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={email}
-                                onChange={(e) => updateEmail(e.target.value)}>
+                                value={user.email}
+                                onChange={(e) => updateUser(e.target.value, "email")}>
                             </input>
                         </td>
                     </tr>
@@ -169,8 +130,8 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={phone}
-                                onChange={(e) => updatePhone(e.target.value)}>
+                                value={user.phone}
+                                onChange={(e) => updateUser(e.target.value, "phone")}>
                             </input>
                         </td>
                     </tr>
@@ -178,20 +139,23 @@ function User(props) {
                         <td className="text-align-right"><strong>Betalmetod</strong></td>
                         <td>
                             <select
-                                onChange={(e) => updatePayment(e.target.value)}
-                                value={payment}>
+                                onChange={(e) => updateUser(e.target.value, "payment_method")}
+                                value={user.payment_method}
+                                disabled={isNaN(parseInt(user.card_information))}>
                                 <option value="monthly">Abonnemang</option>
                                 <option value="refill">Refill</option>
+                                <option value="unknown">Ej vald</option>
                             </select>
+                            {isNaN(parseInt(user.card_information)) && "För att ändra, ange först kortnummer"}
                         </td>
                     </tr>
                     <tr>
                         <td className="text-align-right"><strong>Kortnummer</strong></td>
                         <td>
                             <input
-                                type="text"
-                                value={card}
-                                onChange={(e) => updateCard(e.target.value)}>
+                                type="number"
+                                value={isNaN(parseInt(user.card_information)) ? "" : user.card_information}
+                                onChange={(e) => updateUser(e.target.value, "card_information")}>
                             </input>
                         </td>
                     </tr>
@@ -200,8 +164,8 @@ function User(props) {
                         <td>
                             <input
                                 type="number"
-                                value={balance}
-                                onChange={(e) => updateBalance(e.target.value)}>
+                                value={user.balance}
+                                onChange={(e) => updateUser(e.target.value, "balance")}>
                             </input>
                         </td>
                     </tr>
@@ -209,8 +173,8 @@ function User(props) {
                         <td className="text-align-right"><strong>Status</strong></td>
                         <td>
                             <select
-                                onChange={(e) => updateStatus(e.target.value)}
-                                value={status}>
+                                onChange={(e) => updateUser(e.target.value, "account_status")}
+                                value={user.account_status}>
                                 <option value="active">Aktiv</option>
                                 <option value="deleted">Inaktiv</option>
                             </select>

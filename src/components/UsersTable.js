@@ -23,6 +23,12 @@ function UsersTable(props) {
         props.switchView("user", { _id: users[i]._id });
     }
 
+    function getPaymentIcon(value) {
+        if (value === "monthly") { return ["event", "Abonnemang"]; }
+        if (value === "refill") { return ["payments", "Refill"]; }
+        return ["not_interested", "Ej valt"];
+    }
+
     return (
         <div>
             <h1>Kunder</h1>
@@ -59,9 +65,9 @@ function UsersTable(props) {
                         <td>
                             <div className="icon-and-label-wrapper">
                                 <span className="material-icons">
-                                    {(user.payment_method === "monthly") ? "event" : "payments"}
+                                    {getPaymentIcon(user.payment_method)[0]}
                                 </span>
-                                <div>{(user.payment_method === "monthly") ? "Abonnemang" : "Refill"}</div>
+                                <div>{getPaymentIcon(user.payment_method)[1]}</div>
                             </div>
                         </td>
                         <td>{props.cities[user.city].name}</td>
