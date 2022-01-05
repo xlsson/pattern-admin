@@ -1,8 +1,8 @@
-![Github Actions](https://github.com/xlsson/pattern-admin/actions/workflows/node.js.yml/badge.svg)
+[![Github Actions](https://github.com/xlsson/pattern-admin/actions/workflows/node.js.yml/badge.svg)](https://github.com/xlsson/pattern-admin/)
 
-![Scrutinizer Build](https://scrutinizer-ci.com/g/xlsson/pattern-admin/badges/build.png?b=main)
-![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/xlsson/pattern-admin/badges/quality-score.png?b=main)
-![Scrutinizer Code Coverage](https://scrutinizer-ci.com/g/xlsson/pattern-admin/badges/coverage.png?b=main)
+[![Scrutinizer Build](https://scrutinizer-ci.com/g/xlsson/pattern-admin/badges/build.png?b=main)](https://scrutinizer-ci.com/g/xlsson/pattern-admin/?branch=main)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/xlsson/pattern-admin/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/xlsson/pattern-admin/?branch=main)
+[![Scrutinizer Code Coverage](https://scrutinizer-ci.com/g/xlsson/pattern-admin/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/xlsson/pattern-admin/?branch=main)
 
 # E-scooter admin interface
 (Part of a student project for the course Pattern at Blekinge Institute of Technology, BTH)
