@@ -14,27 +14,85 @@ User.propTypes = {
 function User(props) {
     const userId = props.user._id;
 
-    const [user, setUser] = useState(props.user);
-    const [name, setName] = useState("")
-    const [changes, setChanges] = useState({});
     const [trips, setTrips] = useState([]);
-    const [cityName, setCityName] = useState("");
 
-    useEffect(() => {
-        getUsers(userId);
-        getTrips(userId);
-    }, [userId]);
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [city, setCity] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [payment, setPayment] = useState("");
+    const [card, setCard] = useState("");
+    const [balance, setBalance] = useState(0);
+    const [status, setStatus] = useState("");
 
-    function updateName(userData) {
-        const fullname = userData.firstname + " " + userData.lastname;
-        setName(fullname);
+    const [changes, setChanges] = useState({});
+    const [name, setName] = useState("");
+
+    function updateFirstname(value) {
+        setFirstname(value);
+        setChanges(prevState => ({ ...prevState, firstname: value }));
     }
 
-    async function getUsers(userId) {
+    function updateLastname(value) {
+        setLastname(value);
+        setChanges(prevState => ({ ...prevState, lastname: value }));
+    }
+
+    function updateCity(value) {
+        setCity(value);
+        setChanges(prevState => ({ ...prevState, city: value }));
+    }
+
+    function updateEmail(value) {
+        setEmail(value);
+        setChanges(prevState => ({ ...prevState, email: value }));
+    }
+
+    function updatePhone(value) {
+        setPhone(value);
+        setChanges(prevState => ({ ...prevState, phone: value }));
+    }
+
+    function updatePayment(value) {
+        setPayment(value);
+        setChanges(prevState => ({ ...prevState, payment_method: value }));
+    }
+
+    function updateCard(value) {
+        setCard(value);
+        setChanges(prevState => ({ ...prevState, card: value }));
+    }
+
+    function updateBalance(value) {
+        setBalance(value);
+        setChanges(prevState => ({ ...prevState, balance: value }));
+    }
+
+    function updateStatus(value) {
+        setStatus(value);
+        setChanges(prevState => ({ ...prevState, status: value }));
+    }
+
+    useEffect(() => {
+        getUser(userId);
+        getTrips(userId);
+    }, []);
+
+    async function getUser(userId) {
         const data = await props.api.getUsers(userId);
-        setUser(data.user);
-        updateName(data.user);
-        setCityName(props.cities[data.user.city].name);
+
+        setFirstname(data.user.firstname);
+        setLastname(data.user.lastname);
+        setCity(data.user.city);
+        setEmail(data.user.email);
+        setPhone(data.user.phone);
+        setPayment((data.user.payment_method === "monthly") ? "monthly" : "refill");
+        setCard(data.user.card_information);
+        setBalance(data.user.balance);
+        setStatus((data.user.account_status === "active") ? "active" : "deleted");
+
+        setName(`${data.user.firstname} ${data.user.lastname}`);
     }
 
     async function getTrips(userId) {
@@ -42,29 +100,14 @@ function User(props) {
         setTrips(data.trips);
     }
 
-    function handleInput(value, prop) {
-        const updatedUser = { ...user };
-        updatedUser[prop] = value;
-
-        const updatedChanges = { ...changes };
-        updatedChanges[prop] = value;
-
-        if (prop === "balance") {
-            updatedUser.balance = (value.length > 0) ? parseInt(value) : 0;
-            updatedChanges.balance = (value.length > 0) ? parseInt(value) : 0;
-        }
-
-        setChanges(updatedChanges);
-        setUser(updatedUser);
-    }
-
     async function saveChanges() {
+        console.log("save", changes);
         const data = await props.api.updateUser(userId, changes);
         const message = props.utils.createFlashMessage(data, "updateUser");
 
-        updateName(user);
-        setChanges({});
+        setName(`${firstname} ${lastname}`);
         props.setMessage(message);
+        setChanges({});
     }
 
     return (
@@ -81,8 +124,8 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={user.firstname || ""}
-                                onChange={e => handleInput(e.target.value, "firstname")}>
+                                value={firstname}
+                                onChange={(e) => updateFirstname(e.target.value)}>
                             </input>
                         </td>
                     </tr>
@@ -91,28 +134,24 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={user.lastname || ""}
-                                onChange={e => handleInput(e.target.value, "lastname")}>
+                                value={lastname}
+                                onChange={(e) => updateLastname(e.target.value)}>
                             </input>
                         </td>
                     </tr>
                     <tr>
                         <td className="text-align-right"><strong>Favoritstad</strong></td>
                         <td>
-                            <div className="icon-and-label-wrapper">
-                                <div>{cityName}</div>
-                                <select
-                                    onBlur={(e) => handleInput(e.target.value, "city")}
-                                    defaultValue={props.user.city}>
-                                        {props.citiesArray.map((city, i) => (
-                                            <option
-                                                key={i}
-                                                value={city._id}>
-                                                    {city.name}
-                                                </option>
-                                        ))}
-                                </select>
-                            </div>
+                            <select value={city}
+                                onChange={(e) => updateCity(e.target.value)}>
+                                    {props.citiesArray.map((city, i) => (
+                                        <option
+                                            key={i}
+                                            value={city._id}>
+                                                {city.name}
+                                            </option>
+                                    ))}
+                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -120,8 +159,8 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={user.email || ""}
-                                onChange={e => handleInput(e.target.value, "email")}>
+                                value={email}
+                                onChange={(e) => updateEmail(e.target.value)}>
                             </input>
                         </td>
                     </tr>
@@ -130,27 +169,20 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={user.phone || ""}
-                                onChange={e => handleInput(e.target.value, "phone")}>
+                                value={phone}
+                                onChange={(e) => updatePhone(e.target.value)}>
                             </input>
                         </td>
                     </tr>
                     <tr>
                         <td className="text-align-right"><strong>Betalmetod</strong></td>
                         <td>
-                            <div className="icon-and-label-wrapper">
-                                <span className="material-icons">
-                                    {(user.payment_method === "monthly") ? "event" : "payments"}
-                                </span>
-                                <div>{(user.payment_method === "monthly") ? "Abonnemang" : "Refill"}</div>
-                                <select
-                                    onBlur={(e) => handleInput(e.target.value, "payment_method")}
-                                    defaultValue={user.payment_method || ""}>
-                                    <option value={user.payment_method}></option>
-                                    <option value="monthly">Abonnemang</option>
-                                    <option value="refill">Refill</option>
-                                </select>
-                            </div>
+                            <select
+                                onChange={(e) => updatePayment(e.target.value)}
+                                value={payment}>
+                                <option value="monthly">Abonnemang</option>
+                                <option value="refill">Refill</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -158,8 +190,8 @@ function User(props) {
                         <td>
                             <input
                                 type="text"
-                                value={user.card_information || ""}
-                                onChange={e => handleInput(e.target.value, "card_information")}>
+                                value={card}
+                                onChange={(e) => updateCard(e.target.value)}>
                             </input>
                         </td>
                     </tr>
@@ -168,27 +200,20 @@ function User(props) {
                         <td>
                             <input
                                 type="number"
-                                value={user.balance || 0}
-                                onChange={e => handleInput(e.target.value, "balance")}>
+                                value={balance}
+                                onChange={(e) => updateBalance(e.target.value)}>
                             </input>
                         </td>
                     </tr>
                     <tr>
                         <td className="text-align-right"><strong>Status</strong></td>
                         <td>
-                            <div className="icon-and-label-wrapper">
-                                <span className="material-icons">
-                                    {(user.account_status === "active") ? "check" : "close"}
-                                </span>
-                                <div>{(user.account_status === "active") ? "Aktiv" : "Inaktiv"}</div>
-                                <select
-                                    onBlur={(e) => handleInput(e.target.value, "account_status")}
-                                    defaultValue={user.account_status || ""}>
-                                    <option value={user.account_status}></option>
-                                    <option value="active">Aktiv</option>
-                                    <option value="deleted">Inaktiv</option>
-                                </select>
-                            </div>
+                            <select
+                                onChange={(e) => updateStatus(e.target.value)}
+                                value={status}>
+                                <option value="active">Aktiv</option>
+                                <option value="deleted">Inaktiv</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
