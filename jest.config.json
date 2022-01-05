@@ -12,6 +12,5 @@
   "statements": 0
   }
  },
- "moduleDirectories": ["node_modules", "src"],
- "testPathIgnorePatterns": ["coverage"]
+ "moduleDirectories": ["node_modules", "src"]
 }
