@@ -102,7 +102,7 @@
 {
 	"_id": "61a94810e146af1a898bdb35",
 	"city_id": "61a8fd85ea20b50150945887",
-	"parking_id": null,
+	"parking_id": "61a939c1e146af1a898bdb30",
 	"bike_status": "available",
 	"battery_status": 100,
 	"coordinates": {
@@ -123,7 +123,7 @@
 	"_id": "61abbdbfd3e8bc22cfa13a8c",
 	"city_id": "61a7603dbb53f131584de9b3",
 	"charge_id": null,
-	"parking_id": null,
+	"parking_id": "61a93b34e146af1a898bdb31",
 	"bike_status": "unavailable",
 	"battery_status": 49,
 	"coordinates": {
@@ -205,12 +205,12 @@
 	"charge_id": null,
 	"parking_id": null,
 	"bike_status": "unavailable",
-	"battery_status": 56,
+	"battery_status": 30,
 	"coordinates": {
 		"lat": 59.383555,
 		"long": 13.500037
 	},
-	"maintenance": false,
+	"maintenance": true,
 	"latest_trip": {
 		"average_speed": 34,
 		"distance": 56,
@@ -224,13 +224,13 @@
 	"city_id": "61a8fd85ea20b50150945887",
 	"charge_id": "61a8ff1b108640ebcc7fd228",
 	"parking_id": null,
-	"bike_status": "available",
+	"bike_status": "unavailable",
 	"battery_status": 100,
 	"coordinates": {
 		"lat": 59.3806625,
 		"long": 13.503901500000001
 	},
-	"maintenance": false,
+	"maintenance": true,
 	"latest_trip": {
 		"average_speed": 34,
 		"distance": 56,
