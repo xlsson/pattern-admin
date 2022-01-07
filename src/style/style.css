@@ -216,7 +216,7 @@ button:active {
   justify-content: space-between;
   margin: 1em;
   padding: 0.5em;
-  border: 2px solid #333;
+  border: 1px solid #666;
   border-radius: 3px;
 }
 .flash-modal-background .symbol-text-wrapper {
@@ -228,12 +228,13 @@ button:active {
 }
 .flash-modal-background .text {
   margin: 0 1em;
+  font-size: 0.9em;
 }
 .flash-modal-background .material-icons {
   color: #333;
 }
 .flash-modal-background .error-border {
-  border: 2px solid #dc3545;
+  border: 1px solid #dc3545;
 }
 .flash-modal-background .error-color {
   color: #dc3545;
@@ -260,13 +261,19 @@ button:active {
 }
 
 .header {
+  z-index: 999;
   width: 100%;
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: space-around;
   align-items: baseline;
+  background-color: #fff;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  position: -webkit-sticky;
+  /* Safari */
+  position: sticky;
+  top: 0;
 }
 
 .header-content-wrapper {
@@ -282,6 +289,7 @@ button:active {
   color: #298e46;
   font-size: calc(1.275rem + 0.3vw);
   line-height: 1.2;
+  padding: 0.6em;
 }
 
 .change-city-wrapper {
