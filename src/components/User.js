@@ -12,27 +12,18 @@ User.propTypes = {
 };
 
 function User(props) {
-    const userId = props.user._id;
-
-    const emptyUser = { firstname: "", lastname: "", city: "", email: "",
-        phone: "", payment_method: "unknown", card_information: "", balance: 0, account_status: "deleted" };
+    const _user = props.user.user;
+    const userId = _user._id;
 
     const [trips, setTrips] = useState([]);
-    const [user, setUser] = useState(emptyUser);
+    const [user, setUser] = useState(_user);
     const [changes, setChanges] = useState({});
     const [name, setName] = useState("");
 
     useEffect(() => {
-        getUser(userId);
+        setName(`${_user.firstname} ${_user.lastname}`);
         getTrips(userId);
     }, []);
-
-    async function getUser(userId) {
-        const data = await props.api.getUsers(userId);
-
-        setUser(data.user);
-        setName(`${data.user.firstname} ${data.user.lastname}`);
-    }
 
     async function getTrips(userId) {
         const data = await props.api.getTrips(userId);
