@@ -9,7 +9,7 @@ LoginModal.propTypes = {
 
 function LoginModal(props) {
     const msg = {
-        welcome: "Välkommen",
+        welcome: "Administratörsinloggning",
         fail: "Fel användarnamn eller lösenord"
     };
     const [username, setUsername] = useState("");
@@ -33,10 +33,10 @@ function LoginModal(props) {
     return (
         <div className="login-modal-background">
             <div className="modal-box">
-                <h1>Logga in</h1>
+                <div className="logo" data-testid="logo">seab.</div>
                 <div className="message-wrapper">
                     <span className="material-icons">
-                        {(message === msg.welcome) ? "vpn_key" : "error"}
+                        {(message === msg.welcome) ? "" : "error"}
                     </span>
                     <div>{message}</div>
                 </div>
