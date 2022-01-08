@@ -26,10 +26,13 @@ describe("Tests for Bike component", () => {
     let getBikesHasBeenCalled;
     const api = {};
 
+    const utils = { setView: jest.fn() };
+
     it('Bike page gets rendered with expected elements', async () => {
         render(
             <Bike
                 api={api}
+                utils={utils}
                 bike={bike}
                 cities={cities} />
         );
@@ -43,10 +46,26 @@ describe("Tests for Bike component", () => {
         });
     });
 
+    it('Bike page calls expected functions', async () => {
+        render(
+            <Bike
+                api={api}
+                utils={utils}
+                bike={bike}
+                cities={cities} />
+        );
+
+        await waitFor(() => {
+            const coords = [ bike.coordinates.lat, bike.coordinates.long ];
+            expect(utils.setView).toHaveBeenCalledWith(coords, 20);
+        });
+    });
+
     it('Bike page contains expected data', async () => {
         render(
             <Bike
                 api={api}
+                utils={utils}
                 bike={bike}
                 cities={cities} />
         );

@@ -33,9 +33,15 @@ describe("Tests for Station component", () => {
         }
     };
 
+    const utils = {
+        setView: jest.fn(),
+        getCenter: jest.fn()
+    }
+
     it('Station page gets rendered with expected elements', async () => {
         render(<Station
             api={api}
+            utils={utils}
             switchView={switchView}
             station={station}
             type={type} />);
@@ -51,9 +57,24 @@ describe("Tests for Station component", () => {
         });
     });
 
+    it('Station calls expected functions', async () => {
+        render(<Station
+            api={api}
+            utils={utils}
+            switchView={switchView}
+            station={station}
+            type={type} />);
+
+        await waitFor(() => {
+            expect(utils.setView).toHaveBeenCalled();
+            expect(utils.getCenter).toHaveBeenCalled();
+        });
+    });
+
     it('Station page contains expected station data', async () => {
         render(<Station
             api={api}
+            utils={utils}
             switchView={switchView}
             station={station}
             type={type} />);
@@ -74,6 +95,7 @@ describe("Tests for Station component", () => {
         getBikesHasBeenCalled = false;
         render(<Station
             api={api}
+            utils={utils}
             switchView={switchView}
             station={station}
             type={type} />);
@@ -86,6 +108,7 @@ describe("Tests for Station component", () => {
     it('Click on bike calls switchView', async () => {
         render(<Station
             api={api}
+            utils={utils}
             switchView={switchView}
             station={station}
             type={type} />);

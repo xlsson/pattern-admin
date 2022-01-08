@@ -10,6 +10,8 @@ describe("Tests for OverviewMap component", () => {
         currentInterval: "",
         autoFetch: false,
         stopInterval: jest.fn(),
+        getCenter: jest.fn(),
+        setView: jest.fn(),
         mapInstance: { getZoom: jest.fn(), getCenter: jest.fn() }
     };
     const cities = require("./mockdata/cities.json");
@@ -44,7 +46,7 @@ describe("Tests for OverviewMap component", () => {
         expect(wrapper.exists("Map")).toBe(true);
     });
 
-    it('Click on autofetch button sets values and calls functions', () => {
+    it('Click on autofetch button sets values and calls expected functions', () => {
         const button = wrapper.find({ "data-testid": "autofetch-button" });
 
         button.simulate('click');
