@@ -1,5 +1,8 @@
 const utils = {
     mapInstance: null,
+    setView: function(center, zoom) {
+        if (utils.mapInstance) { utils.mapInstance.setView(center, zoom); }
+    },
     currentInterval: "",
     autoFetch: false,
     stopInterval: function() {

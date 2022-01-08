@@ -27,12 +27,6 @@ function OverviewMap(props) {
         setBikes(data.bikes);
     }
 
-    function setView() {
-        if (props.utils.mapInstance) {
-            props.utils.mapInstance.setView(center, zoom);
-        }
-    }
-
     function toggleInterval(toggle) {
         if (toggle === false) {
             setAutoFetchIsOn(false);
@@ -45,12 +39,12 @@ function OverviewMap(props) {
     }
 
     useEffect(() => {
-        setView();
+        props.utils.setView(center, zoom);
         getBikes();
     }, []);
 
     useEffect(() => {
-        setView();
+        props.utils.setView(center, zoom);
         getBikes();
         // Called twice to reset current city, but not
         // toggle clear interval.
