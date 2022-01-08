@@ -38,6 +38,7 @@ function Bike(props) {
     function renderPosition(bike) {
         return (
             <BikePosition
+                utils={props.utils}
                 bike={bike}
                 cities={cities} />
         )
@@ -60,11 +61,13 @@ function Bike(props) {
             <tbody>
                 <tr>
                     <td>{bike._id}</td>
-                    <td>{cities[bike.city_id].name}</td>
+                    <td data-testid="city">
+                        {cities[bike.city_id].name}
+                    </td>
                     <td className="text-align-center">
                         {renderPosition(bike)}
                     </td>
-                    <td>
+                    <td data-testid="status">
                         <div className="icon-and-label-wrapper">
                             <span className="material-icons">
                                 {(bike.bike_status === "available") ? "check" : "close"}
@@ -76,7 +79,8 @@ function Bike(props) {
                             <div>{(bike.maintenance) && "Underhåll pågår"}</div>
                         </div>
                     </td>
-                    <td className="text-align-center">
+                    <td data-testid="batteryStatus"
+                        className="text-align-center">
                         {parseInt(bike.battery_status)}
                     </td>
                 </tr>

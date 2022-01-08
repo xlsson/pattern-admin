@@ -53,7 +53,7 @@ function BikePopup(props) {
             </> );
     }
 
-    function renderPositionInfo() {
+    function showPositionInfo() {
         let position = "ej på station";
         if (bike.charge_id) { position = `Laddningsstation`; }
         if (bike.parking_id) { position = `Parkeringsstation`; }
@@ -66,7 +66,7 @@ function BikePopup(props) {
                 <span className="material-icons" data-testid="scooter-icon">
                     electric_scooter
                 </span>
-                <div className="bike-icon-text">
+                <div className="bike-icon-text" data-testid="status">
                     {(bike.bike_status === "available") ? "Ledig" : "Upptagen"}
                 </div>
             </div>
@@ -77,9 +77,9 @@ function BikePopup(props) {
                 <span className="bike-info-label">Id:</span>
                 <span>{bike._id}</span>
             </div>
-            <div className="bike-info" data-testid="chargeStation">
+            <div className="bike-info" data-testid="position">
                 <span className="bike-info-label">Position:</span>
-                <span>{renderPositionInfo()}</span>
+                <span>{showPositionInfo()}</span>
             </div>
             <div className="bike-info" data-testid="batteryStatus">
                 <span className="bike-info-label">Batterinivå:</span>
