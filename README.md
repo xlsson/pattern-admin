@@ -23,7 +23,8 @@ To install:
 3. Create a `devconfig.json` file in the `./src/functions/` folder, with the following content:
 ```
 {
-    "baseUrl": "http://localhost:1337/v1",
+    "server": "http://localhost:1337",
+    "version": <server version>, // for example v1
     "username": <admin username>,
     "password": <admin password>
 }
