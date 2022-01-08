@@ -1,7 +1,7 @@
 const devconfig = require("./devconfig.json");
 
 const api = {
-    baseUrl: devconfig.baseUrl,
+    baseUrl: devconfig.server + "/" + devconfig.version,
     token: "",
     sendRequest: async function (url, requestOptions) {
         const response = await fetch(url, requestOptions);
