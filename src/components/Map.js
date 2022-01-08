@@ -34,7 +34,7 @@ function Map(props) {
         setBikes(props.bikes);
         setChargeStations(props.chargeStations);
         setParkingStations(props.parkingStations);
-        createCityLimits();
+        setCityLimits(props.utils.createCityLimits(props.city, props.cities));
     }, [props]);
 
     function closeAnyOpenPopup(e) {
@@ -70,22 +70,6 @@ function Map(props) {
                 station={station}
                 getIcon={getIcon} />
         );
-    }
-
-    function createCityLimits() {
-        const limitsArray = [];
-
-        if (props.city._id !== "all") {
-            limitsArray.push(props.city.coordinates);
-            return setCityLimits(limitsArray);
-        }
-
-        Object.keys(props.cities).forEach((c) => {
-            if (c !== "all") { limitsArray.push(props.cities[c].coordinates); }
-        });
-
-        setCityLimits(limitsArray);
-        return;
     }
 
     function drawCityLimits(coords) {
