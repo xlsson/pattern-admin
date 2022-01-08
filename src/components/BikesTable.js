@@ -36,6 +36,7 @@ function BikesTable(props) {
     function renderPosition(bike) {
         return (
             <BikePosition
+                utils={props.utils}
                 bike={bike}
                 cities={props.cities} />
         )
@@ -56,8 +57,8 @@ function BikesTable(props) {
     return (
         <div>
             <div className="title-wrapper">
-                <h1>Cyklar</h1>
-                <button type="button" onClick={() => getBikes(true)}>
+                <h1 data-testid="bikes-title">Cyklar</h1>
+                <button type="button" data-testid="fetch-data-button" onClick={() => getBikes(true)}>
                     Hämta senaste data
                 </button>
             </div>
