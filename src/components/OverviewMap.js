@@ -12,48 +12,50 @@ OverviewMap.propTypes = {
 
 function OverviewMap(props) {
     const city = props.currentCity;
+    const center = props.utils.getCenter(city.coordinates);
+    const zoom = (city._id !== "all") ? 13 : 6;
 
     const chargeStations = city.charge_stations;
     const parkingStations = city.parking_stations;
 
-    const coords = city.coordinates;
-    const lat = (coords.northwest.lat + coords.southeast.lat)/2;
-    const long = (coords.northwest.long + coords.southeast.long)/2;
-
-    const initialZoom = (city._id !== "all") ? 13 : 6;
-
     const [bikes, setBikes] = useState([]);
-    const [focusCoords, setFocusCoords] = useState([lat, long]);
-    const [zoom, setZoom] = useState(initialZoom);
     const [autoFetchIsOn, setAutoFetchIsOn] = useState(props.utils.autoFetch);
 
-    function setZoomGetBikes() {
-        const center = props.utils.mapInstance.getCenter();
-        setZoom(props.utils.mapInstance.getZoom());
-        setFocusCoords([center.lat, center.lng]);
-        getBikes();
-    }
-
     async function getBikes() {
-        console.log("hämtar");
+        console.log("getBikes, city:", city.name);
         const data = await props.api.getBikes(city._id);
         setBikes(data.bikes);
+    }
+
+    function setView() {
+        if (props.utils.mapInstance) {
+            props.utils.mapInstance.setView(center, zoom);
+        }
     }
 
     function toggleInterval(toggle) {
         if (toggle === false) {
             setAutoFetchIsOn(false);
             return props.utils.stopInterval();
+
         }
         setAutoFetchIsOn(true);
         props.utils.autoFetch = true;
-        props.utils.currentInterval = setInterval(setZoomGetBikes, 1000);
+        props.utils.currentInterval = setInterval(getBikes, 1000);
     }
 
     useEffect(() => {
-        setZoom(initialZoom);
-        setFocusCoords([lat, long]);
+        setView();
         getBikes();
+    }, []);
+
+    useEffect(() => {
+        setView();
+        getBikes();
+        // Called twice to reset current city, but not
+        // toggle clear interval.
+        toggleInterval(!props.utils.autoFetch);
+        toggleInterval(!props.utils.autoFetch);
     }, [props]);
 
     return (
@@ -70,14 +72,12 @@ function OverviewMap(props) {
         <Map
             api={props.api}
             utils={props.utils}
-            zoom={zoom}
-            focusCoords={focusCoords}
             bikes={bikes}
             city={city}
             cities={props.cities}
             chargeStations={chargeStations}
             parkingStations={parkingStations}
-            getBikes={setZoomGetBikes}
+            getBikes={getBikes}
             setMessage={props.setMessage}/>
         </>
     );

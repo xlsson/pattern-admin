@@ -33,9 +33,9 @@ function Station(props) {
     const station = props.station;
     const coords = station.coordinates;
 
-    const lat = (coords.northwest.lat + coords.southeast.lat)/2;
-    const long = (coords.northwest.long + coords.southeast.long)/2;
-    const focusCoords = [lat, long];
+    const center = props.utils.getCenter(coords);
+
+    props.utils.mapInstance.setView(center, 20);
 
     async function getBikesAtStation() {
         const data = await props.api.getBikes(station.city_id);
@@ -94,8 +94,6 @@ function Station(props) {
         <Map
             api={props.api}
             utils={props.utils}
-            zoom={20}
-            focusCoords={focusCoords}
             bikes={bikes}
             city={props.currentCity}
             cities={props.cities}

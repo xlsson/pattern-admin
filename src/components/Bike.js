@@ -16,13 +16,11 @@ function Bike(props) {
     const [bikes, setBikes] = useState([props.bike]);
     const cities = props.cities;
     const bike = props.bike;
-
     const chargeStations = cities[props.bike.city_id].charge_stations;
     const parkingStations = cities[props.bike.city_id].parking_stations;
-    const focusCoords = [
-        props.bike.coordinates.lat,
-        props.bike.coordinates.long
-    ];
+    const center = [ props.bike.coordinates.lat, props.bike.coordinates.long ];
+
+    props.utils.mapInstance.setView(center, 20);
 
     async function getThisBike() {
         const data = await props.api.getBikes(props.bike.city_id);
@@ -90,8 +88,6 @@ function Bike(props) {
         <Map
             api={props.api}
             utils={props.utils}
-            zoom={20}
-            focusCoords={focusCoords}
             bikes={bikes}
             city={props.currentCity}
             cities={cities}

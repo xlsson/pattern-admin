@@ -26,8 +26,8 @@ function LoginModal(props) {
         const data = await props.api.login(username, password);
         if (!data.token) { return setMessage(msg.fail); }
 
-        props.switchView("overviewMap");
         props.setLoggedInUser(username);
+        props.switchView("overviewMap");
     }
 
     return (

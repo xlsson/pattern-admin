@@ -30,7 +30,7 @@ function App() {
 
     const [view, setView] = useState(defaultView);
     const [params, setParams] = useState({});
-    const [loggedInUser, setLoggedInUser] = useState("");
+    const [loggedInUser, setLoggedInUser] = useState();
     const [message, setMessage] = useState(null);
 
     const [cities, setCities] = useState({});
@@ -38,11 +38,13 @@ function App() {
     const [allCities, setAllCities] = useState(_allCities);
     const [currentCity, setCurrentCity] = useState(allCities);
 
-    useEffect(() => { getCities(); }, []);
     useEffect(() => { setCurrentCity(allCities); }, [allCities]);
+
+    useEffect(() => { if (api.token.length > 0) { getCities(); } }, [loggedInUser]);
 
     async function getCities() {
         const data = await api.getCities();
+
         setCitiesArray(data.cities);
         addStationsToDefault(data.cities);
 
@@ -101,6 +103,19 @@ function App() {
             case "overviewMap": return renderOverviewMap();
             case "price": return renderPrice();
         }
+    }
+
+    function renderMenu() {
+        return ( <Menu
+                    api={api}
+                    switchView={switchView}
+                    utils={utils}
+                    view={view}
+                    cities={cities}
+                    allCities={allCities}
+                    chooseCity={chooseCity}
+                    loggedInUser={loggedInUser}
+                    setLoggedInUser={setLoggedInUser} /> );
     }
 
     function renderFlashMessage() {
@@ -195,16 +210,7 @@ function App() {
 
     return (
         <div className="page-wrapper">
-            <Menu
-                api={api}
-                switchView={switchView}
-                utils={utils}
-                view={view}
-                cities={cities}
-                allCities={allCities}
-                chooseCity={chooseCity}
-                loggedInUser={loggedInUser}
-                setLoggedInUser={setLoggedInUser} />
+                {api.token && renderMenu()}
             <div className="content">
                 {renderView()}
                 {message && renderFlashMessage(message)}

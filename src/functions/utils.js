@@ -6,6 +6,13 @@ const utils = {
         clearInterval(utils.currentInterval);
         utils.autoFetch = false;
     },
+    getCenter: function (coords) {
+        const lat = (
+            coords.northwest.lat + coords.southeast.lat)/2;
+        const long = (
+            coords.northwest.long + coords.southeast.long)/2;
+        return [lat, long]
+    },
     // Returns an array with coordinates for all city limits, for Leaflet map
     createCityLimits: function (city, cities) {
         const limitsArray = [];

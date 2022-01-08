@@ -89,10 +89,7 @@ function Map(props) {
                 />
                 <MapConsumer>
                     {(map) => {
-                        useEffect(() => {
-                            props.utils.mapInstance = map;
-                        }, []);
-                        map.setView(focusCoords, zoom);
+                        useEffect(() => { props.utils.mapInstance = map; }, []);
                         return null;
                     }}
                 </MapConsumer>
