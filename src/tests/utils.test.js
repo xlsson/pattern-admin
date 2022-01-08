@@ -106,7 +106,7 @@ describe("Tests for utils module", () => {
         expect(msgError2.text).toEqual("Något gick snett");
         expect(msgError2.error).toEqual(true);
 
-        expect(msg3.text).toMatch(/Meddelande från databasen/);
+        expect(msg3.text).toMatch(/Servermeddelande/);
         expect(msg3.error).toEqual(false);
     });
 

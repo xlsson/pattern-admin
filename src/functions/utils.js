@@ -122,7 +122,7 @@ const utils = {
         };
 
         if (Object.prototype.hasOwnProperty.call(data, "message")) {
-            const message = `Servermeddelande: ${data.message}`;
+            const message = `Servermeddelande: "${data.message}"`;
             return { text: message, error: false };
         }
 

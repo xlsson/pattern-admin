@@ -68,5 +68,5 @@ describe("Tests for Station component", () => {
     //         expect(city.text().includes(currentCity.name)).toBe(true);
     //         expect(coordinates.text().includes(station.coordinates.northwest.lat)).toBe(true);
     //     });
-    });
+    // });
 });
