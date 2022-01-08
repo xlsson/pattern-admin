@@ -27,7 +27,8 @@ function StationsTable(props) {
     }, [props]);
 
     async function countBikes(_stations) {
-        const result = await props.utils.countBikes(_stations, type, currentCity._id);
+        const data = await props.api.getBikes(currentCity._id);
+        const result = await props.utils.countBikes(_stations, type, data.bikes);
         setBikesPerStation(result);
     }
 
