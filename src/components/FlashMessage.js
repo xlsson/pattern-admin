@@ -15,7 +15,7 @@ function FlashMessage(props) {
     return (
         <div className="flash-modal-background">
             <div className="modal-box">
-                <div className={"flash-wrapper " + borderColor}>
+                <div className={"flash-wrapper " + borderColor} data-testid="flash-border">
                     <div className="symbol-text-wrapper">
                         <span className={"material-icons " + iconColor}>
                             {(error) ? "error" : "info"}
