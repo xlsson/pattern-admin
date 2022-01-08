@@ -23,8 +23,7 @@ function LoggedInBox(props) {
             </p>
             <button
                 onClick={logOut}
-                className="pointer-cursor"
-                data-testid="logoutLink">Logga ut</button>
+                className="pointer-cursor">Logga ut</button>
         </div>
     );
 }
