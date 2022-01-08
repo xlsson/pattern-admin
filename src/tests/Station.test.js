@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import Station from "../components/Station";
 import MockedMap from '../components/Map';
 
-jest.mock("../components/map", () => {
+jest.mock("../components/Map", () => {
     return function DummyMap(props) {
         return (
             <p>MockedMap</p>
