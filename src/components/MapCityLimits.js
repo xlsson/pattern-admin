@@ -15,9 +15,9 @@ function MapCityLimits(props) {
     ];
 
     return (
-        <>
+        <div data-testid="map-city-limits">
             <Rectangle bounds={bounds} pathOptions={options} />
-        </>
+        </div>
     );
 }
 

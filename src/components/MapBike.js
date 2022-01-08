@@ -18,8 +18,10 @@ function MapBike(props) {
     const position = [bike.coordinates.lat, bike.coordinates.long];
 
     return (
-        <div>
-            <Marker position={position} icon={props.getIcon("marker_scooter", [15, 15], [0, 0])}>
+        <div data-testid="mapbike-wrapper">
+            <Marker
+                position={position}
+                icon={props.getIcon("marker_scooter", [15, 15], [0, 0])}>
                 <Popup>
                     <BikePopup
                         api={props.api}

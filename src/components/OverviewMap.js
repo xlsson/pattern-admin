@@ -60,7 +60,10 @@ function OverviewMap(props) {
         <>
         <div className="title-wrapper">
             <h1>Översiktskarta</h1>
-            <button type="button" onClick={() => toggleInterval(!props.utils.autoFetch)}>
+            <button
+                type="button"
+                data-testid="autofetch-button"
+                onClick={() => toggleInterval(!props.utils.autoFetch)}>
                 {!autoFetchIsOn ? "Starta " : "Avbryt "} automatisk kartuppdatering
             </button>
         </div>

@@ -8,37 +8,24 @@ configure({ adapter: new Adapter() });
 
 describe("Tests for MapBike component", () => {
     const api = {};
+    const utils = {};
     const bikes = require("./mockdata/bikes.json");
     const bike = bikes[0];
-    const mapInstance = {};
     const cities = require("./mockdata/cities.json");
-    const redrawBikes = jest.fn();
+    const getBikes = jest.fn();
     const getIcon = jest.fn();
+    const setMessage = jest.fn();
 
     const wrapper = shallow(<MapBike
                 api={api}
+                utils={utils}
                 bike={bike}
-                mapInstance={mapInstance}
                 cities={cities}
-                redrawBikes={redrawBikes}
-                getIcon={getIcon} />);
+                getBikes={getBikes}
+                getIcon={getIcon}
+                setMessage={setMessage} />);
 
-    it('MapBike gets rendered with expected elements', () => {
-        const marker = wrapper.find("MapBike");
+    it('MapBike gets rendered', () => {
+        const marker = wrapper.find("mapbike-wrapper");
     });
-
-    // it("MapBike gets rendered", async () => {
-    //     render(<MapBike
-    //                 api={api}
-    //                 bike={bike}
-    //                 mapInstance={mapInstance}
-    //                 cities={cities}
-    //                 redrawBikes={redrawBikes}
-    //                 getIcon={getIcon} />);
-    //
-    //     await waitFor(() => {
-    //         expect(getIcon).toHaveBeenCalled();
-    //     });
-    // });
-
 });

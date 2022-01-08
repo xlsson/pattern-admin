@@ -65,7 +65,6 @@ function Map(props) {
     function drawStation(type, station) {
         return (
             <MapStation
-                utils={props.utils}
                 type={type}
                 station={station}
                 getIcon={getIcon} />

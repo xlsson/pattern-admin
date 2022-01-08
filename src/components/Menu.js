@@ -25,6 +25,7 @@ function Menu(props) {
 
                 <div
                     onClick={() => props.switchView("overviewMap")}
+                    data-testid="logo"
                     className="logo pointer-cursor">seab.</div>
 
                 <ChangeCity

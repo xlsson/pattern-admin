@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Marker, Popup, Rectangle } from 'react-leaflet';
 
 MapStation.propTypes = {
-    utils: PropTypes.object,
     type: PropTypes.string,
     station: PropTypes.object,
     getIcon: PropTypes.func
@@ -30,7 +29,7 @@ function MapStation(props) {
     ];
 
     return (
-        <>
+        <div data-testid="mapstation-wrapper">
             <Rectangle bounds={bounds} pathOptions={options} />
             <Marker position={markerPosition} icon={props.getIcon(markerImg, [15, 35], [1, -10])}>
                 <Popup>
@@ -44,7 +43,7 @@ function MapStation(props) {
                     </div>
                 </Popup>
             </Marker>
-        </>
+        </div>
     );
 }
 
