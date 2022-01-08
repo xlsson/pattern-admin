@@ -1,7 +1,6 @@
 [![Github Actions](https://github.com/xlsson/pattern-admin/actions/workflows/node.js.yml/badge.svg)](https://github.com/xlsson/pattern-admin/actions)
 [![Scrutinizer Build](https://scrutinizer-ci.com/g/xlsson/pattern-admin/badges/build.png?b=main)](https://scrutinizer-ci.com/g/xlsson/pattern-admin/?branch=main)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/xlsson/pattern-admin/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/xlsson/pattern-admin/?branch=main)
-[![Scrutinizer Code Coverage](https://scrutinizer-ci.com/g/xlsson/pattern-admin/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/xlsson/pattern-admin/?branch=main)
 
 # E-scooter admin interface
 (Part of a student project for the course Pattern at Blekinge Institute of Technology, BTH)
@@ -20,13 +19,11 @@ To install:
 
 1. Clone the repo with `git clone https://github.com/xlsson/pattern-admin`
 2. Run `npm install` to install the app and its dependencies.
-3. Create a `devconfig.json` file in the `./src/functions/` folder, with the following content:
+3. Create a `config.json` file in the `./src/functions/` folder, with the following content:
 ```
 {
     "server": "http://localhost:1337",
     "version": <server version>, // for example v1
-    "username": <admin username>,
-    "password": <admin password>
 }
 ```
 
