@@ -76,20 +76,6 @@ function OverviewMap(props) {
             parkingStations={parkingStations}
             getBikes={setZoomGetBikes}
             setMessage={props.setMessage}/>
-        <div className="map-legend">
-            <div className="icon-and-label-wrapper">
-                <span className="material-icons">electric_scooter</span>
-                <div>Elsparkcykel</div>
-            </div>
-            <div className="icon-and-label-wrapper">
-                <span className="material-icons">battery_charging_full</span>
-                <div>Laddningsstation</div>
-            </div>
-            <div className="icon-and-label-wrapper">
-                <span className="material-icons">local_parking</span>
-                <div>Parkeringsstation</div>
-            </div>
-        </div>
         </>
     );
 }
