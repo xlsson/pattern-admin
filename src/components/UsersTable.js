@@ -20,7 +20,7 @@ function UsersTable(props) {
     }
 
     function handleClick(i) {
-        props.switchView("user", { _id: users[i]._id });
+        props.switchView("user", { user: users[i] });
     }
 
     function getPaymentIcon(value) {
@@ -47,8 +47,9 @@ function UsersTable(props) {
                 </thead>
                 <tbody>
                 {users.map((user, i) => (
-                    <tr className="pointer-cursor" key={i} onClick={() => handleClick(i)}>
-                        <>
+                    <tr data-testid="user-row"
+                        className="pointer-cursor" key={i}
+                        onClick={() => handleClick(i)}>
                         <td>{user._id}</td>
                         <td>{user.firstname} {user.lastname}</td>
                         <td>
@@ -70,7 +71,6 @@ function UsersTable(props) {
                             </div>
                         </td>
                         <td>{props.cities[user.city].name}</td>
-                        </>
                     </tr>
                 ))}
                 </tbody>

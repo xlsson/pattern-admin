@@ -29,7 +29,7 @@ function Trips(props) {
                 </thead>
                 <tbody>
                 {trips.map((trip, i) => (
-                    <tr key={i}>
+                    <tr key={i} data-testid="trip-row">
                         <>
                         <td>{trip._id}</td>
                         <td>{props.utils.getDateTimeString(trip.start_time)}</td>

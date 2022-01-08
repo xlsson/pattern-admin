@@ -50,7 +50,6 @@ function User(props) {
             });
         }
 
-        console.log("save", changes);
         const data = await props.api.updateUser(userId, changes);
         const message = props.utils.createFlashMessage(data, "updateUser");
 
@@ -72,6 +71,7 @@ function User(props) {
                         <th scope="col">Förnamn</th>
                         <td>
                             <input
+                                data-testid="firstname-input"
                                 type="text"
                                 value={user.firstname}
                                 onChange={(e) => updateUser(e.target.value, "firstname")}>
@@ -94,11 +94,7 @@ function User(props) {
                             <select value={user.city}
                                 onChange={(e) => updateUser(e.target.value, "city")}>
                                     {props.citiesArray.map((city, i) => (
-                                        <option
-                                            key={i}
-                                            value={city._id}>
-                                                {city.name}
-                                            </option>
+                                        <option key={i} value={city._id}>{city.name}</option>
                                     ))}
                             </select>
                         </td>
@@ -127,6 +123,7 @@ function User(props) {
                         <th scope="col">Betalmetod</th>
                         <td>
                             <select
+                                data-testid="payment-dropdown"
                                 onChange={(e) => updateUser(e.target.value, "payment_method")}
                                 value={user.payment_method}
                                 disabled={isNaN(parseInt(user.card_information))}>

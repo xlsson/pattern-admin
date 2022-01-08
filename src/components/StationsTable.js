@@ -44,8 +44,8 @@ function StationsTable(props) {
                 <>
                 <thead>
                     <tr>
-                        <th>Stad</th>
-                        <th>Stationsnamn</th>
+                        <th data-testid="city">Stad</th>
+                        <th data-testid="station">Stationsnamn</th>
                         <th className="text-align-center">Antal cyklar</th>
                     </tr>
                 </thead>

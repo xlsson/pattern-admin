@@ -60,7 +60,7 @@ function Station(props) {
                 <tr>
                     <th>Stad</th>
                     <th>Namn</th>
-                    <th>Cyklar på stationen ({bikes.length} st)</th>
+                    <th data-testid="nr-of-bikes">Cyklar på stationen ({bikes.length} st)</th>
                 </tr>
             </thead>
             <tbody>
