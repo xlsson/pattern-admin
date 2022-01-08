@@ -35,9 +35,9 @@ function Trips(props) {
                         <td>{props.utils.getDateTimeString(trip.start_time)}</td>
                         <td>{props.utils.getDateTimeString(trip.stop_time)}</td>
                         <td>{trip.bike_id}</td>
-                        <td>{trip.average_speed} km/h</td>
-                        <td>{trip.distance} m</td>
-                        <td>{trip.price} kr</td>
+                        <td>{parseInt(trip.average_speed)} km/h</td>
+                        <td>{parseInt(trip.distance)} m</td>
+                        <td>{parseInt(trip.price)} kr</td>
                         </>
                     </tr>
                 ))}
