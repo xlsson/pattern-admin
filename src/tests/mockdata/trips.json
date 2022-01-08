@@ -1,19 +1,40 @@
-[{
-	"_id": "61a8ce5cd84acdc3bb04d155",
-	"user_id": "619f6ee3d0b6c914a2b58514",
-	"bike_id": "61a8aec803d845a108c53774",
-	"start_time": "2021-12-02T13:47:08.007Z",
-	"start_coordinates": {
-		"lat": 56.166382,
-		"long": 15.593662
+[
+	{
+		"_id": "61a8ce5cd84acdc3bb04d155",
+		"user_id": "619f6ee3d0b6c914a2b58514",
+		"bike_id": "61a8aec803d845a108c53774",
+		"start_time": "2021-12-02T13:47:08.007Z",
+		"start_coordinates": {
+			"lat": 56.166382,
+			"long": 15.593662
+		},
+		"__v": 0,
+		"average_speed": 11.34,
+		"distance": 800,
+		"price": 83,
+		"stop_coordinates": {
+			"lat": 56.162077,
+			"long": 15.58989
+		},
+		"stop_time": "2021-12-02T14:14:06.149Z"
 	},
-	"__v": 0,
-	"average_speed": 15,
-	"distance": 800,
-	"price": 83,
-	"stop_coordinates": {
-		"lat": 56.162077,
-		"long": 15.58989
-	},
-	"stop_time": "2021-12-02T14:14:06.149Z"
-}]
+	{
+		"_id": "61d9a63d4e84709aef03dcb1",
+		"user_id": "619f6ee3d0b6c914a2b58514",
+		"bike_id": "61a8aec803d845a108c53774",
+		"start_time": "2022-01-02T13:47:08.007Z",
+		"start_coordinates": {
+			"lat": 59.323536,
+			"long": 18.053855
+			},
+		"__v": 0,
+		"average_speed": 15.39,
+		"distance": 513,
+		"price": 66,
+		"stop_coordinates": {
+			"lat": 59.322536,
+			"long": 18.049855
+		},
+		"stop_time": "2022-01-02T14:47:08.007Z"
+	}
+]

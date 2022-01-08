@@ -1,54 +1,69 @@
 import { render, waitFor, fireEvent, screen } from "@testing-library/react";
-import { shallow, configure } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import Bike from "../components/Bike";
+import MockedMap from '../components/Map';
+import MockedBikePosition from '../components/BikePosition';
 
-configure({ adapter: new Adapter() });
+jest.mock("../components/Map", () => {
+    return function DummyMap(props) {
+        return (
+            <p>MockedMap</p>
+        );
+    };
+});
+
+jest.mock("../components/BikePosition", () => {
+    return function DummyBikePosition(props) {
+        return (
+            <p>MockedBikePosition</p>
+        );
+    };
+});
 
 describe("Tests for Bike component", () => {
     const bikes = require("./mockdata/bikes.json");
     const bike = bikes[0];
     const cities = require("./mockdata/cities.json");
-    const currentCity = cities[bike.city_id];
-    const utils = require("../functions/utils.js");
-    const api = {
-        getBikes: function(cityId) {
-            return bike;
-        }
-    };
-    const setMessage = jest.fn();
+    let getBikesHasBeenCalled;
+    const api = {};
 
-    const wrapper = shallow(
-        <Bike
-            api={api}
-            utils={utils}
-            bike={bike}
-            currentCity={currentCity}
-            cities={cities}
-            setMessage={setMessage} />
-    );
+    it('Bike page gets rendered with expected elements', async () => {
+        render(
+            <Bike
+                api={api}
+                bike={bike}
+                cities={cities} />
+        );
 
-    it('Bike page gets rendered with expected elements', () => {
-        const title = wrapper.find("h1");
+        await waitFor(() => {
+            const title = screen.getByRole("heading");
+            const bikePositionComponent = screen.getByText(/MockedBikePosition/);
+            const mapComponent = screen.getByText(/MockedMap/);
 
-        expect(wrapper.exists("BikePosition")).toBe(true);
-        expect(wrapper.exists("Map")).toBe(true);
-        expect(title.text().includes("Cykel")).toBe(true);
-        expect(wrapper.exists("Map")).toBe(true);
+            expect(title).toHaveTextContent("Cykel");
+        });
     });
 
-    it('Bike page contains expected data', () => {
-        const correctBatteryStatus = bike.battery_status;
-        const correctCity = currentCity.name;
-        const correctStatus = (bike.bike_status === "available") ? "Ja" : "Nej";
+    it('Bike page contains expected data', async () => {
+        render(
+            <Bike
+                api={api}
+                bike={bike}
+                cities={cities} />
+        );
 
-        const battery = wrapper.find({ "data-testid": "batteryStatus" });
-        const city = wrapper.find({ "data-testid": "city" });
-        const status = wrapper.find({ "data-testid": "status" });
+        await waitFor(() => {
+            const correctBatteryStatus = bike.battery_status;
+            const correctCity = cities[bike.city_id].name;
+            const correctStatus = (bike.bike_status === "available") ? "Ja" : "Nej";
 
-        expect(city.text().includes(correctCity)).toBe(true);
-        expect(battery.text().includes(correctBatteryStatus)).toBe(true);
-        expect(status.text().includes(correctStatus)).toBe(true);
+            const batteryStatus = screen.getByTestId("batteryStatus");
+            const city = screen.getByTestId("city");
+            const status = screen.getByTestId("status");
+
+            expect(city).toHaveTextContent(correctCity);
+            expect(batteryStatus).toHaveTextContent(correctBatteryStatus);
+            expect(status).toHaveTextContent(correctStatus);
+        });
     });
 
 });
