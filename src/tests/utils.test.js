@@ -2,11 +2,89 @@ import utils from "../functions/utils";
 
 describe("Tests for utils module", () => {
 
+    it("setView sets properties to expected values", () => {
+        utils.mapCenter = [58.195259, 14.221258];
+        utils.mapZoom = 6;
+
+        utils.setView([12, 24], 8);
+
+        expect(utils.mapCenter).toEqual([12, 24]);
+        expect(utils.mapZoom).toEqual(8);
+
+        utils.mapCenter = [58.195259, 14.221258];
+        utils.mapZoom = 6;
+
+        utils.setView([12.34, 24.42], 1);
+
+        expect(utils.mapCenter).toEqual([12.34, 24.42]);
+        expect(utils.mapZoom).toEqual(1);
+    });
+
     it("stopInterval sets autoFetch to false", () => {
         utils.autoFetch = true;
+
         utils.stopInterval();
+
         expect(utils.autoFetch).toBe(false);
+
         utils.autoFetch = false;
+    });
+
+    it("getCenter returns expected values", () => {
+        const coords1 = {
+            northwest: {
+                lat: 20,
+                long: 20
+            },
+            southeast: {
+                lat: 50,
+                long: 30
+            }
+        };
+
+        const coords2 = {
+            northwest: {
+                lat: 15,
+                long: 23
+            },
+            southeast: {
+                lat: 50,
+                long: 30
+            }
+        };
+
+        const center1 = utils.getCenter(coords1);
+        const center2 = utils.getCenter(coords2);
+
+        expect(center1).toEqual([35, 25]);
+        expect(center2).toEqual([32.5, 26.5]);
+    });
+
+    it("getCityLimits returns expected values", () => {
+        const citiesArray = require("./mockdata/citiesArray.json");
+        const city = citiesArray[1];
+
+        const bounds = [
+            [59.343886, 18.026826],
+            [59.310522, 18.099825]
+        ];
+
+        const options = { color: "red", fillOpacity: 0, weight: 1 };
+
+        const data = utils.getCityLimits(citiesArray, city);
+
+        expect(data.bounds).toEqual(bounds);
+        expect(data.options).toEqual(options);
+    });
+
+    it("addStations returns expected values", () => {
+        const citiesArray = require("./mockdata/citiesArray.json");
+        const monoCity = require("./mockdata/monoCity.json");
+
+        const withStations = utils.addStations(citiesArray, monoCity);
+
+        expect(withStations.parking_stations.length).toEqual(3);
+        expect(withStations.charge_stations.length).toEqual(4);
     });
 
     it("getStationName returns expected station name", () => {
