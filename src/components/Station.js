@@ -97,6 +97,7 @@ function Station(props) {
             bikes={bikes}
             city={props.currentCity}
             cities={props.cities}
+            autoFetchIsOn={false}
             chargeStations={chargeStation}
             parkingStations={parkingStation}
             getBikes={getBikesAtStation}

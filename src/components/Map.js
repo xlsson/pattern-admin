@@ -9,9 +9,9 @@ import MapBike from './MapBike';
 Map.propTypes = {
     api: PropTypes.object,
     utils: PropTypes.object,
-    bikes: PropTypes.array,
     city: PropTypes.object,
     cities: PropTypes.object,
+    autoFetchIsOn: PropTypes.bool,
     chargeStations: PropTypes.array,
     parkingStations: PropTypes.array,
     getBikes: PropTypes.func,
@@ -19,22 +19,31 @@ Map.propTypes = {
 };
 
 function Map(props) {
-    // const [zoom, setZoom] = useState(6);
-    // const [focusCoords, setFocusCoords] = useState([58.195259, 14.221258]);
     const [bikes, setBikes] = useState([]);
     const [chargeStations, setChargeStations] = useState([]);
     const [parkingStations, setParkingStations] = useState([]);
     const [cityLimits, setCityLimits] = useState([]);
 
     useEffect(() => {
-        // console.log("focusCoords", props.focusCoords);
-        // setZoom(props.zoom);
-        // setFocusCoords(props.focusCoords);
-        setBikes(props.bikes);
+        getBikes();
         setChargeStations(props.chargeStations);
         setParkingStations(props.parkingStations);
         setCityLimits(props.utils.createCityLimits(props.city, props.cities));
+        toggleInterval(props.autoFetchIsOn);
     }, [props]);
+
+    async function getBikes() {
+        console.log("get bikes");
+        const data = await props.api.getBikes(props.city._id);
+        setBikes(data.bikes);
+    }
+
+    function toggleInterval(toggle) {
+        if (toggle === false) { return props.utils.stopInterval(); }
+
+        props.utils.autoFetch = true;
+        props.utils.currentInterval = setInterval(getBikes, 1000);
+    }
 
     function closeAnyOpenPopup(e) {
         if (!e.currentTarget.contains(e.relatedTarget)) { props.utils.mapInstance.closePopup(); }
@@ -55,7 +64,7 @@ function Map(props) {
                 utils={props.utils}
                 bike={bike}
                 cities={props.cities}
-                getBikes={props.getBikes}
+                getBikes={getBikes}
                 getIcon={getIcon}
                 setMessage={props.setMessage} />
         )
@@ -81,7 +90,7 @@ function Map(props) {
                 id="map"
                 center={props.utils.mapCenter}
                 zoom={props.utils.mapZoom}
-                scrollWheelZoom={false}>
+                scrollWheelZoom={true}>
                 <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

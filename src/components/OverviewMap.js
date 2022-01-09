@@ -15,37 +15,12 @@ function OverviewMap(props) {
     const center = props.utils.getCenter(city.coordinates);
     const zoom = (city._id !== "all") ? 13 : 6;
 
-    props.utils.setView(center, zoom);
-
     const chargeStations = city.charge_stations;
     const parkingStations = city.parking_stations;
 
-    const [bikes, setBikes] = useState([]);
     const [autoFetchIsOn, setAutoFetchIsOn] = useState(false);
 
-    async function getBikes() {
-        const data = await props.api.getBikes(city._id);
-        setBikes(data.bikes);
-    }
-
-    function toggleInterval(toggle) {
-        if (toggle === false) {
-            setAutoFetchIsOn(false);
-            return props.utils.stopInterval();
-        }
-        setAutoFetchIsOn(true);
-        props.utils.autoFetch = true;
-        props.utils.currentInterval = setInterval(getBikes, 1000);
-    }
-
-    useEffect(() => {
-        props.utils.setView(center, zoom);
-        getBikes();
-        // Called twice to reset current city, but not
-        // toggle clear interval.
-        toggleInterval(!props.utils.autoFetch);
-        toggleInterval(!props.utils.autoFetch);
-    }, [props]);
+    useEffect(() => { props.utils.setView(center, zoom); }, [props]);
 
     return (
         <>
@@ -54,19 +29,18 @@ function OverviewMap(props) {
             <button
                 type="button"
                 data-testid="autofetch-button"
-                onClick={() => toggleInterval(!props.utils.autoFetch)}>
+                onClick={() => setAutoFetchIsOn(!autoFetchIsOn)}>
                 {!autoFetchIsOn ? "Starta " : "Avbryt "} automatisk kartuppdatering
             </button>
         </div>
         <Map
             api={props.api}
             utils={props.utils}
-            bikes={bikes}
             city={city}
             cities={props.cities}
+            autoFetchIsOn={autoFetchIsOn}
             chargeStations={chargeStations}
             parkingStations={parkingStations}
-            getBikes={getBikes}
             setMessage={props.setMessage}/>
         </>
     );
