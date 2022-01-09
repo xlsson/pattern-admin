@@ -33,7 +33,6 @@ function Map(props) {
     }, [props]);
 
     async function getBikes() {
-        console.log("get bikes");
         const data = await props.api.getBikes(props.city._id);
         setBikes(data.bikes);
     }
