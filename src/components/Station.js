@@ -35,8 +35,6 @@ function Station(props) {
 
     const center = props.utils.getCenter(coords);
 
-    props.utils.mapCenter = center;
-    props.utils.mapZoom = 20;
     props.utils.setView(center, 20);
 
     async function getBikesAtStation() {

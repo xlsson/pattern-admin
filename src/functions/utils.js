@@ -3,7 +3,12 @@ const utils = {
     mapCenter: [58.195259, 14.221258],
     mapZoom: 6,
     setView: function(center, zoom) {
-        if (utils.mapInstance) { utils.mapInstance.setView(center, zoom); }
+        utils.mapCenter = center;
+        utils.mapZoom = zoom;
+
+        if (utils.mapInstance) {
+            utils.mapInstance.setView(center, zoom);
+        }
     },
     currentInterval: "",
     autoFetch: false,
