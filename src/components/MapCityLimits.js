@@ -3,20 +3,23 @@ import PropTypes from "prop-types";
 import { Rectangle } from 'react-leaflet';
 
 MapCityLimits.propTypes = {
-    coords: PropTypes.object
+    city: PropTypes.object,
+    utils: PropTypes.object,
+    selectedId: PropTypes.string
+
 };
 
 function MapCityLimits(props) {
-    const options = { color: "red", fillOpacity: 0, weight: 1 };
 
-    const bounds = [
-        [props.coords.northwest.lat, props.coords.northwest.long],
-        [props.coords.southeast.lat, props.coords.southeast.long]
-    ];
+    if ((props.selectedId !== "all") && (props.selectedId !== props.city._id)) {
+        return null;
+    }
+
+    const data = props.utils.getCityLimits(props.selectedId, props.city);
 
     return (
         <div data-testid="map-city-limits">
-            <Rectangle bounds={bounds} pathOptions={options} />
+            <Rectangle bounds={data.bounds} pathOptions={data.options} />
         </div>
     );
 }

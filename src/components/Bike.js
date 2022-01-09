@@ -9,6 +9,7 @@ Bike.propTypes = {
     bike: PropTypes.object,
     currentCity: PropTypes.object,
     cities: PropTypes.object,
+    citiesArray: PropTypes.array,
     setMessage: PropTypes.func
 };
 
@@ -91,6 +92,7 @@ function Bike(props) {
             bikes={bikes}
             city={props.currentCity}
             cities={cities}
+            citiesArray={props.citiesArray}
             autoFetchIsOn={false}
             chargeStations={chargeStations}
             parkingStations={parkingStations}

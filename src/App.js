@@ -140,6 +140,7 @@ function App() {
                     switchView={switchView}
                     currentCity={currentCity}
                     cities={cities}
+                    citiesArray={citiesArray}
                     setMessage={setMessage} /> );
     }
 
@@ -163,6 +164,7 @@ function App() {
                     type={type}
                     currentCity={currentCity}
                     cities={cities}
+                    citiesArray={citiesArray}
                     setMessage={setMessage} /> );
     }
 
@@ -172,6 +174,7 @@ function App() {
                     utils={utils}
                     currentCity={currentCity}
                     cities={cities}
+                    citiesArray={citiesArray}
                     setMessage={setMessage} /> );
     }
 

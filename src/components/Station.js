@@ -10,6 +10,7 @@ Station.propTypes = {
     type: PropTypes.string,
     currentCity: PropTypes.object,
     cities: PropTypes.object,
+    citiesArray: PropTypes.array,
     setMessage: PropTypes.func
 };
 
@@ -97,6 +98,7 @@ function Station(props) {
             bikes={bikes}
             city={props.currentCity}
             cities={props.cities}
+            citiesArray={props.citiesArray}
             autoFetchIsOn={false}
             chargeStations={chargeStation}
             parkingStations={parkingStation}

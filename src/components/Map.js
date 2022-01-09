@@ -11,6 +11,7 @@ Map.propTypes = {
     utils: PropTypes.object,
     city: PropTypes.object,
     cities: PropTypes.object,
+    citiesArray: PropTypes.array,
     autoFetchIsOn: PropTypes.bool,
     chargeStations: PropTypes.array,
     parkingStations: PropTypes.array,
@@ -22,13 +23,13 @@ function Map(props) {
     const [bikes, setBikes] = useState([]);
     const [chargeStations, setChargeStations] = useState([]);
     const [parkingStations, setParkingStations] = useState([]);
-    const [cityLimits, setCityLimits] = useState([]);
+    const [citiesArray, setCitiesArray] = useState([]);
 
     useEffect(() => {
         getBikes();
         setChargeStations(props.chargeStations);
         setParkingStations(props.parkingStations);
-        setCityLimits(props.utils.createCityLimits(props.city, props.cities));
+        setCitiesArray(props.citiesArray);
         toggleInterval(props.autoFetchIsOn);
     }, [props]);
 
@@ -78,8 +79,11 @@ function Map(props) {
         );
     }
 
-    function drawCityLimits(coords) {
-        return ( <MapCityLimits coords={coords} /> );
+    function drawCityLimits(c) {
+        return ( <MapCityLimits
+                    city={c}
+                    utils={props.utils}
+                    selectedId={props.city._id} /> );
     }
 
     return (
@@ -109,8 +113,8 @@ function Map(props) {
                 {parkingStations.map((station, i) => {
                     return (<div key={i}>{drawStation("parking", station)}</div>);
                 })}
-                {cityLimits.map((coords, i) => {
-                    return (<div key={i}>{drawCityLimits(coords)}</div>);
+                {citiesArray.map((c, i) => {
+                    return (<div key={i}>{drawCityLimits(c)}</div>);
                 })}
             </MapContainer>
         </div>

@@ -23,20 +23,17 @@ const utils = {
             coords.northwest.long + coords.southeast.long)/2;
         return [lat, long]
     },
-    // Returns an array with coordinates for all city limits, for Leaflet map
-    createCityLimits: function (city, cities) {
-        const limitsArray = [];
+    // Returns data needed to draw rectangle, if conditions match
+    getCityLimits: function (selectedId, city) {
+        const options = { color: "red", fillOpacity: 0, weight: 1 };
 
-        if (city._id !== "all") {
-            limitsArray.push(city.coordinates);
-            return limitsArray;
-        }
+        const coords = city.coordinates;
+        const bounds = [
+            [coords.northwest.lat, coords.northwest.long],
+            [coords.southeast.lat, coords.southeast.long]
+        ];
 
-        Object.keys(cities).forEach((c) => {
-            if (c !== "all") { limitsArray.push(cities[c].coordinates); }
-        });
-
-        return limitsArray;
+        return { bounds: bounds, options: options };
     },
     monoCity: {
          _id: "all",

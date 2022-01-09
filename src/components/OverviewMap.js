@@ -7,6 +7,7 @@ OverviewMap.propTypes = {
     utils: PropTypes.object,
     currentCity: PropTypes.object,
     cities: PropTypes.object,
+    citiesArray: PropTypes.array,
     setMessage: PropTypes.func
 };
 
@@ -38,6 +39,7 @@ function OverviewMap(props) {
             utils={props.utils}
             city={city}
             cities={props.cities}
+            citiesArray={props.citiesArray}
             autoFetchIsOn={autoFetchIsOn}
             chargeStations={chargeStations}
             parkingStations={parkingStations}
