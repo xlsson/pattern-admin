@@ -31,6 +31,31 @@ const utils = {
 
         return limitsArray;
     },
+    monoCity: {
+         _id: "all",
+        name: "-- Alla städer --",
+        coordinates: {
+            northwest: { lat: 58.195259, long: 14.221258 },
+            southeast: { lat: 58.195259, long: 14.221258 }
+        },
+        parking_stations: [],
+        charge_stations: []
+    },
+    addStations: function(citiesArray, monoCity) {
+        let park = [];
+        let charge = [];
+        let withStations = { ...monoCity };
+
+        citiesArray.forEach((city) => {
+            park = park.concat(city.parking_stations);
+            charge = charge.concat(city.charge_stations);
+        });
+
+        withStations.parking_stations = park;
+        withStations.charge_stations = charge;
+
+        return withStations;
+    },
     // Returns stationname based on station type and station id
     getStationName: function(type, bike, cities) {
         const stationType = `${type}_stations`;

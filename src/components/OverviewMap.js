@@ -19,10 +19,10 @@ function OverviewMap(props) {
     const parkingStations = city.parking_stations;
 
     const [bikes, setBikes] = useState([]);
-    const [autoFetchIsOn, setAutoFetchIsOn] = useState(props.utils.autoFetch);
+    const [autoFetchIsOn, setAutoFetchIsOn] = useState(false);
 
     async function getBikes() {
-        console.log("getBikes, city:", city.name);
+        console.log("getBikes, city:", city.name, "interval", props.utils.currentInterval);
         const data = await props.api.getBikes(city._id);
         setBikes(data.bikes);
     }
@@ -31,17 +31,11 @@ function OverviewMap(props) {
         if (toggle === false) {
             setAutoFetchIsOn(false);
             return props.utils.stopInterval();
-
         }
         setAutoFetchIsOn(true);
         props.utils.autoFetch = true;
         props.utils.currentInterval = setInterval(getBikes, 1000);
     }
-
-    useEffect(() => {
-        props.utils.setView(center, zoom);
-        getBikes();
-    }, []);
 
     useEffect(() => {
         props.utils.setView(center, zoom);

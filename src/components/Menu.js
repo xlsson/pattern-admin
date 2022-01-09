@@ -8,7 +8,7 @@ Menu.propTypes = {
     switchView: PropTypes.func,
     view: PropTypes.string,
     cities: PropTypes.object,
-    allCities: PropTypes.object,
+    monoCity: PropTypes.object,
     chooseCity: PropTypes.func,
     loggedInUser: PropTypes.string,
     setLoggedInUser: PropTypes.func
@@ -29,7 +29,7 @@ function Menu(props) {
                     className="logo pointer-cursor">seab.</div>
 
                 <ChangeCity
-                    allCities={props.allCities}
+                    monoCity={props.monoCity}
                     cities={props.cities}
                     chooseCity={props.chooseCity} />
 

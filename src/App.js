@@ -15,17 +15,6 @@ import api from './functions/api.js';
 import utils from './functions/utils.js';
 
 function App() {
-    const _allCities = {
-         _id: "all",
-        name: "-- Alla städer --",
-        coordinates: {
-            northwest: { lat: 58.195259, long: 14.221258 },
-            southeast: { lat: 58.195259, long: 14.221258 }
-        },
-        parking_stations: [],
-        charge_stations: []
-    };
-
     const defaultView = (api.token.length === 0) ? "loginModal" : "overviewMap";
 
     const [view, setView] = useState(defaultView);
@@ -35,10 +24,10 @@ function App() {
 
     const [cities, setCities] = useState({});
     const [citiesArray, setCitiesArray] = useState([]);
-    const [allCities, setAllCities] = useState(_allCities);
-    const [currentCity, setCurrentCity] = useState(allCities);
+    const [monoCity, setMonoCity] = useState(utils.monoCity);
+    const [currentCity, setCurrentCity] = useState(monoCity);
 
-    useEffect(() => { setCurrentCity(allCities); }, [allCities]);
+    useEffect(() => { setCurrentCity(monoCity); }, [monoCity]);
 
     useEffect(() => { if (api.token.length > 0) { getCities(); } }, [loggedInUser]);
 
@@ -46,31 +35,17 @@ function App() {
         const data = await api.getCities();
 
         setCitiesArray(data.cities);
-        addStationsToDefault(data.cities);
+
+        const monoCityUpdated = utils.addStations(data.cities, utils.monoCity);
+        setMonoCity(monoCityUpdated);
 
         let citiesObject = {};
         data.cities.forEach((city) => { citiesObject[city._id] = city; });
         setCities(citiesObject);
     }
 
-    function addStationsToDefault(allCities) {
-        let park = [];
-        let charge = [];
-        let allCitiesUpdated = { ..._allCities };
-
-        allCities.forEach((city) => {
-            park = park.concat(city.parking_stations);
-            charge = charge.concat(city.charge_stations);
-        });
-
-        allCitiesUpdated.parking_stations = park;
-        allCitiesUpdated.charge_stations = charge;
-
-        setAllCities(allCitiesUpdated);
-    }
-
     function chooseCity(selectedId) {
-        if (selectedId === "all") { return setCurrentCity(allCities); }
+        if (selectedId === "all") { return setCurrentCity(monoCity); }
 
         setCurrentCity(cities[selectedId]);
     }
@@ -112,7 +87,7 @@ function App() {
                     utils={utils}
                     view={view}
                     cities={cities}
-                    allCities={allCities}
+                    monoCity={monoCity}
                     chooseCity={chooseCity}
                     loggedInUser={loggedInUser}
                     setLoggedInUser={setLoggedInUser} /> );

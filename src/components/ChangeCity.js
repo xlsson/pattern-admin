@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from "prop-types";
 
 ChangeCity.propTypes = {
-    allCities: PropTypes.object,
+    monoCity: PropTypes.object,
     cities: PropTypes.object,
     chooseCity: PropTypes.func
 };
@@ -11,7 +11,7 @@ function ChangeCity(props) {
     const [selectedId, setSelectedId] = useState("all");
 
     const allOptions = props.cities;
-    allOptions["all"] = props.allCities;
+    allOptions["all"] = props.monoCity;
 
     const cityIds = Object.keys(allOptions);
 

@@ -3,23 +3,23 @@ import userEvent from "@testing-library/user-event";
 import ChangeCity from "../components/ChangeCity";
 
 describe("Tests for ChangeCity component", () => {
-    const allCities = require("./mockdata/allCities.json");
+    const monoCity = require("./mockdata/monoCity.json");
     const cities = require("./mockdata/cities.json");
     const chooseCity = jest.fn();
 
     it("Expected default dropdown value is displayed", () => {
         render(<ChangeCity
-                    allCities={allCities}
+                    monoCity={monoCity}
                     cities={cities}
                     chooseCity={chooseCity} />);
 
-        const defaultDropdownValue = screen.getByDisplayValue("Sverige");
+        const defaultDropdownValue = screen.getByDisplayValue("-- Alla städer --");
         expect(defaultDropdownValue).toBeInTheDocument();
     });
 
     it("Expected number of options are displayed", () => {
         render(<ChangeCity
-                    allCities={allCities}
+                    monoCity={monoCity}
                     cities={cities}
                     chooseCity={chooseCity} />);
 
@@ -29,7 +29,7 @@ describe("Tests for ChangeCity component", () => {
 
     it("First option has expected value", () => {
         render(<ChangeCity
-                    allCities={allCities}
+                    monoCity={monoCity}
                     cities={cities}
                     chooseCity={chooseCity} />);
 
@@ -40,7 +40,7 @@ describe("Tests for ChangeCity component", () => {
 
     it("Selecting a city calls props function with id as parameter", () => {
         render(<ChangeCity
-                    allCities={allCities}
+                    monoCity={monoCity}
                     cities={cities}
                     chooseCity={chooseCity} />);
 
