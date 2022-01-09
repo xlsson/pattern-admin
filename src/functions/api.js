@@ -11,16 +11,14 @@ const api = {
     login: async function (username, password) {
         const url = `${api.baseUrl}/admins/login`;
 
-        console.log(username, password, "HÅRDKODAT");
-
         let requestOptions = {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: config.username,
-                password: config.password
+                username: username,
+                password: password
             })
         };
 
@@ -88,8 +86,10 @@ const api = {
         return api.sendRequest(url, requestOptions);
     },
     getPrices: function (cityId) {
-        console.log(cityId);
-        let url = `${api.baseUrl}/prices`;
+        // Set cityId to empty string while infrastructure for individual
+        // pricing is not yet there
+        cityId = "";
+        let url = `${api.baseUrl}/prices${cityId}`;
 
         let requestOptions = {
             method: "GET",

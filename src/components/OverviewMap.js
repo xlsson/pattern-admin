@@ -22,7 +22,6 @@ function OverviewMap(props) {
     const [autoFetchIsOn, setAutoFetchIsOn] = useState(false);
 
     async function getBikes() {
-        console.log("getBikes, city:", city.name, "interval", props.utils.currentInterval);
         const data = await props.api.getBikes(city._id);
         setBikes(data.bikes);
     }

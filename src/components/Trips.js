@@ -7,9 +7,7 @@ Trips.propTypes = {
 };
 
 function Trips(props) {
-    // const trips = require("../tests/mockdata/trips.json");
     const trips = props.trips;
-    // console.log("MOCKDATA");
 
     return (
         <div>

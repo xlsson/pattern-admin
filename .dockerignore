@@ -1,0 +1,10 @@
+**/node_modules
+.git
+.github
+build
+coverage
+src/tests
+src/setupTests.js
+.gitignore
+.scrutinizer.yml
+jest.config.json
