@@ -9,8 +9,6 @@ import MapBike from './MapBike';
 Map.propTypes = {
     api: PropTypes.object,
     utils: PropTypes.object,
-    zoom: PropTypes.number,
-    focusCoords: PropTypes.array,
     bikes: PropTypes.array,
     city: PropTypes.object,
     cities: PropTypes.object,
@@ -21,16 +19,17 @@ Map.propTypes = {
 };
 
 function Map(props) {
-    const [zoom, setZoom] = useState(6);
-    const [focusCoords, setFocusCoords] = useState([58.195259, 14.221258]);
+    // const [zoom, setZoom] = useState(6);
+    // const [focusCoords, setFocusCoords] = useState([58.195259, 14.221258]);
     const [bikes, setBikes] = useState([]);
     const [chargeStations, setChargeStations] = useState([]);
     const [parkingStations, setParkingStations] = useState([]);
     const [cityLimits, setCityLimits] = useState([]);
 
     useEffect(() => {
-        setZoom(props.zoom);
-        setFocusCoords(props.focusCoords);
+        // console.log("focusCoords", props.focusCoords);
+        // setZoom(props.zoom);
+        // setFocusCoords(props.focusCoords);
         setBikes(props.bikes);
         setChargeStations(props.chargeStations);
         setParkingStations(props.parkingStations);
@@ -80,8 +79,8 @@ function Map(props) {
             <MapContainer
                 data-testid="map"
                 id="map"
-                center={focusCoords}
-                zoom={zoom}
+                center={props.utils.mapCenter}
+                zoom={props.utils.mapZoom}
                 scrollWheelZoom={false}>
                 <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

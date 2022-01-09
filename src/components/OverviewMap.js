@@ -15,6 +15,9 @@ function OverviewMap(props) {
     const center = props.utils.getCenter(city.coordinates);
     const zoom = (city._id !== "all") ? 13 : 6;
 
+    props.utils.mapCenter = center;
+    props.utils.mapZoom = zoom;
+
     const chargeStations = city.charge_stations;
     const parkingStations = city.parking_stations;
 

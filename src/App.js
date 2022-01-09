@@ -46,7 +46,6 @@ function App() {
 
     function chooseCity(selectedId) {
         if (selectedId === "all") { return setCurrentCity(monoCity); }
-
         setCurrentCity(cities[selectedId]);
     }
 

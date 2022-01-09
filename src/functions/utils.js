@@ -1,5 +1,7 @@
 const utils = {
     mapInstance: null,
+    mapCenter: [58.195259, 14.221258],
+    mapZoom: 6,
     setView: function(center, zoom) {
         if (utils.mapInstance) { utils.mapInstance.setView(center, zoom); }
     },
