@@ -150,7 +150,8 @@ function App() {
                     switchView={switchView}
                     type={type}
                     currentCity={currentCity}
-                    cities={cities} /> );
+                    cities={cities}
+                    setMessage={setMessage} /> );
     }
 
     function renderStation(type) {

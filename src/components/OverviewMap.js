@@ -30,7 +30,7 @@ function OverviewMap(props) {
                 type="button"
                 data-testid="autofetch-button"
                 onClick={() => setAutoFetchIsOn(!autoFetchIsOn)}>
-                {!autoFetchIsOn ? "Starta " : "Avbryt "} automatisk kartuppdatering
+                {!autoFetchIsOn ? "Starta " : "Avbryt "} löpande kartuppdatering
             </button>
         </div>
         <Map

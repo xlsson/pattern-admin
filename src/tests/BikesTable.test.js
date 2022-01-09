@@ -94,7 +94,7 @@ describe("Tests for BikesTable component", () => {
                     cities={cities} /> );
 
         await waitFor(() => {
-            const fetchButton = screen.getByText(/Hämta senaste data/);
+            const fetchButton = screen.getByText(/Uppdatera/);
 
             userEvent.click(fetchButton);
 

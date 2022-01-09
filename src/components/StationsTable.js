@@ -7,7 +7,8 @@ StationsTable.propTypes = {
     switchView: PropTypes.func,
     type: PropTypes.string,
     currentCity: PropTypes.object,
-    cities: PropTypes.object
+    cities: PropTypes.object,
+    setMessage: PropTypes.func
 };
 
 function StationsTable(props) {
@@ -26,10 +27,14 @@ function StationsTable(props) {
         countBikes(_stations);
     }, [props]);
 
-    async function countBikes(_stations) {
+    async function countBikes(_stations, button=false) {
         const data = await props.api.getBikes(currentCity._id);
         const result = await props.utils.countBikes(_stations, type, data.bikes);
         setBikesPerStation(result);
+        if (button) {
+            const message = props.utils.createFlashMessage(data, "getDataButton");
+            props.setMessage(message);
+        }
     }
 
 
@@ -39,7 +44,15 @@ function StationsTable(props) {
 
     return (
         <div>
-            <h1>{title}</h1>
+            <div className="title-wrapper">
+                <h1 data-testid="bikes-title">{title}</h1>
+                <button
+                    type="button"
+                    data-testid="fetch-data-button"
+                    onClick={() => countBikes(stations, true)}>
+                    Uppdatera
+                </button>
+            </div>
             <table>
                 <>
                 <thead>

@@ -59,7 +59,7 @@ function BikesTable(props) {
             <div className="title-wrapper">
                 <h1 data-testid="bikes-title">Cyklar</h1>
                 <button type="button" data-testid="fetch-data-button" onClick={() => getBikes(true)}>
-                    Hämta senaste data
+                    Uppdatera
                 </button>
             </div>
             <table>
