@@ -30,6 +30,15 @@ describe("Tests for utils module", () => {
         utils.autoFetch = false;
     });
 
+    it("filterOutOngoingTrip returns expected array", () => {
+        const trips = require("./mockdata/tripsOneOngoing.json");
+
+        const filteredTrips = utils.filterOutOngoingTrip(trips);
+
+        expect(trips.length).toEqual(2);
+        expect(filteredTrips.length).toEqual(1);
+    });
+
     it("getCenter returns expected values", () => {
         const coords1 = {
             northwest: {

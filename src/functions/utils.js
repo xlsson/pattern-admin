@@ -16,6 +16,17 @@ const utils = {
         clearInterval(utils.currentInterval);
         utils.autoFetch = false;
     },
+    filterOutOngoingTrip: function (trips) {
+        const onlyFinished = [];
+
+        trips.forEach((trip) => {
+            if (trip.stop_time !== undefined) {
+                onlyFinished.push(trip);
+            }
+        });
+
+        return onlyFinished;
+    },
     getCenter: function (coords) {
         const lat = (
             coords.northwest.lat + coords.southeast.lat)/2;

@@ -27,7 +27,10 @@ function User(props) {
 
     async function getTrips(userId) {
         const data = await props.api.getTrips(userId);
-        setTrips(data.trips);
+        console.log(data.trips);
+        const onlyFinished = props.utils.filterOutOngoingTrip(data.trips);
+        console.log(onlyFinished);
+        setTrips(onlyFinished);
     }
 
     function updateUser(value, property) {
