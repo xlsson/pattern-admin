@@ -36,8 +36,8 @@ function App() {
 
         setCitiesArray(data.cities);
 
-        const monoCityUpdated = utils.addStations(data.cities, utils.monoCity);
-        setMonoCity(monoCityUpdated);
+        const monoCityWithStations = utils.addStations(data.cities, utils.monoCity);
+        setMonoCity(monoCityWithStations);
 
         let citiesObject = {};
         data.cities.forEach((city) => { citiesObject[city._id] = city; });
@@ -187,9 +187,9 @@ function App() {
     }
 
     return (
-        <div className="page-wrapper">
+        <div className="page-wrapper" data-testid="page-wrapper">
                 {api.token && renderMenu()}
-            <div className="content">
+            <div className="content" data-testid="content-wrapper">
                 {renderView()}
                 {message && renderFlashMessage(message)}
             </div>

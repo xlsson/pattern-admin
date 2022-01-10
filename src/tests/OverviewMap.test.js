@@ -1,21 +1,25 @@
 import { render, waitFor, fireEvent, screen } from "@testing-library/react";
-import { shallow, configure } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import userEvent from '@testing-library/user-event';
 import OverviewMap from "../components/OverviewMap";
+import MockedMap from '../components/Map';
 
-configure({ adapter: new Adapter() });
+jest.mock("../components/Map", () => {
+    return function DummyMap(props) {
+        return (
+            <p>MockedMap</p>
+        );
+    };
+});
 
 describe("Tests for OverviewMap component", () => {
     const utils = {
-        currentInterval: "",
-        autoFetch: false,
-        stopInterval: jest.fn(),
         getCenter: jest.fn(),
         setView: jest.fn(),
         mapInstance: { getZoom: jest.fn(), getCenter: jest.fn() }
     };
     const cities = require("./mockdata/cities.json");
     const bikes = require("./mockdata/bikes.json");
+    const citiesArray = require("./mockdata/citiesArray.json");
     const currentCity = cities["61a8fd85ea20b50150945887"];
     const setMessage = jest.fn();
 
@@ -30,31 +34,40 @@ describe("Tests for OverviewMap component", () => {
       getBikesCorrectParam = false;
     });
 
-    const wrapper = shallow(
-        <OverviewMap
-            api={api}
-            utils={utils}
-            currentCity={currentCity}
-            cities={cities}
-            setMessage={setMessage} />
-    );
-
     it('OverviewMap page gets rendered with expected elements', () => {
-        const title = wrapper.find("h1");
-        const button = wrapper.find({ "data-testid": "autofetch-button" });
-        expect(title.text().includes("Översiktskarta")).toBe(true);
-        expect(wrapper.exists("Map")).toBe(true);
+        render(
+            <OverviewMap
+                api={api}
+                utils={utils}
+                currentCity={currentCity}
+                cities={cities}
+                citiesArray={citiesArray}
+                setMessage={setMessage} />
+        );
+
+        const title = screen.getByRole("heading");
+        const button = screen.findByTestId("autofetch-button");
+        const content = screen.getByText(/MockedMap/);
+
+        expect(title).toHaveTextContent(/Översiktskarta/);
     });
 
-    it('Click on autofetch button sets values and calls expected functions', () => {
-        const button = wrapper.find({ "data-testid": "autofetch-button" });
+    it('Click on autofetch button changes button text', async () => {
+        render(
+            <OverviewMap
+                api={api}
+                utils={utils}
+                currentCity={currentCity}
+                cities={cities}
+                citiesArray={citiesArray}
+                setMessage={setMessage} />
+        );
 
-        button.simulate('click');
-        expect(utils.autoFetch).toBe(true);
-        expect(utils.currentInterval).not.toEqual("");
+        let button = screen.getByRole('button', { name: /Starta/ });
 
-        button.simulate('click');
-        expect(utils.stopInterval).toHaveBeenCalled();
+        userEvent.click(button);
+
+        button = screen.getByRole('button', { name: /Avbryt/ });
     });
 
 });

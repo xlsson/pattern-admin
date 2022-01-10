@@ -15,7 +15,6 @@ Map.propTypes = {
     autoFetchIsOn: PropTypes.bool,
     chargeStations: PropTypes.array,
     parkingStations: PropTypes.array,
-    getBikes: PropTypes.func,
     setMessage: PropTypes.func
 };
 
@@ -46,7 +45,9 @@ function Map(props) {
     }
 
     function closeAnyOpenPopup(e) {
-        if (!e.currentTarget.contains(e.relatedTarget)) { props.utils.mapInstance.closePopup(); }
+        if (!e.currentTarget.contains(e.relatedTarget)) {
+            props.utils.mapInstance.closePopup();
+        }
     }
 
     function getIcon(markerImg, iconAnchor, popupAnchor) {

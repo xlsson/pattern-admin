@@ -42,7 +42,8 @@ describe("Tests for StationsTable component", () => {
             });
 
             return result;
-        }
+        },
+        createFlashMessage: jest.fn()
     };
     const api = {
         getBikes: function(cityId) {
@@ -59,10 +60,12 @@ describe("Tests for StationsTable component", () => {
                     type={type}
                     switchView={switchView}
                     currentCity={currentCity}
-                    cities={cities} /> );
+                    cities={cities}
+                    setMessage={setMessage} /> );
 
         await waitFor(() => {
             const title = screen.getByRole("heading");
+            const button = screen.getByRole("button");
             const table = screen.getByRole("table");
             const cityHeader = screen.getByTestId("city");
             const stationHeader = screen.getByTestId("station");
@@ -82,7 +85,8 @@ describe("Tests for StationsTable component", () => {
                     type={type}
                     switchView={switchView}
                     currentCity={currentCity}
-                    cities={cities} /> );
+                    cities={cities}
+                    setMessage={setMessage} /> );
 
         await waitFor(() => {
             expect(getBikesHasBeenCalled).toBe(true);
@@ -99,7 +103,8 @@ describe("Tests for StationsTable component", () => {
                     type={type}
                     switchView={switchView}
                     currentCity={currentCity}
-                    cities={cities} /> );
+                    cities={cities}
+                    setMessage={setMessage} /> );
 
         await waitFor(() => {
             const station3 = screen.getByText("Stora Torget");
@@ -117,7 +122,8 @@ describe("Tests for StationsTable component", () => {
                     type={type}
                     switchView={switchView}
                     currentCity={currentCity}
-                    cities={cities} /> );
+                    cities={cities}
+                    setMessage={setMessage} /> );
 
         await waitFor(() => {
             const station = screen.getByText("Centralstation");
@@ -129,4 +135,24 @@ describe("Tests for StationsTable component", () => {
                 currentCity.charge_stations[1]);
         });
     });
+
+    it("Clicking fetchData calls expected functions", async () => {
+        render(<StationsTable
+                    api={api}
+                    utils={utils}
+                    type={type}
+                    switchView={switchView}
+                    currentCity={currentCity}
+                    cities={cities}
+                    setMessage={setMessage} /> );
+
+        await waitFor(() => {
+            const button = screen.getByRole("button");
+            countBikesHasBeenCalled = false;
+            userEvent.click(button);
+        });
+        expect(countBikesHasBeenCalled).toBe(true);
+        expect(utils.createFlashMessage).toHaveBeenCalled();
+    });
+
 });

@@ -9,11 +9,10 @@ configure({ adapter: new Adapter() });
 describe("Tests for Map component", () => {
     const api = {};
     const utils = {};
-    const zoom = 6;
-    const focusCoords = [58.195259, 14.221258];
-    const bikes = require("./mockdata/bikes.json");
     const cities = require("./mockdata/cities.json");
+    const citiesArray = require("./mockdata/citiesArray.json");
     const city = cities["61a76026bb53f131584de9b1"];
+    const autoFetchIsOn = false;
     const chargeStations = city.charge_stations;
     const parkingStations = city.parking_stations;
     const getBikes = jest.fn();
@@ -22,14 +21,12 @@ describe("Tests for Map component", () => {
     const wrapper = shallow(
         <Map
             api={api}
-            zoom={zoom}
-            focusCoords={focusCoords}
-            bikes={bikes}
+            utils={utils}
             cities={cities}
             city={city}
+            citiesArray={citiesArray}
             chargeStations={chargeStations}
-            parkingStations={parkingStations}
-            getBikes={getBikes} />
+            parkingStations={parkingStations} />
     );
 
     it('MapContainer gets rendered', () => {

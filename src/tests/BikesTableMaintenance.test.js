@@ -1,10 +1,24 @@
 import { render, waitFor, fireEvent, screen, act } from "@testing-library/react";
-import { shallow, configure } from 'enzyme';
 import userEvent from "@testing-library/user-event";
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import BikesTableMaintenance from "../components/BikesTableMaintenance";
+import MockedBikeEndMaintenance from '../components/BikeEndMaintenance';
+import MockedBikeMoveForm from '../components/BikeMoveForm';
 
-configure({ adapter: new Adapter() });
+jest.mock("../components/BikeEndMaintenance", () => {
+    return function DummyBikeEndMaintenance(props) {
+        return (
+            <p>MockedBikeEndMaintenance</p>
+        );
+    };
+});
+
+jest.mock("../components/BikeMoveForm", () => {
+    return function DummyBikeMoveForm(props) {
+        return (
+            <p>MockedBikeMoveForm</p>
+        );
+    };
+});
 
 describe("Tests for BikesTableMaintenance component", () => {
     const cities = require("./mockdata/cities.json");
@@ -18,38 +32,36 @@ describe("Tests for BikesTableMaintenance component", () => {
     const api = {};
 
     it('BikesTableMaintenance with charging bike renders correctly', () => {
-        const wrapper = shallow(
-            <BikesTableMaintenance
-                api={api}
-                utils={utils}
-                getBikes={getBikes}
-                bike={bikeCharging}
-                cities={cities}
-                setMessage={setMessage} />);
+        render( <BikesTableMaintenance
+                    api={api}
+                    utils={utils}
+                    getBikes={getBikes}
+                    bike={bikeCharging}
+                    cities={cities}
+                    setMessage={setMessage} />);
 
-        const service = wrapper.find({ "data-testid": "service" });
+        const service = screen.getByTestId("service");
+        const bikeEndMaintenance = screen.queryByText(/MockedBikeEndMaintenance/);
 
-        expect(service.text().includes("Underhåll och laddning")).toBe(true);
-        expect(wrapper.exists("BikeEndMaintenance")).toBe(false);
+        expect(service).toHaveTextContent("Underhåll och laddning");
+        expect(bikeEndMaintenance).not.toBeInTheDocument();
     });
 
 
     it('BikesTableMaintenance with charged bike renders correctly', () => {
-        const wrapper = shallow(
-            <BikesTableMaintenance
-                api={api}
-                utils={utils}
-                getBikes={getBikes}
-                bike={bikeNotCharging}
-                cities={cities}
-                setMessage={setMessage} />);
+        render( <BikesTableMaintenance
+                    api={api}
+                    utils={utils}
+                    getBikes={getBikes}
+                    bike={bikeNotCharging}
+                    cities={cities}
+                    setMessage={setMessage} />);
 
+        const service = screen.getByTestId("service");
+        const bikeEndMaintenance = screen.queryByText(/MockedBikeEndMaintenance/);
 
-        const service = wrapper.find({ "data-testid": "service" });
-
-        expect(service.text().includes("Underhåll")).toBe(true);
-        expect(service.text().includes("Underhåll och laddning")).toBe(false);
-        expect(wrapper.exists("BikeEndMaintenance")).toBe(true);
+        expect(service).toHaveTextContent("Underhåll");
+        expect(bikeEndMaintenance).toBeInTheDocument();
     });
 
 });
