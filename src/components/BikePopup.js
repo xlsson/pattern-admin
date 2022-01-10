@@ -86,7 +86,7 @@ function BikePopup(props) {
                 <span>{parseInt(bike.battery_status)}</span>
             </div>
             {(bike.bike_status === "available") && renderBikePopupMoveForm()}
-            {(bike.maintenance && (bike.battery_status === 100)) && renderEndMaintenance()}
+            {((bike.maintenance) && (bike.battery_status > 50)) && renderEndMaintenance()}
         </div>
     );
 }
