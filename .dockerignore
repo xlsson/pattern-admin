@@ -5,6 +5,11 @@ build
 coverage
 src/tests
 src/setupTests.js
+.dockerignore
+.env
+.eslintignore
+.eslintrs.js
 .gitignore
 .scrutinizer.yml
 jest.config.json
+README.md
