@@ -11,4 +11,3 @@ build:
                 override:
                     - eslint-run "./src"
                     - js-scrutinizer-run
-                    - npm test
