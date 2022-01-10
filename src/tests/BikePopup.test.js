@@ -1,9 +1,23 @@
 import { render, waitFor, fireEvent, screen } from "@testing-library/react";
-import { shallow, configure } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import BikePopup from "../components/BikePopup";
+import MockedBikeEndMaintenance from '../components/BikeEndMaintenance';
+import MockedBikePopupMoveForm from '../components/BikePopupMoveForm';
 
-configure({ adapter: new Adapter() });
+jest.mock("../components/BikeEndMaintenance", () => {
+    return function DummyBikeEndMaintenance(props) {
+        return (
+            <p>MockedBikeEndMaintenance</p>
+        );
+    };
+});
+
+jest.mock("../components/BikePopupMoveForm", () => {
+    return function DummyBikePopupMoveForm(props) {
+        return (
+            <p>MockedBikePopupMoveForm</p>
+        );
+    };
+});
 
 describe("Tests for BikePopup component", () => {
     const bikes = require("./mockdata/bikes.json");
@@ -14,38 +28,49 @@ describe("Tests for BikePopup component", () => {
     const getBikes = jest.fn();
     const setMessage = jest.fn();
 
-    const wrapper = shallow(
-        <BikePopup
-            api={api}
-            utils={utils}
-            bike={bike}
-            cities={cities}
-            getBikes={getBikes}
-            setMessage={setMessage} />);
-
     it('BikePopup gets rendered with expected elements', () => {
-        const scooterIcon = wrapper.find({ "data-testid": "scooter-icon" });
-        const position = wrapper.find({ "data-testid": "position" });
-        const status = wrapper.find({ "data-testid": "status" });
-        const batteryStatus = wrapper.find({ "data-testid": "batteryStatus" });
+        render(
+            <BikePopup
+                api={api}
+                utils={utils}
+                bike={bike}
+                cities={cities}
+                getBikes={getBikes}
+                setMessage={setMessage} />);
 
-        expect(scooterIcon.text().includes("electric_scooter")).toBe(true);
-        expect(position.text().includes("Position:")).toBe(true);
-        expect(status.text().includes("Ledig" || "Upptagen")).toBe(true);
-        expect(batteryStatus.text().includes("Batterinivå")).toBe(true);
+        const scooterIcon = screen.getByTestId("scooter-icon");
+        const position = screen.getByTestId("position");
+        const status = screen.getByTestId("status");
+        const batteryStatus = screen.getByTestId("batteryStatus");
+
+        expect(scooterIcon).toHaveTextContent("electric_scooter");
+        expect(position).toHaveTextContent("Position:");
+
+        expect(status).toHaveTextContent("Ledig" || "Upptagen");
+        expect(batteryStatus).toHaveTextContent(/Batterinivå/);
     });
 
 
-    it('BikePopup displays expected data', () => {
-        const position = wrapper.find({ "data-testid": "position" });
-        const status = wrapper.find({ "data-testid": "status" });
-        const battery = wrapper.find({ "data-testid": "batteryStatus" });
+    it('BikePopup displays expected data', async () => {
+        render(
+            <BikePopup
+                api={api}
+                utils={utils}
+                bike={bike}
+                cities={cities}
+                getBikes={getBikes}
+                setMessage={setMessage} />);
 
-        expect(position.text().includes("Laddningsstation")).toBe(true);
-        expect(status.text().includes("Ledig")).toBe(true);
-        expect(battery.text().includes("78")).toBe(true);
-        expect(wrapper.exists("BikePopupMoveForm")).toBe(true);
-        expect(wrapper.exists("BikeEndMaintenance")).toBe(false);
+        const position = screen.getByTestId("position");
+        const status = screen.getByTestId("status");
+        const battery = screen.getByTestId("batteryStatus");
+
+        await waitFor(() => {
+            expect(position).toHaveTextContent(/Laddningsstation/);
+            expect(status).toHaveTextContent(/Ledig/);
+            expect(battery).toHaveTextContent(/78/);
+            const component1 = screen.getByText(/MockedBikePopupMoveForm/);
+        });
     });
 
 });

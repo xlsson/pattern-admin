@@ -1,4 +1,4 @@
-import { render, waitFor, fireEvent, screen, act } from "@testing-library/react";
+import { render, waitFor, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import BikeMoveForm from "../components/BikeMoveForm";
 

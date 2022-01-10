@@ -1,4 +1,4 @@
-import { render, waitFor, fireEvent, screen } from "@testing-library/react";
+import { render, waitFor, screen } from "@testing-library/react";
 import Bike from "../components/Bike";
 import MockedMap from '../components/Map';
 import MockedBikePosition from '../components/BikePosition';

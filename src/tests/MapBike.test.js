@@ -1,5 +1,3 @@
-import { render, waitFor, fireEvent, screen, act } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { shallow, configure } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import MapBike from "../components/MapBike";

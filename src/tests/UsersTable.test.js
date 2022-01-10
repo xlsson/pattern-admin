@@ -1,4 +1,4 @@
-import { render, waitFor, fireEvent, screen, within } from '@testing-library/react';
+import { render, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import UsersTable from '../components/UsersTable';
 

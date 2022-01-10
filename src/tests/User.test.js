@@ -1,4 +1,4 @@
-import { render, waitFor, fireEvent, screen, within } from '@testing-library/react';
+import { render, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import User from '../components/User';
 import MockedTrips from '../components/Trips';
@@ -24,7 +24,10 @@ describe("Tests for User component", () => {
 
     const setMessage = jest.fn();
 
-    const utils = { createFlashMessage: jest.fn() };
+    const utils = {
+        createFlashMessage: jest.fn(),
+        filterOutOngoingTrip: jest.fn()
+    };
 
     let getTripsHasBeenCalled = false;
     const api = {
@@ -54,6 +57,20 @@ describe("Tests for User component", () => {
             expect(textInputs.length).toEqual(4);
             expect(title).toHaveTextContent("Sherlock Holmes");
         });
+    });
+
+    it('Rendering page calls function as expected', async () => {
+        render(<User
+                    api={api}
+                    utils={utils}
+                    cities={cities}
+                    citiesArray={citiesArray}
+                    user={user}
+                    setMessage={setMessage} />);
+
+            await waitFor(() => {
+                expect(utils.filterOutOngoingTrip).toHaveBeenCalled();
+            });
     });
 
     it('Editing name changes heading', async () => {
