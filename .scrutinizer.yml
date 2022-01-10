@@ -4,3 +4,4 @@ build:
             tests:
                 override:
                     - eslint-run "./src"
+                    - js-scrutinizer-run
