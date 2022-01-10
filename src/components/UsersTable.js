@@ -61,7 +61,7 @@ function UsersTable(props) {
                             </div>
                         </td>
                         <td>{user.email}</td>
-                        <td>{user.balance} kr</td>
+                        <td>{parseInt(user.balance)} kr</td>
                         <td>
                             <div className="icon-and-label-wrapper">
                                 <span className="material-icons">
