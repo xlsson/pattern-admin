@@ -34,14 +34,14 @@ function BikeMoveForm(props) {
         props.getBikes();
     }
 
-    function stationSelection(event) { setSelectedId(event.target.value); }
+    function selectStation(event) { setSelectedId(event.target.value); }
 
     return (
         <div data-testid="bikeMoveForm" className="bike-move-form">
             <div>Till</div>
             <select
                 data-testid="stationsDropdown"
-                onBlur={stationSelection}
+                onBlur={selectStation}
                 defaultValue={selectedId}>
                 {chargeStations.map((station, i) => (
                     <option key={i} value={i}>
