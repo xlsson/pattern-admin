@@ -21,6 +21,8 @@ function OverviewMap(props) {
 
     const [autoFetchIsOn, setAutoFetchIsOn] = useState(false);
 
+    props.utils.setView(center, zoom);
+
     useEffect(() => { props.utils.setView(center, zoom); }, [props]);
 
     return (
