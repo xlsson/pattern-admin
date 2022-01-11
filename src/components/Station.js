@@ -36,7 +36,7 @@ function Station(props) {
 
     const center = props.utils.getCenter(coords);
 
-    props.utils.setView(center, 20);
+    props.utils.setView(center, 17);
 
     async function getBikesAtStation() {
         const data = await props.api.getBikes(station.city_id);

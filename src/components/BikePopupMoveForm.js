@@ -35,7 +35,7 @@ function BikePopupMoveForm(props) {
         props.utils.mapInstance.closePopup();
     }
 
-    function stationSelection(event) {
+    function selectStation(event) {
         setSelectedId(event.target.value);
     }
 
@@ -44,7 +44,7 @@ function BikePopupMoveForm(props) {
             <strong>Hämta till:</strong>
             <select
                 data-testid="moveBikeDropdown"
-                onBlur={stationSelection}>
+                onBlur={selectStation}>
                 {props.chargeStations.map((station, i) => (
                     <option key={i} value={i}>
                         {station.name}

@@ -21,7 +21,7 @@ function Bike(props) {
     const parkingStations = cities[props.bike.city_id].parking_stations;
     const center = [ props.bike.coordinates.lat, props.bike.coordinates.long ];
 
-    props.utils.setView(center, 20);
+    props.utils.setView(center, 18);
 
     async function getThisBike() {
         const data = await props.api.getBikes(props.bike.city_id);
