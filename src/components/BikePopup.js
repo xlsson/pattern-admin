@@ -83,9 +83,7 @@ function BikePopup(props) {
             </div>
             <div className="bike-info" data-testid="batteryStatus">
                 <span className="bike-info-label">Batterinivå:</span>
-                <span className={`pointer-cursor text-align-center ${(bike.battery_status > 10) ? "" : " low-battery"}`}>
-                    {parseInt(bike.battery_status)}
-                </span>
+                <span>{parseInt(bike.battery_status)}</span>
             </div>
             {(bike.bike_status === "available") && renderBikePopupMoveForm()}
             {((bike.maintenance) && (bike.battery_status > 50)) && renderEndMaintenance()}

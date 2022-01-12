@@ -79,7 +79,7 @@ function Bike(props) {
                         </div>
                     </td>
                     <td data-testid="batteryStatus"
-                        className={`text-align-center ${(bike.battery_status > 10) ? "" : " low-battery"}`}>
+                        className="text-align-center">
                         {parseInt(bike.battery_status)}
                     </td>
                 </tr>
