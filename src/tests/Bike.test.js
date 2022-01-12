@@ -57,7 +57,7 @@ describe("Tests for Bike component", () => {
 
         await waitFor(() => {
             const coords = [ bike.coordinates.lat, bike.coordinates.long ];
-            expect(utils.setView).toHaveBeenCalledWith(coords, 20);
+            expect(utils.setView).toHaveBeenCalledWith(coords, 18);
         });
     });
 
