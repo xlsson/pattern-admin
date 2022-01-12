@@ -94,7 +94,7 @@ function BikesTable(props) {
                                 <div>{(bike.bike_status === "available") ? "Ja" : "Nej"}</div>
                             </div>
                         </td>
-                        <td className="pointer-cursor text-align-center"
+                        <td className={`pointer-cursor text-align-center ${(bike.battery_status > 10) ? "" : " low-battery"}`}
                             onClick={() => handleClick(bike)}>
                             {parseInt(bike.battery_status)}
                         </td>
