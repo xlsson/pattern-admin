@@ -19,12 +19,12 @@ function User(props) {
     const [user, setUser] = useState(_user);
     const [changes, setChanges] = useState({});
     const [name, setName] = useState("");
-    // const [favouriteCities, setFavouriteCities] = useState(props.citiesArray);
+    const [favouriteCities, setFavouriteCities] = useState(props.citiesArray);
 
     useEffect(() => {
-        // let temp = [{ _id: "unknown" , name: "Ej valt" }];
-        // temp = temp.concat(props.citiesArray);
-        // setFavouriteCities(temp);
+        let temp = [{ _id: "" , name: "-- Ingen vald --" }];
+        temp = temp.concat(props.citiesArray);
+        setFavouriteCities(temp);
 
         setName(`${_user.firstname} ${_user.lastname}`);
         getTrips(userId);
@@ -43,6 +43,7 @@ function User(props) {
 
         const tempChanges = { ...changes };
         tempChanges[property] = value;
+
         setChanges(tempChanges);
     }
 
@@ -97,9 +98,9 @@ function User(props) {
                     <tr>
                         <th scope="col">Favoritstad</th>
                         <td>
-                            <select value={user.city}
-                                onChange={(e) => updateUser(e.target.value, "city")}>
-                                    {props.citiesArray.map((city, i) => (
+                            <select value={user.city || ""}
+                                onChange={(e) => updateUser(((e.target.value !== "") ? e.target.value : null ), "city")}>
+                                    {favouriteCities.map((city, i) => (
                                         <option key={i} value={city._id}>{city.name}</option>
                                     ))}
                             </select>
