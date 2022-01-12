@@ -11,7 +11,7 @@ The admin interface is a tool for administrators to do administrative tasks and 
 
 To run the app on your local system, you need the following:
 
-This [server](https://github.com/wadholm/pattern-backend) running on `http://localhost:1337`. You need to register as an admin, and use those login details to log in to the admin interface.
+This [server](https://github.com/wadholm/pattern-backend) running on `http://localhost:1337` (default). You need to register as an admin, and use those login details to log in to the admin interface.
 
 Your system needs git, npm, node.js.
 
@@ -19,17 +19,16 @@ To install:
 
 1. Clone the repo with `git clone https://github.com/xlsson/pattern-admin`
 2. Run `npm install` to install the app and its dependencies.
-3. Create a `config.json` file in the `./src/functions/` folder, with the following content:
+3. Start the app in your browser by running `npm start`.
+4. Point your browser to `http://localhost:3000`
+
+To point the app to another server/port than the default, simply update the `config.json` file, located in the `./src/functions/` folder:
 ```
 {
-    "server": "http://localhost:1337",
+    "server": <server>, // for example http://localhost:1337
     "version": <server version>, // for example v1
 }
 ```
-
-4. Start the app in your browser by running `npm start`.
-5. Point your browser to `http://localhost:3000`
-
 
 ## Available views
 
