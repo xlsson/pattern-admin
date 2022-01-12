@@ -70,7 +70,7 @@ function UsersTable(props) {
                                 <div>{getPaymentIcon(user.payment_method)[1]}</div>
                             </div>
                         </td>
-                        <td>{props.cities[user.city].name}</td>
+                        <td>{(user.city) ? props.cities[user.city].name : "Ej valt"}</td>
                     </tr>
                 ))}
                 </tbody>

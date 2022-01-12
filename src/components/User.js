@@ -19,8 +19,13 @@ function User(props) {
     const [user, setUser] = useState(_user);
     const [changes, setChanges] = useState({});
     const [name, setName] = useState("");
+    // const [favouriteCities, setFavouriteCities] = useState(props.citiesArray);
 
     useEffect(() => {
+        // let temp = [{ _id: "unknown" , name: "Ej valt" }];
+        // temp = temp.concat(props.citiesArray);
+        // setFavouriteCities(temp);
+
         setName(`${_user.firstname} ${_user.lastname}`);
         getTrips(userId);
     }, []);
