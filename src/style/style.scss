@@ -3,10 +3,10 @@
   src: url('./MaterialIconsOutlined-Regular.otf') format('opentype');
 }
 
-@font-face {
-  font-family: 'Open Sans';
-  src: url('./OpenSans-Regular.ttf') format('truetype');
-}
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap');
+
+
+
 
 body {
     width: 100%;
