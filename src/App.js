@@ -14,6 +14,15 @@ import FlashMessage from './components/FlashMessage';
 import api from './functions/api.js';
 import utils from './functions/utils.js';
 
+/**
+ * Parent component for the SPA app. "Routes" to the different views, imports
+ * the modules api.js and utils.js, fetches city data which gets trickled
+ * down as props to child components.
+ *
+ * API calls: getCities()
+ *
+ * @component
+ */
 function App() {
     const views = {
         loginModal: function() { return renderLoginModal(); },

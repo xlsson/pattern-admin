@@ -12,6 +12,11 @@ BikePopup.propTypes = {
     setMessage: PropTypes.func
 };
 
+/**
+ * Popup for bike in map
+ *
+ * @component
+ */
 function BikePopup(props) {
 
     const bike = props.bike;

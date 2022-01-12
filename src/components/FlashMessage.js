@@ -6,6 +6,11 @@ FlashMessage.propTypes = {
     setMessage: PropTypes.func
 };
 
+/**
+ * Flash message modal
+ *
+ * @component
+ */
 function FlashMessage(props) {
     const text = props.message.text;
     const error = props.message.error;

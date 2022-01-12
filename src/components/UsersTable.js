@@ -7,12 +7,17 @@ UsersTable.propTypes = {
     switchView: PropTypes.func
 };
 
+/**
+ * View showing all users
+ *
+ * API calls: getUsers()
+ *
+ * @component
+ */
 function UsersTable(props) {
     const [users, setUsers] = useState([]);
 
-    useEffect(() => {
-        getUsers();
-    }, []);
+    useEffect(() => { getUsers(); }, []);
 
     async function getUsers() {
         const data = await props.api.getUsers("all");

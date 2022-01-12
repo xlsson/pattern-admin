@@ -7,6 +7,11 @@ BikePosition.propTypes = {
     cities: PropTypes.object
 };
 
+/**
+ * Displays icon and station name, if bike is at a station
+ *
+ * @component
+ */
 function BikePosition(props) {
     const bike = props.bike;
     let icon;

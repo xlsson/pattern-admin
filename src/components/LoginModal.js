@@ -7,6 +7,13 @@ LoginModal.propTypes = {
     setLoggedInUser: PropTypes.func
 };
 
+/**
+ * Table showing all bikes in the database
+ *
+ * API calls: login()
+ *
+ * @component
+ */
 function LoginModal(props) {
     const msg = {
         welcome: "Administratörsinloggning",

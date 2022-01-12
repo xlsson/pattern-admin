@@ -8,6 +8,11 @@ MapStation.propTypes = {
     getIcon: PropTypes.func
 };
 
+/**
+ * Station in map
+ * 
+ * @component
+ */
 function MapStation(props) {
     const station = props.station;
     const type = props.type;

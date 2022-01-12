@@ -13,6 +13,11 @@ MapBike.propTypes = {
     setMessage: PropTypes.func
 };
 
+/**
+ * Bike in map 
+ *
+ * @component
+ */
 function MapBike(props) {
     const bike = props.bike;
     const position = [bike.coordinates.lat, bike.coordinates.long];

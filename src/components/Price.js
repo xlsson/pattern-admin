@@ -8,6 +8,13 @@ Price.propTypes = {
     setMessage: PropTypes.func
 };
 
+/**
+ * View to view and update price tariff
+ *
+ * API calls: getPrices(), updatePrice()
+ *
+ * @component
+ */
 function Price(props) {
     const cityId = props.currentCity._id;
     const [price, setPrice] = useState({});

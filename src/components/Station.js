@@ -14,6 +14,13 @@ Station.propTypes = {
     setMessage: PropTypes.func
 };
 
+/**
+ * View showing one station, with map
+ *
+ * API calls: getBikes()
+ *
+ * @component
+ */
 function Station(props) {
     const [bikes, setBikes] = useState([]);
 

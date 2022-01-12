@@ -1,3 +1,22 @@
+/**
+ * Api module with api calls and variables connected to the api
+ *
+ * @property   {object} config              Object with server URL
+ * @property   {string} baseUrl             The base url used for all calls
+ * @property   {function} sendRequest       Called by all api functions, sends
+ *                                          request to server and returns result
+ * @property   {function} login             Sends login credentials, returns token
+ * @property   {function} getBikes          Returns bikes from selected city
+ * @property   {function} moveBike          Updates bike with new coordinates
+ * @property   {function} orderMaintenance  Sets maintenance for a bike
+ * @property   {function} getCities         Gets all cities
+ * @property   {function} getPrices         Gets price for all cities or one
+ * @property   {function} updatePrice       Updates price in one tariff
+ * @property   {function} getTrips          Gets all trips
+ * @property   {function} getUsers          Gets all users
+ * @property   {function} updateUser        Updates a user
+ */
+
 const config = require("./config.json");
 
 const api = {

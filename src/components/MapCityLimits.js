@@ -9,6 +9,11 @@ MapCityLimits.propTypes = {
 
 };
 
+/**
+ * Draws city limits for a city
+ *
+ * @component
+ */
 function MapCityLimits(props) {
 
     if ((props.selectedId !== "all") && (props.selectedId !== props.city._id)) {

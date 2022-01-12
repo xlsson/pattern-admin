@@ -14,6 +14,11 @@ Menu.propTypes = {
     setLoggedInUser: PropTypes.func
 };
 
+/**
+ * Shows menu in header
+ *
+ * @component
+ */
 function Menu(props) {
     const active = props.view;
 

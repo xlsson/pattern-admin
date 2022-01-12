@@ -11,6 +11,10 @@ OverviewMap.propTypes = {
     setMessage: PropTypes.func
 };
 
+/**
+ * Overview map showing selected city
+ * @component
+ */
 function OverviewMap(props) {
     const city = props.currentCity;
     const center = props.utils.getCenter(city.coordinates);
@@ -20,8 +24,6 @@ function OverviewMap(props) {
     const parkingStations = city.parking_stations;
 
     const [autoFetchIsOn, setAutoFetchIsOn] = useState(false);
-
-    props.utils.setView(center, zoom);
 
     useEffect(() => { props.utils.setView(center, zoom); }, [props]);
 

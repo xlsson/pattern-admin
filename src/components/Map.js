@@ -18,6 +18,13 @@ Map.propTypes = {
     setMessage: PropTypes.func
 };
 
+/**
+ * Component holding Leaflet map component 
+ *
+ * API calls: getBikes()
+ *
+ * @component
+ */
 function Map(props) {
     const [bikes, setBikes] = useState([]);
     const [chargeStations, setChargeStations] = useState([]);

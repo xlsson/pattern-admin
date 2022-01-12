@@ -10,6 +10,13 @@ BikeMoveForm.propTypes = {
     setMessage: PropTypes.func
 };
 
+/**
+ * Form to move bike to a station.
+ *
+ * API calls: moveBike(), orderMaintenance()
+ *
+ * @component
+ */
 function BikeMoveForm(props) {
     const bike = props.bike;
     const chargeStations = props.chargeStations;

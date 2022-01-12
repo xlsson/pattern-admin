@@ -1,3 +1,38 @@
+/**
+ * Utils module with various variables and functions used by the components
+ *
+ * @property   {object} mapInstance         Instance of current Leaflet map
+ * @property   {array} mapCenter            Map center sent as props to Map component
+ * @property   {number} mapZoom             Zoom level sent as props to Map component
+ * @property   {string} currentInterval     The latest interval (autofetching
+ *                                           bike data) id set by setInterval
+ * @property   {boolean} autoFetch          Set to true if interval is active
+ * @property   {function} stopInterval          Stops current interval
+ * @property   {function} filterOutOngoingTrip   Returns array where ongoing
+ *                                               trips are removed
+ * @property   {function} getCenter         Returns array with center coords for a
+ *                                          station or city
+ * @property   {function} getCityLimits     Returns object with data needed for
+ *                                          Leaflet Rectangle component props
+ * @property   {object} monoCity            "City" showing stations and
+ *                                          coordinates for the system as a whole
+ * @property   {function} addStations       Adds all stations in system to the
+ *                                          monoCity object
+ * @property   {function} getStationName    Returns stationname based on station
+ *                                          type and station id
+ * @property   {function} createStationsArray  Returns an array of all stations
+ *                                             for the selected city id, with city_id
+ *                                          and city_name attribute added
+ * @property   {function} countBikes        Returns an object with the city's
+ *                                          station ids as keys, and the number of
+ *                                          bikes at each station as their value
+ * @property   {function} getDateTimeString   Returns a string with date and time
+ *                                          based on a MongoDB Date object
+ * @property   {function} addZero             Adds leading zero to a one digit
+ *                                          date, hour or minute.
+  * @property   {function} createFlashMessage Returns object with message based
+  *                                           on input data and topic.
+ */
 const utils = {
     mapInstance: null,
     mapCenter: [58.195259, 14.221258],
@@ -34,7 +69,6 @@ const utils = {
             coords.northwest.long + coords.southeast.long)/2;
         return [lat, long]
     },
-    // Returns data needed to draw rectangle, if conditions match
     getCityLimits: function (selectedId, city) {
         const options = { color: "red", fillOpacity: 0, weight: 1 };
 
@@ -71,7 +105,6 @@ const utils = {
 
         return withStations;
     },
-    // Returns stationname based on station type and station id
     getStationName: function(type, bike, cities) {
         const stationType = `${type}_stations`;
         const stations = cities[bike.city_id][stationType];
@@ -81,8 +114,6 @@ const utils = {
         });
         return stationName;
     },
-    // Returns an array of all stations for the selected city id, with
-    // city_id and city_name attribute added to each station
     createStationsArray: function(type, currentCity, cities) {
         let stations = [];
 
@@ -108,8 +139,6 @@ const utils = {
 
         return stations;
     },
-    // Returns an object with the city's station ids as keys, and
-    // the number of bikes at each station as their value
     countBikes: function(stations, type, bikes) {
         const result = {};
 

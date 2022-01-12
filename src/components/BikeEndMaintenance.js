@@ -9,6 +9,13 @@ BikeEndMaintenance.propTypes = {
     setMessage: PropTypes.func
 };
 
+/**
+ * Button to end maintenance for a bike
+ *
+ * API calls: orderMaintenance()
+ *
+ * @component
+ */
 function BikeEndMaintenance(props) {
     const bike = props.bike;
 

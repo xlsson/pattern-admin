@@ -8,6 +8,11 @@ LoggedInBox.propTypes = {
     switchView: PropTypes.func
 };
 
+/**
+ * Box in header, showing username and log out button
+ *
+ * @component
+ */
 function LoggedInBox(props) {
 
     function logOut() {

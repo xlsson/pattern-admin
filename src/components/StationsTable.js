@@ -11,6 +11,13 @@ StationsTable.propTypes = {
     setMessage: PropTypes.func
 };
 
+/**
+ * View showing all charge/parking stations for selected city
+ *
+ * API calls: getBikes()
+ *
+ * @component
+ */
 function StationsTable(props) {
     const [stations, setStations] = useState([]);
     const [bikesPerStation, setBikesPerStation] = useState({});

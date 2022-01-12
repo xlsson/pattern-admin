@@ -11,6 +11,13 @@ User.propTypes = {
     setMessage: PropTypes.func
 };
 
+/**
+ * View to view and edit one user, shows all trips for the user
+ *
+ * API calls: getTrips(), updateUser()
+ *
+ * @component
+ */
 function User(props) {
     const _user = props.user.user;
     const userId = _user._id;

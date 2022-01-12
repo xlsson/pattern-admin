@@ -6,6 +6,10 @@ Trips.propTypes = {
     trips: PropTypes.array
 };
 
+/**
+ * View showing all trips for selected user
+ * @component
+ */
 function Trips(props) {
     const trips = props.trips;
 

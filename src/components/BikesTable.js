@@ -12,6 +12,13 @@ BikesTable.propTypes = {
     cities: PropTypes.object
 };
 
+/**
+ * Table showing all bikes in the database
+ *
+ * API calls: getBikes()
+ *
+ * @component
+ */
 function BikesTable(props) {
     const [bikes, setBikes] = useState([]);
 

@@ -12,6 +12,11 @@ BikesTableMaintenance.propTypes = {
     setMessage: PropTypes.func
 };
 
+/**
+ * Maintenance and move bike options for bikes table
+ *
+ * @component
+ */
 function BikesTableMaintenance(props) {
     const bike = props.bike;
     const cities = props.cities;

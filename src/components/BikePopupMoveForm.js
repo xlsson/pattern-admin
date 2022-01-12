@@ -11,6 +11,13 @@ BikePopupMoveForm.propTypes = {
     setMessage: PropTypes.func
 };
 
+/**
+ * Form for Popup for bike in map, to move bike to a station
+ *
+ * API calls: moveBike(), orderMaintenance()
+ *
+ * @component
+ */
 function BikePopupMoveForm(props) {
     const bike = props.bike;
 

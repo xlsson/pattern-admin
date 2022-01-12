@@ -13,6 +13,13 @@ Bike.propTypes = {
     setMessage: PropTypes.func
 };
 
+/**
+ * View: shows one bike with stats and map.
+ *
+ * API calls: getBikes()
+ *
+ * @component
+ */
 function Bike(props) {
     const [bikes, setBikes] = useState([props.bike]);
     const cities = props.cities;

@@ -7,6 +7,11 @@ ChangeCity.propTypes = {
     chooseCity: PropTypes.func
 };
 
+/**
+ * Dropdown to select which city to show data for
+ *
+ * @component
+ */
 function ChangeCity(props) {
     const [selectedId, setSelectedId] = useState("all");
 
