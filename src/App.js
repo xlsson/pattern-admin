@@ -63,20 +63,35 @@ function App() {
         setView("loginModal");
     }
 
+    const views = {
+        loginModal: function() { return renderLoginModal(); },
+        users: function() { return renderUsersTable(); },
+        user: function() { return renderUser(); },
+        bikes: function() { return renderBikesTable(); },
+        bike: function() { return renderBike(); },
+        chargeStations: function() { return renderStationsTable("charge"); },
+        chargeStation: function() { return renderStation("charge"); },
+        parkingStations: function() { return renderStationsTable("parking"); },
+        parkingStation: function() { return renderStation("parking"); },
+        overviewMap: function() { return renderOverviewMap(); },
+        price: function() { return renderPrice(); }
+    };
+
     function renderView() {
-        switch (view) {
-            case "loginModal": return renderLoginModal();
-            case "users": return renderUsersTable();
-            case "user": return renderUser();
-            case "bikes": return renderBikesTable();
-            case "bike": return renderBike();
-            case "chargeStations": return renderStationsTable("charge");
-            case "chargeStation": return renderStation("charge");
-            case "parkingStations": return renderStationsTable("parking");
-            case "parkingStation": return renderStation("parking");
-            case "overviewMap": return renderOverviewMap();
-            case "price": return renderPrice();
-        }
+        return views[view]();
+        // switch (view) {
+        //     case "loginModal": return renderLoginModal();
+        //     case "users": return renderUsersTable();
+        //     case "user": return renderUser();
+        //     case "bikes": return renderBikesTable();
+        //     case "bike": return renderBike();
+        //     case "chargeStations": return renderStationsTable("charge");
+        //     case "chargeStation": return renderStation("charge");
+        //     case "parkingStations": return renderStationsTable("parking");
+        //     case "parkingStation": return renderStation("parking");
+        //     case "overviewMap": return renderOverviewMap();
+        //     case "price": return renderPrice();
+        // }
     }
 
     function renderMenu() {
