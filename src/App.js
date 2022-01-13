@@ -119,8 +119,10 @@ function App() {
     function renderUsersTable() {
         return ( <UsersTable
                     api={api}
+                    utils={utils}
                     cities={cities}
-                    switchView={switchView} /> );
+                    switchView={switchView}
+                    setMessage={setMessage} /> );
     }
 
     function renderUser() {

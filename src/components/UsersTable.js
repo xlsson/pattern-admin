@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 
 UsersTable.propTypes = {
     api: PropTypes.object,
+    utils: PropTypes.object,
     cities: PropTypes.object,
-    switchView: PropTypes.func
+    switchView: PropTypes.func,
+    setMessage: PropTypes.func
 };
 
 /**
@@ -19,9 +21,13 @@ function UsersTable(props) {
 
     useEffect(() => { getUsers(); }, []);
 
-    async function getUsers() {
+    async function getUsers(button=false) {
         const data = await props.api.getUsers("all");
         setUsers(data.users);
+        if (button) {
+            const message = props.utils.createFlashMessage(data, "getDataButton");
+            props.setMessage(message);
+        }
     }
 
     function handleClick(i) {
@@ -36,7 +42,15 @@ function UsersTable(props) {
 
     return (
         <div>
-            <h1>Kunder</h1>
+            <div className="title-wrapper">
+                <h1>Kunder</h1>
+                <button
+                    type="button"
+                    data-testid="fetch-data-button"
+                    onClick={() => getUsers(true)}>
+                    Uppdatera
+                </button>
+            </div>
             <table>
                 <>
                 <thead>
