@@ -37,7 +37,7 @@ function UsersTable(props) {
     function getPaymentIcon(value) {
         if (value === "monthly") { return ["event", "Abonnemang"]; }
         if (value === "refill") { return ["payments", "Refill"]; }
-        return ["not_interested", "Ej valt"];
+        return ["not_interested", "Ej vald"];
     }
 
     return (
