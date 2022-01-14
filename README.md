@@ -5,15 +5,15 @@
 # E-scooter admin interface
 (Part of a student project for the course Pattern at Blekinge Institute of Technology, BTH)
 
-The admin interface is a tool for administrators to do administrative tasks and get an overview of the active system. Administrators can switch between showing data and perform tasks for the system as a whole, or for a specific city. Data is fetched from, and sent to, the [server](https://github.com/wadholm/pattern-backend) using a REST API.
+The admin interface is a tool for administrators to do administrative tasks and get an overview of the active system. Administrators can perform tasks and show data, either for all cities in the system, or for a specific city. Data is fetched from, and sent to, the [server](https://github.com/wadholm/pattern-backend) using a REST API.
 
 ## Installation
 
-To run the app on your local system, you need the following:
+To run the app on your local system, you will need the following:
 
-This [server](https://github.com/wadholm/pattern-backend) running on `http://localhost:1337` (default). You need to register as an admin, and use those login details to log in to the admin interface.
+This [server](https://github.com/wadholm/pattern-backend) running on the server and port that you specify in the config-file (see below). You need to register as an admin, and use those login details to log in to the admin interface.
 
-Your system needs git, npm, node.js.
+Your system needs git, npm and node.js.
 
 To install:
 
@@ -22,7 +22,7 @@ To install:
 3. Start the app in your browser by running `npm start`.
 4. Point your browser to `http://localhost:3000`
 
-To point the app to another server/port than the default, simply update the `config.json` file, located in the `./src/functions/` folder:
+To point the app to another server/port than the default (http://localhost:1337), simply update the `config.json` file, located in the `./src/functions/` folder:
 ```
 {
     "server": <server>, // for example http://localhost:1337
